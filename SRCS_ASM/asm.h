@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/05 18:10:25 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/05 18:13:09 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ struct					s_asm {
 /*
 **  error.c
 */
-void	    			error(char *message);
+void					error(char *message);
 
 /*
 **	file.c
 */
 void					readfile(t_asm *data);
+void					printfile(t_asm *data);
 #endif

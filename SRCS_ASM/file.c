@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:09:23 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/05 18:10:03 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/05 18:12:24 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ void	init_file(t_asm *data)
 	data->file = malloc(sizeof(t_lines));
 	data->file->line = NULL;
 	data->file->next = NULL;
+}
+
+void	printfile(t_asm *data)
+{
+	t_lines	*curr;
+
+	curr = data->file;
+	while (curr->next)
+	{
+		ft_putendl(curr->line);
+		curr = curr->next;
+	}
 }
 
 void	readfile(t_asm *data)
