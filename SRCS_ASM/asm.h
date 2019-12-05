@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/05 18:27:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/05 18:52:47 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,9 @@ void					error(char *message);
 */
 void					readfile(t_asm *data);
 void					printfile(t_asm *data);
+
+/*
+**	parse.c
+*/
+void					get_name_comment(t_asm *data);
 #endif
