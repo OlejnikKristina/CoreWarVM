@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2013/10/04 11:33:27 by zaz            #+#    #+#                */
-/*   Updated: 2019/12/03 16:13:12 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/05 17:55:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 #define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 #define COMMENT_CHAR			'#'
-#define ALT_COMMENT_CHAR		';'
+#define ALT_COMMENT_CHAR	';'
 #define LABEL_CHAR				':'
 #define DIRECT_CHAR				'%'
-#define SEPARATOR_CHAR			','
+#define SEPARATOR_CHAR		','
 
 #define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
 
