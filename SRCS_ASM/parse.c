@@ -6,11 +6,29 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 19:03:07 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 19:17:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**	@desc	- function trims a string split on comment_char
+**	@param	- char **split, the split string to trim
+**			- char *tmp, pointer to be freed
+*/
+
+static char	*set_trimmed(char **split, char *tmp)
+{
+	char	*line;
+	char	*s;
+
+	line = ft_strdup(split[0]);
+	s = ft_strtrim(line);
+	free(line);
+	free_arr(&tmp, &split, 2);
+	return (s);
+}
 
 /*
 **	@desc	- function gets line out of file trims it from whitespace,
@@ -43,12 +61,7 @@ static int	get_line(int fd, char **s)
 	else if (ft_strchr(tmp, ';'))
 		split = ft_strsplit(tmp, ';');
 	if (split)
-	{
-		line = ft_strdup(split[0]);
-		*s = ft_strtrim(line);
-		free(line);
-		free_arr(&tmp, &split, 2);
-	}
+		*s = set_trimmed(split, tmp);
 	return (ret);
 }
 
@@ -63,7 +76,7 @@ void		parse_nc(t_asm *data, char *s)
 	char	**split;
 
 	split = ft_strsplit(s, '"');
-	free_arr(NULL, &split, 0);
+	free_arr(NULL, &split, 1);
 	data->wfd = 0;
 }
 
