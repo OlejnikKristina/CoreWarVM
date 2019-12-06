@@ -6,12 +6,25 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:31:43 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 17:00:49 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(*arr);
+}
 /*
 **	@desc	- function gets line out of file trims it from whitespace,
 **			- checks for comment tags copies relevant data to pointer
@@ -23,11 +36,13 @@
 static int	get_line(int fd, char **s)
 {
 	int		ret;
+	char	*line;
 	char	*tmp;
 	char	**split;
 
-	ret = get_next_line(fd, s);
-	tmp = ft_strtrim(*s);
+	ret = get_next_line(fd, &line);
+	tmp = ft_strtrim(line);
+	free(line);
 	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')
 	{
 		*s = ft_strdup("");
@@ -43,9 +58,9 @@ static int	get_line(int fd, char **s)
 	if (split)
 	{
 		*s = ft_strtrim(ft_strdup(split[0]));
-		free(split);
+		free(tmp);
+		free_arr(split);
 	}
-	free(tmp);
 	return (ret);
 }
 
@@ -87,6 +102,10 @@ void		choose_parse(t_asm *data, char *s)
 	}
 }
 
+void	free_line(char **s)
+{
+	free(*s);
+}
 /*
 **	@desc	- main parsing function
 **	@param	- t_asm *data, main struct
@@ -98,7 +117,9 @@ void		parse(t_asm *data)
 
 	while (get_line(data->rfd, &s))
 	{
-		if (ft_strlen(s) > 0)
+		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
+		free(s);
 	}
+	while (1);
 }
