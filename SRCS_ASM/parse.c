@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:15:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 16:16:10 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ static int	get_line(int fd, char **s)
 	free(tmp);
 	return (ret);
 }
-
-// void		parse_nc(t_asm *data, char *s)
-// {
-
-// }
 
 void		choose_parse(t_asm *data, char *s)
 {
