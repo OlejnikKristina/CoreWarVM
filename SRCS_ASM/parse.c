@@ -6,11 +6,19 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 15:02:52 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 16:15:15 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**	@desc	- function gets line out of file trims it from whitespace,
+**			- checks for comment tags copies relevant data to pointer
+**	@param	- int fd, file descriptor of the opened file
+**			- char **s, pointer to string to write file content in
+**	@return	- int ret, amount of bytes read out of the file
+*/
 
 static int	get_line(int fd, char **s)
 {
@@ -41,12 +49,38 @@ static int	get_line(int fd, char **s)
 	return (ret);
 }
 
-void		parse(t_asm *data, char **s)
+// void		parse_nc(t_asm *data, char *s)
+// {
+
+// }
+
+void		choose_parse(t_asm *data, char *s)
 {
-	while (get_line(data->rfd, s))
+	data->wfd = 0;
+	if (s && ft_strlen(s) > 0)
 	{
-		ft_printf("[%s]\n", *s);
-		// if (ft_strlen(*s) > 0)
-		// 	choose_parse(data, s);
+		if (!ft_strncmp(s, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
+			parse_nc(data, s);
+		else if (!ft_strncmp(s, COMMENT_CMD_STRING,\
+		ft_strlen(COMMENT_CMD_STRING)))
+			parse_nc(data, s);
+		else
+			ft_putendl("faka");
+	}
+}
+
+/*
+**	@desc	- main parsing function
+**	@param	- t_asm *data, main struct
+*/
+
+void		parse(t_asm *data)
+{
+	char	*s;
+
+	while (get_line(data->rfd, &s))
+	{
+		if (ft_strlen(s) > 0)
+			choose_parse(data, s);
 	}
 }
