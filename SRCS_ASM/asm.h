@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:03:10 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 16:17:21 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "../op.h"
 
 typedef struct s_asm	t_asm;
-typedef struct s_lines	t_lines;
 typedef struct s_label	t_label;
 
 struct					s_label {
@@ -29,17 +28,11 @@ struct					s_label {
 	t_label				*next;
 };
 
-struct					s_lines {
-	char				*line;
-	t_lines				*next;
-};
-
 struct					s_asm {
 	int					rfd;
 	int					wfd;
 	char				*name;
 	char				*comment;
-	t_lines				*file;
 };
 
 /*

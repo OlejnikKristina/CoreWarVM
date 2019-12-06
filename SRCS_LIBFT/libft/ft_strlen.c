@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: awehlbur <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/01/17 15:32:04 by awehlbur      #+#    #+#                 */
-/*   Updated: 2019/01/17 15:32:11 by awehlbur      ########   odam.nl         */
+/*   Created: 2019/01/17 15:32:04 by awehlbur       #+#    #+#                */
+/*   Updated: 2019/12/06 16:40:08 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ size_t		ft_strlen(const char *s)
 	int		count;
 
 	count = 0;
-	while (s[count] != '\0')
-	{
+	while (s[count])
 		count++;
-	}
 	return (count);
 }

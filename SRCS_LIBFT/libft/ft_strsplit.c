@@ -6,75 +6,82 @@
 /*   By: asulliva <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 13:41:09 by asulliva       #+#    #+#                */
-/*   Updated: 2019/07/11 17:07:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 16:33:57 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int		ft_words(const char *s, char c)
+static int	ft_countwords(char const *s, char c)
 {
-	int		words;
-	int		flag;
+	int word_count;
+	int i;
 
-	flag = 0;
-	words = 0;
-	if (!s || !c)
-		return (0);
-	while (*s != '\0')
+	word_count = 0;
+	i = 0;
+	while (s[i] != 0)
 	{
-		if (flag == 1 && *s == c)
-			flag = 0;
-		if (flag == 0 && *s != c)
-		{
-			flag = 1;
-			words++;
-		}
-		s++;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			word_count++;
+		i++;
 	}
+	return (word_count);
+}
+
+static void	ft_cpychars(char const *s, char *word, int start, int stop)
+{
+	int i;
+
+	i = 0;
+	while (start < stop)
+	{
+		word[i] = s[start];
+		start++;
+		i++;
+	}
+	word[i] = '\0';
+}
+
+static char	**ft_cpwrds(char **words, char const *s, char c)
+{
+	int i;
+	int j;
+	int start;
+	int stop;
+
+	i = -1;
+	j = 0;
+	start = 0;
+	stop = 0;
+	while (s[++i] != '\0')
+	{
+		if (s[i] == c || s[i] == '\0')
+			start = i + 1;
+		if (s[i] != '\0' && s[i] != c && (s[i + 1] == '\0' ||
+			s[i + 1] == c))
+		{
+			stop = i + 1;
+			words[j] = (char*)ft_memalloc(sizeof(char) * (stop - start + 1));
+			ft_cpychars(s, words[j], start, stop);
+			j++;
+		}
+	}
+	words[j] = 0;
 	return (words);
 }
 
-static int		ft_word_len(const char *s, char c)
+char		**ft_strsplit(char const *s, char c)
 {
-	int		len;
+	char	**words;
+	int		w_count;
 
-	len = 0;
-	if (!s || !c)
-		return (0);
-	while (*s != c && *s != '\0')
+	if (s && c)
 	{
-		len++;
-		s++;
+		w_count = ft_countwords(s, c);
+		words = (char**)ft_memalloc(sizeof(char*) * (w_count + 1));
+		if (words)
+			return (ft_cpwrds(words, s, c));
 	}
-	return (len);
-}
-
-char			**ft_strsplit(char const *s, char c)
-{
-	char	**tab;
-	int		words;
-	int		i;
-
-	i = 0;
-	words = ft_words(s, c);
-	if (!s || !c)
-		return (NULL);
-	tab = (char**)malloc(sizeof(char*) * ft_words(s, c) + 1);
-	if (!tab)
-		return (NULL);
-	while (words)
-	{
-		words--;
-		while (*s == c && *s != '\0')
-			s++;
-		tab[i] = ft_strsub(s, 0, ft_word_len(s, c));
-		if (tab[i] == NULL)
-			return (NULL);
-		s = s + ft_word_len(s, c);
-		i++;
-	}
-	tab[i] = NULL;
-	return (tab);
+	return (0);
 }
