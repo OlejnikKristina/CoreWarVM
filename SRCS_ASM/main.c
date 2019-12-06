@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:50:34 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 18:42:24 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_asm	*init(int ac, char **av)
 {
 	t_asm	*data;
 
-	data = (t_asm*)ft_memalloc(sizeof(t_asm));
+	data = (t_asm*)malloc(sizeof(t_asm));
 	data->rfd = open(av[ac - 1], O_RDONLY);
 	if (data->rfd < 3 || read(data->rfd, data->name, 0) < 0)
 		return (NULL);
@@ -48,5 +48,7 @@ int				main(int ac, char **av)
 		error("Invalid file");
 	parse(data);
 	close(data->rfd);
+	free_data(data);
+	// while (1);
 	return (0);
 }

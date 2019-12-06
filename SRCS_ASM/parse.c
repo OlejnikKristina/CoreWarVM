@@ -6,28 +6,11 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2019/12/06 16:16:10 by asulliva      ########   odam.nl         */
-=======
-/*   Updated: 2019/12/06 17:25:54 by asulliva      ########   odam.nl         */
->>>>>>> aidan
+/*   Updated: 2019/12/06 19:00:08 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-void	free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(*arr);
-}
 
 /*
 **	@desc	- function gets line out of file trims it from whitespace,
@@ -49,7 +32,8 @@ static int	get_line(int fd, char **s)
 	free(line);
 	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')
 	{
-		*s = ft_strdup("");
+		// leaks, still needs to be fixed
+		*s = ft_strnew(0);
 		free(tmp);
 		return (ret);
 	}
@@ -61,15 +45,14 @@ static int	get_line(int fd, char **s)
 		split = ft_strsplit(tmp, ';');
 	if (split)
 	{
-		*s = ft_strtrim(ft_strdup(split[0]));
-		free(tmp);
-		free_arr(split);
+		line = ft_strdup(split[0]);
+		*s = ft_strtrim(line);
+		free(line);
+		free_arr(&tmp, &split, 2);
 	}
 	return (ret);
 }
 
-<<<<<<< HEAD
-=======
 /*
 **	@desc	- function parses the .name and .comment commands
 **	@param	- t_asm *data, main struct
@@ -80,8 +63,9 @@ void		parse_nc(t_asm *data, char *s)
 {
 	char	**split;
 
-	ft_printf("line: %s\n", s);
+	// ft_printf("line: %s\n", s);
 	split = ft_strsplit(s, '"');
+	free_arr(NULL, &split, 0);
 	data->wfd = 0;
 }
 
@@ -91,7 +75,6 @@ void		parse_nc(t_asm *data, char *s)
 **			- char *s, line read from the file
 */
 
->>>>>>> aidan
 void		choose_parse(t_asm *data, char *s)
 {
 	if (s && ft_strlen(s) > 0)
@@ -101,8 +84,6 @@ void		choose_parse(t_asm *data, char *s)
 		else if (!ft_strncmp(s, COMMENT_CMD_STRING,\
 		ft_strlen(COMMENT_CMD_STRING)))
 			parse_nc(data, s);
-		else
-			ft_putendl("faka");
 	}
 }
 
@@ -117,6 +98,7 @@ void		parse(t_asm *data)
 
 	while (get_line(data->rfd, &s))
 	{
+		ft_printf("[%s]\n", s);
 		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
 		free(s);

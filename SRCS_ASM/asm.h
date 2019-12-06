@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:17:21 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 18:36:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ struct					s_asm {
 **  error.c
 */
 void					error(char *message);
+
+/*
+**	free.c
+*/
+void					free_arr(char **arr1, char ***arr2, int flag);
+void					free_data(t_asm *data);
 
 /*
 **	parse.c
