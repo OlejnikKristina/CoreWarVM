@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 19:00:08 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 19:03:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	get_line(int fd, char **s)
 	free(line);
 	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')
 	{
-		// leaks, still needs to be fixed
 		*s = ft_strnew(0);
 		free(tmp);
 		return (ret);
@@ -63,7 +62,6 @@ void		parse_nc(t_asm *data, char *s)
 {
 	char	**split;
 
-	// ft_printf("line: %s\n", s);
 	split = ft_strsplit(s, '"');
 	free_arr(NULL, &split, 0);
 	data->wfd = 0;
@@ -103,4 +101,5 @@ void		parse(t_asm *data)
 			choose_parse(data, s);
 		free(s);
 	}
+	free(s);
 }
