@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/02/25 13:40:40 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/05 14:45:24 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/06 16:36:40 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,14 @@ NAME 	= libft.a
 CFLAGS	= -Wall -Wextra -Werror
 LIBFT	= ./libft/
 
-SRCS = srcs/precision.c srcs/width.c srcs/extra.c srcs/modifier.c \
-srcs/conversion.c srcs/go_print.c \
-srcs/handle_d.c srcs/handle_c.c srcs/ft_printf.c srcs/handle_s.c \
-srcs/handle_modulo.c srcs/handle_p.c \
-srcs/handle_f.c srcs/make_fstr.c srcs/handle_u.c srcs/handle_sx.c \
-srcs/handle_o.c srcs/defines.c \
-srcs/handle_f1.c srcs/handle_o1.c srcs/handle_p1.c srcs/handle_s1.c \
-srcs/handle_d1.c srcs/handle_d2.c srcs/handle_d3.c \
+SRCS = precision.c width.c extra.c modifier.c \
+conversion.c go_print.c \
+handle_d.c handle_c.c ft_printf.c handle_s.c \
+handle_modulo.c handle_p.c \
+handle_f.c make_fstr.c handle_u.c handle_sx.c \
+handle_o.c defines.c \
+handle_f1.c handle_o1.c handle_p1.c handle_s1.c \
+handle_d1.c handle_d2.c handle_d3.c \
 
 OBJS	:= $(SRCS:%.c=%.o)
 

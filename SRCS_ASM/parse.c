@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:15:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 16:31:43 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,32 @@ static int	get_line(int fd, char **s)
 	return (ret);
 }
 
-// void		parse_nc(t_asm *data, char *s)
-// {
+/*
+**	@desc	- function parses the .name and .comment commands
+**	@param	- t_asm *data, main struct
+**			- char *s, line read from the file
+*/
 
-// }
+void		parse_nc(t_asm *data, char *s)
+{
+	char	**split;
+
+	ft_printf("line: %s\n", s);
+	split = ft_strsplit(s, '"');
+	data->wfd = 0;
+	for (int i = 0; split[i]; i++)
+		ft_printf("split[i]: %s\n", split[i]);
+	ft_putendl("");
+}
+
+/*
+**	@desc	- function picks which parsing function to call
+**	@param	- t_asm *data, main struct
+**			- char *s, line read from the file
+*/
 
 void		choose_parse(t_asm *data, char *s)
 {
-	data->wfd = 0;
 	if (s && ft_strlen(s) > 0)
 	{
 		if (!ft_strncmp(s, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
