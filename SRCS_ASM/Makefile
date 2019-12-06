@@ -6,12 +6,12 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/05 18:53:16 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/06 14:54:03 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
-SRCS	= main error file parse
+SRCS	= main error parse
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 HEADER	= asm.h

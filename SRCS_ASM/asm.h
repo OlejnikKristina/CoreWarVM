@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/05 18:52:47 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 14:53:52 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ struct					s_lines {
 struct					s_asm {
 	int					rfd;
 	int					wfd;
-	char				*content;
 	char				*name;
 	char				*comment;
 	t_lines				*file;
@@ -49,13 +48,8 @@ struct					s_asm {
 void					error(char *message);
 
 /*
-**	file.c
-*/
-void					readfile(t_asm *data);
-void					printfile(t_asm *data);
-
-/*
 **	parse.c
 */
+void					parse(t_asm *data, char **s);
 void					get_name_comment(t_asm *data);
 #endif
