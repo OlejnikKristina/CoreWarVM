@@ -6,12 +6,11 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 17:00:49 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/06 17:25:54 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
 
 void	free_arr(char **arr)
 {
@@ -25,6 +24,7 @@ void	free_arr(char **arr)
 	}
 	free(*arr);
 }
+
 /*
 **	@desc	- function gets line out of file trims it from whitespace,
 **			- checks for comment tags copies relevant data to pointer
@@ -77,9 +77,6 @@ void		parse_nc(t_asm *data, char *s)
 	ft_printf("line: %s\n", s);
 	split = ft_strsplit(s, '"');
 	data->wfd = 0;
-	for (int i = 0; split[i]; i++)
-		ft_printf("split[i]: %s\n", split[i]);
-	ft_putendl("");
 }
 
 /*
@@ -102,10 +99,6 @@ void		choose_parse(t_asm *data, char *s)
 	}
 }
 
-void	free_line(char **s)
-{
-	free(*s);
-}
 /*
 **	@desc	- main parsing function
 **	@param	- t_asm *data, main struct
@@ -121,5 +114,4 @@ void		parse(t_asm *data)
 			choose_parse(data, s);
 		free(s);
 	}
-	while (1);
 }
