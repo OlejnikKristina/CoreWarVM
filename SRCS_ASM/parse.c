@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 19:17:23 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 13:37:28 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,6 @@ static int	get_line(int fd, char **s)
 }
 
 /*
-**	@desc	- function parses the .name and .comment commands
-**	@param	- t_asm *data, main struct
-**			- char *s, line read from the file
-*/
-
-void		parse_nc(t_asm *data, char *s)
-{
-	char	**split;
-
-	split = ft_strsplit(s, '"');
-	free_arr(NULL, &split, 1);
-	data->wfd = 0;
-}
-
-/*
 **	@desc	- function picks which parsing function to call
 **	@param	- t_asm *data, main struct
 **			- char *s, line read from the file
@@ -91,10 +76,10 @@ void		choose_parse(t_asm *data, char *s)
 	if (s && ft_strlen(s) > 0)
 	{
 		if (!ft_strncmp(s, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
-			parse_nc(data, s);
+			parse_nc(data, s, 0);
 		else if (!ft_strncmp(s, COMMENT_CMD_STRING,\
 		ft_strlen(COMMENT_CMD_STRING)))
-			parse_nc(data, s);
+			parse_nc(data, s, 1);
 	}
 }
 
@@ -109,7 +94,6 @@ void		parse(t_asm *data)
 
 	while (get_line(data->rfd, &s))
 	{
-		ft_printf("[%s]\n", s);
 		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
 		free(s);
