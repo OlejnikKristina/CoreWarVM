@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:05:23 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:06:38 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ void		parse_nc(t_asm *data, char *s, int type)
 	else if (type == 1 && !data->comment)
 		data->comment = s;
 	else
-		error("Redefinition of .name or .comment");	
+		error("Redefinition of .name or .comment");
 	free_arr(NULL, &split, 1);
 }
