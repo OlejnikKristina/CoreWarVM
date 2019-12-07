@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:16:45 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:53:33 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	check_cmd(char *s, int type)
 		if (ft_strlen(s) > COMMENT_LENGTH)
 			error(".comment too long");
 }
+
 /*
 **  @desc   - function counts the quotes on the line with .name and .comment
 **  @param  - char *s, the .name or .comment string (one line)

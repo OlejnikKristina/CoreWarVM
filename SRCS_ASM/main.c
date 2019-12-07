@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:17:37 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:21:11 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				main(int ac, char **av)
 		error("Invalid file");
 	parse(data);
 	close(data->rfd);
+	ft_printf(".name %s\n.comment %s\n", data->name, data->comment);
 	free_data(data);
 	return (0);
 }
