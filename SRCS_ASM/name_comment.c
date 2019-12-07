@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:11:24 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:16:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 static void	check_cmd(char *s, int type)
 {
 	if (type == 0)
+	{
 		if (ft_strlen(s) > PROG_NAME_LENGTH)
 			error(".name too long");
+	}
 	else if (type == 1)
 		if (ft_strlen(s) > COMMENT_LENGTH)
 			error(".comment too long");
@@ -114,7 +116,7 @@ void		parse_nc(t_asm *data, char *s, int type)
 		s = ft_strjoinone(s, '\n');
 		multi_line(data, &s, type);
 	}
-	check_cmd(s);
+	check_cmd(s, type);
 	if (type == 0 && !data->name)
 		data->name = s;
 	else if (type == 1 && !data->comment)
