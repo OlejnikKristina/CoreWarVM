@@ -6,12 +6,27 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:06:38 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:11:24 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+/*
+**	@desc	- function checks if the command are right (.name && .comment)
+**	@param	- char *s, command to check
+**			- int type, 0 if name, 1 if comment
+*/
+
+static void	check_cmd(char *s, int type)
+{
+	if (type == 0)
+		if (ft_strlen(s) > PROG_NAME_LENGTH)
+			error(".name too long");
+	else if (type == 1)
+		if (ft_strlen(s) > COMMENT_LENGTH)
+			error(".comment too long");
+}
 /*
 **  @desc   - function counts the quotes on the line with .name and .comment
 **  @param  - char *s, the .name or .comment string (one line)
@@ -72,7 +87,6 @@ static void	multi_line(t_asm *data, char **s, int type)
 		*s = ft_strjoinone(*s, '\n');
 	}
 	free(check);
-	ft_printf("[%s]\n", *s);
 }
 
 /*
@@ -100,6 +114,7 @@ void		parse_nc(t_asm *data, char *s, int type)
 		s = ft_strjoinone(s, '\n');
 		multi_line(data, &s, type);
 	}
+	check_cmd(s);
 	if (type == 0 && !data->name)
 		data->name = s;
 	else if (type == 1 && !data->comment)
