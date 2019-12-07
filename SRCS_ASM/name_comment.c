@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 14:27:43 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 15:05:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	multi_line(t_asm *data, char **s, int type)
 			break ;
 		*s = ft_strjoinone(*s, '\n');
 	}
+	free(check);
 	ft_printf("[%s]\n", *s);
 }
 
@@ -93,12 +94,17 @@ void		parse_nc(t_asm *data, char *s, int type)
 	if (split[1])
 		s = ft_strdup(split[1]);
 	else if (!split[1])
-		s = ft_strdup("");
+		s = ft_strnew(0);
 	if (quotes == 1)
 	{
 		s = ft_strjoinone(s, '\n');
 		multi_line(data, &s, type);
 	}
+	if (type == 0 && !data->name)
+		data->name = s;
+	else if (type == 1 && !data->comment)
+		data->comment = s;
+	else
+		error("Redefinition of .name or .comment");	
 	free_arr(NULL, &split, 1);
-	data->wfd = 0;
 }
