@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:01:06 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/07 16:38:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	get_line(int fd, char **s)
 	ret = get_next_line(fd, &line);
 	tmp = ft_strtrim(line);
 	free(line);
-	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')
+	if (!tmp || !ft_strlen(tmp) ||
+	tmp[0] == COMMENT_CHAR || tmp[0] == ALT_COMMENT_CHAR)
 	{
 		*s = ft_strnew(0);
 		free(tmp);
@@ -56,10 +57,10 @@ static int	get_line(int fd, char **s)
 	}
 	*s = tmp;
 	split = NULL;
-	if (ft_strchr(tmp, '#'))
-		split = ft_strsplit(tmp, '#');
-	else if (ft_strchr(tmp, ';'))
-		split = ft_strsplit(tmp, ';');
+	if (ft_strchr(tmp, COMMENT_CHAR))
+		split = ft_strsplit(tmp, COMMENT_CHAR);
+	else if (ft_strchr(tmp, ALT_COMMENT_CHAR))
+		split = ft_strsplit(tmp, ALT_COMMENT_CHAR);
 	if (split)
 		*s = set_trimmed(split, tmp);
 	return (ret);
