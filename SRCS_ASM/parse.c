@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:01:06 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 18:51:51 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/09 19:16:07 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	get_line(int fd, char **s)
 	char	**split;
 
 	ret = get_next_line(fd, &line);
+	printf("%s \nret:%d\n", line, ret);
 	tmp = ft_strtrim(line);
 	free(line);
 	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')

@@ -1,6 +1,6 @@
 
 /*
-Lexer which breaks apart
+Lexer which breaks apart s file into smallest components. (reading every letter rather than gnl?)
 */
 
 /*

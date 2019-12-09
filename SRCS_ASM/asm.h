@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/08 22:56:21 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/09 19:01:41 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,23 @@
 typedef enum e_token	t_token;
 typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
+typedef struct s_parts	t_parts;
 
 enum					e_token {
-	LABEL; //if string but not operation
-	MODULO; //DIRECT_CHAR
-	OPERATION; //make op funct that checks for possible op strings
-	COMMA; //SEPARATOR_CHAR
-	NEW_LINE;
-	REGISTRY; //r
-	NUMBER;
+	LABEL, //if string but not operation
+	MODULO, //DIRECT_CHAR
+	OPERATION, //make op funct that checks for possible op strings
+	COMMA, //SEPARATOR_CHAR
+	NEW_LINE,
+	REGISTRY, // r + number
+	NUMBER, // indirect arg
+};
+
+struct					s_parts {
+	char				*str;
+	int					token;
+	int					line;
+	t_parts				*next;
 };
 
 struct					s_label {
