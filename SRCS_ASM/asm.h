@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/09 19:01:41 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/09 21:08:14 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,38 @@
 # include "../op.h"
 
 typedef enum e_token	t_token;
+typedef enum e_oper		t_oper;
 typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
 enum					e_token {
-	LABEL, //if string but not operation
-	MODULO, //DIRECT_CHAR
-	OPERATION, //make op funct that checks for possible op strings
-	COMMA, //SEPARATOR_CHAR
-	NEW_LINE,
-	REGISTRY, // r + number
-	NUMBER, // indirect arg
+	LABEL = -1, //if string but not operation
+	MODULO = -2, //DIRECT_CHAR
+	OPERATION, //one of the t_oper values; funct that checks the str.
+	COMMA = -3, //SEPARATOR_CHAR
+	NEW_LINE = -4,
+	REGISTRY = -5, // r + number
+	NUMBER = -6, // indirect arg
+};
+
+enum					e_oper {
+	LIVE = 1,
+	LD = 2,
+	ST = 3,
+	ADD = 4,
+	SUB = 5,
+	AND = 6,
+	OR = 7,
+	XOR = 8,
+	ZJMP = 9,
+	LDI = 10,
+	STI = 11,
+	FORK = 12,
+	LLD = 13,
+	LLDI = 14,
+	LFORK = 15,
+	AFF = 16
 };
 
 struct					s_parts {
