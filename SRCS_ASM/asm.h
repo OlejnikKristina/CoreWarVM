@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 17:08:41 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:32:32 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ enum					e_oper {
 };
 
 struct					s_parts {
-	char				*str;
 	int					token;
 	int					line;
 	int					value; // if 0 no value
@@ -74,6 +73,7 @@ struct					s_asm {
 	int					lines;
 	char				*name;
 	char				*comment;
+	t_label				*labels;
 	t_parts				*parts;
 };
 
@@ -89,9 +89,16 @@ void					free_arr(char **arr1, char ***arr2, int flag);
 void					free_data(t_asm *data);
 
 /*
+**	instruction.c
+*/
+void					parse_instruction(t_asm *data, char **line);
+
+/*
 **	label.c
 */
 void					parse_label(t_asm *data, char *s);
+int						check_instruction(char *s);
+
 /*
 **	name_comment.c
 */
@@ -101,5 +108,5 @@ void					parse_nc(t_asm *data, char *s, int type);
 **	parse.c
 */
 void					parse(t_asm *data);
-void					get_name_comment(t_asm *data);
+int						get_line(t_asm *data, int fd, char **s, char **split);
 #endif

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 16:47:53 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:53:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static t_asm	*init(int ac, char **av)
 	t_asm	*data;
 
 	data = (t_asm*)ft_memalloc(sizeof(t_asm));
-	data->parts = (t_parts*)ft_memalloc(sizeof(t_parts));
-	data->parts->next = NULL;
+	data->parts = NULL;
+	data->labels = NULL;
 	data->lines = 0;
 	data->rfd = open(av[ac - 1], O_RDONLY);
 	if (data->rfd < 3 || read(data->rfd, data->name, 0) < 0)
@@ -43,7 +43,8 @@ static t_asm	*init(int ac, char **av)
 int				main(int ac, char **av)
 {
 	t_asm	*data;
-	t_parts	*curr;
+	t_label	*curr;
+	t_parts	*curr_part;
 
 	if (ac < 2)
 		error("usage ./asm <file_name>", 0);
@@ -52,13 +53,18 @@ int				main(int ac, char **av)
 		error("Invalid file", 0);
 	parse(data);
 	close(data->rfd);
-	curr = data->parts;
+	curr = data->labels;
 	while (curr)
 	{
-		ft_printf("%d : %d line\n", curr->token, curr->line);
+		ft_printf("%s : %d line\n", curr->name, curr->line);
 		curr = curr->next;
 	}
-	while (curr)
+	curr_part = data->parts;
+	while (curr_part)
+	{
+		ft_printf("%d : %d line\n", curr_part->token, curr_part->line);
+		curr_part = curr_part->next;
+	}
 	free_data(data);
 	return (0);
 }

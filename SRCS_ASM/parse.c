@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 16:45:55 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:43:51 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static char	*set_trimmed(char **split, char *tmp)
 **	@return	- int ret, amount of bytes read out of the file
 */
 
-static int	get_line(int fd, char **s)
+int			get_line(t_asm *data, int fd, char **s, char **split)
 {
 	int		ret;
 	char	*line;
 	char	*tmp;
-	char	**split;
 
 	ret = get_next_line(fd, &line);
+	data->lines++;
 	tmp = ft_strtrim(line);
 	free(line);
 	if (!tmp || !ft_strlen(tmp) ||
@@ -56,7 +56,6 @@ static int	get_line(int fd, char **s)
 		return (ret);
 	}
 	*s = tmp;
-	split = NULL;
 	if (ft_strchr(tmp, COMMENT_CHAR))
 		split = ft_strsplit(tmp, COMMENT_CHAR);
 	else if (ft_strchr(tmp, ALT_COMMENT_CHAR))
@@ -95,9 +94,8 @@ void		parse(t_asm *data)
 {
 	char	*s;
 
-	while (get_line(data->rfd, &s))
+	while (get_line(data, data->rfd, &s, NULL))
 	{
-		data->lines++;
 		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
 		free(s);
