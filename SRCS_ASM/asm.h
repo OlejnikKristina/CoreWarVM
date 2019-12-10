@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/09 21:08:14 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/10 15:56:09 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,31 @@ typedef struct s_parts	t_parts;
 
 enum					e_token {
 	LABEL = -1, //if string but not operation
-	MODULO = -2, //DIRECT_CHAR
+	DIR = -2, //DIRECT_CHAR + num
 	OPERATION, //one of the t_oper values; funct that checks the str.
 	COMMA = -3, //SEPARATOR_CHAR
 	NEW_LINE = -4,
 	REGISTRY = -5, // r + number
-	NUMBER = -6, // indirect arg
+	IND = -6, // indirect arg
 };
 
 enum					e_oper {
-	LIVE = 1,
-	LD = 2,
-	ST = 3,
-	ADD = 4,
-	SUB = 5,
-	AND = 6,
-	OR = 7,
-	XOR = 8,
-	ZJMP = 9,
-	LDI = 10,
-	STI = 11,
-	FORK = 12,
-	LLD = 13,
-	LLDI = 14,
-	LFORK = 15,
-	AFF = 16
+	LIVE = 0x01,
+	LD = 0x02,
+	ST = 0x03,
+	ADD = 0x04,
+	SUB = 0x05,
+	AND = 0x06,
+	OR = 0x07,
+	XOR = 0x08,
+	ZJMP = 0x09,
+	LDI = 0x0a,
+	STI = 0x0b,
+	FORK = 0x0c,
+	LLD = 0x0d,
+	LLDI = 0x0e,
+	LFORK = 0x0f,
+	AFF = 0x10
 };
 
 struct					s_parts {
