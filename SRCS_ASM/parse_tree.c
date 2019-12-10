@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 18:06:37 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/10 15:45:38 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/10 17:14:24 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,3 @@ void		test(t_parts *file)
 		token = token->next;
 	}
 }
-
-int			valid_oper(t_parts **oper)
-{
-	*oper->token 
-}
-
