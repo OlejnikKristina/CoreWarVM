@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 19:15:37 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 19:24:24 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void		get_label(t_asm *data, char **line)
 	split = ft_strsplit(line[0], LABEL_CHAR);
 	if (split[1])
 	{
-		ft_putendl(split[0]);
 		new = make_label(split[0], data->lines);
 		add_label(data, new);
 		ft_strclr(line[0]);

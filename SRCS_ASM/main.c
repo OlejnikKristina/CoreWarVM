@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 18:53:41 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 19:24:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int				main(int ac, char **av)
 	curr = data->labels;
 	while (curr)
 	{
-		ft_printf("%s : %d line\n", curr->name, curr->line);
+		ft_printf("%-15s\tline %d\n", curr->name, curr->line);
 		curr = curr->next;
 	}
 	curr_part = data->parts;
 	while (curr_part)
 	{
-		ft_printf("%d : %d line\n", curr_part->token, curr_part->line);
+		ft_printf("%-15d\tline %d\n", curr_part->token, curr_part->line);
 		curr_part = curr_part->next;
 	}
 	free_data(data);
