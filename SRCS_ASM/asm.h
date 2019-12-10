@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 13:07:07 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 15:37:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ struct					s_label {
 struct					s_asm {
 	int					rfd;
 	int					wfd;
+	int					lines;
 	char				*name;
 	char				*comment;
 };
@@ -38,7 +39,7 @@ struct					s_asm {
 /*
 **  error.c
 */
-void					error(char *message);
+void					error(char *message, int line);
 
 /*
 **	free.c
@@ -46,6 +47,10 @@ void					error(char *message);
 void					free_arr(char **arr1, char ***arr2, int flag);
 void					free_data(t_asm *data);
 
+/*
+**	label.c
+*/
+void					parse_label(t_asm *data, char *s);
 /*
 **	name_comment.c
 */

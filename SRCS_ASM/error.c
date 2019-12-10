@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/06 14:54:36 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:06:24 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 15:37:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 **	@param	- string message to be printed
 */
 
-void	error(char *message)
+void	error(char *message, int line)
 {
-	ft_putstr("Error: ");
+	ft_printf("Error in line %d: ");
 	ft_putendl(message);
 	exit(1);
 }

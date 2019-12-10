@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:21:11 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 15:32:48 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_asm	*init(int ac, char **av)
 	t_asm	*data;
 
 	data = (t_asm*)ft_memalloc(sizeof(t_asm));
+	data->lines = 0;
 	data->rfd = open(av[ac - 1], O_RDONLY);
 	if (data->rfd < 3 || read(data->rfd, data->name, 0) < 0)
 		return (NULL);
