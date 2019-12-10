@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/07 13:04:41 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/07 15:53:33 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 15:43:31 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 /*
 **	@desc	- function checks if the command are right (.name && .comment)
-**	@param	- char *s, command to check
+**	@param	- t_asm *data, main struct
+**			- char *s, command to check
 **			- int type, 0 if name, 1 if comment
 */
 
-static void	check_cmd(char *s, int type)
+static void	check_cmd(t_asm *data, char *s, int type)
 {
 	if (type == 0)
 	{
 		if (ft_strlen(s) > PROG_NAME_LENGTH)
-			error(".name too long");
+			error(".name too long", data->lines);
 	}
 	else if (type == 1)
 		if (ft_strlen(s) > COMMENT_LENGTH)
-			error(".comment too long");
+			error(".comment too long", data->lines);
 }
 
 /*
@@ -80,7 +81,7 @@ static void	multi_line(t_asm *data, char **s, int type)
 			check = NULL;
 		if (ft_strstr(line, NAME_CMD_STRING) ||
 		ft_strstr(line, COMMENT_CMD_STRING))
-			error("No closing quote");
+			error("No closing quote", data->lines);
 		temp = ft_strjoin(*s, line);
 		free_arr(&line, NULL, 0);
 		*s = temp;
@@ -107,7 +108,7 @@ void		parse_nc(t_asm *data, char *s, int type)
 	split = ft_strsplit(s, '"');
 	quotes = count_quotes(s);
 	if (!quotes)
-		error("Incorrect string in .name/.comment");
+		error("Incorrect string in .name/.comment", data->lines);
 	if (split[1])
 		s = ft_strdup(split[1]);
 	else if (!split[1])
@@ -117,12 +118,12 @@ void		parse_nc(t_asm *data, char *s, int type)
 		s = ft_strjoinone(s, '\n');
 		multi_line(data, &s, type);
 	}
-	check_cmd(s, type);
+	check_cmd(data, s, type);
 	if (type == 0 && !data->name)
 		data->name = s;
 	else if (type == 1 && !data->comment)
 		data->comment = s;
 	else
-		error("Redefinition of .name or .comment");
+		error("Redefinition of .name or .comment", data->lines);
 	free_arr(NULL, &split, 1);
 }
