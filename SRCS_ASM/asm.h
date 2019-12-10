@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 15:39:35 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 16:02:29 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ typedef struct s_parts	t_parts;
 
 enum					e_token {
 	LABEL = -1, //if string but not operation
-	MODULO = -2, //DIRECT_CHAR
+	DIR = -2, //DIRECT_CHAR + num
 	OPERATION, //one of the t_oper values; funct that checks the str.
 	COMMA = -3, //SEPARATOR_CHAR
 	NEW_LINE = -4,
 	REGISTRY = -5, // r + number
-	NUMBER = -6, // indirect arg
+	IND = -6, // indirect arg
 };
 
 enum					e_oper {
@@ -73,6 +73,7 @@ struct					s_asm {
 	int					lines;
 	char				*name;
 	char				*comment;
+	t_parts				*parts;
 };
 
 /*
