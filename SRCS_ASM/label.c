@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 16:02:35 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 17:11:12 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,35 @@ static int	check_instruction(char *s)
 	if (ft_strequ(s, "live"))
 		return (LIVE);
 	else if (ft_strequ(s, "ld"))
-		return (0x02);
+		return (LD);
 	else if (ft_strequ(s, "st"))
-		return (0x03);
+		return (ST);
 	else if (ft_strequ(s, "add"))
-		return (0x04);
+		return (ADD);
 	else if (ft_strequ(s, "sub"))
-		return (0x05);
+		return (SUB);
 	else if (ft_strequ(s, "and"))
-		return (0x06);
+		return (AND);
 	else if (ft_strequ(s, "or"))
-		return (0x07);
+		return (OR);
 	else if (ft_strequ(s, "xor"))
-		return (0x08);
+		return (XOR);
 	else if (ft_strequ(s, "zjmp"))
-		return (0x09);
+		return (ZJMP);
 	else if (ft_strequ(s, "ldi"))
-		return (0x0a);
+		return (LDI);
 	else if (ft_strequ(s, "sti"))
-		return (0x0b);
+		return (STI);
 	else if (ft_strequ(s, "fork"))
-		return (0x0c);
+		return (FORK);
 	else if (ft_strequ(s, "lld"))
-		return (0x0d);
+		return (LLD);
 	else if (ft_strequ(s, "lldi"))
-		return (0x0e);
+		return (LLDI);
 	else if (ft_strequ(s, "lfork"))
-		return (0x0f);
+		return (LFORK);
 	else if (ft_strequ(s, "aff"))
-		return (0x10);
+		return (AFF);
 	return (0x00);
 }
 
@@ -55,9 +55,11 @@ t_parts		*make_instruction(int token, int line)
 {
 	t_parts	*new;
 
-	new = ft_memalloc(sizeof(t_parts));
+	new = malloc(sizeof(t_parts));
+	new->str = NULL;
 	new->token = token;
 	new->line = line;
+	new->next = NULL;
 	return (new);
 }
 
@@ -66,16 +68,19 @@ void		add_instruction(t_asm *data, t_parts *new)
 	t_parts	*curr;
 
 	curr = data->parts;
-	while (curr)
+	while (curr->next)
 		curr = curr->next;
-	curr = new;
+	curr->next = new;
 }
 
 int			get_argument(char *s)
 {
 	if (s[0] == 'r')
-		return (0);
-	return (-1);
+		return (REG);
+	else if (s[0] == DIRECT_CHAR)
+		return (DIR);
+	else
+		return (IND);
 }
 
 int			get_token(char *s)
@@ -118,7 +123,6 @@ void		parse_label(t_asm *data, char *s)
 		if (!ft_strchr(split[0], LABEL_CHAR))
 			error("Not a valid instruction", data->lines);
 		else
-			ft_printf("label: [%s]\n", split[0]);
+			parse_label();
 	}
-	
 }

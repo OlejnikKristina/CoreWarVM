@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-<<<<<<< HEAD
 /*                                                        ::::::::            */
 /*   asm.h                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 16:02:29 by asulliva      ########   odam.nl         */
-=======
-/*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/10 15:56:09 by abumbier         ###   ########.fr       */
->>>>>>> abumbier
+/*   Updated: 2019/12/10 17:08:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +31,7 @@ enum					e_token {
 	OPERATION, //one of the t_oper values; funct that checks the str.
 	COMMA = -3, //SEPARATOR_CHAR
 	NEW_LINE = -4,
-	REGISTRY = -5, // r + number
+	REG = -5, // r + number
 	IND = -6, // indirect arg
 };
 
@@ -68,12 +58,13 @@ struct					s_parts {
 	char				*str;
 	int					token;
 	int					line;
+	int					value; // if 0 no value
 	t_parts				*next;
 };
 
 struct					s_label {
 	char				*name;
-	int					id;
+	int					line;
 	t_label				*next;
 };
 

@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 16:06:53 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 16:45:55 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static int	get_line(int fd, char **s)
 	char	**split;
 
 	ret = get_next_line(fd, &line);
-	printf("%s \nret:%d\n", line, ret);
 	tmp = ft_strtrim(line);
 	free(line);
 	if (!tmp || !ft_strlen(tmp) ||
@@ -82,6 +81,8 @@ void		choose_parse(t_asm *data, char *s)
 		else if (!ft_strncmp(s, COMMENT_CMD_STRING,\
 		ft_strlen(COMMENT_CMD_STRING)))
 			parse_nc(data, s, 1);
+		else
+			parse_label(data, s);
 	}
 }
 
@@ -96,6 +97,7 @@ void		parse(t_asm *data)
 
 	while (get_line(data->rfd, &s))
 	{
+		data->lines++;
 		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
 		free(s);
