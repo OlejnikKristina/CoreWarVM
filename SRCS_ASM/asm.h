@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   asm.h                                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 18:32:32 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/11 18:01:02 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,14 @@
 # include "../SRCS_LIBFT/libft/libft.h"
 # include "../op.h"
 
-typedef enum e_token	t_token;
+typedef enum e_arg		t_arg;
 typedef enum e_oper		t_oper;
 typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
-enum					e_token {
-	LABEL = -1, //if string but not operation
+enum					e_arg {
 	DIR = -2, //DIRECT_CHAR + num
-	OPERATION, //one of the t_oper values; funct that checks the str.
-	COMMA = -3, //SEPARATOR_CHAR
-	NEW_LINE = -4,
 	REG = -5, // r + number
 	IND = -6, // indirect arg
 };
@@ -110,3 +106,6 @@ void					parse_nc(t_asm *data, char *s, int type);
 void					parse(t_asm *data);
 int						get_line(t_asm *data, int fd, char **s, char **split);
 #endif
+
+void					check_syntax(t_parts *file);
+int						valid_oper_line(t_parts **oper);

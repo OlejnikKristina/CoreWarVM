@@ -1,17 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: asulliva <asulliva@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/10 17:37:09 by asulliva      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
+#    Updated: 2019/12/11 18:05:10 by abumbier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
-SRCS	= main error parse free name_comment label instruction
+SRCS	= main error parse free name_comment label instruction check_syntax \
+valid_oper_line
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 HEADER	= asm.h

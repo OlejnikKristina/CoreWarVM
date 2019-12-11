@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 13:48:14 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/11 18:08:13 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int				main(int ac, char **av)
 		ft_printf("%-15d = %-5d\tline %d\n", curr_part->token, curr_part->value, curr_part->line);
 		curr_part = curr_part->next;
 	}
+	check_syntax(data->parts);
 	free_data(data);
 	return (0);
 }
