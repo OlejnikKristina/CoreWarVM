@@ -6,11 +6,61 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 17:29:07 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 19:21:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/11 13:46:50 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+/*
+**	@desc	- function gets the value of the argument token
+**	@param	- int token, the token type
+**			- int line, number of the line (in case of errors)
+**			- char *s, the argument
+**	@return	- int ret, the value of the token, -1 if error
+*/
+
+int			get_value(int token, int line, char *s)
+{
+	int		ret;
+
+	ret = 0;
+	if (token == REG)
+	{
+		ret = (int)ft_atoi(&s[1]);
+		if (ret < 1 || ret > 99)
+			error("Registry out of bounds", line);
+		return (ret);
+	}
+	else if (token == DIR)
+	{
+		if (s[1] == LABEL_CHAR)
+		{
+			// ft_putendl(s);// get_label_value(s);
+			return (0);
+		}
+		else if (ft_isdigit(s[1]))
+		{
+			ret = (int)ft_atoi(&s[1]);
+			return (ret);
+		}
+	}
+	else if (token == IND)
+	{
+		if (s[0] == LABEL_CHAR)
+		{
+			// ft_putendl(s);// get_label_value(s);
+			return (0);
+		}
+		else if (ft_isdigit(s[0]))
+		{
+			ret = (int)ft_atoi(&s[1]);
+			return (ret);
+		}
+	}
+	error("Invalid token", line);
+	return (-1);
+}
 
 /*
 **	@desc	- make new instruction object
@@ -19,12 +69,16 @@
 **	@return	- new parts object
 */
 
-t_parts		*make_instruction(int token, int line)
+t_parts		*make_instruction(int token, int line, char *s)
 {
 	t_parts	*new;
 
 	new = malloc(sizeof(t_parts));
 	new->token = token;
+	if (new->token < 0)
+		new->value = get_value(token, line, s);
+	else
+		new->value = 0;
 	new->line = line;
 	new->next = NULL;
 	return (new);
@@ -98,7 +152,7 @@ void		parse_instruction(t_asm *data, char **line)
 	i = 0;
 	while (line[i])
 	{
-		new = make_instruction(get_token(line[i]), data->lines);
+		new = make_instruction(get_token(line[i]), data->lines, line[i]);
 		add_instruction(data, new);
 		i++;
 	}
