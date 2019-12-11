@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/10 15:56:09 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   asm.h                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/10 18:32:32 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum					e_token {
 	OPERATION, //one of the t_oper values; funct that checks the str.
 	COMMA = -3, //SEPARATOR_CHAR
 	NEW_LINE = -4,
-	REGISTRY = -5, // r + number
+	REG = -5, // r + number
 	IND = -6, // indirect arg
 };
 
@@ -55,35 +55,49 @@ enum					e_oper {
 };
 
 struct					s_parts {
-	char				*str;
 	int					token;
 	int					line;
+	int					value; // if 0 no value
 	t_parts				*next;
 };
 
 struct					s_label {
 	char				*name;
-	int					id;
+	int					line;
 	t_label				*next;
 };
 
 struct					s_asm {
 	int					rfd;
 	int					wfd;
+	int					lines;
 	char				*name;
 	char				*comment;
+	t_label				*labels;
+	t_parts				*parts;
 };
 
 /*
 **  error.c
 */
-void					error(char *message);
+void					error(char *message, int line);
 
 /*
 **	free.c
 */
 void					free_arr(char **arr1, char ***arr2, int flag);
 void					free_data(t_asm *data);
+
+/*
+**	instruction.c
+*/
+void					parse_instruction(t_asm *data, char **line);
+
+/*
+**	label.c
+*/
+void					parse_label(t_asm *data, char *s);
+int						check_instruction(char *s);
 
 /*
 **	name_comment.c
@@ -94,5 +108,5 @@ void					parse_nc(t_asm *data, char *s, int type);
 **	parse.c
 */
 void					parse(t_asm *data);
-void					get_name_comment(t_asm *data);
+int						get_line(t_asm *data, int fd, char **s, char **split);
 #endif

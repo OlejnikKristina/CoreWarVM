@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/06 18:18:10 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 19:06:49 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/10 18:39:47 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,30 @@ void	free_arr(char **arr1, char ***arr2, int flag)
 	}
 }
 
+void	free_labels(t_label *label)
+{
+	t_label	*curr;
+
+	while (label)
+	{
+		curr = label->next;
+		free(label);
+		label = curr;
+	}
+}
+
+void	free_parts(t_parts *parts)
+{
+	t_parts	*curr;
+
+	while (parts)
+	{
+		curr = parts->next;
+		free(parts);
+		parts = curr;
+	}
+}
+
 /*
 **	@desc	- function frees main struct
 **	@param	- t_asm *data, main struct
@@ -51,5 +75,7 @@ void	free_data(t_asm *data)
 {
 	free(data->comment);
 	free(data->name);
+	free_labels(data->labels);
+	free_parts(data->parts);
 	free(data);
 }

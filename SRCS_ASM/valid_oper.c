@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:44:58 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/11 16:52:23 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/11 16:56:01 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	valid_oper(t_parts **oper)
 			valid_direct(arg_c, oper_code);
 		else if ((*oper)->token == IND)
 			valid_indirect(arg_c, oper_code);
-		else if ((*oper)->token == REGISTRY)
+		else if ((*oper)->token == REG)
 			valid_registry(arg_c, oper_code);
 		//check for valid_* return
 		(*oper) = (*oper)->next;

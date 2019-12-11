@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 18:51:51 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/09 19:16:07 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 18:51:51 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/10 18:43:51 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,28 @@ static char	*set_trimmed(char **split, char *tmp)
 **	@return	- int ret, amount of bytes read out of the file
 */
 
-static int	get_line(int fd, char **s)
+int			get_line(t_asm *data, int fd, char **s, char **split)
 {
 	int		ret;
 	char	*line;
 	char	*tmp;
-	char	**split;
 
 	ret = get_next_line(fd, &line);
-	printf("%s \nret:%d\n", line, ret);
+	data->lines++;
 	tmp = ft_strtrim(line);
 	free(line);
-	if (!tmp || !ft_strlen(tmp) || tmp[0] == '#' || tmp[0] == ';')
+	if (!tmp || !ft_strlen(tmp) ||
+	tmp[0] == COMMENT_CHAR || tmp[0] == ALT_COMMENT_CHAR)
 	{
 		*s = ft_strnew(0);
 		free(tmp);
 		return (ret);
 	}
 	*s = tmp;
-	split = NULL;
-	if (ft_strchr(tmp, '#'))
-		split = ft_strsplit(tmp, '#');
-	else if (ft_strchr(tmp, ';'))
-		split = ft_strsplit(tmp, ';');
+	if (ft_strchr(tmp, COMMENT_CHAR))
+		split = ft_strsplit(tmp, COMMENT_CHAR);
+	else if (ft_strchr(tmp, ALT_COMMENT_CHAR))
+		split = ft_strsplit(tmp, ALT_COMMENT_CHAR);
 	if (split)
 		*s = set_trimmed(split, tmp);
 	return (ret);
@@ -81,6 +80,8 @@ void		choose_parse(t_asm *data, char *s)
 		else if (!ft_strncmp(s, COMMENT_CMD_STRING,\
 		ft_strlen(COMMENT_CMD_STRING)))
 			parse_nc(data, s, 1);
+		else
+			parse_label(data, s);
 	}
 }
 
@@ -93,7 +94,7 @@ void		parse(t_asm *data)
 {
 	char	*s;
 
-	while (get_line(data->rfd, &s))
+	while (get_line(data, data->rfd, &s, NULL))
 	{
 		if (s && ft_strlen(s) > 0)
 			choose_parse(data, s);
