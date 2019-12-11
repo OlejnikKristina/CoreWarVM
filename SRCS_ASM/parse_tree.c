@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 18:06:37 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/10 17:14:24 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/11 16:48:43 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void		test(t_parts *file)
 	token = file;
 	while (token)
 	{
-		if (token->token == LABEL)
-			valid_label(&token);
-		else if (token->token >= LIVE && token->token <= AFF)
+		if (token->token >= LIVE && token->token <= AFF)
 			valid_oper(&token);
 		token = token->next;
 	}
