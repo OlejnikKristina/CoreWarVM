@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 18:32:32 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/11 16:14:14 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
 enum					e_token {
-	LABEL = -1, //if string but not operation
 	DIR = -2, //DIRECT_CHAR + num
-	OPERATION, //one of the t_oper values; funct that checks the str.
-	COMMA = -3, //SEPARATOR_CHAR
-	NEW_LINE = -4,
 	REG = -5, // r + number
 	IND = -6, // indirect arg
 };
@@ -55,9 +51,11 @@ enum					e_oper {
 };
 
 struct					s_parts {
+	char				*name;
 	int					token;
 	int					line;
 	int					value; // if 0 no value
+	int					size;
 	t_parts				*next;
 };
 
@@ -76,6 +74,11 @@ struct					s_asm {
 	t_label				*labels;
 	t_parts				*parts;
 };
+
+/*
+**	calculate.c
+*/
+void					calc_line_byte(t_asm *data);
 
 /*
 **  error.c

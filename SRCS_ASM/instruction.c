@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 17:29:07 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 13:46:50 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/11 15:30:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int			get_value(int token, int line, char *s)
 		if (s[1] == LABEL_CHAR)
 		{
 			// ft_putendl(s);// get_label_value(s);
-			return (0);
+			return (MAX_INT);
 		}
-		else if (ft_isdigit(s[1]))
+		else if (ft_isdigit(s[1]) || s[1] == '-')
 		{
 			ret = (int)ft_atoi(&s[1]);
 			return (ret);
@@ -50,16 +50,37 @@ int			get_value(int token, int line, char *s)
 		if (s[0] == LABEL_CHAR)
 		{
 			// ft_putendl(s);// get_label_value(s);
-			return (0);
+			return (MAX_INT);
 		}
-		else if (ft_isdigit(s[0]))
+		else if (ft_isdigit(s[0]) || s[0] == '-')
 		{
 			ret = (int)ft_atoi(&s[1]);
 			return (ret);
 		}
 	}
 	error("Invalid token", line);
-	return (-1);
+	return (MAX_INT);
+}
+
+/*
+**	@desc	- function removes SEPARATOR_CHAR (standard ',') from a string
+**	@param	- char *s, string which might have SEPARATOR_CHAR
+**	@return	- char *new, new string without SEPARATOR_CHAR
+*/
+char		*rm_comma(char *s)
+{
+	char	*new;
+	int		i;
+
+	new = ft_strdup(s);
+	i = 0;
+	while (new[i])
+	{
+		if (new[i] == SEPARATOR_CHAR)
+			new[i] = '\0';
+		i++;
+	}
+	return (new);
 }
 
 /*
@@ -80,6 +101,8 @@ t_parts		*make_instruction(int token, int line, char *s)
 	else
 		new->value = 0;
 	new->line = line;
+	new->size = 0;
+	new->name = rm_comma(s);
 	new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 19:24:24 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/11 18:16:50 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,61 @@ void		add_label(t_asm *data, t_label *new)
 	curr->next = new;
 }
 
+int			check_label(char *s)
+{
+	if (s[ft_strlen(s) - 1] == LABEL_CHAR)
+		return (1);
+	return (0);
+}
+
+t_label		*make_label_noline(char *name)
+{
+	t_label	*new;
+
+	new = malloc(sizeof(t_label));
+	new->name = ft_strdup(name);
+	new->next = NULL;
+	new->line = -1;
+	return (new);
+}
+
+/*
+**	@desc	- function adds label if a label is followed by a label
+**	@param	- char *s, the label name
+**			- t_label *head, to already existing label
+*/
+
+void		add_to_label(char *s, t_label *head)
+{
+	t_label	*curr;
+	t_label	*new;
+
+	curr = head;
+	new = make_label_noline(s);
+	while (curr->next)
+		curr = curr->next;
+	curr->next = new;
+	curr = head;
+	while (curr)
+	{
+		ft_putendl(curr->name);
+		curr = curr->next;
+	}
+}
+
+void		set_lines(t_label *head, int line)
+{
+	t_label	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		curr->line = line;
+		curr = curr->next;
+	}
+}
+
+
 /*
 **	@desc	- function get the label variables if its not on the same line
 **	@param	- t_asm *data, main struct
@@ -109,6 +164,8 @@ void		get_next_label(t_asm *data, char *name)
 	t_label	*new;
 
 	split = NULL;
+	new = NULL;
+	new = make_label_noline(name);
 	while (get_line(data, data->rfd, &s, NULL))
 	{
 		if (s && !ft_strequ("", s))
@@ -116,10 +173,12 @@ void		get_next_label(t_asm *data, char *name)
 			split = ft_strsplit_ws(s);
 			if (check_instruction(split[0]))
 			{
-				new = make_label(name, data->lines);
+				set_lines(new, data->lines);
 				add_label(data, new);
 				parse_instruction(data, split);
 			}
+			else if (check_label(split[0]))
+				add_to_label(split[0], new);
 			else
 				error("Invalid label", data->lines);
 			break ;
