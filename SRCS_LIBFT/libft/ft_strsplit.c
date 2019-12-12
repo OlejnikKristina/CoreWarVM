@@ -6,7 +6,7 @@
 /*   By: asulliva <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/17 13:41:09 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/06 16:33:57 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 17:44:11 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	**ft_cpwrds(char **words, char const *s, char c)
 	j = 0;
 	start = 0;
 	stop = 0;
-	while (s[++i] != '\0')
+	while (s[i] != '\0')
 	{
 		if (s[i] == c || s[i] == '\0')
 			start = i + 1;
@@ -66,6 +66,7 @@ static char	**ft_cpwrds(char **words, char const *s, char c)
 			ft_cpychars(s, words[j], start, stop);
 			j++;
 		}
+		i++;
 	}
 	words[j] = 0;
 	return (words);
