@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 15:15:38 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 18:15:27 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 15:04:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int		handle_ld(t_parts *head)
 	i = 0;
 	while (curr && curr->line == line)
 	{
-		ft_printf("%s\t%d\n", curr->name, i);
 		if (i == 0 && curr->token != LD)
 			error("Invalid argument", line);
 		else if (i == 1 && (curr->token != DIR && curr->token != IND))

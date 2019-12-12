@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 18:16:50 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 15:17:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,132 +59,24 @@ int			check_instruction(char *s)
 }
 
 /*
-**	@desc	- fuction makes a new label object
-**	@param	- char *s, name of the label
-**			- int line, line number the label points to
-*/
-
-t_label		*make_label(char *s, int line)
-{
-	t_label	*new;
-
-	new = (t_label*)malloc(sizeof(t_label));
-	new->name = ft_strdup(s);
-	new->line = line;
-	new->next = NULL;
-	return (new);
-}
-
-/*
 **	@desc	- adds a label to the linked list of labels
 **	@param	- t_asm *data, main struct
 **			- t_label *new, label to be added
 */
 
-void		add_label(t_asm *data, t_label *new)
+void		add_label(t_asm *data, t_label **new)
 {
 	t_label	*curr;
 
 	curr = data->labels;
 	if (!curr)
 	{
-		data->labels = new;
+		data->labels = (*new);
 		return ;
 	}
 	while (curr->next)
 		curr = curr->next;
-	curr->next = new;
-}
-
-int			check_label(char *s)
-{
-	if (s[ft_strlen(s) - 1] == LABEL_CHAR)
-		return (1);
-	return (0);
-}
-
-t_label		*make_label_noline(char *name)
-{
-	t_label	*new;
-
-	new = malloc(sizeof(t_label));
-	new->name = ft_strdup(name);
-	new->next = NULL;
-	new->line = -1;
-	return (new);
-}
-
-/*
-**	@desc	- function adds label if a label is followed by a label
-**	@param	- char *s, the label name
-**			- t_label *head, to already existing label
-*/
-
-void		add_to_label(char *s, t_label *head)
-{
-	t_label	*curr;
-	t_label	*new;
-
-	curr = head;
-	new = make_label_noline(s);
-	while (curr->next)
-		curr = curr->next;
-	curr->next = new;
-	curr = head;
-	while (curr)
-	{
-		ft_putendl(curr->name);
-		curr = curr->next;
-	}
-}
-
-void		set_lines(t_label *head, int line)
-{
-	t_label	*curr;
-
-	curr = head;
-	while (curr)
-	{
-		curr->line = line;
-		curr = curr->next;
-	}
-}
-
-
-/*
-**	@desc	- function get the label variables if its not on the same line
-**	@param	- t_asm *data, main struct
-**			- char *name, name of the label
-*/
-
-void		get_next_label(t_asm *data, char *name)
-{
-	char	*s;
-	char	**split;
-	t_label	*new;
-
-	split = NULL;
-	new = NULL;
-	new = make_label_noline(name);
-	while (get_line(data, data->rfd, &s, NULL))
-	{
-		if (s && !ft_strequ("", s))
-		{
-			split = ft_strsplit_ws(s);
-			if (check_instruction(split[0]))
-			{
-				set_lines(new, data->lines);
-				add_label(data, new);
-				parse_instruction(data, split);
-			}
-			else if (check_label(split[0]))
-				add_to_label(split[0], new);
-			else
-				error("Invalid label", data->lines);
-			break ;
-		}
-	}
-	free_arr(&name, &split, 1);
+	curr->next = (*new);
 }
 
 /*
@@ -193,7 +85,7 @@ void		get_next_label(t_asm *data, char *name)
 **			- char **line, line read, split on whitespace
 */
 
-void		get_label(t_asm *data, char **line)
+static void	get_label(t_asm *data, char **line)
 {
 	t_label		*new;
 	char		**split;
@@ -203,7 +95,7 @@ void		get_label(t_asm *data, char **line)
 	if (split[1])
 	{
 		new = make_label(split[0], data->lines);
-		add_label(data, new);
+		add_label(data, &new);
 		ft_strclr(line[0]);
 		line[0] = ft_strdup(split[1]);
 		parse_instruction(data, line);

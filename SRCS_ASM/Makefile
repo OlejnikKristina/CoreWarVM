@@ -6,12 +6,13 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/11 15:33:46 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/12 15:26:04 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
-SRCS	= main error parse free name_comment label instruction calculate
+SRCS	= main error parse free name_comment label instruction calculate\
+		label_util token
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 HEADER	= asm.h
