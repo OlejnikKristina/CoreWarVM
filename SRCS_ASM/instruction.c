@@ -6,60 +6,32 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 17:29:07 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 13:46:50 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 15:26:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /*
-**	@desc	- function gets the value of the argument token
-**	@param	- int token, the token type
-**			- int line, number of the line (in case of errors)
-**			- char *s, the argument
-**	@return	- int ret, the value of the token, -1 if error
+**	@desc	- function removes SEPARATOR_CHAR (standard ',') from a string
+**	@param	- char *s, string which might have SEPARATOR_CHAR
+**	@return	- char *new, new string without SEPARATOR_CHAR
 */
 
-int			get_value(int token, int line, char *s)
+char		*rm_comma(char *s)
 {
-	int		ret;
+	char	*new;
+	int		i;
 
-	ret = 0;
-	if (token == REG)
+	new = ft_strdup(s);
+	i = 0;
+	while (new[i])
 	{
-		ret = (int)ft_atoi(&s[1]);
-		if (ret < 1 || ret > 99)
-			error("Registry out of bounds", line);
-		return (ret);
+		if (new[i] == SEPARATOR_CHAR)
+			new[i] = '\0';
+		i++;
 	}
-	else if (token == DIR)
-	{
-		if (s[1] == LABEL_CHAR)
-		{
-			// ft_putendl(s);// get_label_value(s);
-			return (0);
-		}
-		else if (ft_isdigit(s[1]))
-		{
-			ret = (int)ft_atoi(&s[1]);
-			return (ret);
-		}
-	}
-	else if (token == IND)
-	{
-		if (s[0] == LABEL_CHAR)
-		{
-			// ft_putendl(s);// get_label_value(s);
-			return (0);
-		}
-		else if (ft_isdigit(s[0]))
-		{
-			ret = (int)ft_atoi(&s[1]);
-			return (ret);
-		}
-	}
-	error("Invalid token", line);
-	return (-1);
+	return (new);
 }
 
 /*
@@ -80,6 +52,8 @@ t_parts		*make_instruction(int token, int line, char *s)
 	else
 		new->value = 0;
 	new->line = line;
+	new->size = 0;
+	new->name = rm_comma(s);
 	new->next = NULL;
 	return (new);
 }
@@ -119,23 +93,6 @@ int			get_argument(char *s)
 		return (DIR);
 	else
 		return (IND);
-}
-
-/*
-**	@desc	- function decides if string is argument or instruction
-**	@param	- char *s, string to be checked
-**	@return	- returns correct token for the given string
-*/
-
-int			get_token(char *s)
-{
-	int		ret;
-
-	ret = check_instruction(s);
-	if (ret)
-		return (ret);
-	else
-		return (get_argument(s));
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/11 13:48:14 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 15:04:49 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int				main(int ac, char **av)
 		error("Invalid file", 0);
 	parse(data);
 	close(data->rfd);
+	calc_line_byte(data);
 	curr = data->labels;
 	while (curr)
 	{
@@ -62,7 +63,7 @@ int				main(int ac, char **av)
 	curr_part = data->parts;
 	while (curr_part)
 	{
-		ft_printf("%-15d = %-5d\tline %d\n", curr_part->token, curr_part->value, curr_part->line);
+		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr_part->name, curr_part->token, curr_part->value, curr_part->line);
 		curr_part = curr_part->next;
 	}
 	free_data(data);

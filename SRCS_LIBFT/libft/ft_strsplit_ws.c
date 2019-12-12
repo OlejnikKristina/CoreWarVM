@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strplit_ws.c                                    :+:    :+:            */
+/*   ft_strsplit_ws.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:35:55 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 14:41:16 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 17:44:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	**ft_cpwrds(char **words, char const *s)
 	j = 0;
 	start = 0;
 	stop = 0;
-	while (s[++i] != '\0')
+	while (s[i] != '\0')
 	{
 		if (ft_iswhitespace(s[i]) || s[i] == '\0')
 			start = i + 1;
@@ -75,6 +75,7 @@ static char	**ft_cpwrds(char **words, char const *s)
 			ft_cpychars(s, words[j], start, stop);
 			j++;
 		}
+		i++;
 	}
 	words[j] = 0;
 	return (words);
