@@ -6,13 +6,19 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 15:44:58 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/11 18:15:42 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/12 20:40:05 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			valid_direct(int arg_num, int oper_code)
+/*
+**	@desc	- funct checks if the direct argument is valid for the operation \
+**	(passed as second arg) as n^th argument (n passed as 1st argument)
+**	@param	- int arg_num, 
+*/
+
+static int	valid_direct(int arg_num, int oper_code)
 {
 	int	i;
 	int	arg1[] = {0x01, 0x02, 0x06, 0x07, 0x08, \
@@ -38,7 +44,7 @@ int			valid_direct(int arg_num, int oper_code)
 	return (DIR);
 }
 
-int			valid_indirect(int arg_num, int oper_code)
+static int	valid_indirect(int arg_num, int oper_code)
 {
 	int	i;
 	int	arg1[] = {0x02, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0e};
@@ -61,7 +67,7 @@ int			valid_indirect(int arg_num, int oper_code)
 	return (IND);
 }
 
-int			valid_registry(int arg_num, int oper_code)
+static int	valid_registry(int arg_num, int oper_code)
 {
 	int	i;
 	int	arg1[] = {0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0a, 0x0b, 0x0e, 0x10};

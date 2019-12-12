@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/11 18:01:02 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/12 20:43:16 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
-enum					e_arg {
-	DIR = -2, //DIRECT_CHAR + num
-	REG = -5, // r + number
-	IND = -6, // indirect arg
+enum					e_token {
+	DIR = -2,
+	REG = -5,
+	IND = -6,
 };
 
 enum					e_oper {
@@ -51,9 +51,11 @@ enum					e_oper {
 };
 
 struct					s_parts {
+	char				*name;
 	int					token;
 	int					line;
-	int					value; // if 0 no value
+	int					value;
+	int					size;
 	t_parts				*next;
 };
 
@@ -69,9 +71,15 @@ struct					s_asm {
 	int					lines;
 	char				*name;
 	char				*comment;
+	char				*char_name;
 	t_label				*labels;
 	t_parts				*parts;
 };
+
+/*
+**	calculate.c
+*/
+void					calc_line_byte(t_asm *data);
 
 /*
 **  error.c
@@ -88,12 +96,21 @@ void					free_data(t_asm *data);
 **	instruction.c
 */
 void					parse_instruction(t_asm *data, char **line);
+int						get_argument(char *s);
 
 /*
 **	label.c
 */
 void					parse_label(t_asm *data, char *s);
 int						check_instruction(char *s);
+void					add_label(t_asm *data, t_label **new);
+int						check_label(char *label);
+
+/*
+**	label_utils.c
+*/
+void					get_next_label(t_asm *data, char *name);
+t_label					*make_label(t_asm *data, char *s, int line);
 
 /*
 **	name_comment.c
@@ -105,7 +122,29 @@ void					parse_nc(t_asm *data, char *s, int type);
 */
 void					parse(t_asm *data);
 int						get_line(t_asm *data, int fd, char **s, char **split);
-#endif
+
+/*
+**	token.c
+*/
+int						get_token(char *s);
+int						get_value(int token, int line, char *s);
+
+/*
+**	check_syntax.c
+*/
 
 void					check_syntax(t_parts *file);
+
+/*
+**	valid_oper_line.c
+*/
+
 int						valid_oper_line(t_parts **oper);
+
+/*
+**	write_core.c
+*/
+
+void					create_cor(t_asm *data);
+
+#endif

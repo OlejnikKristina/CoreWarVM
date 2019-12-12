@@ -3,7 +3,7 @@
 
 sti r3, %:live, %1			;change live by the right value
 sti	r1, %:live2, %1			;change live by the right value
-ld	%1, r3, r4
+ld	%1, r3
 ld	%33, r6
 #While (r2 < 10)
 forks:add	r2, r3, r2		;increment r2

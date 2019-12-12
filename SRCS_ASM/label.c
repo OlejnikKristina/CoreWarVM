@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 19:24:24 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 16:37:46 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,24 @@ int			check_instruction(char *s)
 }
 
 /*
-**	@desc	- fuction makes a new label object
-**	@param	- char *s, name of the label
-**			- int line, line number the label points to
+**	@desc	- function checks if the label contains only the allowed characters
+**	@param	- char *label, name of the label to be checked
+**	@return	- int, 0 if not valid
+**			- 1 if valid 
 */
 
-t_label		*make_label(char *s, int line)
+int			check_label(char *label)
 {
-	t_label	*new;
+	int		i;
 
-	new = (t_label*)malloc(sizeof(t_label));
-	new->name = ft_strdup(s);
-	new->line = line;
-	new->next = NULL;
-	return (new);
+	i = 0;
+	while (label[i] != '\0')
+	{
+		if (!ft_strchr(LABEL_CHARS, label[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 /*
@@ -81,51 +85,19 @@ t_label		*make_label(char *s, int line)
 **			- t_label *new, label to be added
 */
 
-void		add_label(t_asm *data, t_label *new)
+void		add_label(t_asm *data, t_label **new)
 {
 	t_label	*curr;
 
 	curr = data->labels;
 	if (!curr)
 	{
-		data->labels = new;
+		data->labels = (*new);
 		return ;
 	}
 	while (curr->next)
 		curr = curr->next;
-	curr->next = new;
-}
-
-/*
-**	@desc	- function get the label variables if its not on the same line
-**	@param	- t_asm *data, main struct
-**			- char *name, name of the label
-*/
-
-void		get_next_label(t_asm *data, char *name)
-{
-	char	*s;
-	char	**split;
-	t_label	*new;
-
-	split = NULL;
-	while (get_line(data, data->rfd, &s, NULL))
-	{
-		if (s && !ft_strequ("", s))
-		{
-			split = ft_strsplit_ws(s);
-			if (check_instruction(split[0]))
-			{
-				new = make_label(name, data->lines);
-				add_label(data, new);
-				parse_instruction(data, split);
-			}
-			else
-				error("Invalid label", data->lines);
-			break ;
-		}
-	}
-	free_arr(&name, &split, 1);
+	curr->next = (*new);
 }
 
 /*
@@ -134,7 +106,7 @@ void		get_next_label(t_asm *data, char *name)
 **			- char **line, line read, split on whitespace
 */
 
-void		get_label(t_asm *data, char **line)
+static void	get_label(t_asm *data, char **line)
 {
 	t_label		*new;
 	char		**split;
@@ -143,8 +115,8 @@ void		get_label(t_asm *data, char **line)
 	split = ft_strsplit(line[0], LABEL_CHAR);
 	if (split[1])
 	{
-		new = make_label(split[0], data->lines);
-		add_label(data, new);
+		new = make_label(data, split[0], data->lines);
+		add_label(data, &new);
 		ft_strclr(line[0]);
 		line[0] = ft_strdup(split[1]);
 		parse_instruction(data, line);
