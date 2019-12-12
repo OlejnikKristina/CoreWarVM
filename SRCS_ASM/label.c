@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:17:40 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 16:37:46 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,27 @@ int			check_instruction(char *s)
 }
 
 /*
+**	@desc	- function checks if the label contains only the allowed characters
+**	@param	- char *label, name of the label to be checked
+**	@return	- int, 0 if not valid
+**			- 1 if valid 
+*/
+
+int			check_label(char *label)
+{
+	int		i;
+
+	i = 0;
+	while (label[i] != '\0')
+	{
+		if (!ft_strchr(LABEL_CHARS, label[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/*
 **	@desc	- adds a label to the linked list of labels
 **	@param	- t_asm *data, main struct
 **			- t_label *new, label to be added
@@ -94,7 +115,7 @@ static void	get_label(t_asm *data, char **line)
 	split = ft_strsplit(line[0], LABEL_CHAR);
 	if (split[1])
 	{
-		new = make_label(split[0], data->lines);
+		new = make_label(data, split[0], data->lines);
 		add_label(data, &new);
 		ft_strclr(line[0]);
 		line[0] = ft_strdup(split[1]);

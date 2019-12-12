@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 15:12:06 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:23:47 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 16:38:57 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static char	*rm_label_char(char *s)
 **			- t_label *head, to already existing label
 */
 
-static void	add_to_label(char *s, t_label **head)
+static void	add_to_label(t_asm *data, char *s, t_label **head)
 {
 	t_label	*curr;
 	t_label	*new;
 
 	curr = (*head);
-	new = make_label(s, -1);
+	new = make_label(data, s, -1);
 	while (curr->next)
 		curr = curr->next;
 	curr->next = new;
@@ -76,12 +76,16 @@ static void	set_lines(t_label *head, int line)
 **			- int line, line number the label points to
 */
 
-t_label		*make_label(char *s, int line)
+t_label		*make_label(t_asm *data, char *s, int line)
 {
 	t_label	*new;
+	char	*name;
 
+	name = rm_label_char(s);
+	if (!check_label(name))
+		error("Invalid label name", data->lines);
 	new = (t_label*)malloc(sizeof(t_label));
-	new->name = rm_label_char(s);
+	new->name = name;
 	new->line = line;
 	new->next = NULL;
 	return (new);
@@ -100,7 +104,7 @@ void		get_next_label(t_asm *data, char *name)
 	t_label	*new;
 
 	split = NULL;
-	new = make_label(name, -1);
+	new = make_label(data, name, -1);
 	while (get_line(data, data->rfd, &s, NULL))
 	{
 		if (s && !ft_strequ("", s))
@@ -114,7 +118,7 @@ void		get_next_label(t_asm *data, char *name)
 				break ;
 			}
 			else if (split[0][ft_strlen(s) - 1] == LABEL_CHAR)
-				add_to_label(split[0], &new);
+				add_to_label(data, split[0], &new);
 			else
 				error("Invalid label", data->lines);
 		}

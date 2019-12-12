@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:27:21 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/12 16:37:09 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,13 @@ int						get_argument(char *s);
 void					parse_label(t_asm *data, char *s);
 int						check_instruction(char *s);
 void					add_label(t_asm *data, t_label **new);
+int						check_label(char *label);
 
 /*
 **	label_utils.c
 */
 void					get_next_label(t_asm *data, char *name);
-t_label					*make_label(char *s, int line);
+t_label					*make_label(t_asm *data, char *s, int line);
 
 /*
 **	name_comment.c
