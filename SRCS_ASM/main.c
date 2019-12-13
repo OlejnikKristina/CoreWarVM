@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/12 18:56:14 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/13 18:54:55 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ int				main(int ac, char **av)
 		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr_part->name, curr_part->token, curr_part->value, curr_part->line);
 		curr_part = curr_part->next;
 	}
-	check_syntax(data->parts);
-	write_cor(data);
+//	check_syntax(data->parts);
+	create_cor(data);
+	ft_printf("og: %d\nsw: %d\n", 0xea83f300, swap_4_bytes(0xea83f300));
+	ft_printf("og: %hd\nsw: %hd\n", 11, swap_2_bytes(11));
 	free_data(data);
 	return (0);
 }

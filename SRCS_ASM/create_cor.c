@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:52:45 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/12 21:39:16 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/13 19:05:34 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*get_cor_name(char *str)
 	char		*new;
 	char		*append;
 	size_t		len;
-	
+
 	len = ft_strlen(str);
 	new = ft_memalloc(len + 3);
 	append = ft_memccpy(new, str, '.', len - 1);
@@ -26,11 +26,13 @@ static char	*get_cor_name(char *str)
 	return (new);
 }
 
-//before writing anything swap the coresponding bits
+/*
+** @descr	- appends n amount of bytes to the file.
+*/
 
-void		write_cor(t_asm *data)
+void		write_null_bytes(int n, int wfd)
 {
-	
+
 }
 
 void		create_cor(t_asm *data)
@@ -39,5 +41,6 @@ void		create_cor(t_asm *data)
 
 	name = get_cor_name(data->char_name);	//memberberries to free
 	data->wfd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0777);
+	write_cor_file(data);
 	ft_strdel(&name);
 }

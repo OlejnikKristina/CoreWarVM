@@ -6,13 +6,14 @@
 #    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
-#    Updated: 2019/12/12 20:43:16 by abumbier         ###   ########.fr        #
+#    Updated: 2019/12/13 19:02:13 by abumbier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 SRCS	= main error parse free name_comment label instruction check_syntax \
-valid_oper_line calculate label_util token create_cor
+valid_oper_line calculate label_util token create_cor swap_endian \
+write_cor_file
 
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
