@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/14 14:53:49 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 15:33:22 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int				main(int ac, char **av)
 	print_parts(data->parts);
 	check_syntax(data->parts);
 	// write_cor(data);
-	// create_cor(data);
+	create_cor(data);
 	free_data(data);
 	return (0);
 }

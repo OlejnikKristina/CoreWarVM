@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 17:52:45 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/14 14:10:53 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 15:34:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@
 void		create_cor(t_asm *data)
 {
 	char	*name;
+	char	**split;
 
-	ft_printf("\t\t\tchar_name %s\n", data->char_name);
-	name = ft_strjoin(data->char_name, ".cor");	//memberberries to free
+	split = ft_strsplit(data->char_name, '.');
+	name = ft_strjoin(split[0], ".cor");	//memberberries to free
+	free_arr(NULL, &split, 1);
 	ft_printf("\t\t\tcname %s\n", name);
 	data->wfd = open(name, O_WRONLY | O_APPEND | O_CREAT, 0777);
 	ft_strdel(&name);
