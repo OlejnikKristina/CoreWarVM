@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/13 19:03:26 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   asm.h                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/14 19:19:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,6 @@ int						swap_4_bytes(int num);
 **	write_cor_file.c
 */
 
-void		write_cor_file(t_asm *data)
+void		write_cor_file(t_asm *data);
 
 #endif
