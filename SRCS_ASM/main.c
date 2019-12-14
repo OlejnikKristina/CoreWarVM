@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/14 14:05:44 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 14:50:31 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ static t_asm	*init(int ac, char **av)
 }
 
 /*
+**	@desc	- function checks if the file is a .s file
+**	@param	- char *file, name of the file given as argument
+*/
+
+static void		check_file(char *file)
+{
+	int		len;
+
+	len = ft_strlen(file);
+	if (file[len - 1] == 's' && file[len - 2] == '.')
+		return ;
+	else
+		error("File exstension must be .s", 0);
+}
+
+/*
 **	@desc	- main controller function
 **	@param	- int ac, the number of arguments
 **			- char **av, the arguments
@@ -49,7 +65,7 @@ int				main(int ac, char **av)
 
 	if (ac < 2)
 		error("usage ./asm <file_name>", 0);
-	// check the correct file type .s
+	check_file(av[ac - 1]);
 	data = init(ac, av);
 	if (!data)
 		error("Invalid file", 0);
@@ -70,7 +86,7 @@ int				main(int ac, char **av)
 	}
 	check_syntax(data->parts);
 	// write_cor(data);
-	create_cor(data);
+	// create_cor(data);
 	free_data(data);
 	return (0);
 }

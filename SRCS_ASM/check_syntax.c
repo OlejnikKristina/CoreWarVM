@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_syntax.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/09 18:06:37 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/11 18:04:46 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   check_syntax.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/09 18:06:37 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/14 14:17:50 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+/*
+**	@desc	- main controller function for checking the syntax and arguments
+**	@param	- t_parts file, tokenized file
+*/
 
 void		check_syntax(t_parts *file)
 {
