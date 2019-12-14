@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/14 14:50:31 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 14:53:49 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,30 @@ static void		check_file(char *file)
 		error("File exstension must be .s", 0);
 }
 
+void			print_labels(t_label *head)
+{
+	t_label	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		ft_printf("%-15s\tline %d\n", curr->name, curr->line);
+		curr = curr->next;
+	}
+}
+
+void			print_parts(t_parts *head)
+{
+	t_parts	*curr;
+
+	curr = head;
+	while (curr)
+	{
+		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr->name, curr->token, curr->value, curr->line);
+		curr = curr->next;
+	}
+}
+
 /*
 **	@desc	- main controller function
 **	@param	- int ac, the number of arguments
@@ -60,8 +84,6 @@ static void		check_file(char *file)
 int				main(int ac, char **av)
 {
 	t_asm	*data;
-	t_label	*curr;
-	t_parts	*curr_part;
 
 	if (ac < 2)
 		error("usage ./asm <file_name>", 0);
@@ -72,18 +94,8 @@ int				main(int ac, char **av)
 	parse(data);
 	close(data->rfd);
 	calc_line_byte(data);
-	curr = data->labels;
-	while (curr)
-	{
-		ft_printf("%-15s\tline %d\n", curr->name, curr->line);
-		curr = curr->next;
-	}
-	curr_part = data->parts;
-	while (curr_part)
-	{
-		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr_part->name, curr_part->token, curr_part->value, curr_part->line);
-		curr_part = curr_part->next;
-	}
+	print_labels(data->labels);
+	print_parts(data->parts);
 	check_syntax(data->parts);
 	// write_cor(data);
 	// create_cor(data);
