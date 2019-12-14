@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 17:52:45 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/13 19:05:34 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/14 16:14:25 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*get_cor_name(char *str)
 
 void		write_null_bytes(int n, int wfd)
 {
-
+	write(wfd, '\0', n);
 }
 
 void		create_cor(t_asm *data)

@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/13 18:54:55 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/14 16:15:25 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int				main(int ac, char **av)
 
 	if (ac < 2)
 		error("usage ./asm <file_name>", 0);
-	// check the correct file type .s
 	data = init(ac, av);
 	if (!data)
 		error("Invalid file", 0);
