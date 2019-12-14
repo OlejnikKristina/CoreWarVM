@@ -1,18 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: asulliva <asulliva@student.codam.nl>         +#+                      #
-#                                                    +#+                       #
-#    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/12 15:26:04 by asulliva      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
+#    Updated: 2019/12/12 20:43:16 by abumbier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
-SRCS	= main error parse free name_comment label instruction calculate\
-		label_util token
+SRCS	= main error parse free name_comment label instruction check_syntax \
+valid_oper_line calculate label_util token create_cor
+
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra
 HEADER	= asm.h

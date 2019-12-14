@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   asm.h                                              :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 16:37:09 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/12 20:43:16 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../SRCS_LIBFT/libft/libft.h"
 # include "../op.h"
 
-typedef enum e_token	t_token;
+typedef enum e_arg		t_arg;
 typedef enum e_oper		t_oper;
 typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
@@ -71,6 +71,7 @@ struct					s_asm {
 	int					lines;
 	char				*name;
 	char				*comment;
+	char				*char_name;
 	t_label				*labels;
 	t_parts				*parts;
 };
@@ -127,4 +128,23 @@ int						get_line(t_asm *data, int fd, char **s, char **split);
 */
 int						get_token(char *s);
 int						get_value(int token, int line, char *s);
+
+/*
+**	check_syntax.c
+*/
+
+void					check_syntax(t_parts *file);
+
+/*
+**	valid_oper_line.c
+*/
+
+int						valid_oper_line(t_parts **oper);
+
+/*
+**	write_core.c
+*/
+
+void					create_cor(t_asm *data);
+
 #endif

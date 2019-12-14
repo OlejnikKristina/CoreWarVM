@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:04:49 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/12 18:56:14 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_asm	*init(int ac, char **av)
 	data->parts = NULL;
 	data->labels = NULL;
 	data->lines = 0;
+	data->char_name = av[ac - 1];
 	data->rfd = open(av[ac - 1], O_RDONLY);
 	if (data->rfd < 3 || read(data->rfd, data->name, 0) < 0)
 		return (NULL);
@@ -48,6 +49,7 @@ int				main(int ac, char **av)
 
 	if (ac < 2)
 		error("usage ./asm <file_name>", 0);
+	// check the correct file type .s
 	data = init(ac, av);
 	if (!data)
 		error("Invalid file", 0);
@@ -66,6 +68,8 @@ int				main(int ac, char **av)
 		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr_part->name, curr_part->token, curr_part->value, curr_part->line);
 		curr_part = curr_part->next;
 	}
+	check_syntax(data->parts);
+	write_cor(data);
 	free_data(data);
 	return (0);
 }
