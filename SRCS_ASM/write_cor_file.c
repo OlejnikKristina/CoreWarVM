@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 19:01:19 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/14 18:43:06 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/16 18:43:28 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void		write_cor_file(t_asm *data)
 	write_magic_header(data->wfd);
 	write_str(data->name, PROG_NAME_LENGTH, data->wfd);
 	write_null_bytes(4, data->wfd);
-	// write the size of executable code; write_size();
+//	write_size();
 	write_str(data->comment, COMMENT_LENGTH, data->wfd);
 	write_null_bytes(4, data->wfd);
-	// write_code()
+	// write_champ_byte();
 }

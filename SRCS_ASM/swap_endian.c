@@ -6,16 +6,16 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 21:15:27 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/14 15:45:30 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 19:21:38 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /*
-**	@desc	- functions swap (4 or 2)bytes between little and big endian.
-**	@param	-
-**	@return	-
+**	@desc	- functions swap 4 bytes between little and big endian
+**	@param	- int num, decimal number to be swapped
+**	@return	- int swap, swapped number
 */
 
 int		swap_4_bytes(int num)
@@ -28,9 +28,9 @@ int		swap_4_bytes(int num)
 }
 
 /*
-**	@desc	-
-**	@param	-
-**	@return	-
+**	@desc	- function swaps 2 bytes between little and big endian
+**	@param	- int num, decimal number to be swapped
+**	@return	- int swap, swapped number
 */
 
 short	swap_2_bytes(short num)

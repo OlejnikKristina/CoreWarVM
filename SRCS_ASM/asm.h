@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/14 17:01:12 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/16 19:02:07 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_asm	t_asm;
 typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
-enum					e_token {
+enum					e_arg {
 	DIR = -2,
 	REG = -5,
 	IND = -6,
@@ -56,6 +56,7 @@ struct					s_parts {
 	int					line;
 	int					value;
 	int					size;
+	int					line_size; //0 for args and labels, value for opers
 	t_parts				*next;
 };
 
@@ -160,5 +161,11 @@ int						swap_4_bytes(int num);
 */
 
 void					write_cor_file(t_asm *data);
+
+/*
+**	encoding_byte.c
+*/
+
+char					encoding_byte(t_parts *oper);
 
 #endif
