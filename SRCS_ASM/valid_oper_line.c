@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   valid_oper_line.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 15:44:58 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/12 20:40:05 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   valid_oper_line.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 15:44:58 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/14 14:34:01 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /*
-**	@desc	- funct checks if the direct argument is valid for the operation \
-**	(passed as second arg) as n^th argument (n passed as 1st argument)
-**	@param	- int arg_num, 
+**	@desc	- function checks if the direct arg is valid for the operation
+**	@param	- int arg_num, postion of the argument in the call
+**			- int oper_code, the hex code of the operation
+**	@return	- DIR, direct code
 */
 
 static int	valid_direct(int arg_num, int oper_code)
 {
 	int	i;
 	int	arg1[] = {0x01, 0x02, 0x06, 0x07, 0x08, \
-	0x09, 0x0a, 0x0c, 0x0d, 0x0e, 0x0f};	//code of oper that can take dir as 1st arg
+	0x09, 0x0a, 0x0c, 0x0d, 0x0e, 0x0f};
 	int	arg2[] = {0x06, 0x07, 0x08, 0x0a, 0x0b, 0x0e};
 	int	arg3[] = {0x0b};
 
 	i = 0;
 	if (arg_num == 3)
-			if (oper_code == arg3[i])
-				return (1);
+		if (oper_code == arg3[i])
+			return (1);
 	while (i < 11)
 	{
 		if (arg_num == 1)
@@ -44,12 +45,19 @@ static int	valid_direct(int arg_num, int oper_code)
 	return (DIR);
 }
 
+/*
+**	@desc	- function checks if the indirect arg if valid for the operation
+**	@param	- int arg_num, postion of the argument in the call
+**			- int oper_code, the hex code of the operation
+**	@return	- IND, indirect code
+*/
+
 static int	valid_indirect(int arg_num, int oper_code)
 {
 	int	i;
 	int	arg1[] = {0x02, 0x06, 0x07, 0x08, 0x0a, 0x0d, 0x0e};
 	int	arg2[] = {0x03, 0x06, 0x07, 0x08, 0x0b};
-	
+
 	i = 0;
 	if (arg_num == 3)
 		return (0);
@@ -66,6 +74,13 @@ static int	valid_indirect(int arg_num, int oper_code)
 	}
 	return (IND);
 }
+
+/*
+**	@desc	- function checks if the registry arg is valid for the operation
+**	@param	- int arg_num, postion of the argument in the call
+**			- int oper_code, the hex code of the operation
+**	@return	- REG, registry code
+*/
 
 static int	valid_registry(int arg_num, int oper_code)
 {
@@ -94,7 +109,16 @@ static int	valid_registry(int arg_num, int oper_code)
 	return (REG);
 }
 
-static void	arg_error(int line, int arg_c, int oper_code, int valid)
+/*
+**	@desc	- function returns a detailed error message
+**	@param	- int line, line where the error occurs
+**			- int arg_c, which argument (1, 2 or 3)
+**			- int oper_code, code of the operation
+**			- int valid, which type of argument is wrong
+**	@return	- int 0, to indicate error
+*/
+
+static int	arg_error(int line, int arg_c, int oper_code, int valid)
 {
 	char	*dir = "direct";
 	char	*ind = "indirect";
@@ -109,7 +133,14 @@ static void	arg_error(int line, int arg_c, int oper_code, int valid)
 		var = reg;
 	ft_printf("Error in line: %d\nOperation with an op_code %#X does not take \
 an argument of type -%s- as argument #%d", line, oper_code, var, arg_c);
+	return (0);
 }
+
+/*
+**	@desc	- main function to check operation line arguments
+**	@param	- t_parts **oper, pointer to the tokenized operation read
+**	@return	- int, 1 on succes, 0 on error
+*/
 
 int			valid_oper_line(t_parts **oper)
 {
@@ -123,7 +154,7 @@ int			valid_oper_line(t_parts **oper)
 	arg_c = 1;
 	valid = 1;
 	(*oper) = (*oper)->next;
-	while ((*oper) && (*oper)->line == line)	//while on the same line
+	while ((*oper) && (*oper)->line == line)
 	{
 		if ((*oper)->token == DIR)
 			valid = valid_direct(arg_c, oper_code);
@@ -131,11 +162,8 @@ int			valid_oper_line(t_parts **oper)
 			valid = valid_indirect(arg_c, oper_code);
 		else if ((*oper)->token == REG)
 			valid = valid_registry(arg_c, oper_code);
-		if (valid != 1)	//checks valid_* return
-		{
-			arg_error(line, arg_c, oper_code, valid);
-			return (0);
-		}
+		if (valid != 1)
+			return (arg_error(line, arg_c, oper_code, valid));
 		(*oper) = (*oper)->next;
 		arg_c++;
 	}

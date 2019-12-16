@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 16:37:46 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/14 13:48:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			check_instruction(char *s)
 **	@desc	- function checks if the label contains only the allowed characters
 **	@param	- char *label, name of the label to be checked
 **	@return	- int, 0 if not valid
-**			- 1 if valid 
+**			- 1 if valid
 */
 
 int			check_label(char *label)

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   swap_endian.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 21:15:27 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/13 18:31:38 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   swap_endian.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/12 21:15:27 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/14 15:45:30 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 /*
-**	@descr	- functions swap (4 or 2)bytes between little and big endian.
+**	@desc	- functions swap (4 or 2)bytes between little and big endian.
+**	@param	-
+**	@return	-
 */
 
 int		swap_4_bytes(int num)
@@ -24,6 +26,12 @@ int		swap_4_bytes(int num)
 			((num >> 8) & 0xff00) | ((num << 24) & 0xff000000);
 	return (swap);
 }
+
+/*
+**	@desc	-
+**	@param	-
+**	@return	-
+*/
 
 short	swap_2_bytes(short num)
 {
