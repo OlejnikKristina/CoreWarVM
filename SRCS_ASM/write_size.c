@@ -6,13 +6,13 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 18:41:45 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/17 19:38:48 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/17 21:19:09 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	arg_sizes(t_parts **parts, int op, int *size)
+static int	arg_sizes(t_parts **parts, int op)
 {
 	int	line;
 	int	arg_size;
@@ -35,7 +35,6 @@ static int	arg_sizes(t_parts **parts, int op, int *size)
 		}
 		*parts = (*parts)->next;
 	}
-	(*size) += arg_size;
 	return (arg_size);
 }
 
@@ -45,6 +44,7 @@ static int	line_sizes(t_parts *parts)
 	int		size; //num of bytes
 	t_parts	*curr_oper;
 
+	size = 0;
 	while (parts)
 	{
 		curr_oper = parts;
@@ -52,7 +52,8 @@ static int	line_sizes(t_parts *parts)
 		curr_oper->line_size++; // oper_code == 1 byte
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 			curr_oper->line_size++;
-		curr_oper->line_size += arg_sizes(&parts, op, &size);
+		curr_oper->line_size += arg_sizes(&parts, op);
+		size += curr_oper->line_size;
 	}
 	return (size);
 }

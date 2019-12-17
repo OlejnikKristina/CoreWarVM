@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/16 19:02:07 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:51:02 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,11 @@ void					write_cor_file(t_asm *data);
 */
 
 char					encoding_byte(t_parts *oper);
+
+/*
+**	write_size.c
+*/
+
+void					write_size(t_parts *parts, int wfd);
 
 #endif

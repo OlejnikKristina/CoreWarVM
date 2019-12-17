@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   instruction.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/10 17:29:07 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:26:41 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   instruction.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/10 17:29:07 by asulliva          #+#    #+#             */
+/*   Updated: 2019/12/17 21:18:05 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **	@return	- char *new, new string without SEPARATOR_CHAR
 */
 
-char		*rm_comma(char *s)
+char		*rm_comma(char *s)		// add line as a parameter and exit with free and error if multiple commas
 {
 	char	*new;
 	int		i;
@@ -53,6 +53,7 @@ t_parts		*make_instruction(int token, int line, char *s)
 		new->value = 0;
 	new->line = line;
 	new->size = 0;
+	new->line_size = 0;
 	new->name = rm_comma(s);
 	new->next = NULL;
 	return (new);
