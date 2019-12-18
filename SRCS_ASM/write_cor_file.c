@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_cor_file.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 19:01:19 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/17 20:52:56 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_cor_file.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/13 19:01:19 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/18 13:32:11 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		write_magic_header(int wfd)
 	int	magic;
 
 	// get_magic_header form the .h file
-	magic = -360451328;
+	magic = swap_4_bytes(0xea83f3);
 	write(wfd, &magic, 4);
 }
 
