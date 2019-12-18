@@ -6,14 +6,14 @@
 #    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
-#    Updated: 2019/12/17 20:50:59 by abumbier         ###   ########.fr        #
+#    Updated: 2019/12/18 19:46:22 by abumbier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 SRCS	= main error parse free name_comment label instruction check_syntax \
 valid_oper_line calculate label_util token create_cor swap_endian \
-write_cor_file encoding_byte write_size
+write_cor_file encoding_byte write_size write_champ_byte write_dir
 
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra

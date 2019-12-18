@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/17 20:51:02 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/18 19:53:18 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void					parse_label(t_asm *data, char *s);
 int						check_instruction(char *s);
 void					add_label(t_asm *data, t_label **new);
 int						check_label(char *label);
+void					get_label(t_asm *data, char **line);
 
 /*
 **	label_utils.c
@@ -173,5 +174,18 @@ char					encoding_byte(t_parts *oper);
 */
 
 void					write_size(t_parts *parts, int wfd);
+
+/*
+**	write_champ_byte.c
+*/
+
+void					write_ind(int value, int wfd);
+void					write_champ_byte(t_asm *data);
+
+/*
+**	write_dir.c
+*/
+
+void					write_dir(t_asm *data, t_parts *parts, int op);
 
 #endif

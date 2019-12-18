@@ -6,31 +6,49 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 18:33:41 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 16:27:38 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/18 20:01:46 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
 
-static void	write_line(t_parts *start, t_parts *parts, int wfd)
+static void	write_reg(int value, int wfd)
 {
+	char reg;
+
+	reg = (char)value;
+	write(wfd, &reg, 1);
+}
+
+void		write_ind(int value, int wfd)
+{
+	short ind;
+	short swap;
+
+	ind = (short)value;
+	swap = swap_2_bytes(ind);
+	write(wfd, &swap, 2);
+}
+
+static void	write_line(t_asm *data, t_parts *parts)
+{
+	int	op;
 	int	line;
 
-	line = parts;
+	op = parts->token;
+	line = parts->line;
 	parts = parts->next;
 	while (parts && line == parts->line)
 	{
 		if (parts->token == REG)
-			write_reg();
+			write_reg(parts->value, data->wfd);
 		else if (parts->token == IND)
-			write_ind();
+			write_ind(parts->value, data->wfd);
 		else if (parts->token == DIR)
-			write_dir();
+			write_dir(data, parts, op);
 		parts = parts->next;
 	}
-	// if step on label iter through label struct and find corresponding line.
-	// calculate arg value from that line. (do we take current opp size in account if we move up?)
 }
 
 /*
@@ -50,9 +68,9 @@ void		write_champ_byte(t_asm *data)
 		write(data->wfd, &op, 1);
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 		{
-			enc = encoding_byte(parts->token);
+			enc = encoding_byte(parts);
 			write(data->wfd, &enc, 1);
 		}
-		write_line(data->parts, parts, data->wfd);
+		write_line(data, parts);
 	}
 }

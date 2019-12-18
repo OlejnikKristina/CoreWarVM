@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 19:01:19 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 17:29:13 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/18 17:55:27 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void		write_magic_header(int wfd)
 	int	magic;
 
 	// get_magic_header form the .h file
-	magic = swap_4_bytes(0xea83f3);
+	// magic = -360451328;
+	magic = swap_4_bytes(COREWAR_EXEC_MAGIC);
 	write(wfd, &magic, 4);
 }
 

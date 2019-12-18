@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:31:21 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/14 13:48:23 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/18 17:42:51 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,36 @@ void		add_label(t_asm *data, t_label **new)
 	curr->next = (*new);
 }
 
+static void	label_syntax(char *label, int line)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (label[i])
+	{
+		if (label[i] == LABEL_CHAR)
+			count++;
+		i++;
+	}
+	if (count > 1)
+		error("Invalid label syntax", line);
+}
+
 /*
 **	@desc	- function gets the label and all the variables
 **	@param	- t_asm *data, main struct
 **			- char **line, line read, split on whitespace
 */
 
-static void	get_label(t_asm *data, char **line)
+void		get_label(t_asm *data, char **line)
 {
 	t_label		*new;
 	char		**split;
 
 	split = NULL;
+	label_syntax(line[0], data->lines);
 	split = ft_strsplit(line[0], LABEL_CHAR);
 	if (split[1])
 	{

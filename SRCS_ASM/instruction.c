@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   instruction.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 17:29:07 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/17 21:18:05 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   instruction.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/10 17:29:07 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/18 15:50:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@
 **	@return	- char *new, new string without SEPARATOR_CHAR
 */
 
-char		*rm_comma(char *s)		// add line as a parameter and exit with free and error if multiple commas
+char		*rm_comma(char *s, int line)
 {
 	char	*new;
 	int		i;
+	int		count;
 
 	new = ft_strdup(s);
 	i = 0;
+	count = 0;
 	while (new[i])
 	{
 		if (new[i] == SEPARATOR_CHAR)
+		{
+			count++;
 			new[i] = '\0';
+		}
 		i++;
 	}
+	if (count > 1)
+		error("Invalid syntax", line);
 	return (new);
 }
 
@@ -54,7 +61,7 @@ t_parts		*make_instruction(int token, int line, char *s)
 	new->line = line;
 	new->size = 0;
 	new->line_size = 0;
-	new->name = rm_comma(s);
+	new->name = rm_comma(s, line);
 	new->next = NULL;
 	return (new);
 }

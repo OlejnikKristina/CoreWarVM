@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   check_syntax.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2019/12/09 18:06:37 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/14 14:17:50 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   check_syntax.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/09 18:06:37 by abumbier          #+#    #+#             */
+/*   Updated: 2019/12/18 17:52:49 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void		check_syntax(t_parts *file)
 	{
 		if (token->token >= LIVE && token->token <= AFF)
 			if (!valid_oper_line(&token))
-				break ; // free stuff n exit
-		//calculate label values?
-		//token = token->next;
+			{
+				//free and exit;
+				break ;
+			}
 	}
 }

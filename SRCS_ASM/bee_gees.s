@@ -6,6 +6,8 @@ sti	r1, %:live2, %1			;change live by the right value
 ld	%1, r3
 ld	%33, r6
 #While (r2 < 10)
+hop:
+ld	35, r7		;REMOVE
 forks:
 forks2:
 add	r2, r3, r2		;increment r2

@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 18:41:45 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/17 21:19:09 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/18 18:17:48 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	arg_sizes(t_parts **parts, int op)
 			arg_size += 2;
 		else if ((*parts)->token == DIR)
 		{
-			if ((op >= 0x01 && op <= 0x08) || op == 0x0D || op == 0x10)
+			if ((op >= 0x01 && op <= 0x08) || op == 0x0d || op == 0x10)
 				arg_size += 4;
 			else
 				arg_size += 2;
