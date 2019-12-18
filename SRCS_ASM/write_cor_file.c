@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 19:01:19 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 15:59:47 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/18 17:29:13 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void		write_magic_header(int wfd)
 	magic = swap_4_bytes(0xea83f3);
 	write(wfd, &magic, 4);
 }
-
-// 1) find the number you want to write
-// 2) convert it to big endian
-// 3) write in the file
 
 void		write_str(char *name, int limit, int wfd)
 {
