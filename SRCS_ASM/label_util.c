@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 15:12:06 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 16:38:57 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/18 17:39:13 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@
 **	@return	- char *new, new string without label_char
 */
 
-static char	*rm_label_char(char *s)
+static char	*rm_label_char(char *s, int line)
 {
 	char	*new;
 	int		i;
+	int		count;
 
 	new = ft_strdup(s);
 	i = 0;
+	count = 0;
 	while (new[i])
 	{
 		if (new[i] == LABEL_CHAR)
+		{
+			count++;
 			new[i] = '\0';
+		}
 		i++;
 	}
+	if (count > 1)
+		error("Invalid syntax", line);
 	return (new);
 }
 
@@ -81,7 +88,7 @@ t_label		*make_label(t_asm *data, char *s, int line)
 	t_label	*new;
 	char	*name;
 
-	name = rm_label_char(s);
+	name = rm_label_char(s, data->lines);
 	if (!check_label(name))
 		error("Invalid label name", data->lines);
 	new = (t_label*)malloc(sizeof(t_label));
@@ -119,6 +126,13 @@ void		get_next_label(t_asm *data, char *name)
 			}
 			else if (split[0][ft_strlen(s) - 1] == LABEL_CHAR)
 				add_to_label(data, split[0], &new);
+			else if (ft_strchr(split[0], LABEL_CHAR))
+			{
+				add_label(data, &new);
+				set_lines(new, data->lines);
+				get_label(data, split);
+				break ;
+			}
 			else
 				error("Invalid label", data->lines);
 		}

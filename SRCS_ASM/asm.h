@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/17 20:51:02 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   asm.h                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/18 17:29:56 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void					parse_label(t_asm *data, char *s);
 int						check_instruction(char *s);
 void					add_label(t_asm *data, t_label **new);
 int						check_label(char *label);
+void					get_label(t_asm *data, char **line);
 
 /*
 **	label_utils.c
