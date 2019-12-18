@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_cor_file.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 19:01:19 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 17:55:27 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_cor_file.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/13 19:01:19 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/18 20:49:42 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ void		write_cor_file(t_asm *data)
 	write_size(data->parts, data->wfd);
 	write_str(data->comment, COMMENT_LENGTH, data->wfd);
 	write_null_bytes(4, data->wfd);
-	// write_champ_byte(data);
+	write_champ_byte(data);
 }
