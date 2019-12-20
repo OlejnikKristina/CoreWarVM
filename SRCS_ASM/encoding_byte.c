@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 16:58:59 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 16:27:34 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/20 18:14:38 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,23 @@ char		encoding_byte(t_parts *oper)
 	int		line;
 	char	enc;
 	int		i;
+	t_parts	*curr;
 
 	i = 4;
 	enc = 0;
 	line = oper->line;
-	while (oper && line == oper->line)
+	curr = oper;
+	while (curr && line == curr->line)
 	{
-		if (oper->token == REG)
+		if (curr->token == REG)
 			add_reg(&enc, i);
-		if (oper->token == DIR)
+		if (curr->token == DIR)
 			add_dir(&enc, i);
-		if (oper->token == IND)
+		if (curr->token == IND)
 			add_ind(&enc, i);
-		oper = oper->next;
-		if (oper->token < LIVE)
-			i--;
+		curr = curr->next;
+		// if (curr->token < LIVE)
+		i--;
 	}
 	return (enc);
 }

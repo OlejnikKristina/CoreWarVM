@@ -6,20 +6,42 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 16:39:41 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/20 18:42:21 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-static int	find_label(t_label *label, char *name)
+static char	*clean_label(char *label)
 {
-	while (label && ft_strcmp(name, label->name))	//check if strcmp stops the loop when equal
-		{ft_printf("label->line: %d\n", label->line);
-		label = label->next;}
-	ft_putendl("lol");
+	char	*new;
+	int		i;
+	int		j;
+
+	new = ft_strnew(ft_strlen(label));
+	i = 0;
+	j = 0;
+	while (label[i])
+	{
+		if (ft_strchr(LABEL_CHARS, label[i]))
+		{
+			new[j] = label[i];
+			j++;
+		}
+		i++;
+	}
+	return (new);
+}
+
+static int	find_label(t_label *label, char *name, int line)
+{
+	char	*clean;
+
+	clean = clean_label(name);
+	while (label && ft_strcmp(clean, label->name))	//check if strcmp stops the loop when equal;
+		label = label->next;
 	if (!label)
-		;//free and exit (specified label doesnt exist)
+		error("Label not found", line);//free and exit (specified label doesnt exist)
 	return (label->line);
 }
 
@@ -51,11 +73,12 @@ static int	calculate_lines(t_parts *start, int to_reach, int current)
 	{
 		// loop untill to_reach(including) and count line lengths untill current(excluding)
 		// add - sign
+		ft_printf("current %d\tto_reach %d\n", current, to_reach);
 		while (start && start->line != to_reach)
 			start = start->next;
 		if (!start)
 			;//free and exit (shouldnt happen though)
-		while (start && start->line != to_reach)
+		while (start && start->line != current)
 		{
 			if (start->line != line)
 			{
@@ -77,18 +100,21 @@ void		write_dir(t_asm *data, t_parts *parts, int op)
 
 	if (parts->value == MAX_INT)
 	{
-		ft_putendl("hoi");
-		label_line = find_label(data->labels, parts->name);
-	ft_putendl("segfault");
+		label_line = find_label(data->labels, parts->name, parts->line);
 		value = calculate_lines(data->parts, label_line, parts->line); //subst value
 		;
 	}
 	else
 		value = parts->value;
+	ft_printf("value: %d\n", value);
 	if ((op >= 0x01 && op <= 0x08) || op == 0x0d || op == 0x10)
 	{
+		if (!value)
+		{
+			write_null_bytes(4, data->wfd);
+			return ;
+		}
 		four_bytes = swap_4_bytes(value);
-		ft_printf("%#X\n", four_bytes);	
 		write(data->wfd, &four_bytes, 4);
 	}
 	else
