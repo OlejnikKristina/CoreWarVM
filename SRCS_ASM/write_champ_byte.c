@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_champ_byte.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/16 18:33:41 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 20:01:46 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_champ_byte.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/20 16:15:32 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ void		write_champ_byte(t_asm *data)
 	{
 		op = parts->token;	// check if its actually an oper token?
 		write(data->wfd, &op, 1);
+		ft_printf("%#X\n", op);
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 		{
 			enc = encoding_byte(parts);
+			ft_printf("%#X\n", enc);
 			write(data->wfd, &enc, 1);
 		}
 		write_line(data, parts);

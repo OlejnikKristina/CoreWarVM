@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_dir.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:44:42 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 20:42:21 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_dir.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/20 16:08:35 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	find_label(t_label *label, char *name)
 {
+	if (!label || !name)
+		return (-1);
 	while (label && ft_strcmp(name, label->name))	//check if strcmp stops the loop when equal
 		label = label->next;
 	if (!label)
