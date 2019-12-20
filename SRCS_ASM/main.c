@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/17 17:24:31 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/19 16:54:21 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int				main(int ac, char **av)
 	parse(data);
 	close(data->rfd);
 //	calc_line_byte(data);
-	print_labels(data->labels);
-	print_parts(data->parts);
+//	print_labels(data->labels);
+//	print_parts(data->parts);
 	check_syntax(data->parts);
 	create_cor(data);
 	free_data(data);
