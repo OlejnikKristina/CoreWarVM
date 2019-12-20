@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 16:08:35 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/20 16:39:41 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	find_label(t_label *label, char *name)
 {
-	if (!label || !name)
-		return (-1);
 	while (label && ft_strcmp(name, label->name))	//check if strcmp stops the loop when equal
-		label = label->next;
+		{ft_printf("label->line: %d\n", label->line);
+		label = label->next;}
+	ft_putendl("lol");
 	if (!label)
 		;//free and exit (specified label doesnt exist)
 	return (label->line);
@@ -77,7 +77,9 @@ void		write_dir(t_asm *data, t_parts *parts, int op)
 
 	if (parts->value == MAX_INT)
 	{
+		ft_putendl("hoi");
 		label_line = find_label(data->labels, parts->name);
+	ft_putendl("segfault");
 		value = calculate_lines(data->parts, label_line, parts->line); //subst value
 		;
 	}
@@ -86,6 +88,7 @@ void		write_dir(t_asm *data, t_parts *parts, int op)
 	if ((op >= 0x01 && op <= 0x08) || op == 0x0d || op == 0x10)
 	{
 		four_bytes = swap_4_bytes(value);
+		ft_printf("%#X\n", four_bytes);	
 		write(data->wfd, &four_bytes, 4);
 	}
 	else

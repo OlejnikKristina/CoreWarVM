@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 16:15:32 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/20 16:28:27 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	write_reg(int value, int wfd)
 	char reg;
 
 	reg = (char)value;
+	ft_printf("%#X\n", reg);
 	write(wfd, &reg, 1);
 }
 
@@ -28,6 +29,7 @@ void		write_ind(int value, int wfd)
 
 	ind = (short)value;
 	swap = swap_2_bytes(ind);
+	ft_printf("%#X\n", ind);
 	write(wfd, &swap, 2);
 }
 
@@ -66,11 +68,9 @@ void		write_champ_byte(t_asm *data)
 	{
 		op = parts->token;	// check if its actually an oper token?
 		write(data->wfd, &op, 1);
-		ft_printf("%#X\n", op);
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 		{
 			enc = encoding_byte(parts);
-			ft_printf("%#X\n", enc);
 			write(data->wfd, &enc, 1);
 		}
 		write_line(data, parts);
