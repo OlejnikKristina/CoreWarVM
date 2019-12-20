@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 16:58:59 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/16 18:20:58 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/20 19:30:15 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char		encoding_byte(t_parts *oper)
 	char	enc;
 	int		i;
 
-	i = 3;
+	i = 4;
 	enc = 0;
 	line = oper->line;
 	while (oper && line == oper->line)
@@ -58,8 +58,8 @@ char		encoding_byte(t_parts *oper)
 		if (oper->token == IND)
 			add_ind(&enc, i);
 		oper = oper->next;
-		if (oper->token < LIVE)
-			i--;
+		//if (oper->token < LIVE)
+		i--;
 	}
 	return (enc);
 }

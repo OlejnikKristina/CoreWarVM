@@ -6,15 +6,39 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:44:42 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 20:42:21 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/20 19:40:12 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
+static char	*clean_label(char *label)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	new = ft_strnew(ft_strlen(label));
+	i = 0;
+	j = 0;
+	while (label[i])
+	{
+		if (ft_strchr(LABEL_CHARS, label[i]))
+		{
+			new[j] = label[i];
+			j++;
+		}
+		i++;
+	}
+	return (new);
+}
+
 static int	find_label(t_label *label, char *name)
 {
-	while (label && ft_strcmp(name, label->name))	//check if strcmp stops the loop when equal
+	char *clean;
+
+	clean = clean_label(name);
+	while (label && ft_strcmp(clean, label->name))	//check if strcmp stops the loop when equal
 		label = label->next;
 	if (!label)
 		;//free and exit (specified label doesnt exist)
@@ -53,7 +77,7 @@ static int	calculate_lines(t_parts *start, int to_reach, int current)
 			start = start->next;
 		if (!start)
 			;//free and exit (shouldnt happen though)
-		while (start && start->line != to_reach)
+		while (start && start->line != current)
 		{
 			if (start->line != line)
 			{

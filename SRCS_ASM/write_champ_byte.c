@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 18:33:41 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 20:01:46 by abumbier         ###   ########.fr       */
+/*   Updated: 2019/12/20 19:32:25 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		write_ind(int value, int wfd)
 	write(wfd, &swap, 2);
 }
 
-static void	write_line(t_asm *data, t_parts *parts)
+static t_parts	*write_line(t_asm *data, t_parts *parts)
 {
 	int	op;
 	int	line;
@@ -49,13 +49,14 @@ static void	write_line(t_asm *data, t_parts *parts)
 			write_dir(data, parts, op);
 		parts = parts->next;
 	}
+	return (parts);
 }
 
 /*
 **	Assumes that the *parts list starts with an operation and the syntax is correct
 */
 
-void		write_champ_byte(t_asm *data)
+void			write_champ_byte(t_asm *data)
 {
 	char	op;
 	char	enc;
@@ -71,6 +72,6 @@ void		write_champ_byte(t_asm *data)
 			enc = encoding_byte(parts);
 			write(data->wfd, &enc, 1);
 		}
-		write_line(data, parts);
+		parts = write_line(data, parts);
 	}
 }
