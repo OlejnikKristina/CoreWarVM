@@ -6,13 +6,11 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 17:52:45 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 16:10:42 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:14:33 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-//before writing anything swap the coresponding bits
 
 void		write_null_bytes(int n, int wfd)
 {

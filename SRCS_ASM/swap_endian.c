@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 21:15:27 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 21:38:12 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:09:53 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int		swap_4_bytes(int num)
 short	swap_2_bytes(short nb)
 {
 	int b1;
-    int b2;
+	int b2;
 
-    b1 = (nb & 0x00ff) << 8;
-    b2 = (nb & 0xff00) >> 8;
-    return (b1 | b2);
+	b1 = (nb & 0x00ff) << 8;
+	b2 = (nb & 0xff00) >> 8;
+	return (b1 | b2);
 }

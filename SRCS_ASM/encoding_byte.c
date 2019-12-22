@@ -6,24 +6,27 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 16:58:59 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 15:29:35 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:14:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void    print_bits(unsigned char octet)
+void		print_bits(unsigned char octet)
 {
-    int z = 128, oct = octet;
+	int z;
+	int	oct;
 
-    while (z > 0)
-    {
-        if (oct & z)
-            write(1, "1", 1);
-        else
-            write(1, "0", 1);
-        z >>= 1;
-    }
+	oct = octet;
+	z = 128;
+	while (z > 0)
+	{
+		if (oct & z)
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+		z >>= 1;
+	}
 	write(1, "\n", 1);
 }
 
@@ -33,7 +36,6 @@ static void	add_reg(char *enc, int argc)
 
 	reg = 1;
 	*enc = *enc | (reg << argc * 2);
-
 }
 
 static void	add_dir(char *enc, int argc)
@@ -51,9 +53,10 @@ static void	add_ind(char *enc, int argc)
 	ind = 3;
 	*enc = *enc | (ind << argc * 2);
 }
+
 /*
 **	@desc	- encodes a byte based on the arguments operation has
-**	@param	- t_parts *oper, 
+**	@param	- t_parts *oper,
 */
 
 char		encoding_byte(t_parts *oper)
@@ -76,7 +79,6 @@ char		encoding_byte(t_parts *oper)
 		if (curr->token == IND)
 			add_ind(&enc, i);
 		curr = curr->next;
-		//if (oper->token < LIVE)
 		i--;
 	}
 	return (enc);

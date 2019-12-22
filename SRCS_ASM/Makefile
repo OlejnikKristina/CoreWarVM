@@ -1,18 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
-#    Updated: 2019/12/19 16:53:21 by abumbier         ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: abumbier <abumbier@student.42.fr>            +#+                      #
+#                                                    +#+                       #
+#    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
+#    Updated: 2019/12/22 22:15:08 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 SRCS	= main error parse free name_comment label instruction check_syntax \
-valid_oper_line calculate label_util token create_cor swap_endian \
+valid_oper_line label_util token create_cor swap_endian \
 write_cor_file encoding_byte write_size write_champ_byte write_dir
 
 CC		= gcc

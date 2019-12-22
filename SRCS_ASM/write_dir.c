@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 21:37:17 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:06:49 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,58 +38,69 @@ static int	find_label(t_label *label, char *name, int line)
 	char *clean;
 
 	clean = clean_label(name);
-	while (label && ft_strcmp(clean, label->name))	//check if strcmp stops the loop when equal
+	while (label && ft_strcmp(clean, label->name))
 		label = label->next;
 	if (!label)
-		error("Label not found", line);//free and exit (specified label doesnt exist)
+		error("Label not found", line);
 	return (label->line);
 }
 
-static int	calculate_lines(t_parts *start, int to_reach, int current)
+static int	label_ahead(t_parts *start, int to_reach, int current)
 {
 	int	line;
 	int	bytes;
 
 	line = 0;
 	bytes = 0;
+	while (start && start->line != current)
+		start = start->next;
+	if (!start)
+		error("Label not found", -1);
+	while (start && start->line != to_reach)
+	{
+		if (start->line != line)
+		{
+			line = start->line;
+			bytes += start->line_size;
+		}
+		start = start->next;
+	}
+	return (bytes);
+}
+
+static int	label_behind(t_parts *start, int to_reach, int current)
+{
+	int	line;
+	int	bytes;
+
+	line = 0;
+	bytes = 0;
+	while (start && start->line != to_reach)
+		start = start->next;
+	if (!start)
+		error("Label not found", -1);
+	while (start && start->line != current)
+	{
+		if (start->line != line)
+		{
+			line = start->line;
+			bytes += start->line_size;
+		}
+		start = start->next;
+	}
+	bytes *= -1;
+	return (bytes);
+}
+
+static int	calculate_lines(t_parts *start, int to_reach, int current)
+{
+	int	bytes;
+
+	bytes = 0;
 	if (current < to_reach)
-	{
-		// loop untill current(including) and count line lengths until to_reach(excluding)
-		while (start && start->line != current)
-			start = start->next;
-		if (!start)
-			;//free and exit (shouldnt happen though)
-		while (start && start->line != to_reach)
-		{
-			if (start->line != line)
-			{
-				line = start->line;
-				bytes += start->line_size;
-			}
-			start = start->next;
-		}
-	}
+		bytes = label_ahead(start, to_reach, current);
 	else
-	{
-		// loop untill to_reach(including) and count line lengths untill current(excluding)
-		// add - sign
-		ft_printf("current %d\tto_reach %d\n", current, to_reach);
-		while (start && start->line != to_reach)
-			start = start->next;
-		if (!start)
-			;//free and exit (shouldnt happen though)
-		while (start && start->line != current)
-		{
-			if (start->line != line)
-			{
-				line = start->line;
-				bytes += start->line_size;
-			}
-			start = start->next;
-		}
-		bytes *= -1;
-		ft_printf("result = %d\n", bytes);
-	}
+		bytes = label_behind(start, to_reach, current);
 	return (bytes);
 }
 
@@ -102,8 +113,7 @@ void		write_dir(t_asm *data, t_parts *parts, int op)
 	if (parts->value == MAX_INT)
 	{
 		label_line = find_label(data->labels, parts->name, parts->line);
-		value = calculate_lines(data->parts, label_line, parts->line); //subst value
-		;
+		value = calculate_lines(data->parts, label_line, parts->line);
 	}
 	else
 		value = parts->value;
