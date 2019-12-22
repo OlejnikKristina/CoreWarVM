@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 12:39:14 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/22 19:09:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ typedef struct		s_flags
 typedef	struct		s_player
 {
 	short			id;
-	char			*name;
-	char			*credo;
+	// char			*name;
+	// char			*credo;
+	t_header		header;
 	uint8_t			*code;
 }					t_player;
 
