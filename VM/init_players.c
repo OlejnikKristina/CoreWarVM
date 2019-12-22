@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 17:31:39 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/22 17:38:28 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_player_id(t_player *player,
 		{
 			if (choosen_id == players_order[i])
 			{
-				i = 0;
+				i = -1;
 				choosen_id++;
 			}
 			i++;
