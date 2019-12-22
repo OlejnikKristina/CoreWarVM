@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:17:50 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/17 17:24:31 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/22 22:18:24 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void			print_parts(t_parts *head)
 	curr = head;
 	while (curr)
 	{
-		ft_printf("%-10s : %-15d = %-10d\tline %d\n", curr->name, curr->token, curr->value, curr->line);
+		ft_printf("%-10s : %-15d = %-10d\tline %d\n",\
+		curr->name, curr->token, curr->value, curr->line);
 		curr = curr->next;
 	}
 }
@@ -93,11 +94,9 @@ int				main(int ac, char **av)
 		error("Invalid file", 0);
 	parse(data);
 	close(data->rfd);
-//	calc_line_byte(data);
-	print_labels(data->labels);
-	print_parts(data->parts);
 	check_syntax(data->parts);
 	create_cor(data);
+	close(data->wfd);
 	free_data(data);
 	return (0);
 }

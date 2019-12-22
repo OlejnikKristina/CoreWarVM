@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   encoding_byte.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/16 16:58:59 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/16 18:20:58 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   encoding_byte.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/16 16:58:59 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/22 22:14:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void		print_bits(unsigned char octet)
+{
+	int z;
+	int	oct;
+
+	oct = octet;
+	z = 128;
+	while (z > 0)
+	{
+		if (oct & z)
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+		z >>= 1;
+	}
+	write(1, "\n", 1);
+}
 
 static void	add_reg(char *enc, int argc)
 {
@@ -35,9 +53,10 @@ static void	add_ind(char *enc, int argc)
 	ind = 3;
 	*enc = *enc | (ind << argc * 2);
 }
+
 /*
 **	@desc	- encodes a byte based on the arguments operation has
-**	@param	- t_parts *oper, 
+**	@param	- t_parts *oper,
 */
 
 char		encoding_byte(t_parts *oper)
@@ -45,21 +64,22 @@ char		encoding_byte(t_parts *oper)
 	int		line;
 	char	enc;
 	int		i;
+	t_parts	*curr;
 
-	i = 3;
+	i = 4;
 	enc = 0;
 	line = oper->line;
-	while (oper && line == oper->line)
+	curr = oper;
+	while (curr && line == curr->line)
 	{
-		if (oper->token == REG)
+		if (curr->token == REG)
 			add_reg(&enc, i);
-		if (oper->token == DIR)
+		if (curr->token == DIR)
 			add_dir(&enc, i);
-		if (oper->token == IND)
+		if (curr->token == IND)
 			add_ind(&enc, i);
-		oper = oper->next;
-		if (oper->token < LIVE)
-			i--;
+		curr = curr->next;
+		i--;
 	}
 	return (enc);
 }

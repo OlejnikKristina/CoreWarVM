@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 14:35:55 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 17:44:19 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 21:42:42 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int  ft_iswhitespace(char c)
+static int	ft_iswhitespace(char c)
 {
-    if (c == ' ' || c == '\t')
-        return (1);
-    return (0);
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
 }
 
 static int	ft_countwords(char const *s)
@@ -31,7 +31,8 @@ static int	ft_countwords(char const *s)
 	i = 0;
 	while (s[i] != 0)
 	{
-		if (!ft_iswhitespace(s[i]) && (ft_iswhitespace(s[i + 1]) || s[i + 1] == '\0'))
+		if (!ft_iswhitespace(s[i]) &&\
+		(ft_iswhitespace(s[i + 1]) || s[i + 1] == '\0'))
 			word_count++;
 		i++;
 	}
