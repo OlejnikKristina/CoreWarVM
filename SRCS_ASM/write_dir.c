@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 18:42:21 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 15:29:16 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static char	*clean_label(char *label)
 	return (new);
 }
 
-static int	find_label(t_label *label, char *name, int line)
+static int	find_label(t_label *label, char *name)
 {
-	char	*clean;
+	char *clean;
 
 	clean = clean_label(name);
-	while (label && ft_strcmp(clean, label->name))	//check if strcmp stops the loop when equal;
+	while (label && ft_strcmp(clean, label->name))	//check if strcmp stops the loop when equal
 		label = label->next;
 	if (!label)
 		error("Label not found", line);//free and exit (specified label doesnt exist)

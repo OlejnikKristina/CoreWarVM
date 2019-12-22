@@ -6,7 +6,7 @@
 #    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
-#    Updated: 2019/12/18 19:46:22 by abumbier         ###   ########.fr        #
+#    Updated: 2019/12/19 16:53:21 by abumbier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ valid_oper_line calculate label_util token create_cor swap_endian \
 write_cor_file encoding_byte write_size write_champ_byte write_dir
 
 CC		= gcc
-FLAGS	= -Wall -Werror -Wextra
+FLAGS	= -Wall -Werror -Wextra -g
 HEADER	= asm.h
 LIBFTH	= ../SRCS_LIBFT/libft/
 LIB		= ../SRCS_LIBFT/libft.a

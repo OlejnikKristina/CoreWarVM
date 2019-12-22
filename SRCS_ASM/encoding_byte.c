@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 16:58:59 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 18:14:38 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 15:29:35 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char		encoding_byte(t_parts *oper)
 		if (curr->token == IND)
 			add_ind(&enc, i);
 		curr = curr->next;
-		// if (curr->token < LIVE)
+		//if (oper->token < LIVE)
 		i--;
 	}
 	return (enc);

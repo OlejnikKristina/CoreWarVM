@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/20 18:46:40 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 15:29:16 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_parts	*write_line(t_asm *data, t_parts *parts)
 **	Assumes that the *parts list starts with an operation and the syntax is correct
 */
 
-void		write_champ_byte(t_asm *data)
+void			write_champ_byte(t_asm *data)
 {
 	char	op;
 	char	enc;
