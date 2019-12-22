@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 21:09:32 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 21:37:17 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static int	calculate_lines(t_parts *start, int to_reach, int current)
 			start = start->next;
 		}
 		bytes *= -1;
+		ft_printf("result = %d\n", bytes);
 	}
 	return (bytes);
 }
