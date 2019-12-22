@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 15:29:16 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 21:09:32 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*clean_label(char *label)
 	return (new);
 }
 
-static int	find_label(t_label *label, char *name)
+static int	find_label(t_label *label, char *name, int line)
 {
 	char *clean;
 

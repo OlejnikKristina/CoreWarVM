@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 15:29:16 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 21:26:54 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		write_ind(int value, int wfd)
 	short swap;
 
 	ind = (short)value;
-	ft_printf("ind %#hX\n", ind);
+	ft_printf("dec value %d\t\tind %#hX\n", ind, ind);
 	if (!ind)
 	{
 		write_null_bytes(2, wfd);
