@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/18 19:44:42 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 22:06:49 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:19:34 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	label_ahead(t_parts *start, int to_reach, int current)
 	while (start && start->line != current)
 		start = start->next;
 	if (!start)
-		error("Label not found", -1);
+		error("Label not found", 0);
 	while (start && start->line != to_reach)
 	{
 		if (start->line != line)
@@ -78,7 +78,7 @@ static int	label_behind(t_parts *start, int to_reach, int current)
 	while (start && start->line != to_reach)
 		start = start->next;
 	if (!start)
-		error("Label not found", -1);
+		error("Label not found", 0);
 	while (start && start->line != current)
 	{
 		if (start->line != line)
@@ -117,7 +117,6 @@ void		write_dir(t_asm *data, t_parts *parts, int op)
 	}
 	else
 		value = parts->value;
-	ft_printf("value: %d\n", value);
 	if ((op >= 0x01 && op <= 0x08) || op == 0x0d || op == 0x10)
 	{
 		if (!value)

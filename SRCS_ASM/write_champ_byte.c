@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/22 22:09:04 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:20:10 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void			write_champ_byte(t_asm *data)
 	t_parts	*parts;
 
 	parts = data->parts;
-	print_parts(parts);
 	while (parts)
 	{
 		op = parts->token;
