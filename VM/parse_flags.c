@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 13:05:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/22 17:00:34 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	add_n_falg(t_flags *flags, int from, int n)
 
 short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 {
-	int		n;
-	int		index;
+	int			n;
+	int			index;
 	static bool prev_was_nflag;
 
 	index = 0;
@@ -57,9 +57,8 @@ short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 			return (-1);
 		*num = *num + 1;
 		n = ft_atoi(params[*num]);
-		if (n <= 0 || MAX_PLAYERS < n)
-			return (-1);
-		if (!check_champion(params[*num + 1]))
+		if (n <= 0 || MAX_PLAYERS < n || 
+		!check_champion(params[*num + 1]))
 			return (-1);
 		while (index < MAX_PLAYERS)
 		{
@@ -69,8 +68,6 @@ short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 		}
 		if (prev_was_nflag == false)
 			prev_was_nflag = true;
-		// else
-		// 	prev_was_nflag = false;
 		add_n_falg(flags, 0, n);
 		return (1);
 	}
