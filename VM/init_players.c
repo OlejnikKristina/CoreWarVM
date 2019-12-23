@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 17:46:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/23 20:56:37 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ bool	is_magic_header(const int fd)
 		m_ref[3] == m_in[0]));
 }
 
+void	introduce_champion(t_player *player)
+{
+	ft_printf("%{YELLOW_B}Introducing contestants...%{WHITE_B}\n");
+	ft_printf("*Player %d, ", player->id);
+	ft_printf("weighing %u, ", (unsigned int)player->code_size);
+	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
+	ft_printf("(\"%s\") !\n%{RESET}", player->comment);
+}
+
 bool	init_player(t_player *player, char *player_file)
 {
 	int		fd;
@@ -83,10 +92,11 @@ bool	init_player(t_player *player, char *player_file)
 		return (false);
 	if (!check_null_byte(fd) && error_msg(4))
 		return (false);
-	if (!get_player_code_size(player, fd) && error_msg(5))
+	if (!get_player_code_size(player, fd) && error_msg(7))
 		return (false);
 	if (!get_player_comment(player, fd) && error_msg(6))
 		return (false);
+	introduce_champion(player);
 	close(fd);
 	return (true);
 }

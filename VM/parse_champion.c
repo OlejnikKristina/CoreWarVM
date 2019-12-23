@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parse_chempion.c                                   :+:    :+:            */
+/*   parse_champion.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:12:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 20:32:08 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/23 20:52:25 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ bool	get_player_code_size(t_player *player, const int fd)
 	if (read(fd, &num, 4) < 4 && player)
 		return (false);
 	num = reverse_bytes(num);
-	if (CHAMP_MAX_SIZE < num && )
-
+	if (CHAMP_MAX_SIZE < num)
+		return (false);
+	player->code_size = (uint8_t)num;
 	return (true);
 }
