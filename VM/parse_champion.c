@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:12:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 17:57:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/23 20:32:08 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,30 @@ bool	check_null_byte(const int fd)
 	return (false);
 }
 
+uint32_t reverse_bytes(uint32_t in)
+{
+	uint32_t	res;
+	uint8_t		*res_bytes;
+	uint8_t		*in_bytes;
+
+	res = 0;
+	res_bytes = (uint8_t *)&res;
+	in_bytes = (uint8_t *)&in;
+	res_bytes[0] = in_bytes[3];
+	res_bytes[1] = in_bytes[2];
+	res_bytes[2] = in_bytes[1];
+	res_bytes[3] = in_bytes[0];
+	return (res);
+}
+
 bool	get_player_code_size(t_player *player, const int fd)
 {
-	uint32_t	code_size;
-	uint8_t		*code_size_ref;
+	uint32_t num;
 
-	if (read(fd, &code_size, 4) < 4 && player)
+	if (read(fd, &num, 4) < 4 && player)
 		return (false);
-	code_size_ref = (uint8_t *)&code_size;
-	ft_printf("[%x][%x][%x][%x]\n",
-	code_size_ref[0], code_size_ref[1],
-	code_size_ref[2], code_size_ref[3]);
+	num = reverse_bytes(num);
+	if (CHAMP_MAX_SIZE < num && )
+
 	return (true);
 }

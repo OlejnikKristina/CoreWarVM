@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 17:46:52 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/23 20:32:05 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,17 @@ bool	error_msg(unsigned short erro_num)
 	if (erro_num == 4)
 		ft_printf(". Champion name should be a null termineted\n");
 	if (erro_num == 5)
-		ft_printf("in player code size\n");
+	{
+		ft_printf("in player executable code size is too big\n");
+		ft_printf("Your player is just too fat\n");
+	}
 	if (erro_num == 6)
 		ft_printf(". Champion's comment is too small\n");
+	if (erro_num == 7)
+	{
+		ft_printf("in player executable code size is too big\n");
+		ft_printf("Your player is too \"skinny\" and weight nothing\n");
+	}
 	ft_printf("%{RESET}");
 	return (true);
 }

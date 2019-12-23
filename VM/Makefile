@@ -6,7 +6,7 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/20 15:30:36 by krioliin       #+#    #+#                 #
-#    Updated: 2019/12/23 17:19:32 by krioliin      ########   odam.nl          #
+#    Updated: 2019/12/23 20:35:44 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ HEADER		= -I./ft_printf/includes -I includes/
 NAME		= corewar
 
 SRC			= main.c parse_argc.c parse_flags.c \
-			parse_champions.c init_players.c vm_free.c \
-			utilities/error_msg.c parse_chempion.c
+			get_champions_argc.c init_players.c vm_free.c \
+			utilities/error_msg.c parse_champion.c
 
 all: $(NAME)
 
