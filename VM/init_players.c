@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 21:02:51 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/24 12:56:54 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,22 @@ bool	is_magic_header(const int fd)
 		m_ref[3] == m_in[0]));
 }
 
-void	introduce_champion(t_player *player)
+void	introduce_champions(t_vm *vm)
 {
-	ft_printf("%{YELLOW_B}Introducing contestants...%{WHITE_B}\n");
-	ft_printf("*Player %d, ", player->id);
-	ft_printf("weighing %{BLUE_B}%u%{WHITE_B}, ", (unsigned int)player->code_size);
-	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
-	ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !\n%{RESET}", player->comment);
+	int			i;
+	t_player	*curr;
+
+	i = 0;
+	ft_printf("%{YELLOW_B}Introducing contestants...\n");
+	while (i < vm->players_amnt)
+	{
+		curr = vm->players[i];
+		ft_printf("%{WHITE_B}*Player %d, ", curr->id);
+		ft_printf("weighing %{BLUE_B}%u%{WHITE_B} bytes, ", (unsigned int)curr->code_size);
+		ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", curr->name);
+		ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !\n%{RESET}", curr->comment);
+		i++;
+	}
 }
 
 bool	init_player(t_player *player, char *player_file)
@@ -96,7 +105,6 @@ bool	init_player(t_player *player, char *player_file)
 		return (false);
 	if (!get_player_comment(player, fd) && error_msg(6))
 		return (false);
-	introduce_champion(player);
 	close(fd);
 	return (true);
 }
@@ -110,7 +118,7 @@ bool	init_players(t_vm *vm)
 	vm->players_amnt = get_players_amnt(0);
 	players_files = safe_players_files(NULL);
 	vm->players = (t_player **)ft_memalloc(sizeof(t_player *) * (vm->players_amnt));
-	if (!vm->players)
+	if (!vm->players) //real corewar still runs with 1 champion
 		return (0);
 	while (i < vm->players_amnt)
 	{
@@ -120,5 +128,6 @@ bool	init_players(t_vm *vm)
 		init_player(vm->players[i], players_files[i]);
 		i++;
 	}
+	introduce_champions(vm);
 	return (true);
 }
