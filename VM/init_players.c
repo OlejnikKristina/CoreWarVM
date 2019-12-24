@@ -6,61 +6,36 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 21:08:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/23 21:02:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 
-void	set_player_id(t_player *player,
-		short players_order[MAX_PLAYERS], short num)
+bool	get_player_comment(t_player *player, const int fd)
 {
-	int		i;
-	int		id;
-	int		choosen_id;
+	char	player_comment[COMMENT_LENGTH + 1];
 
-	i = 0;
-	choosen_id = 1;
-	id = players_order[num];
-	if (id == -1)
+	ft_bzero(player_comment, COMMENT_LENGTH + 1);
+	if (read(fd, player_comment, COMMENT_LENGTH) >= COMMENT_LENGTH)
 	{
-		while (id == -1 && i < MAX_PLAYERS)
-		{
-			if (choosen_id == players_order[i])
-			{
-				i = -1;
-				choosen_id++;
-			}
-			i++;
-		}
-		players_order[num] = choosen_id;
-		player->id = choosen_id;
+		player->comment = ft_strdup(player_comment);
+		return (true);
 	}
-	else
-		player->id = id;
+	return (false);
 }
 
-// bool	get_player_name()
-// {
-// 	return (true);
-// }
-
-int		ft_memcomp(const void *s1, const void *s2, size_t n)
+bool	get_player_name(t_player *player, const int fd)
 {
-	unsigned char *p1;
-	unsigned char *p2;
+	char	player_name[PROG_NAME_LENGTH + 1];
 
-	p1 = (unsigned char *)s1;
-	p2 = (unsigned char *)s2;
-	if (n == 0)
-		return (0);
-	while (n)
+	ft_bzero(player_name, PROG_NAME_LENGTH + 1);
+	if (read(fd, player_name, PROG_NAME_LENGTH) >= PROG_NAME_LENGTH)
 	{
-		if (*(p1++) != *(p2++))
-			break ;
-		n--;
+		player->name = ft_strdup(player_name);
+		return (true);
 	}
-	return (*(p1 - 1) - *(p2 - 1));
+	return (false);
 }
 
 /*
@@ -70,26 +45,35 @@ int		ft_memcomp(const void *s1, const void *s2, size_t n)
 
 bool	is_magic_header(const int fd)
 {
-	uint8_t		magic_header[4];
-	uint32_t	magic_header2;
-	uint32_t	magic;
+	uint32_t	magic_number_input;
+	uint32_t	magic_number_reference;
+	uint8_t		*m_in;
+	uint8_t		*m_ref;
 
-	magic = COREWAR_EXEC_MAGIC;
-	if (read(fd, magic_header, 4) < 4)
-	{
-		ft_printf("Error. Too small file: ");
+	if (read(fd, &magic_number_input, 4) < 4)
 		return (false);
-	}
-	magic_header2 = magic_header[0] | magic_header[1] | magic_header[2] | magic_header[3];
-	ft_printf("[%x] ", magic);
-	ft_printf("[%x] ", magic_header);
-	ft_printf("[%x]\n\n", magic_header2);
-	if (ft_memcomp((const void *)magic_header, (const void *)&magic, 4))
-	{
-		ft_printf("Error. Incorrect magic header. In file: ");
-		return (false);
-	}
-	return (true);
+	magic_number_reference = COREWAR_EXEC_MAGIC;
+	m_in = (uint8_t *)&magic_number_input;
+	m_ref = (uint8_t *)&magic_number_reference;
+	return ((
+		m_ref[0] == m_in[0] &&
+		m_ref[1] == m_in[1] &&
+		m_ref[2] == m_in[2] &&
+		m_ref[3] == m_in[3])
+		|| (
+		m_ref[0] == m_in[3] &&
+		m_ref[1] == m_in[2] &&
+		m_ref[2] == m_in[1] &&
+		m_ref[3] == m_in[0]));
+}
+
+void	introduce_champion(t_player *player)
+{
+	ft_printf("%{YELLOW_B}Introducing contestants...%{WHITE_B}\n");
+	ft_printf("*Player %d, ", player->id);
+	ft_printf("weighing %{BLUE_B}%u%{WHITE_B}, ", (unsigned int)player->code_size);
+	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
+	ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !\n%{RESET}", player->comment);
 }
 
 bool	init_player(t_player *player, char *player_file)
@@ -97,15 +81,22 @@ bool	init_player(t_player *player, char *player_file)
 	int		fd;
 
 	fd = open((const char *)player_file, O_RDONLY);
-	if (fd <= 0 && player)
+	if (fd <= 0 && error_msg(2))
 	{
-		ft_printf("%{RED_B}Can't read file [%s]%{RESET}\n", player_file);
+		ft_printf("[%s]\n", player_file);
 		return (false);
 	}
-	ft_printf("file [%s]%{RESET}\n", player_file);
-	if (!is_magic_header(fd) && ft_printf("%s\n", player_file))
+	if (!is_magic_header(fd) && error_msg(1))
 		return (false);
-	// get_player_name(player, fd);
+	if (!get_player_name(player, fd) && error_msg(3))
+		return (false);
+	if (!check_null_byte(fd) && error_msg(4))
+		return (false);
+	if (!get_player_code_size(player, fd) && error_msg(7))
+		return (false);
+	if (!get_player_comment(player, fd) && error_msg(6))
+		return (false);
+	introduce_champion(player);
 	close(fd);
 	return (true);
 }
