@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 16:14:13 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 16:42:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 		else
 		{
 			*param_num = *param_num + 1;
+			int	i = 0;
+			while (params[*param_num][i])
+			{
+				if (!ft_isdigit(params[*param_num][i]))
+					return (-1);
+				i++;
+			}
 			flags->dump = ft_atoi(params[*param_num]);
 			return (1);
 		}
