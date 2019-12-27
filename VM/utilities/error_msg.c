@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 20:44:32 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 16:07:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 bool	error_msg(unsigned short erro_num)
 {
-	ft_printf("%{RED_B} Error");
+	ft_printf("%{RED_B}Error");
 	if (erro_num == 1)
 		ft_printf(" in magic file\n");
 	if (erro_num == 2)
@@ -26,14 +26,14 @@ bool	error_msg(unsigned short erro_num)
 		ft_printf(". Champion name should be a null termineted\n");
 	if (erro_num == 5)
 	{
-		ft_printf("in player executable code size is too big\n");
+		ft_printf(" in player executable code size is too big\n");
 		ft_printf("Your player is just too fat\n");
 	}
 	if (erro_num == 6)
 		ft_printf(". Champion's comment is too small\n");
 	if (erro_num == 7)
 	{
-		ft_printf("in player executable code size is too big\n");
+		ft_printf(" in player executable code, size is too small\n");
 		ft_printf("Your player weight nothing and this is a problem\n");
 	}
 	ft_printf("%{RESET}");

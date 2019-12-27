@@ -6,11 +6,11 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/24 12:26:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/24 12:26:24 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/27 16:10:24 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS		= -Wall -Wextra -Werror
+FLAGS		= -Wall -Wextra -Werror -g
 LIB			= ft_printf/libftprintf.a
 HEADER		= -I./ft_printf/includes -I includes/
 NAME		= corewar

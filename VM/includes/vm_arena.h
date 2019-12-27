@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 17:53:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 16:03:35 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@
 /*
 *** v								visualisation
 */
+
+typedef struct		s_cursor	t_cursor;
+
+struct				t_cursor
+{
+	short			colour;
+	short			id;
+	bool			carry;
+	short			opcode;
+	short			last_live;
+	short			wait_cycles;
+	uint8_t			pos;
+	int				jump;
+	uint8_t			reg[REG_NUMBER];
+	t_cursor		*next;
+};
 
 typedef struct		s_flags
 {
@@ -44,6 +60,7 @@ typedef struct		s_vm
 	t_player		**players;
 	uint8_t			arena[MEM_SIZE];
 	t_flags			*flag;
+	t_cursor		*cursor;
 }					t_vm;
 
 /*************************** Parsing Arguments *******************************/
