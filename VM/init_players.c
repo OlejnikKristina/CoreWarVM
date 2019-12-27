@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:18:11 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:37:42 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,24 +67,6 @@ bool	is_magic_header(const int fd)
 		m_ref[3] == m_in[0]));
 }
 
-void	introduce_champions(t_vm *vm)
-{
-	int			i;
-	t_player	*curr;
-
-	i = 0;
-	ft_printf("%{YELLOW_B}Introducing contestants...\n");
-	while (i < vm->players_amnt)
-	{
-		curr = vm->players[i];
-		ft_printf("%{WHITE_B}*Player %d, ", curr->id);
-		ft_printf("weighing %{BLUE_B}%u%{WHITE_B} bytes, ", (unsigned int)curr->code_size);
-		ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", curr->name);
-		ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !\n%{RESET}", curr->comment);
-		i++;
-	}
-}
-
 bool	init_player(t_player *player, char *player_file)
 {
 	int		fd;
@@ -117,14 +99,16 @@ bool	init_players(t_vm *vm)
 	i = 0;
 	vm->players_amnt = get_players_amnt(0);
 	players_files = safe_players_files(NULL);
-	vm->players = (t_player **)ft_memalloc(sizeof(t_player *) * (vm->players_amnt));
-	if (!vm->players) //real corewar still runs with 1 champion
+	vm->players = (t_player **)ft_memalloc(sizeof(t_player *) *
+	(vm->players_amnt));
+	if (!vm->players)
 		return (0);
 	while (i < vm->players_amnt)
 	{
 		if (!(vm->players[i] = (t_player *)ft_memalloc(sizeof(t_player))))
 			return (0);
-		set_player_id(vm->players[i], vm->flag->players_order, i, vm->players_amnt);
+		set_player_id(vm->players[i], vm->flag->players_order, i,
+		vm->players_amnt);
 		init_player(vm->players[i], players_files[i]);
 		i++;
 	}

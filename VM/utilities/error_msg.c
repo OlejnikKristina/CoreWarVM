@@ -6,12 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 16:07:07 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:40:10 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf/includes/ft_printf.h"
-// #include "ft_printf.h"
 
 bool	error_msg(unsigned short erro_num)
 {

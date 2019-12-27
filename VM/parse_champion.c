@@ -6,13 +6,13 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:12:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:21:57 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:28:55 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 
-void	set_start_pos(t_player *player, int	id, short players_amnt)
+void		set_start_pos(t_player *player, int id, short players_amnt)
 {
 	int	abs_id;
 	int	space;
@@ -23,7 +23,7 @@ void	set_start_pos(t_player *player, int	id, short players_amnt)
 	player->start_pos = space * abs_id;
 }
 
-void	set_player_id(t_player *player, short players_order[MAX_PLAYERS],
+void		set_player_id(t_player *player, short players_order[MAX_PLAYERS],
 		short num, short players_amnt)
 {
 	int		i;
@@ -52,7 +52,7 @@ void	set_player_id(t_player *player, short players_order[MAX_PLAYERS],
 	set_start_pos(player, player->id, players_amnt);
 }
 
-bool	check_null_byte(const int fd)
+bool		check_null_byte(const int fd)
 {
 	uint32_t	null_byte;
 	uint8_t		*null_byte_ref;
@@ -69,7 +69,7 @@ bool	check_null_byte(const int fd)
 	return (false);
 }
 
-uint32_t reverse_bytes(uint32_t in)
+uint32_t	reverse_bytes(uint32_t in)
 {
 	uint32_t	res;
 	uint8_t		*res_bytes;
@@ -85,7 +85,7 @@ uint32_t reverse_bytes(uint32_t in)
 	return (res);
 }
 
-bool	get_player_code_size(t_player *player, const int fd)
+bool		get_player_code_size(t_player *player, const int fd)
 {
 	uint32_t num;
 

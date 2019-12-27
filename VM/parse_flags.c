@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 16:47:05 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:39:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 {
+	int	i;
+
+	i = 0;
 	if (!ft_strcmp((const char *)params[*param_num], "-dump"))
 	{
 		if ((*param_num == argc - 1 || flags->dump != -4242))
@@ -21,7 +24,6 @@ short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 		else
 		{
 			*param_num = *param_num + 1;
-			int	i = 0;
 			while (params[*param_num][i])
 			{
 				if (!ft_isdigit(params[*param_num][i]))
@@ -35,7 +37,7 @@ short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 	return (0);
 }
 
-void	add_n_falg(t_flags *flags, int from, int n)
+void	add_n_flag(t_flags *flags, int from, int n)
 {
 	short		index;
 
@@ -51,13 +53,25 @@ void	add_n_falg(t_flags *flags, int from, int n)
 	}
 }
 
+short	check_n_pos(int n, short *players_order)
+{
+	int		i;
+
+	i = 0;
+	while (i < MAX_PLAYERS)
+	{
+		if (n == players_order[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 {
 	int			n;
-	int			index;
 	static bool prev_was_nflag;
 
-	index = 0;
 	if (!ft_strcmp((const char *)params[*num], "-n"))
 	{
 		if (*num == argc - 2)
@@ -66,22 +80,17 @@ short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 		if (!params[*num])
 			return (-1);
 		n = ft_atoi(params[*num]);
-		if (n < 1 || MAX_PLAYERS < n || 
-		!check_champion(params[*num + 1]))
+		if (n < 1 || MAX_PLAYERS < n || !check_champion(params[*num + 1]))
 			return (-1);
-		while (index < MAX_PLAYERS)
-		{
-			if (n == flags->players_order[index])
-				return (-1);
-			index++;
-		}
+		if (!check_n_pos(n, flags->players_order))
+			return (-1);
 		if (prev_was_nflag == false)
 			prev_was_nflag = true;
-		add_n_falg(flags, 0, n);
+		add_n_flag(flags, 0, n);
 		return (1);
 	}
 	if (!prev_was_nflag)
-		add_n_falg(flags, 0, -1);
+		add_n_flag(flags, 0, -1);
 	prev_was_nflag = false;
 	return (0);
 }
