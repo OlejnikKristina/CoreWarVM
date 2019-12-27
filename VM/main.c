@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 13:09:56 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:40:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ int		main(int argc, char **argv)
 		ft_printf("Can't init players\n");
 	else
 		ft_printf("Arguments are correct!\n");
-	// ft_printf("N: %s\n", vm->flag->players_order[0]);
-	// ft_printf("N: %s\n", vm->flag->players_order[1]);
-	// ft_printf("N: %s\n", vm->flag->players_order[2]);
-	// ft_printf("N: %s\n", vm->flag->players_order[3]);
 	vm_free(&vm);
 	// sleep(20);
 	return (0);
