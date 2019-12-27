@@ -6,14 +6,25 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:12:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 20:52:25 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:21:57 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 
+void	set_start_pos(t_player *player, int	id, short players_amnt)
+{
+	int	abs_id;
+	int	space;
+
+	abs_id = (id < 0 ? id * -1 : id);
+	abs_id--;
+	space = MEM_SIZE / (int)players_amnt;
+	player->start_pos = space * abs_id;
+}
+
 void	set_player_id(t_player *player, short players_order[MAX_PLAYERS],
-		short num)
+		short num, short players_amnt)
 {
 	int		i;
 	int		id;
@@ -38,6 +49,7 @@ void	set_player_id(t_player *player, short players_order[MAX_PLAYERS],
 	}
 	else
 		player->id = id;
+	set_start_pos(player, player->id, players_amnt);
 }
 
 bool	check_null_byte(const int fd)

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 16:03:35 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:21:37 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef	struct		s_player
 	char			*comment;
 	uint8_t			code_size;
 	uint8_t			*code;
+	int				start_pos;
 }					t_player;
 
 typedef struct		s_vm
@@ -62,7 +63,7 @@ typedef struct		s_vm
 	t_flags			*flag;
 	t_cursor		*cursor;
 }					t_vm;
-
+void	test_reg(void);
 /*************************** Parsing Arguments *******************************/
 
 bool				args_validation(int argc, char **argv, t_flags *flags);
@@ -80,7 +81,7 @@ bool				init_players(t_vm *vm);
 bool				check_null_byte(const int fd);
 bool				get_player_code_size(t_player *player, const int fd);
 void				set_player_id(t_player *player, short players_order[MAX_PLAYERS],
-					short num);
+					short num, short players_amnt);
 
 /******************************* Utilites ********************************/
 

@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/24 12:26:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/27 16:10:24 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/27 16:57:35 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME		= corewar
 
 SRC			= main.c parse_argc.c parse_flags.c \
 			get_champions_argc.c init_players.c vm_free.c \
-			utilities/error_msg.c parse_champion.c
+			utilities/error_msg.c parse_champion.c cursor.c
 
 all: $(NAME)
 

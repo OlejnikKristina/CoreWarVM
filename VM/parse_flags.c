@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 16:42:07 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 16:47:05 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ short	is_flag_n(int argc, char **params, int *num, t_flags *flags)
 		if (!params[*num])
 			return (-1);
 		n = ft_atoi(params[*num]);
-		if (n <= 0 || MAX_PLAYERS < n || 
+		if (n < 1 || MAX_PLAYERS < n || 
 		!check_champion(params[*num + 1]))
 			return (-1);
 		while (index < MAX_PLAYERS)
