@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/01 17:36:16 by krioliin       #+#    #+#                */
-/*   Updated: 2019/08/24 22:12:20 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:46:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void					ft_putstr(char const *str);
 void					ft_putnbr(int n);
 void					ft_putchar(char c);
 void					ft_putchar_fd(char c, int fd);
-short					ft_putstr_fd(char const *s, int fd);//Use it
+short					ft_putstr_fd(char const *s, int fd);
 void					ft_putendl_fd(char const *s, int fd);
 void					ft_putnbr_fd(int n, int fd);
 void					ft_putendl(char const *s);

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:38:03 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:45:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ short players_order[MAX_PLAYERS], short num, short players_amnt);
 /******************************* Utilites ********************************/
 
 bool				error_msg(unsigned short erro_num);
-void				introduce_champions(t_vm *vm);
+void				introduce_champions(t_player **players, short player_amnt);
 void				vm_free(t_vm **vm);
 
 #endif
