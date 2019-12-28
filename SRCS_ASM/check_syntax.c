@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_syntax.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/09 18:06:37 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 17:52:49 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   check_syntax.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/09 18:06:37 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/22 22:14:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		check_syntax(t_parts *file)
 		if (token->token >= LIVE && token->token <= AFF)
 			if (!valid_oper_line(&token))
 			{
-				//free and exit;
 				break ;
 			}
 	}

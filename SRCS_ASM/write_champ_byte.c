@@ -1,37 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_champ_byte.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/16 18:33:41 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 20:01:46 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_champ_byte.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/16 18:33:41 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/22 22:20:10 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-
-static void	write_reg(int value, int wfd)
+static void		write_reg(int value, int wfd)
 {
 	char reg;
 
 	reg = (char)value;
-	write(wfd, &reg, 1);
+	if (!reg)
+		write(wfd, "\0", 1);
+	else
+		write(wfd, &reg, 1);
 }
 
-void		write_ind(int value, int wfd)
+void			write_ind(int value, int wfd)
 {
 	short ind;
 	short swap;
 
 	ind = (short)value;
+	if (!ind)
+	{
+		write_null_bytes(2, wfd);
+		return ;
+	}
 	swap = swap_2_bytes(ind);
 	write(wfd, &swap, 2);
 }
 
-static void	write_line(t_asm *data, t_parts *parts)
+static t_parts	*write_line(t_asm *data, t_parts *parts)
 {
 	int	op;
 	int	line;
@@ -49,13 +56,15 @@ static void	write_line(t_asm *data, t_parts *parts)
 			write_dir(data, parts, op);
 		parts = parts->next;
 	}
+	return (parts);
 }
 
 /*
-**	Assumes that the *parts list starts with an operation and the syntax is correct
+**	Assumes that the *parts list starts with an operation and
+**	the syntax is correct
 */
 
-void		write_champ_byte(t_asm *data)
+void			write_champ_byte(t_asm *data)
 {
 	char	op;
 	char	enc;
@@ -64,13 +73,13 @@ void		write_champ_byte(t_asm *data)
 	parts = data->parts;
 	while (parts)
 	{
-		op = parts->token;	// check if its actually an oper token?
+		op = parts->token;
 		write(data->wfd, &op, 1);
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 		{
 			enc = encoding_byte(parts);
 			write(data->wfd, &enc, 1);
 		}
-		write_line(data, parts);
+		parts = write_line(data, parts);
 	}
 }

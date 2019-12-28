@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   write_size.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/14 18:41:45 by abumbier          #+#    #+#             */
-/*   Updated: 2019/12/18 18:17:48 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   write_size.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/14 18:41:45 by abumbier       #+#    #+#                */
+/*   Updated: 2019/12/22 22:07:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	arg_sizes(t_parts **parts, int op)
 static int	line_sizes(t_parts *parts)
 {
 	int		op;
-	int		size; //num of bytes
+	int		size;
 	t_parts	*curr_oper;
 
 	size = 0;
@@ -49,7 +49,7 @@ static int	line_sizes(t_parts *parts)
 	{
 		curr_oper = parts;
 		op = curr_oper->token;
-		curr_oper->line_size++; // oper_code == 1 byte
+		curr_oper->line_size++;
 		if (op != 0x01 && op != 0x09 && op != 0x0c && op != 0x0f)
 			curr_oper->line_size++;
 		curr_oper->line_size += arg_sizes(&parts, op);

@@ -6,24 +6,16 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/13 19:01:19 by abumbier       #+#    #+#                */
-/*   Updated: 2019/12/18 20:49:42 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 22:07:48 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-//before writing anything swap the coresponding bits
-
-/*
-*/
-
-
 void		write_magic_header(int wfd)
 {
 	int	magic;
 
-	// get_magic_header form the .h file
-	// magic = -360451328;
 	magic = swap_4_bytes(COREWAR_EXEC_MAGIC);
 	write(wfd, &magic, 4);
 }

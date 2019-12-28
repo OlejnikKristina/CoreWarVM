@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 15:25:38 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/12 15:37:39 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/22 21:33:02 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	handle_ind(char *s)
 		return (MAX_INT);
 	else if (ft_isdigit(s[0]) || s[0] == '-')
 	{
-		ret = (int)ft_atoi(&s[1]);
+		ret = (int)ft_atoi(s);
 		return (ret);
 	}
 	return (MAX_INT);

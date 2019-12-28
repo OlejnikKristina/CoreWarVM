@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/05 14:15:46 by asulliva          #+#    #+#             */
-/*   Updated: 2019/12/18 19:53:18 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   asm.h                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
+/*   Updated: 2019/12/22 22:15:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct					s_parts {
 	int					line;
 	int					value;
 	int					size;
-	int					line_size; //0 for args and labels, value for opers
+	int					line_size;
 	t_parts				*next;
 };
 
@@ -77,6 +77,7 @@ struct					s_asm {
 	t_parts				*parts;
 };
 
+void					print_parts(t_parts *head);
 /*
 **	calculate.c
 */

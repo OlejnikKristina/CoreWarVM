@@ -1,22 +1,22 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/12/05 14:20:22 by asulliva          #+#    #+#              #
-#    Updated: 2019/12/18 19:46:22 by abumbier         ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: abumbier <abumbier@student.42.fr>            +#+                      #
+#                                                    +#+                       #
+#    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
+#    Updated: 2019/12/24 12:29:55 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 SRCS	= main error parse free name_comment label instruction check_syntax \
-valid_oper_line calculate label_util token create_cor swap_endian \
+valid_oper_line label_util token create_cor swap_endian \
 write_cor_file encoding_byte write_size write_champ_byte write_dir
 
 CC		= gcc
-FLAGS	= -Wall -Werror -Wextra
+FLAGS	= -Wall -Werror -Wextra -g
 HEADER	= asm.h
 LIBFTH	= ../SRCS_LIBFT/libft/
 LIB		= ../SRCS_LIBFT/libft.a
@@ -28,17 +28,17 @@ all: $(OBJS) $(NAME)
 $(NAME): $(OBJS)
 	@make -C ../SRCS_LIBFT/
 	@$(CC) $(FLAGS) $^ -o $(NAME) $(LIB)
-	@echo "[ + ] $(NAME) has been compiled"
+	@echo "\033[0;32m[ + ] $(NAME) has been compiled\033[0m"
 
 %.o: %.c $(HEADER)
 	@$(CC) $(FLAGS) -c -o $@ $< -I $(LIBFTH)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "[ - ] removed object files"
+	@echo "\033[0;31m[ - ] removed object files\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "[ - ] removed $(NAME)"
+	@echo "\033[0;31m[ - ] removed $(NAME)\033[0m"
 
 re: fclean all
