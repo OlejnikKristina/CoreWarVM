@@ -6,39 +6,59 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 15:27:04 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 16:10:36 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
+#include "includes/t_dir_sizes.h"
+
 
 //zork's exec code
 //0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 00 00 00 01 09 ff fb
 //68 = 01 10 10 00 [T_REG|T_DIR|T_DIR]
 
-// int		calculate_jump(uint8_t opcode, uint8_t codage_octet)
-// {
-// 	ft_printf("[]");
-// 	return (0);
-// }
+/* Returns a t_dir size according to opcode */
 
-// bool	check_player_exec_code(uint8_t *code, int code_size)
-// {
-// 	int		jump;
-// 	uint8_t	opcode;
-// 	int		i;
+short	get_dir_size(uint8_t opcode)
+{
+	return
+	(( opcode == ZJMP || opcode == LDI
+	|| opcode == FORK || opcode == STI
+	|| opcode == LLDI || opcode == LFORK)
+	? 2 : 4);
+}
 
-// 	i = 0;
-// 	jump = 0;
+bool	is_encoding_byte(uint8_t opcode)
+{
+	return (
+		opcode != LIVE && opcode != ZJMP &&
+		opcode != FORK && opcode != LFORK);
+}
 
-// 	opcode = code[i];
-// 	calculate_jump(code[i], code[i + 1]);
-// 	// while (i < code_size)
-// 	// {
-// 	// 	i++;
-// 	// }
-// 	return (true);
-// }
+int		calculate_jump(uint8_t opcode, uint8_t codage_octet)
+{
+	ft_printf("[]");
+	return (0);
+}
+
+bool	check_player_exec_code(uint8_t *code, int code_size)
+{
+	int		jump;
+	uint8_t	opcode;
+	int		i;
+
+	i = 0;
+	jump = 0;
+
+	opcode = code[i];
+	calculate_jump(code[i], code[i + 1]);
+	// while (i < code_size)
+	// {
+	// 	i++;
+	// }
+	return (true);
+}
 
 bool	get_player_exec_code(t_player *player, const int fd)
 {
