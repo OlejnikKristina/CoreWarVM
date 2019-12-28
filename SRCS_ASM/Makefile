@@ -6,7 +6,7 @@
 #    By: abumbier <abumbier@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/22 22:15:08 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/24 12:29:55 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,17 +28,17 @@ all: $(OBJS) $(NAME)
 $(NAME): $(OBJS)
 	@make -C ../SRCS_LIBFT/
 	@$(CC) $(FLAGS) $^ -o $(NAME) $(LIB)
-	@echo "[ + ] $(NAME) has been compiled"
+	@echo "\033[0;32m[ + ] $(NAME) has been compiled\033[0m"
 
 %.o: %.c $(HEADER)
 	@$(CC) $(FLAGS) -c -o $@ $< -I $(LIBFTH)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "[ - ] removed object files"
+	@echo "\033[0;31m[ - ] removed object files\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "[ - ] removed $(NAME)"
+	@echo "\033[0;31m[ - ] removed $(NAME)\033[0m"
 
 re: fclean all

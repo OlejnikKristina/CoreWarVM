@@ -6,15 +6,35 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 14:59:38 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 16:10:36 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
+#include "includes/t_dir_sizes.h"
+
 
 //zork's exec code
 //0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 00 00 00 01 09 ff fb
 //68 = 01 10 10 00 [T_REG|T_DIR|T_DIR]
+
+/* Returns a t_dir size according to opcode */
+
+short	get_dir_size(uint8_t opcode)
+{
+	return
+	(( opcode == ZJMP || opcode == LDI
+	|| opcode == FORK || opcode == STI
+	|| opcode == LLDI || opcode == LFORK)
+	? 2 : 4);
+}
+
+bool	is_encoding_byte(uint8_t opcode)
+{
+	return (
+		opcode != LIVE && opcode != ZJMP &&
+		opcode != FORK && opcode != LFORK);
+}
 
 int		calculate_jump(uint8_t opcode, uint8_t codage_octet)
 {

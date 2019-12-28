@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 20:04:19 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 15:09:13 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,16 @@ bool	init_players(t_vm *vm)
 	i = 0;
 	vm->players_amnt = get_players_amnt(0);
 	players_files = safe_players_files(NULL);
-	vm->players = (t_player **)ft_memalloc(sizeof(t_player *) * (vm->players_amnt));
+	vm->players = (t_player **)ft_memalloc(sizeof(t_player *) *
+	(vm->players_amnt));
 	if (!vm->players)
 		return (0);
 	while (i < vm->players_amnt)
 	{
 		if (!(vm->players[i] = (t_player *)ft_memalloc(sizeof(t_player))))
 			return (0);
-		set_player_id(vm->players[i], vm->flag->players_order, i);
+		set_player_id(vm->players[i], vm->flag->players_order, i,
+		vm->players_amnt);
 		init_player(vm->players[i], players_files[i]);
 		i++;
 	}

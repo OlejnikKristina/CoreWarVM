@@ -6,16 +6,15 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:47:56 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 15:09:12 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf/includes/ft_printf.h"
-// #include "ft_printf.h"
 
 bool	error_msg(unsigned short erro_num)
 {
-	ft_printf("%{RED_B} Error");
+	ft_printf("%{RED_B}Error");
 	if (erro_num == 1)
 		ft_printf(" in magic file\n");
 	if (erro_num == 2)
@@ -26,14 +25,14 @@ bool	error_msg(unsigned short erro_num)
 		ft_printf(". Champion name should be a null termineted\n");
 	if (erro_num == 5)
 	{
-		ft_printf("in player executable code size is too big\n");
+		ft_printf(" in player executable code size is too big\n");
 		ft_printf("Your player is just too fat\n");
 	}
 	if (erro_num == 6)
 		ft_printf(". Champion's comment is too small\n");
 	if (erro_num == 7)
 	{
-		ft_printf("in player executable code size is smal big\n");
+		ft_printf(" in player executable code, size is too small\n");
 		ft_printf("Your player weight nothing and this is a problem\n");
 	}
 	if (erro_num == 8)

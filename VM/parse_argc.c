@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 13:59:58 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/22 14:27:27 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/24 13:00:09 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	parse_error(void)
 		if (line)
 			ft_strdel(&line);
 	}
+	close(fd);
 	return (true);
 }
 
@@ -97,7 +98,7 @@ bool	args_validation(int argc, char **params, t_flags *flags)
 	num = 1;
 	ft_bzero(flags, sizeof(t_flags *));
 	flags->dump = -4242;
-	if (argc <= 2)
+	if (argc < 2)
 		return (false);
 	while (num < argc)
 	{
