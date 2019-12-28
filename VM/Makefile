@@ -6,7 +6,7 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/20 15:30:36 by krioliin       #+#    #+#                 #
-#    Updated: 2019/12/27 18:19:47 by krioliin      ########   odam.nl          #
+#    Updated: 2019/12/28 13:46:53 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME		= corewar
 SRC			= main.c parse_argc.c parse_flags.c \
 			get_champions_argc.c init_players.c vm_free.c \
 			utilities/error_msg.c parse_champion.c \
-			introduce_champions.c get_player_exec_code.c
+			utilities/introduction.c get_player_exec_code.c
 
 all: $(NAME)
 
