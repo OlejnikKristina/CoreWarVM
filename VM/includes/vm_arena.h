@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:42:53 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 19:54:13 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef	struct		s_player
 	short			id;
 	char			*name;
 	char			*comment;
-	uint8_t			code_size;
+	int				code_size;
 	uint8_t			*code;
 }					t_player;
 
@@ -64,6 +64,7 @@ bool				check_null_byte(const int fd);
 bool				get_player_code_size(t_player *player, const int fd);
 void				set_player_id(t_player *player, short players_order[MAX_PLAYERS],
 					short num);
+bool				get_player_exec_code(t_player *player, const int fd);
 void				introduce_champions(t_player **players, short player_amnt);
 
 /******************************* Utilites ********************************/

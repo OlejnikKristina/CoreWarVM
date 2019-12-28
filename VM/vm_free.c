@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:27:33 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 16:57:49 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 18:43:07 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	players_free(t_vm **vm)
 	{
 		free((*vm)->players[i]->name);
 		ft_bzero((*vm)->players[i], sizeof(*vm)->players[i]);
+		if ((*vm)->players[i]->code)
+			ft_memdel((void **)&(*vm)->players[i]->code);
 		free((*vm)->players[i]);
 		(*vm)->players[i] = NULL;
 		i++;
