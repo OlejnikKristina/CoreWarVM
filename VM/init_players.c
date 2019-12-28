@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 15:09:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 16:32:58 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ bool	init_player(t_player *player, char *player_file)
 		return (false);
 	if (!check_null_byte(fd) && error_msg(4))
 		return (false);
-	if (!get_player_exec_code(player, fd) && error_msg(8))
-		return (false);
+	// if (!get_player_exec_code(player, fd) && error_msg(8))
+	// 	return (false);
 	close(fd);
 	return (true);
 }

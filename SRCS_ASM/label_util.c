@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/12 15:12:06 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/18 17:39:13 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/28 16:50:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void		get_next_label(t_asm *data, char *name)
 			else
 				error("Invalid label", data->lines);
 		}
+		free_arr(&s, &split, 2);
 	}
-	free_arr(&name, &split, 1);
+	free_arr(&s, &split, 2);
 }

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/06 18:18:10 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/10 18:39:47 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/28 16:34:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_labels(t_label *label)
 	while (label)
 	{
 		curr = label->next;
+		free(label->name);
 		free(label);
 		label = curr;
 	}
@@ -61,6 +62,7 @@ void	free_parts(t_parts *parts)
 	while (parts)
 	{
 		curr = parts->next;
+		free(parts->name);
 		free(parts);
 		parts = curr;
 	}
