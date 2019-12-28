@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/23 20:44:32 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:47:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ bool	error_msg(unsigned short erro_num)
 		ft_printf(". Champion's comment is too small\n");
 	if (erro_num == 7)
 	{
-		ft_printf("in player executable code size is too big\n");
+		ft_printf("in player executable code size is smal big\n");
 		ft_printf("Your player weight nothing and this is a problem\n");
 	}
+	if (erro_num == 8)
+		ft_printf(" in champion's executable code\n");
 	ft_printf("%{RESET}");
 	return (true);
 }
