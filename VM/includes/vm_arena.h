@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 19:54:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 13:46:09 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 #include <fcntl.h>
 #include "op.h"
 #include "../ft_printf/includes/ft_printf.h"
-// #include "ft_printf.h"
 
-/*
-*** v								visualisation
-*/
+typedef struct s_cursor	t_cursor;
+
+struct				s_cursor
+{
+	short			id;
+	short			colour;
+	bool			carry;
+	short			opcode;
+	short			last_live;
+	short			wait_cycles;
+	uint8_t			position;
+	int				jump;
+	uint8_t			reg[REG_NUMBER][REG_SIZE];
+	t_cursor		*next;
+	t_cursor		*prev;
+};
 
 typedef struct		s_flags
 {
@@ -65,11 +77,11 @@ bool				get_player_code_size(t_player *player, const int fd);
 void				set_player_id(t_player *player, short players_order[MAX_PLAYERS],
 					short num);
 bool				get_player_exec_code(t_player *player, const int fd);
-void				introduce_champions(t_player **players, short player_amnt);
 
 /******************************* Utilites ********************************/
 
 bool				error_msg(unsigned short erro_num);
+void				introduce_champions(t_player **players, short player_amnt);
 void				vm_free(t_vm **vm);
 
 #endif
