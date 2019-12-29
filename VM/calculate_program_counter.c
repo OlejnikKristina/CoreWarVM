@@ -1,0 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   calculate_program_counter.c                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/29 14:13:56 by krioliin       #+#    #+#                */
+/*   Updated: 2019/12/29 14:21:53 by krioliin      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "includes/vm_arena.h"
+#include "includes/t_dir_sizes.h"
+
+/* Returns a t_dir size according to opcode */
+
+short	get_dir_size(uint8_t opcode)
+{
+	return
+	(( opcode == ZJMP || opcode == LDI
+	|| opcode == FORK || opcode == STI
+	|| opcode == LLDI || opcode == LFORK)
+	? 2 : 4);
+}
+
+bool	is_encoding_byte(uint8_t opcode)
+{
+	return (
+		opcode != LIVE && opcode != ZJMP &&
+		opcode != FORK && opcode != LFORK);
+}
+
+/*
+**	add_bytes_to_pc - calc amount of bytes need to program_counter
+**	according to instruction (live,sti,ld...)
+**	and diffirent arguments type (REG|DIR|IND)
+*/
+
+short	add_bytes_to_pc(e_argctype arg_type, uint8_t opcode)
+{
+	if (arg_type == DIR)
+		return (get_dir_size(opcode));
+	return (arg_type);
+}
+
+/*
+**	Calculate and return amount of bytes to next instruction.
+*/
+
+int		calculate_program_counter(uint8_t opcode, uint8_t encod_byte)
+{
+	int			program_counter;
+	e_argctype	argc_type[3];
+
+	program_counter = 0;
+	if (is_encoding_byte(opcode))
+	{
+		ft_printf("opcode (%d)\n", opcode);
+		decode_encoding_byte(encod_byte, argc_type);
+		program_counter += add_bytes_to_pc(argc_type[0], opcode);
+		program_counter += add_bytes_to_pc(argc_type[1], opcode);
+		program_counter += add_bytes_to_pc(argc_type[2], opcode);
+		program_counter += 2;
+		ft_printf("type: [%d] [%d] [%d]\n", argc_type[0], argc_type[1], argc_type[2]);
+		ft_printf("program_counter: %d\n", program_counter);
+	}
+	else if (opcode == LIVE)
+		program_counter = 4;
+	else if (opcode == ZJMP || opcode == FORK || opcode == LFORK)
+		program_counter = 2;
+	return (program_counter);
+}
