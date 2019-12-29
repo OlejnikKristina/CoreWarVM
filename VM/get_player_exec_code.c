@@ -6,28 +6,44 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 14:14:06 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 15:15:02 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 
-bool	check_player_exec_code(uint8_t *code, int code_size)
+bool	is_register_correct(uint8_t *code, uint8_t opcode, int pc)
 {
-	int		prog_counter;
-	int		i;
+	e_argctype	argc_type[3];
+	int			i;
 
 	i = 0;
-	prog_counter = 0;
-
-	prog_counter = calculate_program_counter(code[i], code[i + 1]);
-	i += prog_counter;
-	prog_counter = calculate_program_counter(code[i], code[i + 1]);
-	i += prog_counter;
-	prog_counter = calculate_program_counter(code[i], code[i + 1]);
-	while (i < code_size)
+	if (is_encoding_byte(opcode))
 	{
-		i++;
+		decode_encoding_byte(code[pc + 1], argc_type);
+		while (i < 3)
+		{
+			if (argc_type[i] == REG && REG_NUMBER <= code[pc + 2])
+				return (false);
+			pc += add_bytes_to_pc(argc_type[i], opcode);
+			pc += 2;
+			i++;
+		}
+	}
+	return (true);
+}
+
+bool	check_player_exec_code(uint8_t *code, int code_size)
+{
+	int		pc;
+
+	pc = 0;
+	while (pc < code_size)
+	{
+		pc += calculate_program_counter(code[pc], code[pc + 1]);
+		if (!is_register_correct(code, code[pc], pc))
+			return (false);
+		ft_printf("program_counter: %d\n", pc);
 	}
 	return (true);
 }
@@ -49,6 +65,7 @@ bool	get_player_exec_code(t_player *player, const int fd)
 		i++;
 	}
 	ft_printf("\n");
-	check_player_exec_code(player->code, player->code_size);
+	if (!check_player_exec_code(player->code, player->code_size))
+		return (false);
 	return (true);
 }

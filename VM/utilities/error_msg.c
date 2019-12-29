@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 16:33:18 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 15:09:12 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 15:16:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	error_msg(unsigned short erro_num)
 		ft_printf("Your player weight nothing and this is a problem\n");
 	}
 	if (erro_num == 8)
-		ft_printf(" in champion's executable code\n");
+		ft_printf(" in champion's code. Regestir number is too big\n");
 	ft_printf("%{RESET}");
 	return (true);
 }

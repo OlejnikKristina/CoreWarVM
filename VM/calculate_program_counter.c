@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/29 14:13:56 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 14:21:53 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 14:41:13 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		calculate_program_counter(uint8_t opcode, uint8_t encod_byte)
 		program_counter += add_bytes_to_pc(argc_type[2], opcode);
 		program_counter += 2;
 		ft_printf("type: [%d] [%d] [%d]\n", argc_type[0], argc_type[1], argc_type[2]);
-		ft_printf("program_counter: %d\n", program_counter);
 	}
 	else if (opcode == LIVE)
 		program_counter = 4;

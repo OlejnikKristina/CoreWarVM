@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 14:15:36 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 15:14:29 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ short players_order[MAX_PLAYERS], short num, short players_amnt);
 
 int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
 int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
+short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
 
 /*

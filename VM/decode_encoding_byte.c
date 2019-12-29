@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 18:19:42 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 14:16:27 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 14:42:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int		decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3])
 	unsigned char	byte_fr[3];
 
 	ft_bzero(byte_fr, 3);
-	mask[0] = 192;//(unsigned char)11000000;
-	mask[1] = 48;//(unsigned char)00110000;
-	mask[2] = 12;//(unsigned char)00001100;
+	mask[0] = 0b11000000;
+	mask[1] = 0b00110000;
+	mask[2] = 0b00001100;
 	byte_fr[0] = mask[0] & encod_byte;
 	byte_fr[1] = mask[1] & encod_byte;
 	byte_fr[2] = mask[2] & encod_byte;
