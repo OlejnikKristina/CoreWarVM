@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/29 14:13:56 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 14:41:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 16:09:40 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ short	add_bytes_to_pc(e_argctype arg_type, uint8_t opcode)
 {
 	if (arg_type == DIR)
 		return (get_dir_size(opcode));
-	return (arg_type);
+	else if (arg_type == IND)
+		return (2);
+	else if (arg_type == REG)
+		return (1);
+	return (0);
 }
 
 /*
@@ -61,12 +65,12 @@ int		calculate_program_counter(uint8_t opcode, uint8_t encod_byte)
 		program_counter += add_bytes_to_pc(argc_type[0], opcode);
 		program_counter += add_bytes_to_pc(argc_type[1], opcode);
 		program_counter += add_bytes_to_pc(argc_type[2], opcode);
-		program_counter += 2;
 		ft_printf("type: [%d] [%d] [%d]\n", argc_type[0], argc_type[1], argc_type[2]);
+		return (program_counter + 2);
 	}
 	else if (opcode == LIVE)
 		program_counter = 4;
 	else if (opcode == ZJMP || opcode == FORK || opcode == LFORK)
 		program_counter = 2;
-	return (program_counter);
+	return (program_counter + 1);
 }
