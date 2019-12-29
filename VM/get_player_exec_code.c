@@ -6,17 +6,12 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 16:10:36 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 14:02:50 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 #include "includes/t_dir_sizes.h"
-
-
-//zork's exec code
-//0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 00 00 00 01 09 ff fb
-//68 = 01 10 10 00 [T_REG|T_DIR|T_DIR]
 
 /* Returns a t_dir size according to opcode */
 
@@ -29,34 +24,65 @@ short	get_dir_size(uint8_t opcode)
 	? 2 : 4);
 }
 
-bool	is_encoding_byte(uint8_t opcode)
+/*
+**	add_bytes_to_pc - calc amount of bytes need to program_counter
+**	according to instruction (live,sti,ld...)
+**	and diffirent arguments type (REG|DIR|IND)
+*/
+
+short	add_bytes_to_pc(e_argctype arg_type, uint8_t opcode)
 {
-	return (
-		opcode != LIVE && opcode != ZJMP &&
-		opcode != FORK && opcode != LFORK);
+	if (arg_type == DIR)
+		return (get_dir_size(opcode));
+	return (arg_type);
 }
 
-int		calculate_jump(uint8_t opcode, uint8_t codage_octet)
+/*
+**	Calculate and return amount of bytes to next instruction.
+*/
+
+int		calculate_program_counter(uint8_t opcode, unsigned char encod_byte)
 {
-	ft_printf("[]");
-	return (0);
+	int				program_counter;
+	char			res;
+	e_argctype		argc_type[3];
+
+	program_counter = 0;
+	if (is_encoding_byte(opcode) && encod_byte)
+	{
+		ft_printf("opcode (%d)\n", opcode);
+		decode_encoding_byte(encod_byte, argc_type);
+		program_counter += add_bytes_to_pc(argc_type[0], opcode);
+		program_counter += add_bytes_to_pc(argc_type[1], opcode);
+		program_counter += add_bytes_to_pc(argc_type[2], opcode);
+		program_counter += 2;
+		ft_printf("type: [%d] [%d] [%d]\n", argc_type[0], argc_type[1], argc_type[2]);
+		ft_printf("program_counter: %d\n", program_counter);
+	}
+	else
+	{
+		res = 1;
+	}
+	return (program_counter);
 }
 
 bool	check_player_exec_code(uint8_t *code, int code_size)
 {
-	int		jump;
-	uint8_t	opcode;
+	int		prog_counter;
 	int		i;
 
 	i = 0;
-	jump = 0;
+	prog_counter = 0;
 
-	opcode = code[i];
-	calculate_jump(code[i], code[i + 1]);
-	// while (i < code_size)
-	// {
-	// 	i++;
-	// }
+	prog_counter = calculate_program_counter(code[i], code[i + 1]);
+	i += prog_counter;
+	prog_counter = calculate_program_counter(code[i], code[i + 1]);
+	i += prog_counter;
+	prog_counter = calculate_program_counter(code[i], code[i + 1]);
+	while (i < code_size)
+	{
+		i++;
+	}
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 15:24:46 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 14:00:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <fcntl.h>
 # include "op.h"
-# include "../ft_printf/includes/ft_printf.h"
+#include "ft_printf.h"
 
 typedef struct s_cursor	t_cursor;
 
@@ -28,7 +28,7 @@ struct				s_cursor
 	short			last_live;
 	short			wait_cycles;
 	uint8_t			position;
-	int				jump;
+	int				program_counter;
 	uint8_t			reg[REG_NUMBER][REG_SIZE];
 	t_cursor		*next;
 	t_cursor		*prev;
@@ -59,8 +59,20 @@ typedef struct		s_vm
 	t_flags			*flag;
 	t_cursor		*cursor;
 }					t_vm;
+
+typedef enum				e_argctype
+{
+	REG = 1,
+	DIR,
+	IND
+}							e_argctype;
+
+
 void				test_reg(void);
-/*************************** Parsing Arguments *******************************/
+
+/*
+	***************************** Parsing Arguments ****************************
+*/
 
 bool				args_validation(int argc, char **argv, t_flags *flags);
 short				check_flag(int argc, char **params, int *num,
@@ -72,7 +84,9 @@ short				get_players_amnt(short players_amnt_init);
 char				**safe_players_files(char *file);
 bool				parse_error();
 
-/******************************* Init Players ********************************/
+/*
+	****************************** Init Players ******************************
+*/
 
 bool				init_players(t_vm *vm);
 bool				check_null_byte(const int fd);
@@ -81,7 +95,12 @@ bool				get_player_exec_code(t_player *player, const int fd);
 void				set_player_id(t_player *player,
 short players_order[MAX_PLAYERS], short num, short players_amnt);
 
-/******************************* Utilites ********************************/
+int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
+bool				is_encoding_byte(uint8_t opcode);
+
+/*
+	****************************** Utilites *******************************
+*/
 
 bool				error_msg(unsigned short erro_num);
 void				introduce_champions(t_player **players, short player_amnt);
