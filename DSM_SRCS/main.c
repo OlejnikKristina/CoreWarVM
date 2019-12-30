@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:31:38 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/30 15:55:16 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/30 20:11:17 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_dsm	*init(int ac, char **av)
 	return (data);
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_dsm	*data;
 

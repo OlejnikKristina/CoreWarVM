@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:35:54 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/30 16:36:23 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/30 20:08:46 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 **	@return	- int, returns the converted number
 */
 
-int convert(unsigned char *s, int size)
+int	convert(unsigned char *s, int size)
 {
 	int				i;
 	unsigned int	temp;
@@ -28,7 +28,7 @@ int convert(unsigned char *s, int size)
 	temp = 0;
 	while (i < size)
 	{
-		temp = temp << 8;	
+		temp = temp << 8;
 		temp |= s[i];
 		i++;
 	}
