@@ -6,11 +6,12 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2019/12/29 14:14:35 by krioliin      ########   odam.nl          #
+#    Updated: 2019/12/29 19:40:18 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-FLAGS		= -Wall -Wextra -Werror -g
+#-Wall -Wextra -Werror 
+FLAGS		= -g -lncurses
 LIB			= ft_printf/libftprintf.a
 HEADER		= -I./ft_printf/includes -I includes/
 NAME		= corewar
@@ -21,11 +22,13 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			utilities/introduction.c get_player_exec_code.c \
 			decode_encoding_byte.c calculate_program_counter.c
 
+VISUAL		= visual/test_ncurse.c
+
 all: $(NAME)
 
 $(NAME):
-	@clang $(FLAGS) -o $(NAME) \
-	$(SRC) $(HEADER) $(LIB)
+	@clang  $(FLAGS) -o $(NAME) \
+	$(SRC) $(VISUAL) $(HEADER) $(LIB)
 	@echo "\033[0;32mVM successfully created\033[0m"
 
 clean:

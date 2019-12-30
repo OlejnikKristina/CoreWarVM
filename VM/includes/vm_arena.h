@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 15:14:29 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/30 14:50:17 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <fcntl.h>
 # include "op.h"
-#include "ft_printf.h"
+# include "ft_printf.h"
 
 typedef struct s_cursor	t_cursor;
 
@@ -107,5 +107,11 @@ bool				is_encoding_byte(uint8_t opcode);
 bool				error_msg(unsigned short erro_num);
 void				introduce_champions(t_player **players, short player_amnt);
 void				vm_free(t_vm **vm);
+
+/*
+	****************************** Visualisation *******************************
+*/
+
+bool				visual_corawar();
 
 #endif
