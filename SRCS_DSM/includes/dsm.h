@@ -19,4 +19,5 @@ struct					s_dsm
 
 void	error(char *message, int usage);
 void	parse(t_dsm *data);
+int 	convert(unsigned char *s, int size);
 #endif

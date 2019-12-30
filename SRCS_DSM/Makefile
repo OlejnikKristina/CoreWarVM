@@ -6,12 +6,12 @@
 #    By: abumbier <abumbier@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/30 16:00:27 by asulliva      ########   odam.nl          #
+#    Updated: 2019/12/30 16:36:36 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= dsm
-SRCS	= main error parse
+SRCS	= main error parse convert
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra -g
 HEADER	= includes/dsm.h
