@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 16:04:15 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 18:57:07 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ bool	is_register_correct(uint8_t *code, uint8_t opcode, int pc)
 	pc += 2;
 	while (i < 3)
 	{
-		if (argc_type[i] == REG)
-			ft_printf("reg [%d] \n", code[pc]);
+		// if (argc_type[i] == REG)
+		// 	ft_printf("reg [%d] \n", code[pc]);
 		if (argc_type[i] == REG && REG_NUMBER < code[pc])
 			return (false);
 		pc += add_bytes_to_pc(argc_type[i], opcode);
@@ -43,7 +43,7 @@ bool	check_player_exec_code(uint8_t *code, int code_size)
 		{
 			if (!is_register_correct(code, code[pc], pc))
 				return (false);
-			ft_printf("program_counter: %d\n", pc);
+			// ft_printf("program_counter: %d\n", pc);
 		}
 		pc += calculate_program_counter(code[pc], code[pc + 1]);
 	}
