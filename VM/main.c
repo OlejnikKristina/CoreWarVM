@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 16:20:55 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/30 15:05:01 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		main(int argc, char **argv)
 	else
 		ft_printf("Arguments are correct!\n");
 	vm_free(&vm);
+	// test_reg();
 	return (0);
 }

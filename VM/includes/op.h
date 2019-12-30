@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2013/10/04 11:33:27 by zaz            #+#    #+#                */
-/*   Updated: 2019/12/23 15:18:54 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/28 17:07:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef char					t_arg_type;
 
 # define T_REG					1
 # define T_DIR					2
-# define T_IND					4
+# define T_IND					2
 # define T_LAB					8
 
 # define PROG_NAME_LENGTH		128
