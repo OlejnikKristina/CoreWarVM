@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 14:56:51 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/30 15:25:23 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,23 @@ void	move_ball()
 
 bool	visual_corawar()
 {
+	int	ch;
+
 	initscr();
-	printw("Hello world!");
-	move_ball();
+	raw();
+	keypad(stdscr, TRUE);
+	noecho();
+	printw("Type any character to see it in bold\n");
+	ch = getch();
+	if (ch == KEY_F(1))
+		printw("F1 Key pressed");
+	else
+	{
+		printw("Key pressed: ");
+		attron(A_BOLD);
+		printw("%c", ch);
+		attroff(A_BOLD);
+	}
 	refresh();
 	getch();
 	endwin();
