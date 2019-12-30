@@ -1,33 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   test_ncurse.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 14:49:53 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/30 14:56:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm_arena.h"
+#include <corewar_visual.h>
 
-int		main(int argc, char **argv)
+void	move_ball()
 {
-	t_vm		*vm;
+	int x;
+	int y;
+	int	max_x;
+	int	max_y;
+	int	direction;
+	int	next_x;
 
-	if (!(vm = (t_vm *)ft_memalloc(sizeof(t_vm))))
-		return (0);
-	if (!(vm->flag = (t_flags *)ft_memalloc(sizeof(t_flags))))
-		return (0);
-	if (!args_validation(argc, argv, vm->flag))
-		parse_error();
-	else if (!init_players(vm))
-		ft_printf("Can't init players\n");
-	else
-		ft_printf("Arguments are correct!\n");
-    if (vm->flag->v)
-        visual_corawar();
-	vm_free(&vm);
-	return (0);
+	direction = 1;
+	next_x = 0;
+	max_x = 0;
+	max_y = 0;
+	x = 0;
+	y = 0;
+	while (x < 300)
+	{
+		getmaxyx(stdscr, max_y, max_x);
+		mvprintw(y, x, "o");
+		refresh();
+		usleep(30000);
+		x++;
+		next_x = x + direction;
+ 		if (next_x >= max_x || next_x < 0)
+ 			direction*= -1;
+		else
+ 			x+= direction;
+	}	
 }
+
+bool	visual_corawar()
+{
+	initscr();
+	printw("Hello world!");
+	move_ball();
+	refresh();
+	getch();
+	endwin();
+	return (true);
+}
+
