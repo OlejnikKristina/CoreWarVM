@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 14:50:17 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/30 19:06:46 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				test_reg(void);
 
 bool				args_validation(int argc, char **argv, t_flags *flags);
 short				check_flag(int argc, char **params, int *num,
-t_flags *flags);
+					t_flags *flags);
 void				add_n_falg(t_flags *flags, int from, int n);
 bool				check_champ_file_name(char *file_name);
 bool				check_champion(char *file_name);
@@ -95,10 +95,16 @@ bool				get_player_exec_code(t_player *player, const int fd);
 void				set_player_id(t_player *player,
 short players_order[MAX_PLAYERS], short num, short players_amnt);
 
+/*
+	****************************** Battlefield *******************************
+*/
+
+bool				init_battlefield(t_vm *vm);
 int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
 int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
+
 
 /*
 	****************************** Utilites *******************************

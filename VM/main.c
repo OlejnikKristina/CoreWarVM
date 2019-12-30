@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 15:09:11 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/30 20:32:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!args_validation(argc, argv, vm->flag))
 		parse_error();
-	else if (!init_players(vm))
+	if (!init_players(vm))
 		ft_printf("Can't init players\n");
-	else
-		ft_printf("Arguments are correct!\n");
-    if (vm->flag->v)
-        visual_corawar();
+	if (!init_battlefield(vm))
+		ft_printf("Error battlefield\n");
+	if (vm->flag->v)
+		visual_corawar(vm);
 	vm_free(&vm);
 	return (0);
 }
