@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 19:59:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 15:09:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 15:19:58 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ bool	init_players(t_vm *vm)
 			return (0);
 		set_player_id(vm->players[i], vm->flag->players_order, i,
 		vm->players_amnt);
-		init_player(vm->players[i], players_files[i]);
+		if (!init_player(vm->players[i], players_files[i]))
+			return (false);
 		i++;
 	}
 	introduce_champions(vm->players, vm->players_amnt);

@@ -6,57 +6,47 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/28 16:10:36 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/29 16:04:15 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
-#include "includes/t_dir_sizes.h"
 
-
-//zork's exec code
-//0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 00 00 00 01 09 ff fb
-//68 = 01 10 10 00 [T_REG|T_DIR|T_DIR]
-
-/* Returns a t_dir size according to opcode */
-
-short	get_dir_size(uint8_t opcode)
+bool	is_register_correct(uint8_t *code, uint8_t opcode, int pc)
 {
-	return
-	(( opcode == ZJMP || opcode == LDI
-	|| opcode == FORK || opcode == STI
-	|| opcode == LLDI || opcode == LFORK)
-	? 2 : 4);
-}
+	e_argctype	argc_type[3];
+	int			i;
 
-bool	is_encoding_byte(uint8_t opcode)
-{
-	return (
-		opcode != LIVE && opcode != ZJMP &&
-		opcode != FORK && opcode != LFORK);
-}
-
-int		calculate_jump(uint8_t opcode, uint8_t codage_octet)
-{
-	ft_printf("[]");
-	return (0);
+	i = 0;
+	decode_encoding_byte(code[pc + 1], argc_type);
+	pc += 2;
+	while (i < 3)
+	{
+		if (argc_type[i] == REG)
+			ft_printf("reg [%d] \n", code[pc]);
+		if (argc_type[i] == REG && REG_NUMBER < code[pc])
+			return (false);
+		pc += add_bytes_to_pc(argc_type[i], opcode);
+		i++;
+	}
+	return (true);
 }
 
 bool	check_player_exec_code(uint8_t *code, int code_size)
 {
-	int		jump;
-	uint8_t	opcode;
-	int		i;
+	int		pc;
 
-	i = 0;
-	jump = 0;
-
-	opcode = code[i];
-	calculate_jump(code[i], code[i + 1]);
-	// while (i < code_size)
-	// {
-	// 	i++;
-	// }
+	pc = 0;
+	while (pc < code_size)
+	{
+		if (is_encoding_byte(code[pc]))
+		{
+			if (!is_register_correct(code, code[pc], pc))
+				return (false);
+			ft_printf("program_counter: %d\n", pc);
+		}
+		pc += calculate_program_counter(code[pc], code[pc + 1]);
+	}
 	return (true);
 }
 
@@ -77,6 +67,7 @@ bool	get_player_exec_code(t_player *player, const int fd)
 		i++;
 	}
 	ft_printf("\n");
-	check_player_exec_code(player->code, player->code_size);
+	if (!check_player_exec_code(player->code, player->code_size))
+		return (false);
 	return (true);
 }
