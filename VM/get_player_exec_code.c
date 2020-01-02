@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 18:57:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/02 13:55:34 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 bool	is_register_correct(uint8_t *code, uint8_t opcode, int pc)
 {
+
 	e_argctype	argc_type[3];
 	int			i;
 
