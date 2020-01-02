@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 21:04:46 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/02 21:17:24 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_pairs()
 	if (!has_colors())
 	{
 		endwin();
-		ft_printf("Your terminal does't support color\n");
+		ft_printf("Your terminal does't support colors\n");
 	}
 	start_color();
 	// init_pair(COLOR_P1, DARCK_RED, COLOR_RED);
@@ -61,19 +61,6 @@ void	init_pairs()
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, LIGHT_BLUE, COLOR_BLACK);
 	init_pair(5, DARCK_GREEN, COLOR_BLACK);
-}
-
-void	fill_colors_palette(short color_palette[9])
-{
-	color_palette[0] = COLOR_RED;
-	color_palette[1] = COLOR_YELLOW;
-	color_palette[2] = COLOR_GREEN;
-	color_palette[3] = INTENSE_PINK;
-	color_palette[4] = COLOR_BLUE;
-	color_palette[5] = VIOLET;
-	color_palette[6] = BRIGHT_YELLOW;
-	color_palette[7] = LIGHT_BLUE;
-	color_palette[8] = LIGHT_PINK;
 }
 
 WINDOW	*init_arena(int	height, int width, int startx, int starty)
@@ -91,30 +78,13 @@ WINDOW	*init_arena(int	height, int width, int startx, int starty)
 	return (warena);
 }
 
-t_player	*get_player(t_player **players, short player_id, short player_amnt)
-{
-	short	i;
-
-	i = 0;
-	while (i < player_amnt)
-	{
-		if (players[i]->id == player_id)
-			return (players[i]);
-		i++;
-	}
-	return (NULL);
-}
-
 int			get_attribute(int i, t_player **players, short players_amnt)
 {
-	// static short	colors_palette[9];
 	static int		prev_code_size;
 	static short	player_id;
 	int				index;
 	t_player		*player;
 
-	// if (colors_palette[0] == 0)
-	// 	fill_colors_palette(colors_palette);
 	index = (MEM_SIZE / players_amnt) * player_id;
 	if (!(player = get_player(players, player_id + 1, players_amnt)))
 		return (COLOR_PAIR(5) | A_BOLD);
@@ -130,7 +100,7 @@ int			get_attribute(int i, t_player **players, short players_amnt)
 	return (COLOR_PAIR(5) | A_BOLD);
 }
 
-static void	display_arena(t_vm *vm, WINDOW *warena, t_pl_color **pl_colors)
+static void	display_arena(t_vm *vm, WINDOW *warena)
 {
 	int		yx[2];
 	int		i;
@@ -158,47 +128,19 @@ static void	display_arena(t_vm *vm, WINDOW *warena, t_pl_color **pl_colors)
 		
 	}
 	wrefresh(warena);
-	if (pl_colors)
-		;
-}
-
-bool	set_colors_to_players(t_pl_color **pl_colors, t_player **players,
-		short players_amnt)
-{
-	short	colors_palette[9];
-	short	i;
-
-	i = 0;
-	fill_colors_palette(colors_palette);
-	pl_colors = (t_pl_color**)ft_memalloc(sizeof(t_pl_color *));
-	if (pl_colors)
-		return (false);
-	while (i < players_amnt)
-	{
-		if ((pl_colors[i] = (t_pl_color *)ft_memalloc(sizeof(t_pl_color))))
-			return (false);
-		pl_colors[i]->id = players[i]->id;
-		pl_colors[i]->color = colors_palette[i];
-		i++;
-	}
-	return (true);
 }
 
 bool	visual_corawar(t_vm *vm)
 {
-	t_pl_color	**players_colors;
+	// t_pl_color	**players_colors;
 	WINDOW		*warena;
 
-	players_colors = NULL;
+	// players_colors = NULL;
 	initscr();
 	init_pairs();
 	warena = init_arena(HEIGHT, WIDTH, OFFSETX, OFFSETY);
-	set_colors_to_players(players_colors, vm->players, vm->players_amnt);
-	if (vm)
-		;
-	//display_arena2(vm, warena);
-	display_arena(vm, warena, players_colors);
-	// printw("Hello world!");
+	// set_colors_to_players(players_colors, vm->players, vm->players_amnt);
+	display_arena(vm, warena);
 	// move_ball();
 	// del_players_colors(&players_colors, vm->players_amnt);
 	getch();
