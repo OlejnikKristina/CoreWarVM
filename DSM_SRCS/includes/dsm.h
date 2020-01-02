@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 16:48:59 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/02 20:42:42 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@
 # define LFORK		0x0f
 # define NB_OPS		0x0f
 
-# define ENC_BYTE	(int[]){0, 0, 1, 1, 1, 1, 1, 1 ,1, 0, 1, 1, 0, 1, 1, 0, 1}
-# define DIR_SIZES	(int[]){0, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 4, 2, 2, 4}
-# define ARGS_AMNT	(int[]){0, 1, 2, 2, 3, 3, 3, 3, 3, 1, 3, 3, 1, 2, 3, 1, 1}
-
 typedef struct s_dsm	t_dsm;
 typedef struct s_op		t_op;
 
@@ -65,4 +61,8 @@ void		error(char *message, int usage);
 void		parse(t_dsm *data);
 int			convert(unsigned char *s, int size);
 void		get_exec_code(t_dsm *data);
+int			enc_byte(int op);
+int			dir_size(int op);
+int			arg_amnt(int op);
+void		free_arr(char **arr1, char ***arr2, int flag);
 #endif
