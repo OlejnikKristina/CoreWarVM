@@ -6,11 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2019/12/30 15:25:23 by asulliva      ########   odam.nl         */
-=======
-/*   Updated: 2019/12/30 19:07:29 by krioliin      ########   odam.nl         */
->>>>>>> kristina
+/*   Updated: 2020/01/02 21:28:10 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +66,6 @@ bool	visual_corawar(t_vm *vm)
 	int	ch;
 
 	initscr();
-<<<<<<< HEAD
-	raw();
-	keypad(stdscr, TRUE);
-	noecho();
-	printw("Type any character to see it in bold\n");
-	ch = getch();
-	if (ch == KEY_F(1))
-		printw("F1 Key pressed");
-	else
-	{
-		printw("Key pressed: ");
-		attron(A_BOLD);
-		printw("%c", ch);
-		attroff(A_BOLD);
-	}
-=======
 	refresh();
 	init_pairs();
 	init_arena(HEIGHT, WIDTH, OFFSETX, OFFSETY);
@@ -94,7 +74,6 @@ bool	visual_corawar(t_vm *vm)
 	// display_battlefield(vm->arena);
 	// printw("Hello world!");
 	// move_ball();
->>>>>>> kristina
 	refresh();
 	getch();
 	endwin();
