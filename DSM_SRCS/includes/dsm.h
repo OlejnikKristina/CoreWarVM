@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/30 20:19:03 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/02 16:48:59 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../../LIBFT_SRCS/libft/libft.h"
 # include "../../op.h"
 
-# define LIVE 0x01
+# define LIVE		0x01
 # define LD			0x02
 # define ST			0x03
 # define ADD		0x04
