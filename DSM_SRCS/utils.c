@@ -6,11 +6,26 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 20:20:14 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 20:42:34 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/02 21:37:22 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/dsm.h"
+
+/*
+**	@desc 	- prints error message and exits
+**	@param	- string message to be printed
+**			- int usage, print usage or not
+*/
+
+void	error(char *message, int usage)
+{
+	ft_printf("Error: ");
+	ft_putendl(message);
+	if (usage)
+		ft_printf("Usage: ./dsm [file name]");
+	exit(1);
+}
 
 /*
 **	@desc	- function that tells you if operation has encoding byte

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 20:42:42 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/02 21:38:07 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,33 @@ struct		s_op
 	t_op	*next;
 };
 
-void		error(char *message, int usage);
-void		parse(t_dsm *data);
+/*
+**	args.c
+*/
+int			find_args(t_op *curr, int enc_byte, int arg_amnt, int op);
+
+/*
+**	convert.c
+*/
 int			convert(unsigned char *s, int size);
+
+/*
+**	exec_code.c
+*/
 void		get_exec_code(t_dsm *data);
+
+/*
+**	parse.c
+*/
+void		parse(t_dsm *data);
+
+/*
+**	utils.c
+*/
 int			enc_byte(int op);
 int			dir_size(int op);
 int			arg_amnt(int op);
+void		error(char *message, int usage);
 void		free_arr(char **arr1, char ***arr2, int flag);
+
 #endif
