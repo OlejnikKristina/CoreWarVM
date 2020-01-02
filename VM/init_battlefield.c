@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:47:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 19:16:44 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/02 16:50:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ void	put_player_on_arena(uint8_t arena[MEM_SIZE], t_player *player,
 	}
 }
 
-void	display_arena(uint8_t arena[MEM_SIZE])
-{
-	int		i;
+// static void	display_arena(uint8_t arena[MEM_SIZE])
+// {
+// 	int		i;
 
-	i = 0;
-	while (i < MEM_SIZE - 1)
-	{
-		if (i == 0)
-		 ft_printf(" 0");
-		if (arena[i] == 0)
-			ft_printf("%x ", arena[i]);
-		else
-			ft_printf("%{YELLOW_B}%x%{RESET} ", arena[i]);
-		if (i % 50 == 0 && i != 0)
-			ft_printf("\n ");
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < MEM_SIZE - 1)
+// 	{
+// 		if (i == 0)
+// 		 ft_printf(" 0");
+// 		if (arena[i] == 0)
+// 			ft_printf("%x ", arena[i]);
+// 		else
+// 			ft_printf("%{YELLOW_B}%x%{RESET} ", arena[i]);
+// 		if (i % 50 == 0 && i != 0)
+// 			ft_printf("\n ");
+// 		i++;
+// 	}
+// }
 
 bool	init_battlefield(t_vm *vm)
 {
@@ -59,6 +59,6 @@ bool	init_battlefield(t_vm *vm)
 		player_pos += MEM_SIZE / vm->players_amnt;
 		i++;
 	}
-	display_arena(vm->arena);
+	// display_arena(vm->arena);
 	return (true);
 }

@@ -6,7 +6,7 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2019/12/30 19:06:34 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/02 13:57:03 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			decode_encoding_byte.c calculate_program_counter.c \
 			init_battlefield.c
 
-VISUAL		= visual/test_ncurse.c
+VISUAL		= visual/corewar_visual.c
 
 all: $(NAME)
 

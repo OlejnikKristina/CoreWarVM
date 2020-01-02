@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 19:06:46 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/02 14:07:31 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_cursor	t_cursor;
 struct				s_cursor
 {
 	short			id;
-	short			colour;
+	short			color;
 	bool			carry;
 	short			opcode;
 	short			last_live;
