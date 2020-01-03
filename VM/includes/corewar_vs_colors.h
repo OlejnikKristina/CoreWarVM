@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:18:36 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 14:50:42 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/03 14:49:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # define BGGREEN_FGRED 111
 # define BGCYAN_FBLACK 112
-# define BGBLUE_FYELLOW 113 
+# define BGYELLOW_FBLACK 113 
 # define BGYELLOW_FBYELLOW 115 BGRED_FBLACK
 # define BGRED_FBLACK 116
 
@@ -42,5 +42,9 @@
 # define NORMAL_BLUE 0b111101
 # define VIOLET 0b111000
 # define INTENSE_PINK 0b10000000
+# define NICE_PINCK 0b0110101
+# define NICE_PINCK2 0b1111111
+# define INTENSE_BLUE 0b10001
+# define INTENSE_RED 0b00001
 
 #endif

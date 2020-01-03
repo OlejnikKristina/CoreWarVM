@@ -6,42 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 21:17:24 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/03 15:24:24 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
-
-void	del_players_colors(t_pl_color ***pl_colors, short players_amnt)
-{
-	short i;
-
-	i = 0;
-	while (i < players_amnt)
-	{
-		free(*pl_colors[i]);
-		i++;
-	}
-	*pl_colors = NULL;
-}
-
-void	move_ball()
-{
-	int x;
-	int y;
-
-	x = 0;
-	y = 0;
-	addch( 'A' | A_BOLD | A_UNDERLINE );
-	// while (x < 300)
-	// {
-	// 	mvprintw(y, x, "o");
-	// 	refresh();
-	// 	usleep(30000);
-	// 	x++;
-	// }
-	addch( 'A' | A_BOLD | A_UNDERLINE );
-}
 
 void	init_pairs()
 {
@@ -51,31 +20,13 @@ void	init_pairs()
 		ft_printf("Your terminal does't support colors\n");
 	}
 	start_color();
-	// init_pair(COLOR_P1, DARCK_RED, COLOR_RED);
-	// init_pair(BGBLUE_FYELLOW, LIGHT_BLUE, COLOR_YELLOW);
-	// init_pair(BGGREEN_FGRED, COLOR_RED, COLOR_GREEN);
-	// init_pair(BGCYAN_FBLACK, COLOR_CYAN, COLOR_BLACK);
 	init_pair(BGRED_FBLACK, COLOR_RED, COLOR_BLACK);
+	init_pair(BGYELLOW_FBLACK, BRIGHT_YELLOW, COLOR_BLACK);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, INTENSE_PINK, COLOR_BLACK);
+	init_pair(2, DARCK_GREEN, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, LIGHT_BLUE, COLOR_BLACK);
-	init_pair(5, DARCK_GREEN, COLOR_BLACK);
-}
-
-WINDOW	*init_arena(int	height, int width, int startx, int starty)
-{
-	WINDOW	*warena;
-
-	wbkgd(stdscr, COLOR_PAIR(BGRED_FBLACK));
-	refresh();
-
-	warena = newwin(height, width, startx, starty);
-	wbkgd(warena, COLOR_PAIR(BGRED_FBLACK));
-	wborder(warena, '*', '*', '*','*','#', '#', '#', '#');
-	mvaddstr(OFFSETY + 1, OFFSETX + ((width / 2) - 10), "[ CORE WAR ]");
-	wrefresh(warena);
-	return (warena);
+	init_pair(5, NICE_PINCK, COLOR_BLACK);
 }
 
 int			get_attribute(int i, t_player **players, short players_amnt)
@@ -86,7 +37,7 @@ int			get_attribute(int i, t_player **players, short players_amnt)
 	t_player		*player;
 
 	index = (MEM_SIZE / players_amnt) * player_id;
-	if (!(player = get_player(players, player_id + 1, players_amnt)))
+	if (!(player = get_player_by_id(players, player_id + 1, players_amnt)))
 		return (COLOR_PAIR(5) | A_BOLD);
 	if (i - index >= player->code_size)
 	{
@@ -130,21 +81,49 @@ static void	display_arena(t_vm *vm, WINDOW *warena)
 	wrefresh(warena);
 }
 
+WINDOW	*init_arena(int	height, int width, int startx, int starty)
+{
+	WINDOW	*warena;
+
+	wbkgd(stdscr, COLOR_PAIR(BGYELLOW_FBLACK));
+	refresh();
+
+	warena = newwin(height, width, startx, starty);
+	wbkgd(warena, COLOR_PAIR(BGYELLOW_FBLACK));
+	wborder(warena, '|', '|', '*','*','*', '*', '*', '*');
+	mvaddstr(OFFSETY + 3, OFFSETX + ((width / 2) - 10), "[ CORE WAR ]");
+	wrefresh(warena);
+	return (warena);
+}
+
+WINDOW	*init_winfo(int	height, int width, int startx, int starty)
+{
+	WINDOW *winfo;
+
+	winfo = newwin(height, width, startx, starty);
+	wbkgd(winfo, COLOR_PAIR(BGYELLOW_FBLACK));
+	wborder(winfo, '|', '|', '*','*', '*', '*', '*', '*');
+	wrefresh(winfo);
+	refresh();
+	return (winfo);
+}
+
 bool	visual_corawar(t_vm *vm)
 {
-	// t_pl_color	**players_colors;
 	WINDOW		*warena;
+	WINDOW		*winfo;
 
-	// players_colors = NULL;
 	initscr();
 	init_pairs();
-	warena = init_arena(HEIGHT, WIDTH, OFFSETX, OFFSETY);
-	// set_colors_to_players(players_colors, vm->players, vm->players_amnt);
+	warena = init_arena(HEIGHT, WIDTH, OFFSETY, OFFSETX);
+	winfo = init_winfo(HEIGHT, (WIDTH) / 4 + 7, OFFSETY, WIDTH + 3);
 	display_arena(vm, warena);
-	// move_ball();
-	// del_players_colors(&players_colors, vm->players_amnt);
+	display_info(vm, winfo);
+	set_colors_to_players(vm->players, vm->players_amnt);
+	
 	getch();
 	delwin(warena);
+	delwin(winfo);
 	endwin();
 	return (true);
 }

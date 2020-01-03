@@ -6,13 +6,13 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:16:56 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 21:17:30 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/03 13:57:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
 
-t_player	*get_player(t_player **players, short player_id, short player_amnt)
+t_player	*get_player_by_id(t_player **players, short player_id, short player_amnt)
 {
 	short	i;
 

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 14:07:31 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/03 14:01:44 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct		s_flags
 typedef	struct		s_player
 {
 	short			id;
+	short			color;
 	char			*name;
 	char			*comment;
 	int				code_size;
@@ -53,6 +54,9 @@ typedef	struct		s_player
 
 typedef struct		s_vm
 {
+	int				cycle_current;
+	int				cycle_to_die;
+	int				process;
 	short			players_amnt;
 	t_player		**players;
 	uint8_t			arena[MEM_SIZE];
@@ -71,7 +75,7 @@ typedef enum				e_argctype
 void				test_reg(void);
 
 /*
-	***************************** Parsing Arguments ****************************
+	***************************** Parsing Arguments ******************************
 */
 
 bool				args_validation(int argc, char **argv, t_flags *flags);
@@ -85,7 +89,7 @@ char				**safe_players_files(char *file);
 bool				parse_error();
 
 /*
-	****************************** Init Players ******************************
+	****************************** Init Players *********************************
 */
 
 bool				init_players(t_vm *vm);
@@ -96,7 +100,7 @@ void				set_player_id(t_player *player,
 short players_order[MAX_PLAYERS], short num, short players_amnt);
 
 /*
-	****************************** Battlefield *******************************
+	****************************** Battlefield **********************************
 */
 
 bool				init_battlefield(t_vm *vm);
@@ -107,9 +111,11 @@ bool				is_encoding_byte(uint8_t opcode);
 
 
 /*
-	****************************** Utilites *******************************
+	****************************** Utilites *************************************
 */
 
+t_player			*get_player_by_id(t_player **players, short player_id,
+					short player_amnt);
 bool				error_msg(unsigned short erro_num);
 void				introduce_champions(t_player **players, short player_amnt);
 void				vm_free(t_vm **vm);

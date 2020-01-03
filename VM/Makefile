@@ -6,7 +6,7 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/02 21:18:11 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/03 15:21:34 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			init_battlefield.c
 
 VISUAL		= visual/corewar_visual.c visual/set_colors_to_players.c \
-			utilities/get_player.c
+			utilities/get_player_by_id.c visual/display_info.c
 
 all: $(NAME)
 
