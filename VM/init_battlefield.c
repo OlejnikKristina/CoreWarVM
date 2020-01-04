@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:47:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 16:50:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/03 14:00:36 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ bool	init_battlefield(t_vm *vm)
 	player_pos = 0;
 	while (i < vm->players_amnt)
 	{
-		put_player_on_arena(vm->arena, vm->players[i], player_pos);
+		put_player_on_arena(vm->arena,
+		get_player_by_id(vm->players, i + 1, vm->players_amnt), player_pos);
 		player_pos += MEM_SIZE / vm->players_amnt;
 		i++;
 	}
