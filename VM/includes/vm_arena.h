@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/03 14:01:44 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 13:07:05 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef	struct		s_player
 
 typedef struct		s_vm
 {
-	int				cycle_current;
+	int				current_cycle;
 	int				cycle_to_die;
 	int				process;
 	short			players_amnt;

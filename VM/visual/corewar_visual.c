@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/03 15:24:24 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:38:38 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	init_pairs()
 	start_color();
 	init_pair(BGRED_FBLACK, COLOR_RED, COLOR_BLACK);
 	init_pair(BGYELLOW_FBLACK, BRIGHT_YELLOW, COLOR_BLACK);
+	init_pair(WHITE_BLACK, COLOR_WHITE, COLOR_BLACK);
+	init_pair(PINK_YELLOW, NICE_PINCK2, COLOR_YELLOW);
+	init_pair(YELLOW_PINK, COLOR_YELLOW, NICE_PINCK2);
+	init_pair(PINK_BLACK, NICE_PINCK2, COLOR_BLACK);
+	init_pair(LBLUE_BLACK, LIGHT_BLUE, COLOR_BLACK);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, DARCK_GREEN, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
@@ -36,6 +41,11 @@ int			get_attribute(int i, t_player **players, short players_amnt)
 	int				index;
 	t_player		*player;
 
+	if (i == 0)
+	{
+		player_id = 0;
+		i = 0;
+	}
 	index = (MEM_SIZE / players_amnt) * player_id;
 	if (!(player = get_player_by_id(players, player_id + 1, players_amnt)))
 		return (COLOR_PAIR(5) | A_BOLD);
@@ -85,11 +95,11 @@ WINDOW	*init_arena(int	height, int width, int startx, int starty)
 {
 	WINDOW	*warena;
 
-	wbkgd(stdscr, COLOR_PAIR(BGYELLOW_FBLACK));
+	wbkgd(stdscr, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	refresh();
 
 	warena = newwin(height, width, startx, starty);
-	wbkgd(warena, COLOR_PAIR(BGYELLOW_FBLACK));
+	wbkgd(warena, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	wborder(warena, '|', '|', '*','*','*', '*', '*', '*');
 	mvaddstr(OFFSETY + 3, OFFSETX + ((width / 2) - 10), "[ CORE WAR ]");
 	wrefresh(warena);
@@ -101,7 +111,7 @@ WINDOW	*init_winfo(int	height, int width, int startx, int starty)
 	WINDOW *winfo;
 
 	winfo = newwin(height, width, startx, starty);
-	wbkgd(winfo, COLOR_PAIR(BGYELLOW_FBLACK));
+	wbkgd(winfo, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	wborder(winfo, '|', '|', '*','*', '*', '*', '*', '*');
 	wrefresh(winfo);
 	refresh();
