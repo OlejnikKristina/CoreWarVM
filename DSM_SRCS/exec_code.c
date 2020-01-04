@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 19:39:31 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 17:48:39 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 18:58:11 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void		get_line(t_dsm *data, int op, int *size)
 
 	new = new_op(data);
 	new->op_name = set_name(op);
-	ft_printf("name is %s\n", new->op_name);
 	if (enc_byte(op))
 	{
 		ret = read(data->rfd, &s, 1);

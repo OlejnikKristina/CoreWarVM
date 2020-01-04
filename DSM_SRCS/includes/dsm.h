@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 17:44:29 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 18:26:16 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ struct		s_dsm
 	int		size;
 	char	*name;
 	char	*comment;
+	char	*file_name;
 	t_op	*ops;
 };
 
@@ -94,4 +95,8 @@ int			arg_amnt(int op);
 void		error(char *message, int usage);
 void		free_arr(char **arr1, char ***arr2, int flag);
 
+/*
+**	write.c
+*/
+void		write_file(t_dsm *data);
 #endif

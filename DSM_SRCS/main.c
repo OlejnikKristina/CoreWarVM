@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:31:38 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 17:50:12 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 19:07:21 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_dsm	*init(int ac, char **av)
 
 	data = (t_dsm*)ft_memalloc(sizeof(t_dsm));
 	data->rfd = open(av[ac - 1], O_RDONLY);
+	data->file_name = av[ac - 1];
 	if (data->rfd < 3 || read(data->rfd, data->comment, 0) < 0)
 		return (NULL);
 	return (data);
@@ -72,5 +73,7 @@ int				main(int ac, char **av)
 	if (!data)
 		error("Unable to read file", 0);
 	parse(data);
+	close(data->rfd);
+	write_file(data);
 	return (0);
 }

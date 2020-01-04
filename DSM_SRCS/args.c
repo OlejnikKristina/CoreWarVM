@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:34:48 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 17:55:34 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 18:48:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,27 @@ static int	find_value(char **args, int nb_arg, int size)
 	combo = (char**)ft_memalloc(sizeof(char*) * 3);
 	combo[0] = args[nb_arg];
 	combo[1] = ft_itoa(ret_val);
-	args[nb_arg] = ft_strjoin(args[nb_arg], ft_itoa(ret_val));
+	args[nb_arg] = ft_strjoin(args[nb_arg], combo[1]);
+	free_arr(NULL, &combo, 1);
 	return (ret);
+}
+
+/*
+**	@desc	- function prepares the arguments
+**	@param	- int enc_byte, the encoding byte to check
+**			- int nb_arg, which argument we are atm
+**	@return	- filled string with char corresponding to the arg type
+*/
+
+static char	*prep_arg(int enc_byte, int nb_arg)
+{
+	if (ret_type(enc_byte, nb_arg) == REG)
+		return (ft_strdup("r"));
+	if (ret_type(enc_byte, nb_arg) == DIR)
+		return (ft_strdup("%"));
+	if (ret_type(enc_byte, nb_arg) == IND)
+		return (ft_strdup(""));
+	return (ft_strdup("%"));
 }
 
 /*
@@ -101,12 +120,7 @@ int			find_args(t_op *curr, int enc_byte, int arg_amnt, int op)
 	curr->args = (char**)ft_memalloc(sizeof(char*) * arg_amnt + 1);
 	while (i < arg_amnt)
 	{
-		if (ret_type(enc_byte, i) == REG)
-			curr->args[i] = ft_strdup("r");
-		if (ret_type(enc_byte, i) == DIR)
-			curr->args[i] = ft_strdup("%");
-		if (ret_type(enc_byte, i) == IND)
-			curr->args[i] = ft_strdup("");
+		curr->args[i] = prep_arg(enc_byte, i);
 		size += find_value(curr->args, i, get_size(ret_type(enc_byte, i), op));
 		if (i < arg_amnt - 1)
 		{
