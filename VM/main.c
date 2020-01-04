@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/30 18:50:14 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:35:55 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		main(int argc, char **argv)
 	if (!init_players(vm))
 		ft_printf("Can't init players\n");
 	if (!init_battlefield(vm))
+		ft_printf("Error battlefield\n");
+	if (!init_cursors(vm))
 		ft_printf("Error battlefield\n");
 	if (vm->flag->v)
 		visual_corawar(vm);

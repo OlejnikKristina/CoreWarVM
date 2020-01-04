@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 18:19:42 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 17:31:31 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 19:12:22 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3])
 	// ft_printf("mask[2] = dec(%d)\n", byte_fr[2]);
 	op_args[0] = reg_dir_ind(byte_fr[0], 1);
 	op_args[1] = reg_dir_ind(byte_fr[1], 2);
-	// op_args[2] = reg_dir_ind(byte_fr[2], 3);
+	op_args[2] = reg_dir_ind(byte_fr[2], 3);
 	// ft_printf("Encoded byte: [%d] [%x]\n", encod_byte, encod_byte);
 	// ft_printf("Encoded vals: [%d] [%d] [%d]\n",
 	// op_args[0], op_args[1], op_args[2]);

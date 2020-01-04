@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 15:38:38 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:11:18 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ WINDOW	*init_arena(int	height, int width, int startx, int starty)
 	warena = newwin(height, width, startx, starty);
 	wbkgd(warena, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	wborder(warena, '|', '|', '*','*','*', '*', '*', '*');
-	mvaddstr(OFFSETY + 3, OFFSETX + ((width / 2) - 10), "[ CORE WAR ]");
+	mvaddstr(OFFSETY + 3, OFFSETX + ((width / 2) - 12),
+	"C O R E  W A R");
 	wrefresh(warena);
 	return (warena);
 }

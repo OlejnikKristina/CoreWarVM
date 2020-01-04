@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 15:41:32 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:46:17 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void		display_current_cycle(WINDOW *winfo, int current_cycle)
 {
 	wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 25, 3, "Current cycle:     ");
+	mvwprintw(winfo, OFFSETY + 25, 3, "Current cycle:");
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 25, 19, "%d", current_cycle);
+	mvwprintw(winfo, OFFSETY + 25, 21, " %d", current_cycle);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 
 void		display_processes(WINDOW *winfo, int processes_num)
 {
 	wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 27, 3, "Processes    :");
+	mvwprintw(winfo, OFFSETY + 27, 3, "Processes:");
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 27, 19, "%d", processes_num);
+	mvwprintw(winfo, OFFSETY + 27, 22, "%d", processes_num);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 

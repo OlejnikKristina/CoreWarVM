@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 13:07:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 18:19:30 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include "op.h"
 # include "ft_printf.h"
 
+/*
+	**	pc			program_counter
+*/
+
 typedef struct s_cursor	t_cursor;
 
 struct				s_cursor
@@ -24,14 +28,13 @@ struct				s_cursor
 	short			id;
 	short			color;
 	bool			carry;
-	short			opcode;
+	int				opcode;
 	short			last_live;
 	short			wait_cycles;
-	uint8_t			position;
-	int				program_counter;
-	uint8_t			reg[REG_NUMBER][REG_SIZE];
+	int				position;
+	int				pc;
+	int16_t			reg[REG_NUMBER][REG_SIZE];
 	t_cursor		*next;
-	t_cursor		*prev;
 };
 
 typedef struct		s_flags
@@ -109,6 +112,12 @@ int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
 
+
+/*
+	********************************* Cursors ************************************
+*/
+
+bool				init_cursors(t_vm *vm);
 
 /*
 	****************************** Utilites *************************************
