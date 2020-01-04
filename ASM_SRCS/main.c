@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/28 16:57:12 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:05:51 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int				main(int ac, char **av)
 	parse(data);
 	close(data->rfd);
 	check_syntax(data->parts);
+	print_parts(data->parts);
+	print_labels(data->labels);
 	create_cor(data);
 	close(data->wfd);
 	free_data(data);

@@ -6,11 +6,29 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:34:48 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 21:35:33 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:53:18 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/dsm.h"
+
+void		print_bits(unsigned char octet)
+{
+	int z;
+	int	oct;
+
+	oct = octet;
+	z = 128;
+	while (z > 0)
+	{
+		if (oct & z)
+			write(1, "1", 1);
+		else
+			write(1, "0", 1);
+		z >>= 1;
+	}
+	write(1, "\n", 1);
+}
 
 /*
 **	@desc	- function finds out what type of arguments are coming
@@ -31,6 +49,8 @@ int			find_args(t_op *curr, int enc_byte, int arg_amnt, int op)
 	i = 0;
 	size = 0;
 	curr->args = (char**)ft_memalloc(sizeof(char*) * arg_amnt + 1);
+	print_bits(enc_byte);
+	ft_putnbr(enc_byte & 192);
 	while (i < arg_amnt)
 	{
 		//parse the encoding byte curr->args[i] would be

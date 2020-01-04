@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/30 19:51:11 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 16:04:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct s_label	t_label;
 typedef struct s_parts	t_parts;
 
 enum					e_arg {
-	DIR = -2,
-	REG = -5,
-	IND = -6,
+	DIR = -1,
+	REG = -2,
+	IND = -3,
 };
 
 enum					e_oper {

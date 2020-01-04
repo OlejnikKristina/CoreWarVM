@@ -6,14 +6,14 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:35:54 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/30 20:08:46 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:15:59 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/dsm.h"
 
 /*
-**	@desc	- function converts binary to number
+**	@desc	- function converts binary to decimal
 **	@param	- unsigned char *s, the read binary
 **			- int size, amount of bytes
 **	@return	- int, returns the converted number

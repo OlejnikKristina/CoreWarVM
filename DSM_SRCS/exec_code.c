@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 19:39:31 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 21:35:31 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 15:47:30 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void		get_line(t_dsm *data, int op, int *size)
 	{
 		ret = read(data->rfd, &s, 1);
 		*size -= ret;
-		*size -= find_args(new, (s >> 2), arg_amnt(op), op);
+		*size -= find_args(new, s, arg_amnt(op), op);
 	}
 	else
 		*size -= find_args(new, 0, arg_amnt(op), op);
