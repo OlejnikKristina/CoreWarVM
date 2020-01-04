@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/02 21:38:07 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 17:44:29 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define LLDI		0x0e
 # define LFORK		0x0f
 # define NB_OPS		0x0f
+# define REG		-1
+# define DIR		-2
+# define IND		-3
 
 typedef struct s_dsm	t_dsm;
 typedef struct s_op		t_op;
@@ -71,6 +74,11 @@ int			convert(unsigned char *s, int size);
 **	exec_code.c
 */
 void		get_exec_code(t_dsm *data);
+
+/*
+**	main.c
+*/
+int			get_rfd(int rfd);
 
 /*
 **	parse.c

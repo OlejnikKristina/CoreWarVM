@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 19:39:31 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 15:47:30 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/04 17:48:39 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static char	*set_name(int op_code)
 	if (!names)
 	{
 		names = (char**)ft_memalloc(sizeof(char*) * 18);
-		names[0] = "wrong \0";
+		names[0] = "INVALID \0";
 		names[1] = "live \0";
 		names[2] = "ld \0";
 		names[3] = "st \0";
@@ -118,10 +118,11 @@ void		get_exec_code(t_dsm *data)
 		s = 0;
 		ret = read(data->rfd, &s, 1);
 		size -= ret;
+		if (!ret)
+			break ;
 		if (s < 1 || s > NB_OPS)
-			ft_printf("%#X is NOT\n", s);
-		else
-			get_line(data, s, &size);
+			error("Invalid operation", 0);
+		get_line(data, s, &size);
 	}
 	if (size)
 		error("Size of champion does not match", 0);
