@@ -6,15 +6,12 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 18:19:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 19:12:22 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 18:31:50 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/vm_arena.h"
 #include "includes/t_dir_sizes.h"
-
-//zork's exec code
-//0b 68 01 00 0f 00 01 06 64 01 00 00 00 00 01 01 00 00 00 01 09 ff fb
 
 /*
 **	Encoding byte

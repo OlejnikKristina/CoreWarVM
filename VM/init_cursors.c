@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:15:28 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 17:37:43 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	whats_hide_inside_cursors(t_vm *vm)
 		ft_printf("\nCursosr id: %d\n", cursor->id);
 		ft_printf("Player id: %d \n", cursor->reg[0][0]);
 		ft_printf("Player name: %s\n", player->name);
-		ft_printf("Cursor pos: %d\n", cursor->position);
+		ft_printf("Cursor pos: %d\n", cursor->pos);
 		ft_printf("Cursor opcode: %d\n", cursor->opcode);
 		ft_printf("Next instruction (pc): %d\n", cursor->pc);
 		cursor = cursor->next;
@@ -41,7 +41,7 @@ t_cursor	*init_cursor(int id, int pos, int opcode, int encoding_byte)
 	if (!(cursor = (t_cursor *)ft_memalloc(sizeof(t_cursor))))
 		return (NULL);
 	cursor->id = id;
-	cursor->position = pos;
+	cursor->pos = pos;
 	cursor->opcode = opcode;
 	cursor->pc = calculate_program_counter(opcode, encoding_byte);
 	cursor->reg[0][0] = id * -1;
@@ -70,6 +70,6 @@ bool		init_cursors(t_vm *vm)
 		id--;
 	}
 	current->next = NULL;
-	// whats_hide_inside_cursors(vm);
+	whats_hide_inside_cursors(vm);
 	return (true);
 }

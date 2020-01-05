@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:14:53 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 19:37:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "op.h"
 # include "ft_printf.h"
 
+# define OP_NBR 16
 /*
 	**	pc			program_counter
 */
@@ -32,7 +33,7 @@ struct				s_cursor
 	int				opcode;
 	short			last_live;
 	short			wait_cycles;
-	int				position;
+	int				pos;
 	int				pc;
 	int16_t			reg[REG_NUMBER][REG_SIZE];
 	t_cursor		*next;
@@ -70,8 +71,10 @@ typedef struct		s_vm
 {
 	int				current_cycle;
 	int				cycle_to_die;
+	int				nbr_lives;
 	int				process;
 	short			players_amnt;
+	int				last_alive;
 	t_player		**players;
 	uint8_t			arena[MEM_SIZE];
 	t_flags			*flag;
@@ -119,7 +122,7 @@ short players_order[MAX_PLAYERS], short num, short players_amnt);
 */
 
 bool				init_battlefield(t_vm *vm);
-int					calculate_program_counter(int opcode, int encod_byte);
+int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
 int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
@@ -132,6 +135,13 @@ bool				is_encoding_byte(uint8_t opcode);
 bool				init_cursors(t_vm *vm);
 
 /*
+	********************************* RUN GAME ************************************
+*/
+
+void				start_game(t_vm *vm);
+short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
 	****************************** Utilites *************************************
 */
 
@@ -139,6 +149,12 @@ t_player			*get_player_by_id(t_player **players, short player_id,
 					short player_amnt);
 bool				error_msg(unsigned short erro_num);
 void				introduce_champions(t_player **players, short player_amnt);
+void				init_op_encode_validation_arr(bool (*op_encode[17])(e_argctype *));
+bool				en_op_code_and_or_xor(e_argctype arg_type[3]);
+bool				en_op_code_ldi_lldi(e_argctype arg_type[3]);
+bool				en_op_code_ldi(e_argctype arg_type[3]);
+bool				en_op_code_aff(e_argctype arg_type[3]);
+bool				en_op_code_sti(e_argctype arg_type[3]);
 void				vm_free(t_vm **vm);
 
 /*
