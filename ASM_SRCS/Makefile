@@ -6,7 +6,7 @@
 #    By: abumbier <abumbier@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2019/12/30 19:51:31 by asulliva      ########   odam.nl          #
+#    Updated: 2020/01/05 17:16:48 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ write_cor_file encoding_byte write_size write_champ_byte write_dir
 
 CC		= gcc
 FLAGS	= -Wall -Werror -Wextra -g
-HEADER	= asm.h
+HEADER	= includes/asm.h
 LIBFTH	= ../LIBFT_SRCS/libft/
 LIB		= ../LIBFT_SRCS/libft.a
 OBJS	:= $(SRCS:%=%.o)

@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:15:46 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 16:04:36 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/05 17:00:37 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 # include <fcntl.h>
 # include <unistd.h>
-# include "../LIBFT_SRCS/libft/libft.h"
-# include "../op.h"
+# include "../../LIBFT_SRCS/libft/libft.h"
+# include "../../includes/op.h"
 
 typedef enum e_arg		t_arg;
 typedef enum e_oper		t_oper;
