@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 18:26:16 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/05 16:44:04 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int			convert(unsigned char *s, int size);
 **	exec_code.c
 */
 void		get_exec_code(t_dsm *data);
+
+/*
+**	free.c
+*/
+void		free_all(t_dsm *data);
 
 /*
 **	main.c

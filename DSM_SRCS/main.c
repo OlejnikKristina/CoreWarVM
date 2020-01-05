@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 15:31:38 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 19:07:21 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/05 16:43:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int				main(int ac, char **av)
 	parse(data);
 	close(data->rfd);
 	write_file(data);
+	free_all(data);
 	return (0);
 }
