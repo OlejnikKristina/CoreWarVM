@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 18:59:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 15:15:28 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	whats_hide_inside_cursors(t_vm *vm)
 	}
 }
 
-t_cursor	*init_cursor(int id, int pos, uint8_t opcode, uint8_t encoding_byte)
+t_cursor	*init_cursor(int id, int pos, int opcode, int encoding_byte)
 {
 	t_cursor	*cursor;
 
 	if (!(cursor = (t_cursor *)ft_memalloc(sizeof(t_cursor))))
 		return (NULL);
-	// ft_bzero(cursor->reg, sizeof(int16_t) * REG_NUMBER * REG_SIZE);
 	cursor->id = id;
 	cursor->position = pos;
 	cursor->opcode = opcode;
@@ -56,7 +55,9 @@ bool		init_cursors(t_vm *vm)
 	int			pos;
 
 	id = vm->players_amnt;
-	pos = MEM_SIZE - (MEM_SIZE / vm->players_amnt);
+	pos = MEM_SIZE - MEM_SIZE / vm->players_amnt;
+	if (MEM_SIZE % vm->players_amnt)
+		pos--;
 	vm->cursor = init_cursor(id, pos, vm->arena[pos], vm->arena[pos + 1]);
 	current = vm->cursor;
 	id--;
@@ -69,8 +70,6 @@ bool		init_cursors(t_vm *vm)
 		id--;
 	}
 	current->next = NULL;
-	// if (vm->flags->v)
-	// 	vs_init_cursor(vm->cursor);
-	whats_hide_inside_cursors(vm);
+	// whats_hide_inside_cursors(vm);
 	return (true);
 }

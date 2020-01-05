@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/29 14:13:56 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/29 16:46:53 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 12:56:49 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ short	add_bytes_to_pc(e_argctype arg_type, uint8_t opcode)
 **	Calculate and return amount of bytes to next instruction.
 */
 
-int		calculate_program_counter(uint8_t opcode, uint8_t encod_byte)
+int		calculate_program_counter(int opcode, int encod_byte)
 {
 	int			program_counter;
 	e_argctype	argc_type[3];

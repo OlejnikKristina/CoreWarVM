@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 16:11:18 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 15:44:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,20 +121,21 @@ WINDOW	*init_winfo(int	height, int width, int startx, int starty)
 
 bool	visual_corawar(t_vm *vm)
 {
-	WINDOW		*warena;
-	WINDOW		*winfo;
-
 	initscr();
+	// nodelay(stdscr, true);
 	init_pairs();
-	warena = init_arena(HEIGHT, WIDTH, OFFSETY, OFFSETX);
-	winfo = init_winfo(HEIGHT, (WIDTH) / 4 + 7, OFFSETY, WIDTH + 3);
-	display_arena(vm, warena);
-	display_info(vm, winfo);
+	vm->v = (t_visual *)ft_memalloc(sizeof(t_visual));
+	if (!vm)
+		return (false);
+	vm->v->warena = init_arena(HEIGHT, WIDTH, OFFSETY, OFFSETX);
+	vm->v->winfo = init_winfo(HEIGHT, (WIDTH) / 4 + 7, OFFSETY, WIDTH + 3);
+	display_arena(vm, vm->v->warena);
+	display_info(vm, vm->v->winfo);
+	// display_cursors(vm->v->warena, vm->cursor);
 	set_colors_to_players(vm->players, vm->players_amnt);
-	
 	getch();
-	delwin(warena);
-	delwin(winfo);
+	delwin(vm->v->warena);
+	delwin(vm->v->winfo);
 	endwin();
 	return (true);
 }

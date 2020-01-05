@@ -6,13 +6,14 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 18:19:30 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/05 15:14:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VM_ARENA_H
 # define VM_ARENA_H
 
+# include <ncurses.h>
 # include <fcntl.h>
 # include "op.h"
 # include "ft_printf.h"
@@ -55,6 +56,16 @@ typedef	struct		s_player
 	int				start_pos;
 }					t_player;
 
+typedef struct		s_visual
+{
+	WINDOW			*winfo;
+	WINDOW			*warena;
+}					t_visual;
+
+/*
+ ** v  --------------> visualsation
+*/
+
 typedef struct		s_vm
 {
 	int				current_cycle;
@@ -65,6 +76,7 @@ typedef struct		s_vm
 	uint8_t			arena[MEM_SIZE];
 	t_flags			*flag;
 	t_cursor		*cursor;
+	t_visual		*v;
 }					t_vm;
 
 typedef enum				e_argctype
@@ -107,7 +119,7 @@ short players_order[MAX_PLAYERS], short num, short players_amnt);
 */
 
 bool				init_battlefield(t_vm *vm);
-int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
+int					calculate_program_counter(int opcode, int encod_byte);
 int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
@@ -134,5 +146,6 @@ void				vm_free(t_vm **vm);
 */
 
 bool				visual_corawar();
+void				display_cursors(WINDOW *warena, t_cursor *cursor);;
 
 #endif
