@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:17:50 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/06 14:44:45 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:00:02 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@
 static t_asm	*init(int ac, char **av)
 {
 	t_asm	*data;
-	char	*temp;
+	// char	*temp;
 
 	data = (t_asm*)ft_memalloc(sizeof(t_asm));
 	data->parts = NULL;
 	data->labels = NULL;
 	data->lines = 0;
-	temp = ft_strrchr(av[ac - 1], '/');
-	data->char_name = (temp ? temp + 1 : av[ac - 1]);
+	// temp = ft_strrchr(av[ac - 1], '/');
+	// data->char_name = (temp ? temp + 1 : av[ac - 1]);
+	data->char_name = av[ac - 1];
 	data->rfd = open(av[ac - 1], O_RDONLY);
 	if (data->rfd < 3 || read(data->rfd, data->name, 0) < 0)
 		return (NULL);
