@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 19:54:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:16:42 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 short	execute_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
-	if (cursor)
+	if (cursor->opcode  && arena)
 		;
 	return (0);
 }
@@ -24,13 +24,7 @@ bool	check_opcode(uint8_t opcode)
 	return (1 <= opcode && opcode <= OP_NBR);
 }
 
-bool	check_register(uint8_t	opcode, uint8_t arena[MEM_SIZE])
-{
-	return (true);
-}
-
-bool	check_reg_encodbyte(uint8_t	opcode, uint8_t encoding_byte,
-		uint8_t arena[MEM_SIZE])
+bool	check_encodbyte(uint8_t	opcode, uint8_t encoding_byte)
 {
 	e_argctype	argc_type[3];
 	static bool	(*op_encode[17])(e_argctype *);
@@ -46,6 +40,25 @@ bool	check_reg_encodbyte(uint8_t	opcode, uint8_t encoding_byte,
 	return (true);
 }
 
+bool	check_reg(uint8_t opcode, uint8_t encoding_byte, uint8_t *arena)
+{
+	e_argctype	argc_type[3];
+	short		i;
+
+	i = 0;
+	if (is_encoding_byte(opcode))
+	{
+		decode_encoding_byte(encoding_byte, argc_type);
+		while (i < 3)
+		{
+			if (argc_type[i] == REG && !(1 <= arena[i] && arena[i] <= OP_NBR))
+				return (false);
+			i++;
+		}
+	}
+	return (true);
+}
+
 short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	if (cursor->wait_cycles == 0)
@@ -53,7 +66,8 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		if (check_opcode(cursor->opcode))
 			cursor->pos += 1;
 		else if (
-		check_reg_encodbyte(cursor->opcode, arena[cursor->pos + 1], arena))
+		check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
+		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
 			execute_operation(cursor, arena);
 		else
 		{

@@ -6,11 +6,11 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 16:50:58 by asulliva       #+#    #+#                */
-/*   Updated: 2019/12/27 17:27:55 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:15:42 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/vm_arena.h"
+#include "vm_arena.h"
 
 void	print_reg(uint8_t *reg)
 {

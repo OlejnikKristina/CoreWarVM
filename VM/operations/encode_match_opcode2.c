@@ -6,11 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 19:29:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 19:29:36 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:14:48 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/vm_arena.h"
+#include "vm_arena.h"
 
 bool	en_op_code_sti(e_argctype arg_type[3])
 {

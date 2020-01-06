@@ -6,12 +6,12 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 18:19:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 18:31:50 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:18:04 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/vm_arena.h"
-#include "includes/t_dir_sizes.h"
+#include "vm_arena.h"
+#include "operations.h"
 
 /*
 **	Encoding byte

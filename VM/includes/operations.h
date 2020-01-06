@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   t_dir_sizes.h                                      :+:    :+:            */
+/*   operations.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 15:40:03 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 16:39:27 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:17:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_DIR_SIZE_H
-# define T_DIR_SIZE_H
+#ifndef OPERATIONS_H
+# define OPERATIONS_H
 
 /* Ops with size T_DIR 4 bytes */
 

@@ -6,7 +6,7 @@
 #    By: krioliin <krioliin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/05 19:30:24 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/06 15:15:13 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,13 @@ HEADER		= -I./ft_printf/includes -I includes/
 NAME		= corewar
 
 SRC			= main.c parse_argc.c parse_flags.c \
-			get_champions_argc.c init_players.c vm_free.c \
-			utilities/error_msg.c parse_champion.c cursor.c \
+			get_champions_argc.c init_players.c utilities/vm_free.c \
+			utilities/error_msg.c parse_champion.c utilities/cursor.c \
 			utilities/introduction.c get_player_exec_code.c \
 			decode_encoding_byte.c calculate_program_counter.c \
 			init_battlefield.c init_cursors.c start_game.c \
-			execute_cursor.c encode_match_opcode.c encode_match_opcode2.c
+			execute_cursor.c operations/encode_match_opcode.c \
+			operations/encode_match_opcode2.c
 
 VISUAL		= visual/corewar_visual.c visual/set_colors_to_players.c \
 			utilities/get_player_by_id.c visual/display_info.c \

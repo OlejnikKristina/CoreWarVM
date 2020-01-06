@@ -6,11 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:27:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:16:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:14:38 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/vm_arena.h"
+#include "vm_arena.h"
 
 void	cursors_free(t_cursor *cursor)
 {
