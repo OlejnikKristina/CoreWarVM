@@ -6,11 +6,20 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:27:33 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 18:43:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 15:14:38 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/vm_arena.h"
+#include "vm_arena.h"
+
+void	cursors_free(t_cursor *cursor)
+{
+	if (cursor)
+	{
+		cursors_free(cursor->next);
+		ft_memdel((void **)&cursor);
+	}
+}
 
 void	players_free(t_vm **vm)
 {
@@ -39,6 +48,7 @@ void	vm_free(t_vm **vm)
 	if (*vm)
 	{
 		players_free(vm);
+		cursors_free((*vm)->cursor);
 		if ((*vm)->flag)
 		{
 			ft_bzero((void *)(*vm)->flag, sizeof((*vm)->flag));

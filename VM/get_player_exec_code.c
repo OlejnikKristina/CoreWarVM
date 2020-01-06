@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 13:55:34 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/04 17:26:42 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ bool	get_player_exec_code(t_player *player, const int fd)
 	read_byte = read(fd, player->code, player->code_size);
 	if (read_byte < player->code_size)
 		return (false);
-	while (i < player->code_size)
-	{
-		ft_printf("[%x] ", player->code[i]);
-		i++;
-	}
-	ft_printf("\n");
+	// while (i < player->code_size)
+	// {
+	// 	ft_printf("[%x] ", player->code[i]);
+	// 	i++;
+	// }
+	// ft_printf("\n");
 	if (!check_player_exec_code(player->code, player->code_size))
 		return (false);
 	return (true);

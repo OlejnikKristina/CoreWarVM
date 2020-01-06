@@ -6,12 +6,16 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/29 14:13:56 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/06 14:36:59 by asulliva      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/06 15:19:01 by krioliin      ########   odam.nl         */
+>>>>>>> kristina
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/vm_arena.h"
-#include "includes/t_dir_sizes.h"
+#include "vm_arena.h"
+#include "operations.h"
 
 /* Returns a t_dir size according to opcode */
 
