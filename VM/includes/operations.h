@@ -6,12 +6,17 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 15:40:03 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 15:17:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 17:05:48 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
+
+#include "vm_arena.h"
+
+typedef struct s_vm t_vm;
+typedef struct s_cursor	t_cursor;
 
 /* Ops with size T_DIR 4 bytes */
 
@@ -34,5 +39,22 @@
 #define FORK 0x0c
 #define LLDI 0x0e
 #define LFORK 0x0f
+
+bool		op_live(t_cursor *cursor, t_vm *vm);
+bool		op_add(t_cursor *cursor, t_vm *vm);
+bool		op_aff(t_cursor *cursor, t_vm *vm);
+bool		op_and(t_cursor *cursor, t_vm *vm);
+bool		op_fork(t_cursor *cursor, t_vm *vm);
+bool		op_lfork(t_cursor *cursor, t_vm *vm);
+bool		op_st(t_cursor *cursor, t_vm *vm);
+bool		op_sti(t_cursor *cursor, t_vm *vm);
+bool		op_ld(t_cursor *cursor, t_vm *vm);
+bool		op_ldi(t_cursor *cursor, t_vm *vm);
+bool		op_lld(t_cursor *cursor, t_vm *vm);
+bool		op_lldi(t_cursor *cursor, t_vm *vm);
+bool		op_or(t_cursor *cursor, t_vm *vm);
+bool		op_xor(t_cursor *cursor, t_vm *vm);
+bool		op_sub(t_cursor *cursor, t_vm *vm);
+bool		op_zjmp(t_cursor *cursor, t_vm *vm);
 
 #endif

@@ -6,18 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 15:16:42 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 16:51:15 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vm_arena.h"
-
-short	execute_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
-{
-	if (cursor->opcode  && arena)
-		;
-	return (0);
-}
 
 bool	check_opcode(uint8_t opcode)
 {
@@ -59,16 +52,16 @@ bool	check_reg(uint8_t opcode, uint8_t encoding_byte, uint8_t *arena)
 	return (true);
 }
 
-short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
 	if (cursor->wait_cycles == 0)
 	{
-		if (check_opcode(cursor->opcode))
+		if (!check_opcode(cursor->opcode))
 			cursor->pos += 1;
 		else if (
 		check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
 		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
-			execute_operation(cursor, arena);
+			execute_operation(cursor, vm);
 		else
 		{
 			cursor->pos += cursor->pc;

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 19:37:56 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 17:14:04 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include "op.h"
 # include "ft_printf.h"
+# include "operations.h"
 
 # define OP_NBR 16
 /*
@@ -122,24 +123,19 @@ short players_order[MAX_PLAYERS], short num, short players_amnt);
 */
 
 bool				init_battlefield(t_vm *vm);
+bool				init_cursors(t_vm *vm);
 int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
 int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
-
-
-/*
-	********************************* Cursors ************************************
-*/
-
-bool				init_cursors(t_vm *vm);
 
 /*
 	********************************* RUN GAME ************************************
 */
 
 void				start_game(t_vm *vm);
-short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm);
+short				execute_operation(t_cursor *cursor, t_vm *vm);
 
 /*
 	****************************** Utilites *************************************

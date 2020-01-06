@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 19:34:47 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 17:18:07 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	execute_one_cycle(t_vm *vm)
 	cursor = vm->cursor;
 	while (cursor)
 	{
-		execute_cursor(cursor, vm->arena);
+		execute_cursor(cursor, vm->arena, vm);
 		cursor = cursor->next;
 	}
 	return (true);
@@ -82,7 +82,7 @@ bool	up_to_cycle_to_die(t_vm *vm)
 		vm->current_cycle = 0;
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
-			// execute_one_cycle(vm);
+			execute_one_cycle(vm);
 			vm->current_cycle += 1;
 		}
 		someone_alive = check(vm);
