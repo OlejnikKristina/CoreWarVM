@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 13:59:58 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/02 21:31:36 by asulliva      ########   odam.nl         */
+/*   Updated: 2019/12/24 13:00:09 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ bool	parse_error(void)
 			ft_strdel(&line);
 	}
 	close(fd);
-	exit(1);
 	return (true);
 }
 
