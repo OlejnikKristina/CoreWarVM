@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 19:53:03 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:17:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,7 @@ bool				is_encoding_byte(uint8_t opcode);
 bool				start_game(t_vm *vm);
 short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm);
 short				execute_operation(t_cursor *cursor, t_vm *vm);
-bool				show_arena(uint8_t arena[MEM_SIZE], t_player **players,
-					short pl_amnt, t_vm *vm);
+bool				show_arena(t_player **players, short pl_amnt, t_vm *vm);
 
 /*
 	****************************** Utilites *************************************
@@ -154,6 +153,7 @@ bool				en_op_code_ldi(e_argctype arg_type[3]);
 bool				en_op_code_aff(e_argctype arg_type[3]);
 bool				en_op_code_sti(e_argctype arg_type[3]);
 void				vm_free(t_vm **vm);
+short				get_dir_size(uint8_t opcode);
 
 /*
 	****************************** Visualisation *******************************
