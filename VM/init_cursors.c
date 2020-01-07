@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 16:09:50 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:53:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ bool		init_cursors(t_vm *vm)
 	int			pos;
 
 	id = vm->players_amnt;
+	vm->process = vm->players_amnt;
 	pos = MEM_SIZE - MEM_SIZE / vm->players_amnt;
 	if (MEM_SIZE % vm->players_amnt)
 		pos--;
