@@ -11,8 +11,8 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 		if (args[0] == IND && args[1] == IND && args[2] == REG)
 		{
 			cursor->reg[vm->arena[cursor->pos + 6] - 1] =
-			convert(&vm->arena[cursor->pos + 3], 2) &
-			convert(&vm->arena[cursor->pos + 5], 2);
+			convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD &
+			convert(&vm->arena[cursor->pos + 5], 2) % IDX_MOD;
 			cursor->carry = (cursor->reg[vm->arena[cursor->pos + 6] - 1] == 0 ? 1 : 0);
 		}
 		if (args[0] == DIR && args[1] == DIR && args[2] == REG)
@@ -32,7 +32,7 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 		if (args[0] == IND && args[1] == REG && args[2] == REG)
 		{
 			cursor->reg[vm->arena[cursor->pos + 5] - 1] =
-			convert(&vm->arena[cursor->pos + 3], 2) &
+			convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD &
 			cursor->reg[vm->arena[cursor->pos + 4] - 1]; 
 			cursor->carry = (cursor->reg[vm->arena[cursor->pos + 5] - 1] == 0 ? 1 : 0);
 		}
@@ -40,13 +40,13 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 		{
 			cursor->reg[vm->arena[cursor->pos + 5] - 1] = 
 			cursor->reg[vm->arena[cursor->pos + 2] - 1] &
-			convert(&vm->arena[cursor->pos + 4], 2);
+			convert(&vm->arena[cursor->pos + 4], 2) % IDX_MOD;
 			cursor->carry = (cursor->reg[vm->arena[cursor->pos + 5] - 1] == 0 ? 1 : 0);
 		}
 		if (args[0] == IND && args[1] == DIR && args[2] == REG)
 		{
 			cursor->reg[vm->arena[cursor->pos + 8] - 1] =
-			convert(&vm->arena[cursor->pos + 2], 2) &
+			convert(&vm->arena[cursor->pos + 2], 2) % IDX_MOD &
 			vm->arena[cursor->pos + convert(&vm->arena[cursor->pos + 4], 4)];
 			cursor->carry = (cursor->reg[vm->arena[cursor->pos + 7] - 1] == 0 ? 1 : 0);
 		}
@@ -54,7 +54,7 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 		{
 			cursor->reg[vm->arena[cursor->pos + 8] - 1] = 
 			vm->arena[cursor->pos + convert(&vm->arena[cursor->pos + 2], 4)] &
-			convert(&vm->arena[cursor->pos + 5], 2);
+			convert(&vm->arena[cursor->pos + 5], 2) % IDX_MOD;
 			cursor->carry = (cursor->reg[vm->arena[cursor->pos + 8] - 1] == 0 ? 1 : 0);
 		}
 		if (args[0] == DIR && args[1] == REG && args[2] == REG)
