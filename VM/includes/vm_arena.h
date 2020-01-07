@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 18:04:35 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 18:26:32 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ bool				en_op_code_aff(e_argctype arg_type[3]);
 bool				en_op_code_sti(e_argctype arg_type[3]);
 void				vm_free(t_vm **vm);
 short				get_dir_size(uint8_t opcode);
+int					convert(unsigned char *s, int size);
 
 /*
 	****************************** Visualisation *******************************
