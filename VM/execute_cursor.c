@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 17:28:50 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/07 17:29:53 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
 	if (cursor->wait_cycles == 0)
 	{
-		ft_printf("before %d\n", cursor->pos);
 		if (!check_opcode(cursor->opcode))
 		{
 			cursor->pos += 1;
