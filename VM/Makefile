@@ -3,14 +3,10 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: krioliin <krioliin@student.codam.nl>         +#+                      #
+#    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-<<<<<<< HEAD
-#    Updated: 2020/01/07 16:24:39 by asulliva      ########   odam.nl          #
-=======
-#    Updated: 2020/01/06 19:30:51 by krioliin      ########   odam.nl          #
->>>>>>> kristina
+#    Created: 2020/01/07 17:28:46 by asulliva       #+#    #+#                 #
+#    Updated: 2020/01/07 17:28:48 by asulliva      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
