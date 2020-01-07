@@ -10,7 +10,7 @@ bool		op_ld(t_cursor *cursor, t_vm *vm)
 	{
 		if (args[0] == IND && args[1] == REG)
 		{
-			cursor->reg[vm->arena[cursor->pos + 4] - 1] = (vm->arena[cursor->pos + 3] % IDX_MOD);
+			cursor->reg[vm->arena[cursor->pos + 4] - 1] = (convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD);
 			ft_printf("loaded %d into r%d = %d\n", vm->arena[cursor->pos + 3], vm->arena[cursor->pos + 4],
 			cursor->reg[vm->arena[cursor->pos + 4] - 1]);
 		}
