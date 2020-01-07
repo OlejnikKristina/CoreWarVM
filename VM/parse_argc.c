@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 13:59:58 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/24 13:00:09 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/06 19:55:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ bool	args_validation(int argc, char **params, t_flags *flags)
 
 	num = 1;
 	ft_bzero(flags, sizeof(t_flags *));
-	flags->dump = -4242;
+	flags->dump = 0;
 	if (argc < 2)
 		return (false);
 	while (num < argc)

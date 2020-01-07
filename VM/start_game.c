@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 17:18:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:26:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ bool		check(t_vm *vm)
 	else
 		checks_in_row++;
 	vm->process -= bury_dead_cursors(&(vm->cursor));
-	if (vm->process <= 0)
-		return (false);
-	return (true);
+	return (0 < vm->process);
 }
 
 bool	execute_one_cycle(t_vm *vm)
@@ -74,7 +72,8 @@ bool	execute_one_cycle(t_vm *vm)
 
 bool	up_to_cycle_to_die(t_vm *vm)
 {
-	bool	someone_alive;
+	bool		someone_alive;
+	static int	cycle_counter;
 
 	someone_alive = true;
 	while (someone_alive)
@@ -83,16 +82,20 @@ bool	up_to_cycle_to_die(t_vm *vm)
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
 			execute_one_cycle(vm);
+			cycle_counter++;
 			vm->current_cycle += 1;
+			if (vm->flag->dump == cycle_counter)
+				return (show_arena(vm->players, vm->players_amnt, vm));
 		}
 		someone_alive = check(vm);
 	}
 	return (true);
 }
 
-void	start_game(t_vm *vm)
+bool	start_game(t_vm *vm)
 {
 	up_to_cycle_to_die(vm);
-	ft_printf("The winner is player #%d!!!\n",
-	vm->last_alive, get_player_by_id(vm->players, vm->last_alive, vm->players_amnt));
+	ft_printf("The winner is player #%d!!!\n", vm->last_alive,
+	get_player_by_id(vm->players, vm->last_alive, vm->players_amnt));
+	return (true);
 }
