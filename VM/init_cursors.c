@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 17:37:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 19:15:03 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	whats_hide_inside_cursors(t_vm *vm)
 	cursor = vm->cursor;
 	while (cursor)
 	{
-		player = get_player_by_id(vm->players, cursor->reg[0][0] * -1,
+		player = get_player_by_id(vm->players, cursor->reg[0] * -1,
 				vm->players_amnt);
 		if (!player)
 			return ;
 		ft_printf("\nCursosr id: %d\n", cursor->id);
-		ft_printf("Player id: %d \n", cursor->reg[0][0]);
+		ft_printf("Player id: %d \n", cursor->reg[0]);
 		ft_printf("Player name: %s\n", player->name);
 		ft_printf("Cursor pos: %d\n", cursor->pos);
 		ft_printf("Cursor opcode: %d\n", cursor->opcode);
@@ -44,7 +44,7 @@ t_cursor	*init_cursor(int id, int pos, int opcode, int encoding_byte)
 	cursor->pos = pos;
 	cursor->opcode = opcode;
 	cursor->pc = calculate_program_counter(opcode, encoding_byte);
-	cursor->reg[0][0] = id * -1;
+	cursor->reg[0] = id * -1;
 	return (cursor);
 }
 
@@ -70,6 +70,6 @@ bool		init_cursors(t_vm *vm)
 		id--;
 	}
 	current->next = NULL;
-	whats_hide_inside_cursors(vm);
+	// whats_hide_inside_cursors(vm);
 	return (true);
 }

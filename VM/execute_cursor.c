@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 16:51:15 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 20:01:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 	if (cursor->wait_cycles == 0)
 	{
 		if (!check_opcode(cursor->opcode))
+		{
 			cursor->pos += 1;
+			return (0);
+		}
 		else if (
 		check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
 		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
 			execute_operation(cursor, vm);
-		else
-		{
-			cursor->pos += cursor->pc;
-			cursor->pc =
-			calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
-		}
+		cursor->pos += cursor->pc;
 		cursor->opcode = arena[cursor->pos];
+		cursor->pc =
+		calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
 	}
 	else
 		cursor->wait_cycles -= 1;

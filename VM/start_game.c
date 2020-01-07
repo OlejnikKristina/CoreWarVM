@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 17:18:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/06 20:04:54 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ bool	up_to_cycle_to_die(t_vm *vm)
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
 			execute_one_cycle(vm);
+			show_arena(vm->arena, vm->players, vm->players_amnt, vm);
 			vm->current_cycle += 1;
 		}
 		someone_alive = check(vm);
@@ -90,9 +91,11 @@ bool	up_to_cycle_to_die(t_vm *vm)
 	return (true);
 }
 
-void	start_game(t_vm *vm)
+bool	start_game(t_vm *vm)
 {
 	up_to_cycle_to_die(vm);
+	show_arena(vm->arena, vm->players, vm->players_amnt, vm);
 	ft_printf("The winner is player #%d!!!\n",
 	vm->last_alive, get_player_by_id(vm->players, vm->last_alive, vm->players_amnt));
+	return (true);
 }
