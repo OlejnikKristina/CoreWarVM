@@ -6,11 +6,17 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:50:33 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 17:00:36 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
+
+void	init_vm(t_vm *vm)
+{
+	vm->process = vm->players_amnt;
+	vm->cycle_to_die = CYCLE_TO_DIE;
+}
 
 int		main(int argc, char **argv)
 {
@@ -22,12 +28,16 @@ int		main(int argc, char **argv)
 		return (0);
 	if (!args_validation(argc, argv, vm->flag))
 		parse_error();
-	if (!init_players(vm))
+	else if (!init_players(vm))
 		ft_printf("Can't init players\n");
-	if (!init_battlefield(vm))
-		ft_printf("Error battlefield\n");
-	if (!init_cursors(vm))
-		ft_printf("Error battlefield\n");
+	else if (!init_battlefield(vm))
+	{
+		vm_free(&vm);
+		return (0);
+	}
+	else if (!init_cursors(vm))
+		ft_printf("Error in cursor init\n");
+	init_vm(vm);
 	start_game(vm);
 	if (vm->flag->v)
 		visual_corawar(vm);

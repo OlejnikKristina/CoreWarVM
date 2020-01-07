@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:39:23 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/06 19:55:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 	i = 0;
 	if (!ft_strcmp((const char *)params[*param_num], "-dump"))
 	{
-		if ((*param_num == argc - 1 || flags->dump != -4242))
+		if ((*param_num == argc - 1 || flags->dump))
 			return (-1);
 		else
 		{

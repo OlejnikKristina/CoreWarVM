@@ -6,7 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/07 16:56:19 by asulliva      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/07 16:47:45 by krioliin      ########   odam.nl         */
+>>>>>>> kristina
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +70,24 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 	{
 		ft_printf("before %d\n", cursor->pos);
 		if (!check_opcode(cursor->opcode))
+		{
 			cursor->pos += 1;
+			return (0);
+		}
 		else if (
 		check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
 		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
 		execute_operation(cursor, vm);
 		cursor->pos += cursor->pc;
+		cursor->opcode = arena[cursor->pos];
 		cursor->pc =
 		calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
+<<<<<<< HEAD
 		cursor->opcode = arena[cursor->pos];
 		ft_printf("after %d\n", cursor->pos);
+=======
+		// cursor->wait_cycles = get_waite_cycle();
+>>>>>>> kristina
 	}
 	else
 		cursor->wait_cycles -= 1;
