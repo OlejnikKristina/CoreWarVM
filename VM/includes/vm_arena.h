@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 17:14:04 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 15:55:13 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct				s_cursor
 	short			wait_cycles;
 	int				pos;
 	int				pc;
-	int16_t			reg[REG_NUMBER][REG_SIZE];
+	int16_t			reg[REG_NUMBER];
 	t_cursor		*next;
 };
 
@@ -152,6 +152,7 @@ bool				en_op_code_ldi(e_argctype arg_type[3]);
 bool				en_op_code_aff(e_argctype arg_type[3]);
 bool				en_op_code_sti(e_argctype arg_type[3]);
 void				vm_free(t_vm **vm);
+short				get_dir_size(uint8_t opcode);
 
 /*
 	****************************** Visualisation *******************************

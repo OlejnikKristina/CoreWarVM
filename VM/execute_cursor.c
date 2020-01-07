@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 16:51:15 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 15:56:35 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,23 @@ bool	check_reg(uint8_t opcode, uint8_t encoding_byte, uint8_t *arena)
 {
 	e_argctype	argc_type[3];
 	short		i;
+	short		j;
 
 	i = 0;
+	j = 0;
 	if (is_encoding_byte(opcode))
 	{
 		decode_encoding_byte(encoding_byte, argc_type);
 		while (i < 3)
 		{
-			if (argc_type[i] == REG && !(1 <= arena[i] && arena[i] <= OP_NBR))
+			if (argc_type[i] == REG && !(1 <= arena[j] && arena[j] <= OP_NBR))
 				return (false);
+			if (argc_type[i] == REG)
+				j++;
+			else if (argc_type[i] == IND)
+				j += 2;
+			else if (argc_type[i] == DIR)
+				j += get_dir_size(opcode);			
 			i++;
 		}
 	}
