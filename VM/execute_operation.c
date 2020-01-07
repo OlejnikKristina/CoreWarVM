@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 15:19:29 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 15:44:52 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:56:53 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 short	execute_operation(t_cursor *cursor, t_vm *vm)
 {
-	ft_putendl("fucntio");
 	if (
 	(cursor->opcode == LIVE && op_live(cursor, vm)) ||
 	(cursor->opcode == LD && op_ld(cursor, vm)) ||

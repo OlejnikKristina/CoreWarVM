@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 16:26:39 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 18:52:01 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ bool	up_to_cycle_to_die(t_vm *vm)
 
 bool	start_game(t_vm *vm)
 {
+	t_player *the_champion;
+
 	up_to_cycle_to_die(vm);
-	ft_printf("The winner is player #%d!!!\n", vm->last_alive,
-	get_player_by_id(vm->players, vm->last_alive, vm->players_amnt));
+	the_champion = get_player_by_id(vm->players, vm->last_alive * -1, vm->players_amnt);
+	ft_printf("The winner is player #%d %s!!!\n", vm->last_alive * -1, the_champion);
 	return (true);
 }

@@ -7,9 +7,10 @@ bool		op_live(t_cursor *cursor, t_vm *vm)
 
 	val = convert(&vm->arena[cursor->pos + 1], 4);
 	ft_printf("val %d reg[0] %d\n", val, cursor->reg[0]);
+	val *= -1;
 	if (cursor && vm)
 	{
-		if (val == cursor->reg[0])
+		if (val == cursor->reg[0] * -1)
 		{
 			cursor->last_live = vm->current_cycle;
 			vm->nbr_lives++;

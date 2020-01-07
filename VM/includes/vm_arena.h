@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 18:26:32 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 18:48:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ bool				start_game(t_vm *vm);
 short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm);
 short				execute_operation(t_cursor *cursor, t_vm *vm);
 bool				show_arena(t_player **players, short pl_amnt, t_vm *vm);
+int					get_waite_cycle(uint8_t opcode);
 
 /*
 	****************************** Utilites *************************************

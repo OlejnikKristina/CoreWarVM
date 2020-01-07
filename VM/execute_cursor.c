@@ -6,11 +6,34 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 18:06:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/07 19:12:10 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vm_arena.h"
+
+int		get_waite_cycle(uint8_t opcode)
+{
+	if (opcode == LIVE || opcode == ADD || opcode == SUB || opcode == LLD)
+		return (10);
+	if (opcode == LD || opcode == ST)
+		return (5);
+	if (opcode == AND || opcode == OR || opcode == XOR)
+		return (6);
+	if (opcode == ZJMP)
+		return (20);
+	if (opcode == LDI || opcode == STI)
+		return (25);
+	if (opcode == FORK)
+		return (800);
+	if (opcode == LLDI)
+		return (50);
+	if (opcode == LFORK)
+		return (1000);
+	if (opcode == AFF)
+		return (2);
+	return (0);
+}
 
 bool	check_opcode(uint8_t opcode)
 {
@@ -60,11 +83,6 @@ bool	check_reg(uint8_t opcode, uint8_t encoding_byte, uint8_t *arena)
 	return (true);
 }
 
-// int		get_waite_cycle()
-// {
-// 	return ();
-// }
-
 short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
 	if (cursor->wait_cycles == 0)
@@ -79,10 +97,12 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
 			execute_operation(cursor, vm);
 		cursor->pos += cursor->pc;
+		while (MEM_SIZE <= cursor->pos)
+			cursor->pos %= MEM_SIZE;
 		cursor->opcode = arena[cursor->pos];
 		cursor->pc =
 		calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
-		// cursor->wait_cycles = get_waite_cycle();
+		// cursor->wait_cycles = get_waite_cycle(cursor->opcode);
 	}
 	else
 		cursor->wait_cycles -= 1;
