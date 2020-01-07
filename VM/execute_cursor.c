@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 16:31:33 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/07 16:56:19 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
 	if (cursor->wait_cycles == 0)
 	{
+		ft_printf("before %d\n", cursor->pos);
 		if (!check_opcode(cursor->opcode))
 			cursor->pos += 1;
 		else if (
@@ -74,6 +75,7 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 		cursor->pc =
 		calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
 		cursor->opcode = arena[cursor->pos];
+		ft_printf("after %d\n", cursor->pos);
 	}
 	else
 		cursor->wait_cycles -= 1;
