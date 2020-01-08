@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:22:15 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 13:30:54 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 13:33:40 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool		op_ld(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
 	int			reg_num;
-	int			reg_val;
 
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	if (cursor && vm)
