@@ -19,8 +19,9 @@ bool		op_st(t_cursor *cursor, t_vm *vm)
 		else if (args[0] == REG && args[1] == IND)
 		{
 			cursor->reg[vm->arena[cursor->pos + 2] - 1] = 
-			convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD;
-			ft_printf("ST %d into r%d:%d\n", convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD,
+			vm->arena[(cursor->pos + convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD) % MEM_SIZE];
+			ft_printf("ST %d into r%d:%d\n", vm->arena[(cursor->pos +
+			convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD) % MEM_SIZE],
 			vm->arena[cursor->pos + 2], cursor->reg[vm->arena[cursor->pos + 2] - 1]);
 		}
 		return (true);
