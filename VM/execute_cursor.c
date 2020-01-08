@@ -6,7 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/08 18:01:51 by krioliin      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/08 15:43:24 by krioliin      ########   odam.nl         */
+>>>>>>> aidan
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +99,28 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 		else if (
 		check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
 		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
+<<<<<<< HEAD
 			execute_operation(cursor, vm);
 		cursor->pos += cursor->pc;
 		while (MEM_SIZE <= cursor->pos)
 			cursor->pos %= MEM_SIZE;
 		if (!(cursor->opcode == ZJMP && cursor->carry))
 		{
+=======
+		execute_operation(cursor, vm);
+		if (cursor->opcode != ZJMP && !cursor->carry)
+		{
+			cursor->pos += cursor->pc;
+>>>>>>> aidan
 			cursor->opcode = arena[cursor->pos];
 			cursor->pc =
 			calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
 		}
+<<<<<<< HEAD
 		// cursor->wait_cycles = get_waite_cycle(cursor->opcode);
+=======
+		// cursor->wait_cycles = get_waite_cycle();
+>>>>>>> aidan
 	}
 	else
 		cursor->wait_cycles -= 1;

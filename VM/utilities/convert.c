@@ -6,7 +6,11 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:35:54 by asulliva       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/08 15:41:43 by krioliin      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/07 16:25:24 by asulliva      ########   odam.nl         */
+>>>>>>> aidan
 /*                                                                            */
 /* ************************************************************************** */
 

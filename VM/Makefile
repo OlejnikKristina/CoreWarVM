@@ -5,8 +5,13 @@
 #                                                      +:+                     #
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
+<<<<<<< HEAD
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
 #    Updated: 2020/01/07 18:30:13 by krioliin      ########   odam.nl          #
+=======
+#    Created: 2020/01/07 17:28:46 by asulliva       #+#    #+#                 #
+#    Updated: 2020/01/07 17:28:48 by asulliva      ########   odam.nl          #
+>>>>>>> aidan
 #                                                                              #
 # **************************************************************************** #
 
