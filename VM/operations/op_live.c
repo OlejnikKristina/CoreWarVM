@@ -6,8 +6,6 @@ bool		op_live(t_cursor *cursor, t_vm *vm)
 	int		val;
 
 	val = convert(&vm->arena[cursor->pos + 1], 4);
-	ft_printf("val %d\tconvert %d\n", val, convert(&vm->arena[cursor->pos + 1], 4));
-	val = convert((unsigned char*)&val, 4);
 	if (cursor && vm)
 	{
 		if (val == cursor->reg[0])

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 17:36:54 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 17:31:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 16:30:27 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	introduce_champions(t_player **players, short player_amnt)
 	{
 		if (players[i]->id == player_id)
 		{
-			// introduce_champion(players[i]);
+			introduce_champion(players[i]);
 			player_id++;
 			i = -1;
 		}
