@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 18:19:50 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 16:28:50 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 20:13:45 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,10 @@ bool	get_player_exec_code(t_player *player, const int fd)
 		return (false);
 	if (!check_player_exec_code(player->code, player->code_size))
 		return (false);
+	// while (i < player->code_size)
+	// {
+	// 	ft_printf("[%.2x] ", player->code[i]);
+	// 	i++;
+	// }
 	return (true);
 }
