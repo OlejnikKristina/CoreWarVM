@@ -6,15 +6,15 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:14:42 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 15:09:31 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_VISUAL_H
 # define COREWAR_VISUAL_H
 
-# define HEIGHT 66 + 8
-# define WIDTH 194 + 4
+# define HEIGHT (66 + 8)
+# define WIDTH (194 + 4)
 # define OFFSETX 3
 # define OFFSETY 5
 

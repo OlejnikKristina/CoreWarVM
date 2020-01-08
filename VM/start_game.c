@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 18:52:01 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 15:31:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ int		bury_dead_cursors(t_cursor **head)
 	t_cursor	*cursor;
 	t_cursor	*prev;
 
-	if (!(*head) || ((*head)->last_live == 0))
+	if (!head || (*head)->last_live == 0)
 	{
-		ft_memdel((void **)head);;
+		ft_memdel((void **)head);
 		ft_printf("%{RED}ALL PLAYERS DEAD\n%{RESET}");
 		return (100);
 	}
+	(*head)->last_live = 0;
 	corpse_counter = 0;
 	prev = *head;
 	cursor = (*head)->next;
@@ -35,6 +36,7 @@ int		bury_dead_cursors(t_cursor **head)
 			ft_memdel((void **)&cursor);
 			corpse_counter++;
 		}
+		cursor->last_live = 0;
 		cursor = cursor->next;
 		prev = cursor;
 	}
@@ -45,15 +47,14 @@ bool		check(t_vm *vm)
 {
 	static int checks_in_row;
 
+	checks_in_row++;
 	if (NBR_LIVE <= vm->nbr_lives || MAX_CHECKS <= checks_in_row)
 	{
 		vm->cycle_to_die -= CYCLE_DELTA;
-		vm->nbr_lives = 0;
 		checks_in_row = 0;
 	}
-	else
-		checks_in_row++;
-	vm->process -= bury_dead_cursors(&(vm->cursor));
+	vm->nbr_lives = 0;
+	vm->process -= bury_dead_cursors(&vm->cursor);
 	return (0 < vm->process);
 }
 
@@ -86,6 +87,8 @@ bool	up_to_cycle_to_die(t_vm *vm)
 			vm->current_cycle += 1;
 			if (vm->flag->dump == cycle_counter)
 				return (show_arena(vm->players, vm->players_amnt, vm));
+			if (vm->flag->dump == 4242)
+				show_arena(vm->players, vm->players_amnt, vm);
 		}
 		someone_alive = check(vm);
 	}
@@ -98,6 +101,6 @@ bool	start_game(t_vm *vm)
 
 	up_to_cycle_to_die(vm);
 	the_champion = get_player_by_id(vm->players, vm->last_alive * -1, vm->players_amnt);
-	ft_printf("The winner is player #%d %s!!!\n", vm->last_alive * -1, the_champion);
+	ft_printf("The winner is player #%d %s!!!\n", vm->last_alive * -1, the_champion->name);
 	return (true);
 }

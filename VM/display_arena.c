@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 19:30:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/07 16:21:34 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/08 14:06:41 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ static int get_cursor_pos(t_cursor *cursor_head, int id)
 	return (0);
 }
 
+static void show_additional_info(t_vm *vm)
+{
+	ft_printf("%{BLUE_B}   Processes: %d\n", vm->process);
+	ft_printf("   Last_alive: %d\n", vm->last_alive);
+	ft_printf("   nbr_lives: %d\n", vm->nbr_lives);
+	ft_printf("   current_cycle: %d\n", vm->current_cycle);
+	ft_printf("   cycle_to_die: %d\n\n", vm->cycle_to_die);
+}
+
 bool	show_arena(t_player **players, short pl_amnt, t_vm *vm)
 {
 	int		i;
@@ -35,6 +44,7 @@ bool	show_arena(t_player **players, short pl_amnt, t_vm *vm)
 	i = 0;
 	z = 0;
 	index = MEM_SIZE / pl_amnt;
+	show_additional_info(vm);
 	write(1, "\n     ", 7);
 	while (i < MEM_SIZE)
 	{
