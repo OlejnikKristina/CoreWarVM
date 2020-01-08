@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:34:48 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 18:48:40 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/08 15:26:28 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	find_value(char **args, int nb_arg, int size)
 	combo = (char**)ft_memalloc(sizeof(char*) * 3);
 	combo[0] = args[nb_arg];
 	combo[1] = ft_itoa(ret_val);
-	args[nb_arg] = ft_strjoin(args[nb_arg], combo[1]);
+	args[nb_arg] = ft_strjoin(combo[0], combo[1]);
 	free_arr(NULL, &combo, 1);
 	return (ret);
 }
