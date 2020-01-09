@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 19:46:09 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/09 20:57:58 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ void		write_into_memory(int32_t val_to_write, uint8_t arena[])
 	uint8_t		*pointer;
 
 	pointer = (uint8_t *)&val_to_write;
-	arena[0] = pointer[0];
-	arena[1] = pointer[1];
-	arena[2] = pointer[2];
-	arena[3] = pointer[3];
+	arena[0] = pointer[3];
+	arena[1] = pointer[2];
+	arena[2] = pointer[1];
+	arena[3] = pointer[0];
 }
 
 int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 			t_cursor *cursor, int *padding)
 {
-	int val;
-	int reg_num;
+	int16_t	val;
+	int8_t	*pval;
+	int		reg_num;
 
 	val = 0;
+	pval = (int8_t *)&val;
 	if (arg_type == REG)
 	{
 		reg_num = arena[cursor->pos + 3 + *padding];
@@ -41,7 +43,11 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	}
 	else if (arg_type == DIR)
 	{
-		val = arena[cursor->pos + 4 + *padding];
+		pval[0] = arena[cursor->pos + 3 + *padding];
+		pval[1] += arena[cursor->pos + 4 + *padding];
+		val = convert((unsigned char *)&val, 2);
+		ft_printf("\nHEX1(%.2x) DEC1(%d) HEX2(%.2x) DEC2(%d) val(%d)\n",
+		pval[0], pval[0], pval[1], pval[1], val);
 		*padding = 2;
 	}
 	else if (arg_type == IND)
@@ -55,7 +61,7 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 bool		op_sti(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
-	int32_t		val_to_write ;
+	int32_t		val_to_write;
 	int			address;
 	int			padding;
 
@@ -64,7 +70,7 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 	padding = 0;
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
-	address %= IDX_MOD + cursor->pos;
+	address = (address  % IDX_MOD) + cursor->pos;
 	write_into_memory(val_to_write, &(vm->arena[address]));
 	return (true);
 }

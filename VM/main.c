@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 15:55:06 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/09 20:05:54 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,14 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	else if (!init_cursors(vm))
+	{
 		ft_printf("Error in cursor init\n");
-	init_vm(vm);
-	start_game(vm);
+	}
+	else
+	{
+		init_vm(vm);
+		start_game(vm);
+	}
 	if (vm->flag->v)
 		visual_corawar(vm);
 	vm_free(&vm);
