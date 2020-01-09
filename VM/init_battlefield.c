@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:47:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 20:15:51 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/09 15:52:50 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ void	put_player_on_arena(uint8_t arena[MEM_SIZE], t_player *player,
 		start_pos++;
 		i++;
 	}
+}
+
+void	print_arena_pure(unsigned char arena[MEM_SIZE])
+{
+	int		i;
+
+	i = 0;
+	ft_putchar('\n');
+	while (i < 23)
+	{
+		ft_printf("[%.2x] ", arena[i]);
+		i++;
+	}
+	ft_printf("\n");
 }
 
 bool	init_battlefield(t_vm *vm)
