@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 15:46:17 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:27:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void		display_current_cycle(WINDOW *winfo, int current_cycle)
 {
-	wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 25, 3, "Current cycle:");
+	static	bool lable_set;
+
+	if (lable_set == false)
+	{
+		wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
+		mvwprintw(winfo, OFFSETY + 25, 3, "Current cycle:");
+		lable_set = true;
+	}
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 	mvwprintw(winfo, OFFSETY + 25, 21, " %d", current_cycle);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
@@ -23,8 +29,14 @@ void		display_current_cycle(WINDOW *winfo, int current_cycle)
 
 void		display_processes(WINDOW *winfo, int processes_num)
 {
-	wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 27, 3, "Processes:");
+	static	bool lable_set;
+
+	if (lable_set == false)
+	{
+		wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
+		mvwprintw(winfo, OFFSETY + 27, 3, "Processes:");
+		lable_set = true;
+	}
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 	mvwprintw(winfo, OFFSETY + 27, 22, "%d", processes_num);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
@@ -101,5 +113,7 @@ void		display_info(t_vm *vm, WINDOW *winfo)
 	display_current_cycle(winfo, 0);
 	display_processes(winfo, 0);
 	display_game_params(winfo);
+	display_current_cycle(vm->v->winfo, 1);
+	display_processes(vm->v->winfo, 1);
 	wrefresh(winfo);
 }

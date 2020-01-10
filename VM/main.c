@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 21:42:41 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:05:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int		main(int argc, char **argv)
 		init_vm(vm);
 		start_game(vm);
 	}
-	if (vm->flag->v)
-		visual_corawar(vm);
 	vm_free(&vm);
 	return (0);
 }

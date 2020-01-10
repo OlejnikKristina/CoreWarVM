@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 18:47:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 15:52:50 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:05:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ bool	init_battlefield(t_vm *vm)
 		player_pos += MEM_SIZE / vm->players_amnt;
 		i++;
 	}
+	if (vm->flag->v)
+		visual_corawar(vm);
 	return (true);
 }

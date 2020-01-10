@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 15:40:45 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:19:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "op.h"
 # include "ft_printf.h"
 # include "operations.h"
+# include "corewar_visual.h"
 
 # define OP_NBR 16
 /*

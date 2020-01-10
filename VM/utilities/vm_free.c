@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:27:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 15:34:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:30:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ void	vm_free(t_vm **vm)
 		players_free(vm);
 		if ((*vm)->cursor)
 			cursors_free((*vm)->cursor);
+		if ((*vm)->flag->v)
+		{
+			getch();
+			delwin((*vm)->v->warena);
+			delwin((*vm)->v->winfo);
+			endwin();
+		}
 		if ((*vm)->flag)
 		{
 			ft_bzero((void *)(*vm)->flag, sizeof((*vm)->flag));

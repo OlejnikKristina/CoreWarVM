@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 14:35:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:29:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,19 @@ static void	display_arena(t_vm *vm, WINDOW *warena)
 	i = 0;
 	yx[0] = 1;
 	num = 0;
-	// mvwprintw(warena, OFFSETY + yx[0], 3, "%.2x ", vm->arena[i]);
-	wmove(warena, OFFSETY + 1, 3);
+	wmove(warena, OFFSETY + 1, 0);
 	while (i < MEM_SIZE - 1)
 	{
 		yx[1] = 0;
-		while (yx[1] < WIDTH)
+		while (yx[1] < 64 * 3)
 		{
 			attribute = get_attribute(i, vm->players, vm->players_amnt);
 			wattron(warena, attribute);
-			wprintw(warena, "%.2x ", vm->arena[i]);
-			mvwprintw(warena, OFFSETY + yx[0], yx[1], "%.2x ", vm->arena[i]);
+			mvwprintw(warena, OFFSETY + yx[0], yx[1] + 3, "%.2x ", vm->arena[i]);
 			i++;
 			yx[1] += 3;
 		}
 		yx[0] += 1;
-		// mvwprintw(warena, OFFSETY + yx[0], 3, "%.2x ", vm->arena[i]);
-		// wmove(warena, OFFSETY + yx[0], 2);
 		wprintw(warena, " ");
 		
 	}
@@ -136,10 +132,6 @@ bool	visual_corawar(t_vm *vm)
 	display_info(vm, vm->v->winfo);
 	// display_cursors(vm->v->warena, vm->cursor);
 	set_colors_to_players(vm->players, vm->players_amnt);
-	getch();
-	delwin(vm->v->warena);
-	delwin(vm->v->winfo);
-	endwin();
 	return (true);
 }
 

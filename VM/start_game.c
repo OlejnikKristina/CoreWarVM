@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 21:42:48 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:28:13 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ bool	execute_one_cycle(t_vm *vm)
 	{
 		execute_cursor(cursor, vm->arena, vm);
 		cursor = cursor->next;
+	}
+	if (vm->flag->v)
+	{
+		display_current_cycle(vm->v->winfo, vm->current_cycle);
+		display_processes(vm->v->winfo, vm->process);
+		wrefresh(vm->v->winfo);
 	}
 	return (true);
 }

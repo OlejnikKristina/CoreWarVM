@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 15:09:31 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 17:21:31 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@
 # include "vm_arena.h"
 # include "corewar_vs_colors.h"
 
-typedef struct		s_player_color
-{
-	short			id;
-	short			color;
-}					t_pl_color;
-
+typedef	struct		s_player t_player;
 
 bool				visual_corawar(t_vm *vm);
 void				fill_colors_palette(short color_palette[9]);
@@ -38,5 +33,6 @@ void				display_info(t_vm *vm, WINDOW *winfo);
 int					get_attribute(int i, t_player **players, short players_amnt);
 
 void				display_cursors(WINDOW *warena, t_cursor *cursor);
-
+void				display_current_cycle(WINDOW *winfo, int current_cycle);
+void				display_processes(WINDOW *winfo, int processes_num);
 #endif
