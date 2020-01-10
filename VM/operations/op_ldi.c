@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   op_ldi.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/10 16:37:51 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/10 16:37:52 by krioliin      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm_arena.h"
 
+<<<<<<< HEAD
 static int	get_offset(int type)
 {
 	if (type == REG)
@@ -37,14 +49,23 @@ static int	get_reg_num(t_vm *vm, t_cursor *cursor, e_argctype args[3])
 // 	b = set_value(vm, cursor, args[1], b);
 // 	return ((a + b) % IDX_MOD);
 // }
+=======
+>>>>>>> kristina
 
 bool		op_ldi(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
 	int			reg_num;
+<<<<<<< HEAD
 	// int			value;
+=======
+	int			address;
+	int			padding;
+>>>>>>> kristina
 
+	padding = 2;
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
+<<<<<<< HEAD
 	reg_num = get_reg_num(vm, cursor, args);
 	// value = get_value(vm, cursor, args);
 	ft_printf("r%d\n", reg_num + 1);
@@ -119,3 +140,12 @@ bool		op_ldi(t_cursor *cursor, t_vm *vm)
 	// }
 	return (false);
 }
+=======
+	address = get_arg_val(args[1], vm->arena, cursor, &padding);
+	address += get_arg_val(args[2], vm->arena, cursor, &padding);
+	address = (address  % IDX_MOD) + cursor->pos % MEM_SIZE;
+	reg_num = vm->arena[cursor->pos + padding] - 1;
+	cursor->reg[reg_num] = convert(&(vm->arena[address]), 4);
+	return (true);
+}
+>>>>>>> kristina

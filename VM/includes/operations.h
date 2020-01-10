@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 15:40:03 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 17:05:48 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:16:45 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 #include "vm_arena.h"
 
-typedef struct s_vm t_vm;
-typedef struct s_cursor	t_cursor;
+typedef struct	s_vm t_vm;
+typedef struct	s_cursor t_cursor;
+typedef enum	e_argctype e_argctype;
 
 /* Ops with size T_DIR 4 bytes */
 
@@ -56,5 +57,8 @@ bool		op_or(t_cursor *cursor, t_vm *vm);
 bool		op_xor(t_cursor *cursor, t_vm *vm);
 bool		op_sub(t_cursor *cursor, t_vm *vm);
 bool		op_zjmp(t_cursor *cursor, t_vm *vm);
+
+int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
+			t_cursor *cursor, int *padding);
 
 #endif
