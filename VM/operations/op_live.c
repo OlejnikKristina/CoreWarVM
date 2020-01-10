@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:44:31 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 18:26:13 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 16:53:00 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool		op_live(t_cursor *cursor, t_vm *vm)
 {
 	int		val;
 
-	val = convert(&vm->arena[cursor->pos + 1], 4) * -1;
+	val = convert(&vm->arena[cursor->pos + 1], 4);
 	ft_printf("val %d reg[0] %d\n", val, cursor->reg[0]);
 	if (val == cursor->reg[0])
 	{

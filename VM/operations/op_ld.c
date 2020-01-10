@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:22:15 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 16:12:51 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/10 16:51:14 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int			get_reg_num(t_vm *vm, t_cursor *cursor, int type)
 	offset = 1;
 	offset += (type == IND ? 3 : 5);
 	reg_num = vm->arena[cursor->pos + offset];
-	ft_printf("offset %d\treg %d\n", offset, reg_num);
 	return (reg_num);	
 }
 
@@ -33,7 +32,6 @@ int32_t		get_value(t_vm *vm, t_cursor *cursor, int type)
 	offset = 2;
 	size = (type == IND ? 2 : 4);
 	value = (int32_t)convert(&vm->arena[cursor->pos + offset], size);
-	ft_printf("size %d\tvalue %d\n", size, value);
 	return (value);
 }
 
