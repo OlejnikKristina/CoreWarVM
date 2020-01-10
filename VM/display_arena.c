@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 19:30:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 19:49:02 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/09 21:37:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,27 @@ bool	show_arena(t_player **players, short pl_amnt, t_vm *vm)
 		else if (3 < pl_amnt && get_cursor_pos(vm->cursor, 4) == i)
 			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
 
-		else if (0 <= i && i < index && i <= players[0]->code_size)
-			ft_printf("%{PINK_B}%.2x %{GRAY_B}", vm->arena[i]);
+		// else if (0 <= i && i < index && i <= players[0]->code_size)
+		// 	ft_printf("%{PINK_B}%.2x %{GRAY_B}", vm->arena[i]);
 
-		else if (1 < pl_amnt && index <= i && i < index * 2 &&
-		i <= (players[1]->code_size + index))
-			ft_printf("%{YELLOW_B}%.2x%{GRAY_B} ", vm->arena[i]);
-		else if (2 < pl_amnt && index * 2 <= i && i < index * 3 &&
-		i <= (players[2]->code_size + index * 2))
-			ft_printf("%{BLUE_B}%.2x%{GRAY_B} ", vm->arena[i]);
-		else if (3 < pl_amnt && index * 3 <= i && i < index * 4 &&
-		i <= (players[3]->code_size + index * 3))
-			ft_printf("%{GREEN_B}%.2x%{GRAY_B} ", vm->arena[i]);
-		else
-			ft_printf("%.2x%{GRAY_B} ", vm->arena[i]);
+		// else if (1 < pl_amnt && index <= i && i < index * 2 &&
+		// i <= (players[1]->code_size + index))
+		// 	ft_printf("%{YELLOW_B}%.2x%{GRAY_B} ", vm->arena[i]);
+		// else if (2 < pl_amnt && index * 2 <= i && i < index * 3 &&
+		// i <= (players[2]->code_size + index * 2))
+		// 	ft_printf("%{BLUE_B}%.2x%{GRAY_B} ", vm->arena[i]);
+		// else if (3 < pl_amnt && index * 3 <= i && i < index * 4 &&
+		// i <= (players[3]->code_size + index * 3))
+		// 	ft_printf("%{GREEN_B}%.2x%{GRAY_B} ", vm->arena[i]);
+		// else
+		// 	ft_printf("%.2x%{GRAY_B} ", vm->arena[i]);
+		ft_printf("%{GRAY_B}%.2x ", vm->arena[i]);
 		if ((i + 1) % 64 == 0 && i != 0)
 			ft_printf("\n     ");
 		i++;
 	}
+	if (players)
+		;
 	// i = 0;
 	// ft_printf("ARENA MEM: \n");
 	// while (i < 23)

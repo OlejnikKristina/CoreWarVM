@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/23 17:12:32 by krioliin       #+#    #+#                */
-/*   Updated: 2019/12/27 17:28:55 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:24:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ bool		get_player_code_size(t_player *player, const int fd)
 {
 	uint32_t num;
 
-	if (read(fd, &num, 4) < 4 && player)
+	if (read(fd, &num, 4) < 4)
 		return (false);
 	num = reverse_bytes(num);
 	if (CHAMP_MAX_SIZE < num)
 		return (false);
-	player->code_size = (uint8_t)num;
+	player->code_size = (int)num;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 20:57:58 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/09 21:39:05 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,22 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 			return (false);
 		val = cursor->reg[reg_num - 1];
 		*padding = REG;
+		ft_printf("Hello =D\n");
 	}
 	else if (arg_type == DIR)
 	{
 		pval[0] = arena[cursor->pos + 3 + *padding];
 		pval[1] += arena[cursor->pos + 4 + *padding];
 		val = convert((unsigned char *)&val, 2);
-		ft_printf("\nHEX1(%.2x) DEC1(%d) HEX2(%.2x) DEC2(%d) val(%d)\n",
-		pval[0], pval[0], pval[1], pval[1], val);
+		// ft_printf("\nHEX1(%.2x) DEC1(%d) HEX2(%.2x) DEC2(%d) val(%d)\n",
+		// pval[0], pval[0], pval[1], pval[1], val);
 		*padding = 2;
 	}
 	else if (arg_type == IND)
 	{
 		val = arena[convert(&arena[cursor->pos + 3 + *padding], 4) % IDX_MOD];
 		*padding = 2;
+		ft_printf("Hello =D=d=d\n");
 	}
 	return (val);
 }
@@ -71,6 +73,7 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 	address = (address  % IDX_MOD) + cursor->pos;
+	ft_printf("address(%d)\n", address);
 	write_into_memory(val_to_write, &(vm->arena[address]));
 	return (true);
 }
