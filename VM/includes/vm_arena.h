@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 15:53:01 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 19:23:47 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ bool				get_player_code_size(t_player *player, const int fd);
 bool				get_player_exec_code(t_player *player, const int fd);
 void				set_player_id(t_player *player,
 short players_order[MAX_PLAYERS], short num, short players_amnt);
+t_cursor			*init_cursor(int id, int pos, int opcode, int encoding_byte);
 
 /*
 	****************************** Battlefield **********************************
