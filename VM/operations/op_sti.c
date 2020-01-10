@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 14:55:00 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:12:29 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	}
 	else if (arg_type == IND)
 	{
-		val = arena[convert(&arena[cursor->pos + 3 + *padding], 4) % IDX_MOD];
+		val = arena[convert(&arena[cursor->pos + *padding], 4) % IDX_MOD];
 		*padding += 2;
 	}
 	return (val);
@@ -80,3 +80,27 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 	write_into_memory(val_to_write, &(vm->arena[address]));
 	return (true);
 }
+
+/*
+	padding = 2;
+	opcode(1) + encodebyte(1)
+*/
+
+// bool		op_ldi(t_cursor *cursor, t_vm *vm)
+// {
+// 	e_argctype	args[3];
+// 	int32_t		val_to_write;
+// 	int			reg_num;
+// 	int			address;
+// 	int			padding;
+
+// 	padding = 2;
+// 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
+// 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
+// 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
+// 	address = (address  % IDX_MOD) + cursor->pos % MEM_SIZE;
+// 	reg_num = vm->arena[cursor->pos + padding] - 1;
+// 	// cursor->reg[reg_num] = ;
+// 	// write_into_memory(val_to_write, &(vm->arena[address]));
+// 	return (true);
+// }
