@@ -1,29 +1,48 @@
 
 #include "vm_arena.h"
 
+static int	get_reg_num(t_vm *vm, t_cursor *cursor)
+{
+	int		offset;
+	int		reg_num;
+
+	offset = 2;
+	reg_num = vm->arena[cursor->pos + offset] - 1;
+	return (reg_num);
+}
+
+static void	write_value(t_vm *vm, t_cursor *cursor, int type, int value)
+{
+	int	index;
+	int	offset;
+	int	address;
+
+	offset = (type == REG ? 3 : 4);
+	if (type == REG)
+	{
+		index = vm->arena[cursor->pos + offset] - 1;
+		cursor->reg[index] = value;
+	}
+	else if (type == IND)
+	{
+		index = vm->arena[cursor->pos + offset] % IDX_MOD;
+		address = (cursor->pos + index) % IDX_MOD; 
+		vm->arena[address] = value;
+	}
+}
+
 bool		op_st(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
+	int			reg_num;
+	int			value;
 
-	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	if (cursor && vm)
 	{
-		if (args[0] == REG && args[1] == REG)
-		{
-			cursor->reg[vm->arena[cursor->pos + 3] - 1] = 
-			cursor->reg[vm->arena[cursor->pos + 2] - 1];
-			ft_printf("ST r%d:%d into r%d:%d\n", vm->arena[cursor->pos + 2],
-			cursor->reg[vm->arena[cursor->pos + 2] - 1], vm->arena[cursor->pos + 3],
-			cursor->reg[vm->arena[cursor->pos + 3] - 1]);
-		}
-		else if (args[0] == REG && args[1] == IND)
-		{
-			cursor->reg[vm->arena[cursor->pos + 2] - 1] = 
-			vm->arena[(cursor->pos + convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD) % MEM_SIZE];
-			ft_printf("ST %d into r%d:%d\n", vm->arena[(cursor->pos +
-			convert(&vm->arena[cursor->pos + 3], 2) % IDX_MOD) % MEM_SIZE],
-			vm->arena[cursor->pos + 2], cursor->reg[vm->arena[cursor->pos + 2] - 1]);
-		}
+		decode_encoding_byte(vm->arena[cursor->pos + 1], args);
+		reg_num = get_reg_num(vm, cursor);
+		value = cursor->reg[reg_num];
+		write_value(vm, cursor, args[1], value);
 		return (true);
 	}
 	return (false);
