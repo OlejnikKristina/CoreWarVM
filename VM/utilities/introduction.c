@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 17:36:54 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/08 16:30:27 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/10 16:13:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	introduce_champion(t_player *player)
 	ft_printf("weighing %{BLUE_B}%u%{WHITE_B}, ",
 	(unsigned int)player->code_size);
 	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
-	ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !%{RESET}", player->comment);
+	ft_printf("(\"%{GREEN_B}%s%{WHITE_B}\") !\n%{RESET}", player->comment);
 }
 
 void	introduce_champions(t_player **players, short player_amnt)
