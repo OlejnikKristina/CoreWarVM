@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/09 21:39:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:50:59 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,25 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	pval = (int8_t *)&val;
 	if (arg_type == REG)
 	{
-		reg_num = arena[cursor->pos + 3 + *padding];
+		reg_num = arena[cursor->pos + *padding];
 		if (reg_num < 1 || REG_NUMBER < reg_num)
 			return (false);
 		val = cursor->reg[reg_num - 1];
-		*padding = REG;
-		ft_printf("Hello =D\n");
+		*padding += REG;
 	}
 	else if (arg_type == DIR)
 	{
-		pval[0] = arena[cursor->pos + 3 + *padding];
-		pval[1] += arena[cursor->pos + 4 + *padding];
+		pval[0] = arena[cursor->pos + *padding];
+		pval[1] += arena[cursor->pos + 1 + *padding];
 		val = convert((unsigned char *)&val, 2);
 		// ft_printf("\nHEX1(%.2x) DEC1(%d) HEX2(%.2x) DEC2(%d) val(%d)\n",
 		// pval[0], pval[0], pval[1], pval[1], val);
-		*padding = 2;
+		*padding += 2;
 	}
 	else if (arg_type == IND)
 	{
 		val = arena[convert(&arena[cursor->pos + 3 + *padding], 4) % IDX_MOD];
-		*padding = 2;
-		ft_printf("Hello =D=d=d\n");
+		*padding += 2;
 	}
 	return (val);
 }
@@ -69,7 +67,7 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	val_to_write = cursor->reg[vm->arena[cursor->pos + 2] - REG];
-	padding = 0;
+	padding = 3;
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 	address = (address  % IDX_MOD) + cursor->pos;
