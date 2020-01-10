@@ -6,81 +6,51 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:22:15 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/08 18:18:07 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 16:12:51 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
 
+int			get_reg_num(t_vm *vm, t_cursor *cursor, int type)
+{
+	int		reg_num;
+	int		offset;
+
+	offset = 1;
+	offset += (type == IND ? 3 : 5);
+	reg_num = vm->arena[cursor->pos + offset];
+	ft_printf("offset %d\treg %d\n", offset, reg_num);
+	return (reg_num);	
+}
+
+int32_t		get_value(t_vm *vm, t_cursor *cursor, int type)
+{
+	int32_t	value;
+	int		offset;
+	int		size;
+
+	offset = 2;
+	size = (type == IND ? 2 : 4);
+	value = (int32_t)convert(&vm->arena[cursor->pos + offset], size);
+	ft_printf("size %d\tvalue %d\n", size, value);
+	return (value);
+}
+
 bool		op_ld(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
 	int			reg_num;
+	int32_t		value;
 
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	if (cursor && vm)
 	{
-		if (args[0] == IND && args[1] == REG)
-		{
-			reg_num = vm->arena[cursor->pos + 4];
-			cursor->reg[reg_num] = 
-			convert(&vm->arena[((cursor->pos + convert(&vm->arena[cursor->pos + 2], 2) % IDX_MOD) % MEM_SIZE)], 4);
-
-			ft_printf("LD %d into r%d = %d\n",
-			convert(&vm->arena[((cursor->pos + convert(&vm->arena[cursor->pos + 2], 2) % IDX_MOD) % MEM_SIZE)], 4),
-			vm->arena[cursor->pos + 4],
-			cursor->reg[reg_num]);
-
-			cursor->carry = (cursor->reg[reg_num] = 0 ? 1 : 0);
-		}
-		else if (args[0] == DIR && args[1] == REG)
-		{
-			reg_num = vm->arena[cursor->pos + 6] - 1;
-			cursor->reg[reg_num] =
-			convert(&vm->arena[cursor->pos + 2], 4);
-			ft_printf("LD %d into r%d = %d\n", convert(&vm->arena[cursor->pos + 2], 4),
-			vm->arena[cursor->pos + 6], cursor->reg[reg_num]);
-			cursor->carry = (cursor->reg[reg_num] = 0 ? 1 : 0);
-		}
-		else
-			return (false);
+		reg_num = get_reg_num(vm, cursor, args[0]) - 1;
+		value = get_value(vm, cursor, args[0]);
+		cursor->reg[reg_num] = value;
+		cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
 		return (true);
 	}
 	return (false);
 }
-
-
-// bool		op_ld(t_cursor *cursor, t_vm *vm)
-// {
-// 	e_argctype	args[3];
-// 	int			reg_num;
-
-// 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
-// 	if (cursor && vm)
-// 	{
-// 		if (args[0] == IND && args[1] == REG)
-// 		{
-// 			reg_num = vm->arena[cursor->pos + 4] - 1;
-// 			cursor->reg[reg_num] = (vm->arena[cursor->pos + 3] % IDX_MOD);
-			
-// 			ft_printf("loaded %d into r%d = %d\n",
-// 			vm->arena[cursor->pos + 3], vm->arena[cursor->pos + 4],
-// 			cursor->reg[reg_num]);
-// 		}
-// 		else if (args[0] == DIR && args[1] == REG)
-// 		{
-// 			reg_num = vm->arena[cursor->pos + 6] - 1;
-// 			cursor->reg[reg_num] =
-// 			vm->arena[cursor->pos + convert(&vm->arena[cursor->pos + 2], 4)];
-// 			cursor->carry = (cursor->reg[reg_num] == 0) ? true : false;
-
-// 			ft_printf("loaded %d into r%d = %d\n",
-// 			vm->arena[cursor->pos + convert(&vm->arena[cursor->pos + 2], 4)],
-// 			vm->arena[cursor->pos + 6], cursor->reg[reg_num]);
-// 		}
-// 		else
-// 			return (false);
-// 		return (true);
-// 	}
-// 	return (false);
-// }

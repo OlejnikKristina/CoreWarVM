@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 15:12:29 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 15:21:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 // 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 // 	address = (address  % IDX_MOD) + cursor->pos % MEM_SIZE;
 // 	reg_num = vm->arena[cursor->pos + padding] - 1;
-// 	// cursor->reg[reg_num] = ;
-// 	// write_into_memory(val_to_write, &(vm->arena[address]));
+// 	cursor->reg[reg_num] = ;
+// 	write_into_memory(val_to_write, &(vm->arena[address]));
 // 	return (true);
 // }
