@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 14:50:59 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/10 14:55:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	}
 	return (val);
 }
+
+/*
+	padding = 3;
+	opcode(1) + encodebyte(1) + first arg REG(1)
+*/
 
 bool		op_sti(t_cursor *cursor, t_vm *vm)
 {
