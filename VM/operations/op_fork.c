@@ -29,7 +29,7 @@ static void	insert_new(t_cursor *new, t_vm *vm)
 	curr = vm->cursor;
 	while (curr)
 	{
-		if (curr->reg[0] == new->reg[0])
+		if (curr->id == new->id)
 		{
 			temp = curr->next;
 			curr->next = new;

@@ -6,11 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/01/10 20:57:26 by krioliin      ########   odam.nl         */
-=======
-/*   Updated: 2020/01/10 19:58:29 by asulliva      ########   odam.nl         */
->>>>>>> aidan
+/*   Updated: 2020/01/11 17:19:34 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +99,6 @@ bool	up_to_cycle_to_die(t_vm *vm)
 			// print_arena_pure(vm->arena);
 			if (vm->flag->dump == cycle_counter)
 				return (show_arena(vm->players, vm->players_amnt, vm));
-			// if (vm->flag->dump == 4242)
-				// show_arena(vm->players, vm->players_amnt, vm);
-			// print_arena_pure(vm->arena);
 		}
 		someone_alive = check(vm);
 	}
@@ -117,7 +110,7 @@ bool	start_game(t_vm *vm)
 	t_player *the_champion;
 
 	up_to_cycle_to_die(vm);
-	the_champion = get_player_by_id(vm->players, vm->last_alive * -1, vm->players_amnt);
-	ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive * -1, the_champion->name);
+	the_champion = get_player_by_id(vm->players, vm->last_alive, vm->players_amnt);
+	ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
 	return (true);
 }

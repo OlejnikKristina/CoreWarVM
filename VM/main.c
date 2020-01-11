@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 17:05:51 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:25:52 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_vm(t_vm *vm)
 {
 	vm->process = vm->players_amnt;
 	vm->cycle_to_die = CYCLE_TO_DIE;
-	vm->last_alive = vm->players[0]->id * -1;
+	vm->last_alive = vm->players[0]->id;
 }
 
 int		main(int argc, char **argv)
