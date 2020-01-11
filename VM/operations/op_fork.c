@@ -6,7 +6,9 @@ static int	get_value(t_vm *vm, t_cursor *cursor)
 	int		value;
 
 	value = convert(&vm->arena[cursor->pos + 1], 2);
-	return (value % IDX_MOD);
+	value = (value < 0 ? IDX_MOD + value : value % IDX_MOD);
+	value += cursor->pos % MEM_SIZE;
+	return (value);
 }
 
 static void	cp_regs(t_cursor *new, int32_t reg[16])
@@ -44,13 +46,14 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 	int			new_pos;
 	t_cursor	*new;
 
-	new_pos = get_value(vm, cursor);
-	new = init_cursor(cursor->id, new_pos, cursor->opcode, 0);
-	cp_regs(new, cursor->reg);
-	insert_new(new, vm);
-	vm->process++;
-	ft_printf("value %d\n", new_pos);
 	if (cursor && vm)
-		;
-	return (true);
+	{	
+		new_pos = get_value(vm, cursor);
+		new = init_cursor(cursor->id, new_pos, cursor->opcode, 0);
+		cp_regs(new, cursor->reg);
+		insert_new(new, vm);
+		vm->process++;
+		return (true);
+	}
+	return (false);
 }
