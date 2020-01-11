@@ -1,5 +1,5 @@
 .name "jemoeder"
 .comment "aan het poeder"
 
-ldi 0, %1, r2
-
+lldi %0, %2, r2
+lldi r2, %1, r3

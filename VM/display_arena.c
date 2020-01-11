@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 19:30:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 16:40:33 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 16:06:20 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ bool	show_arena(t_player **players, short pl_amnt, t_vm *vm)
 	{
 		if (get_cursor_pos(vm->cursor, 1) == i)
 			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
-		else if (1 < pl_amnt && get_cursor_pos(vm->cursor, 2) == i)
+		else if (1 < vm->process && get_cursor_pos(vm->cursor, 2) == i)
 			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
-		else if (2 < pl_amnt && get_cursor_pos(vm->cursor, 3) == i)
+		else if (2 < vm->process && get_cursor_pos(vm->cursor, 3) == i)
 			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
-		else if (3 < pl_amnt && get_cursor_pos(vm->cursor, 4) == i)
+		else if (3 < vm->process && get_cursor_pos(vm->cursor, 4) == i)
+			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
+		else if (4 < vm->process && get_cursor_pos(vm->cursor, 4) == i)
 			ft_printf("%{RED_B}%.2x %{GRAY_B}", vm->arena[i]);
 
 		else if (0 <= i && i < index && i < players[0]->code_size)

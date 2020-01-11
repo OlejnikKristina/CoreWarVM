@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 18:52:17 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 16:01:06 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		write_into_memory(int32_t val_to_write, uint8_t arena[])
 int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 			t_cursor *cursor, int *padding)
 {
-	int16_t	val;
+	int32_t	val;
 	int8_t	*pval;
 	int		reg_num;
 

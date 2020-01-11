@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 16:37:51 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 21:16:18 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 14:59:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 		DIR DIR REG (Works) checked
 		DIR IND REG (With quations) checked
+		REG DIR REG (Works) checked
 */
 
 bool		op_ldi(t_cursor *cursor, t_vm *vm)

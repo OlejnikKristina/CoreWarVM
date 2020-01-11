@@ -6,10 +6,15 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/10 20:34:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 21:17:28 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 15:53:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+		DIR DIR REG (Works) checked
+		DIR IND REG (Works With questions) checked
+		REG DIR REG (Works 100%) checked
+*/
 
 #include "vm_arena.h"
 
