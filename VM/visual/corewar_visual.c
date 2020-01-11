@@ -6,33 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 17:29:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:53:47 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
-
-void	init_pairs()
-{
-	if (!has_colors())
-	{
-		endwin();
-		ft_printf("Your terminal does't support colors\n");
-	}
-	start_color();
-	init_pair(BGRED_FBLACK, COLOR_RED, COLOR_BLACK);
-	init_pair(BGYELLOW_FBLACK, BRIGHT_YELLOW, COLOR_BLACK);
-	init_pair(WHITE_BLACK, COLOR_WHITE, COLOR_BLACK);
-	init_pair(PINK_YELLOW, NICE_PINCK2, COLOR_YELLOW);
-	init_pair(YELLOW_PINK, COLOR_YELLOW, NICE_PINCK2);
-	init_pair(PINK_BLACK, NICE_PINCK2, COLOR_BLACK);
-	init_pair(LBLUE_BLACK, LIGHT_BLUE, COLOR_BLACK);
-	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, DARCK_GREEN, COLOR_BLACK);
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(4, LIGHT_BLUE, COLOR_BLACK);
-	init_pair(5, NICE_PINCK, COLOR_BLACK);
-}
 
 int			get_attribute(int i, t_player **players, short players_amnt)
 {

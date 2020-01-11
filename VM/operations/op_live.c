@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:44:31 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 17:28:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:17:17 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ bool		op_live(t_cursor *cursor, t_vm *vm)
 		cursor->last_live = vm->current_cycle;
 		vm->nbr_lives++;
 		vm->last_alive = cursor->id;
-		ft_printf("LA: %d\n", vm->last_alive);
 	}
 	return (true);
 }

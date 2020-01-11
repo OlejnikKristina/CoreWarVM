@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 16:16:20 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:50:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@
 # include "corewar_visual.h"
 
 # define OP_NBR 16
-/*
-	**	pc			program_counter
-*/
 
 typedef struct s_cursor	t_cursor;
+typedef struct s_visual t_visual;
 
 struct				s_cursor
 {
@@ -58,12 +56,6 @@ typedef	struct		s_player
 	uint8_t			*code;
 	int				start_pos;
 }					t_player;
-
-typedef struct		s_visual
-{
-	WINDOW			*winfo;
-	WINDOW			*warena;
-}					t_visual;
 
 /*
  ** v  --------------> visualsation
@@ -165,6 +157,6 @@ void				print_arena_pure(unsigned char arena[MEM_SIZE]);
 */
 
 bool				visual_corawar();
-void				display_cursors(WINDOW *warena, t_cursor *cursor);;
+// void				display_cursors(WINDOW *warena, t_cursor *cursor);
 
 #endif
