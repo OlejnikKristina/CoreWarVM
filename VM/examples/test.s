@@ -3,6 +3,5 @@
 
 
 load:
-    lldi %0, %2, r2
-    lldi r2, %1, r3
-lfork %:load
+    ld %0, r2
+zjmp %:load
