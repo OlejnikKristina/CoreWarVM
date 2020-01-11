@@ -6,7 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/10 20:57:26 by krioliin      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/10 19:58:29 by asulliva      ########   odam.nl         */
+>>>>>>> aidan
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +42,12 @@ int		bury_dead_cursors(t_cursor **head)
 			if (prev->next == NULL)
 				break ;
 		}
-		cursor->last_live = 0;
-		cursor = cursor->next;
-		prev = cursor;
+		else
+		{
+			cursor->last_live = 0;
+			cursor = cursor->next;
+			prev = cursor;
+		}
 	}
 	return(corpse_counter);
 }

@@ -6,7 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:22:15 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/10 17:33:35 by krioliin      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/10 19:30:11 by asulliva      ########   odam.nl         */
+>>>>>>> aidan
 /*                                                                            */
 /* ************************************************************************** */
 

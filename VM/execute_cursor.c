@@ -6,7 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/01/10 20:55:53 by krioliin      ########   odam.nl         */
+=======
+/*   Updated: 2020/01/10 19:51:40 by asulliva      ########   odam.nl         */
+>>>>>>> aidan
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +91,8 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
 	if (cursor->wait_cycles == 0)
 	{
+		if (vm->current_cycle == 1536)
+			ft_printf("Helloß");
 		if (!check_opcode(cursor->opcode))
 		{
 			cursor->pos += 1;
