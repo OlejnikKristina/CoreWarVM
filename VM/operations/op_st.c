@@ -27,7 +27,7 @@ static void	write_value(t_vm *vm, t_cursor *cursor, int type, int value)
 	{
 		index = vm->arena[cursor->pos + offset] % IDX_MOD;
 		address = (cursor->pos + index) % IDX_MOD; 
-		vm->arena[address] = value;
+		write_into_memory(value, &(vm->arena[address]));
 	}
 }
 
@@ -43,6 +43,7 @@ bool		op_st(t_cursor *cursor, t_vm *vm)
 		reg_num = get_reg_num(vm, cursor);
 		value = cursor->reg[reg_num];
 		write_value(vm, cursor, args[1], value);
+
 		return (true);
 	}
 	return (false);

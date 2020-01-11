@@ -6,14 +6,14 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 16:01:06 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 17:56:04 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "vm_arena.h"
 
-void		write_into_memory(int32_t val_to_write, uint8_t arena[])
+void	write_into_memory(int32_t val_to_write, uint8_t arena[])
 {
 	uint8_t		*pointer;
 
@@ -24,8 +24,8 @@ void		write_into_memory(int32_t val_to_write, uint8_t arena[])
 	arena[3] = pointer[0];
 }
 
-int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
-			t_cursor *cursor, int *padding)
+int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
+		t_cursor *cursor, int *padding)
 {
 	int32_t	val;
 	int8_t	*pval;
@@ -61,7 +61,7 @@ int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	opcode(1) + encodebyte(1) + first arg REG(1)
 */
 
-bool		op_sti(t_cursor *cursor, t_vm *vm)
+bool	op_sti(t_cursor *cursor, t_vm *vm)
 {
 	e_argctype	args[3];
 	int32_t		val_to_write;
@@ -74,7 +74,6 @@ bool		op_sti(t_cursor *cursor, t_vm *vm)
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 	address = (address  % IDX_MOD) + cursor->pos;
-	ft_printf("address(%d)\n", address);
 	write_into_memory(val_to_write, &(vm->arena[address]));
 	return (true);
 }
