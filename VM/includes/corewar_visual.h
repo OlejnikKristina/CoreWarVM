@@ -6,25 +6,28 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 19:21:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/12 20:07:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_VISUAL_H
 # define COREWAR_VISUAL_H
 
-# define HEIGHT (66 + 8)
-# define WIDTH (194 + 4)
+# define HEIGHT 68
+# define WIDTH 194
 # define OFFSETX 3
 # define OFFSETY 5
 # define DELAY 30000
+# define INDEX ((HEIGHT - 8) / players_amnt))
 
 # include <ncurses.h>
 # include "vm_arena.h"
 # include "corewar_vs_colors.h"
 
+typedef struct 		s_cursor t_cursor;
 typedef	struct		s_player t_player;
 typedef struct		s_vm t_vm;
+
 
 typedef struct		s_visual
 {
