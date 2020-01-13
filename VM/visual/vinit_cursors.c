@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 14:39:50 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/12 20:07:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/13 13:51:46 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,32 @@
 // 	return (NULL);
 // }
 
+// void	init_cursors_coordinats(t_cursor *cursors, short players_amnt)
+// {
+// 	t_cursor	*cursor;
+// 	int			next_player;
+// 	int			y;
+// 	int			i;
+// 	int			x;
+
+// 	i = players_amnt - 1;
+// 	cursor = cursors;
+// 	while (cursor)
+// 	{
+// 		if (i != 0)
+// 			x = cursor->pos % 64;
+// 		else
+// 			x = cursor->pos;
+// 		if (64 <= x)
+// 		{
+// 			y = x / 64;
+// 			x %= 64;
+// 		}
+// 		else
+// 			y = 0;
+// 		next_player = ((HEIGHT) / players_amnt) * i;
+// 		cursor->xy[0] = x * 3 + 3;
+// 		cursor->xy[1] = OFFSETY + 1 + next_player + y - i;
+// 		cursor = cursor->next;
+// 	}
+// }

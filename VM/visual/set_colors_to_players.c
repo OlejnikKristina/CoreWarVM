@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:10:01 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 19:28:16 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/12 20:08:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ bool	set_colors_to_players(t_player **players, short players_amnt)
 	i = 0;
 	while (i < players_amnt)
 	{
-		players[i]->color = i + 1;
+		if (players[i])
+			;
 		i++;
 	}
 	return (true);

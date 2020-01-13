@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/12 20:07:26 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/13 13:51:04 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				display_info(t_vm *vm, WINDOW *winfo);
 int					get_attribute(int i, t_player **players, short players_amnt);
 
 void				display_cursors(WINDOW *warena, t_cursor *cursor,
-					uint8_t arena[MEM_SIZE], short players_amnt);
+					uint8_t arena[MEM_SIZE], t_vm *vm);
 void				display_current_cycle(WINDOW *winfo, int current_cycle);
 void				display_processes(WINDOW *winfo, int processes_num);
 void				refresh_arena(t_vm *vm);

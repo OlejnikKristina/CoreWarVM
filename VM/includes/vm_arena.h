@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 18:50:26 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/13 13:44:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ struct				s_cursor
 	int				pos;
 	int				pc;
 	int32_t			reg[REG_NUMBER];
+	/* For visualisation */
+	int				prev_xy[2];
+	int				prev_val;
 	t_cursor		*next;
 };
 
@@ -49,7 +52,6 @@ typedef struct		s_flags
 typedef	struct		s_player
 {
 	short			id;
-	short			color;
 	char			*name;
 	char			*comment;
 	int				code_size;
