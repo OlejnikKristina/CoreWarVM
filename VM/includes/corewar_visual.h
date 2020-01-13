@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/13 13:51:04 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/13 14:39:22 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void				display_cursors(WINDOW *warena, t_cursor *cursor,
 void				display_current_cycle(WINDOW *winfo, int current_cycle);
 void				display_processes(WINDOW *winfo, int processes_num);
 void				refresh_arena(t_vm *vm);
+void				visual_sti(t_visual *v, short id, int32_t val_to_write, int address);
 
 #endif
