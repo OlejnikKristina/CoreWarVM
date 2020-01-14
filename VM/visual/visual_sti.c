@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 14:24:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/13 14:42:12 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 14:45:52 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,20 @@ void	get_xy_coordinate(int *x, int *y, int address)
 
 /* t_visual v swap to WINDOW warena  */
 
-void	visual_sti(t_visual *v, short id, int32_t val_to_write, int address)
+void	visual_sti(WINDOW *warena, uint8_t arena[], short id, int address)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	short	i;
 
-	get_xy_coordinate(&x, &y, address);
-	wattron(v->warena, (COLOR_PAIR(id) | A_BOLD));
-	mvwprintw(v->warena, y, x, "%.2x ", val_to_write);
-	wrefresh(v->warena);
+	i = 0;
+	wattron(warena, (COLOR_PAIR(id) | A_BOLD));
+	while (i < 4)
+	{
+		get_xy_coordinate(&x, &y, address);
+		mvwprintw(warena, y, x, "%.2x ", arena[i]);
+		address++;
+		i++;
+	}
+	wrefresh(warena);
 }

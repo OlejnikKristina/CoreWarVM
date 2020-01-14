@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/13 14:40:59 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 14:47:38 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ bool	op_sti(t_cursor *cursor, t_vm *vm)
 	address = (address  % IDX_MOD) + cursor->pos;
 	write_into_memory(val_to_write, &(vm->arena[address]));
 	if (vm->flag->v)
-		visual_sti(vm->v, cursor->id, val_to_write, address);
+		visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
 	return (true);
 }
