@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/13 13:44:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:58:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_visual t_visual;
 struct				s_cursor
 {
 	short			id;
-	short			color;
 	bool			carry;
 	int				opcode;
 	short			last_live;

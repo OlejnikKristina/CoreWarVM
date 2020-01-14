@@ -6,22 +6,25 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 14:47:38 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 17:45:03 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "vm_arena.h"
 
-void	write_into_memory(int32_t val_to_write, uint8_t arena[])
+void	write_into_memory(int32_t val_to_write, uint8_t *arena, int address)
 {
 	uint8_t		*pointer;
+	int			i;
 
+	i = 0;
 	pointer = (uint8_t *)&val_to_write;
-	arena[0] = pointer[3];
-	arena[1] = pointer[2];
-	arena[2] = pointer[1];
-	arena[3] = pointer[0];
+	while (i < 4)
+	{
+		arena[(address + i) % MEM_SIZE] = pointer[3 - i];
+		i++;
+	}
 }
 
 int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
@@ -74,7 +77,7 @@ bool	op_sti(t_cursor *cursor, t_vm *vm)
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 	address = (address  % IDX_MOD) + cursor->pos;
-	write_into_memory(val_to_write, &(vm->arena[address]));
+	write_into_memory(val_to_write, vm->arena, address);
 	if (vm->flag->v)
 		visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
 	return (true);
