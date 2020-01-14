@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 17:05:36 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/14 17:45:03 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	write_into_memory(int32_t val_to_write, uint8_t *arena, int address)
 	pointer = (uint8_t *)&val_to_write;
 	while (i < 4)
 	{
-		arena[(address + i) % MEM_SIZE] = pointer[4 - i];
+		arena[(address + i) % MEM_SIZE] = pointer[3 - i];
 		i++;
 	}
 }
