@@ -27,7 +27,7 @@ static void	write_value(t_vm *vm, t_cursor *cursor, int type, int value)
 	{
 		index = vm->arena[cursor->pos + offset] % IDX_MOD;
 		address = (cursor->pos + index) % IDX_MOD; 
-		write_into_memory(value, &(vm->arena[address]));
+		write_into_memory(value, vm->arena, address);
 	}
 }
 

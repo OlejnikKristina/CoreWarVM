@@ -6,50 +6,64 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 14:39:50 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/05 15:15:10 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/13 13:51:46 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
 
-// static void	vdisplay_arena(t_vm *vm, WINDOW *warena)
+// t_vcursor	*vinit_cursor(t_cursor *classic_cursor)
 // {
-// 	int		yx[2];
-// 	int		i;
-// 	int		attribute;
-// 	short	num;
+// 	t_vcursor *new_cursor;
 
-// 	i = 0;
-// 	yx[0] = 1;
-// 	num = 0;
-// 	wmove(warena, OFFSETY + 1, 3);
-// 	while (i < MEM_SIZE - 1)
-// 	{
-// 		yx[1] = 0;
-// 		while (yx[1] < WIDTH / 3 - 4)
-// 		{
-// 			attribute = get_attribute(i, vm->players, vm->players_amnt);
-// 			wattron(warena, attribute);
-// 			wprintw(warena, "%.2x ", vm->arena[i]);
-// 			i++;
-// 			yx[1] += 3;
-// 		}
-// 		yx[0] += 1;
-// 		wmove(warena, OFFSETY + yx[0], 2);
-// 		wprintw(warena, " ");
-		
-// 	}
-// 	wrefresh(warena);
+// 	new_cursor = (t_vcursor *)ft_memalloc(sizeof(t_cursor));
+// 	new_cursor->id =
+// 	new_cursor->next = NULL;
+// 	return (NULL);
 // }
 
-void	display_cursors(WINDOW *warena, t_cursor *cursor)
-{
-	if (cursor)
-		;
-	wattron(warena, COLOR_PAIR(4));
-	wmove(warena, 6, 3);
-	wprintw(warena, "HH");
-	wrefresh(warena);
-	mvwprintw(warena, 6, 3, "HH");
-	wrefresh(warena);
-}
+// t_vcursor	*vinit_cursors(t_vcursor *vcursors, t_cursor *cursors)
+// {
+// 	t_cursor	*cursor;
+// 	t_vcursor	*vcursor;
+
+// 	cursor = cursors;
+// 	vcursor = new_visual_cursor();
+// 	while (cursor)
+// 	{
+// 		vcursor->next = new_visual_cursor();
+// 		cursor = cursor->next;
+// 		vcursor = vcursor->next;
+// 	}
+// 	return (NULL);
+// }
+
+// void	init_cursors_coordinats(t_cursor *cursors, short players_amnt)
+// {
+// 	t_cursor	*cursor;
+// 	int			next_player;
+// 	int			y;
+// 	int			i;
+// 	int			x;
+
+// 	i = players_amnt - 1;
+// 	cursor = cursors;
+// 	while (cursor)
+// 	{
+// 		if (i != 0)
+// 			x = cursor->pos % 64;
+// 		else
+// 			x = cursor->pos;
+// 		if (64 <= x)
+// 		{
+// 			y = x / 64;
+// 			x %= 64;
+// 		}
+// 		else
+// 			y = 0;
+// 		next_player = ((HEIGHT) / players_amnt) * i;
+// 		cursor->xy[0] = x * 3 + 3;
+// 		cursor->xy[1] = OFFSETY + 1 + next_player + y - i;
+// 		cursor = cursor->next;
+// 	}
+// }

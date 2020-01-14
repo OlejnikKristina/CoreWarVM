@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 19:08:51 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/13 13:39:42 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ t_cursor	*init_cursor(int id, int pos, int opcode, int encoding_byte)
 	cursor->pc = calculate_program_counter(opcode, encoding_byte);
 	cursor->wait_cycles = get_waite_cycle(opcode);
 	cursor->reg[0] = id * -1;
+	cursor->prev_xy[0] = -1;
+	cursor->prev_xy[1] = -1;
 	return (cursor);
 }
 

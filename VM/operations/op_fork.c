@@ -53,7 +53,6 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 		cp_regs(new, cursor->reg);
 		insert_new(new, vm);
 		vm->process++;
-		ft_printf("value %d\n", new_pos);
 		return (true);
 	}
 	return (false);

@@ -64,6 +64,7 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 		reg_num = get_reg_num(vm, cursor, args);
 		value = get_value(vm, cursor, args);
 		cursor->reg[reg_num] = value;
+		cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
 		return (true);
 	}
 	return (true);

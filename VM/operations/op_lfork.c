@@ -6,7 +6,6 @@ static int	get_value(t_vm *vm, t_cursor *cursor)
 	int		value;
 
 	value = convert(&vm->arena[cursor->pos + 1], 2);
-	ft_printf("value %d\n", value);
 	value += cursor->pos;
 	value = (value < 0 ? MEM_SIZE + value : value % MEM_SIZE);
 	return (value);
@@ -54,7 +53,6 @@ bool		op_lfork(t_cursor *cursor, t_vm *vm)
 		cp_regs(new, cursor->reg);
 		insert_new(new, vm);
 		vm->process++;
-		ft_printf("value %d\n", new_pos);
 		return (true);
 	}
 	return (false);

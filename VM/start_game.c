@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 17:19:34 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/11 18:33:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		bury_dead_cursors(t_cursor **head)
 	if (!head || (*head)->last_live == 0)
 	{
 		ft_memdel((void **)head);
-		ft_printf("%{RED}ALL PLAYERS DEAD\n%{RESET}");
+		// ft_printf("%{RED}ALL PLAYERS DEAD\n%{RESET}");
 		return (100);
 	}
 	(*head)->last_live = 0;
@@ -74,11 +74,7 @@ bool	execute_one_cycle(t_vm *vm)
 		cursor = cursor->next;
 	}
 	if (vm->flag->v)
-	{
-		display_current_cycle(vm->v->winfo, vm->current_cycle);
-		display_processes(vm->v->winfo, vm->process);
-		wrefresh(vm->v->winfo);
-	}
+		refresh_arena(vm);
 	return (true);
 }
 
@@ -96,7 +92,6 @@ bool	up_to_cycle_to_die(t_vm *vm)
 			execute_one_cycle(vm);
 			cycle_counter++;
 			vm->current_cycle += 1;
-			// print_arena_pure(vm->arena);
 			if (vm->flag->dump == cycle_counter)
 				return (show_arena(vm->players, vm->players_amnt, vm));
 		}
@@ -111,6 +106,7 @@ bool	start_game(t_vm *vm)
 
 	up_to_cycle_to_die(vm);
 	the_champion = get_player_by_id(vm->players, vm->last_alive, vm->players_amnt);
-	ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
+	if (vm->flag->v == false)
+		ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
 	return (true);
 }

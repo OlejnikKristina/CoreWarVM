@@ -6,35 +6,50 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:10:01 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/03 13:50:44 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/12 20:08:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
 
-void	fill_colors_palette(short color_palette[9])
+void	init_pairs()
 {
-	color_palette[0] = COLOR_RED;
-	color_palette[1] = COLOR_YELLOW;
-	color_palette[2] = COLOR_GREEN;
-	color_palette[3] = INTENSE_PINK;
-	color_palette[4] = COLOR_BLUE;
-	color_palette[5] = VIOLET;
-	color_palette[6] = BRIGHT_YELLOW;
-	color_palette[7] = LIGHT_BLUE;
-	color_palette[8] = LIGHT_PINK;
+	if (!has_colors())
+	{
+		endwin();
+		ft_printf("Your terminal does't support colors\n");
+	}
+	start_color();
+	init_pair(BGRED_FBLACK, COLOR_RED, COLOR_BLACK);
+	init_pair(BGYELLOW_FBLACK, BRIGHT_YELLOW, COLOR_BLACK);
+	init_pair(WHITE_BLACK, COLOR_WHITE, COLOR_BLACK);
+	init_pair(PINK_YELLOW, NICE_PINCK2, COLOR_YELLOW);
+	init_pair(YELLOW_PINK, COLOR_YELLOW, NICE_PINCK2);
+	init_pair(PINK_BLACK, NICE_PINCK2, COLOR_BLACK);
+	init_pair(LBLUE_BLACK, LIGHT_BLUE, COLOR_BLACK);
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(2, DARCK_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, LIGHT_BLUE, COLOR_BLACK);
+	init_pair(5, NICE_PINCK, COLOR_BLACK);
+
+	init_pair(10, LIGHT_PINK, NICE_PINCK2);
+	init_pair(20, LIGHT_PINK, DARCK_GREEN);
+	init_pair(30, LIGHT_PINK, COLOR_YELLOW);
+	init_pair(40, LIGHT_PINK, LIGHT_BLUE);
+	init_pair(50, LIGHT_PINK, NICE_PINCK);
+
 }
 
 bool	set_colors_to_players(t_player **players, short players_amnt)
 {
-	// short	colors_palette[9];
 	short	i;
 
 	i = 0;
-	// fill_colors_palette(colors_palette);
 	while (i < players_amnt)
 	{
-		players[i]->color = i + 1;//colors_palette[i];
+		if (players[i])
+			;
 		i++;
 	}
 	return (true);
