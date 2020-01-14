@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/13 14:39:01 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/14 18:53:45 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC			= main.c parse_argc.c parse_flags.c \
 VISUAL		= visual/corewar_visual.c visual/set_colors_to_players.c \
 			utilities/get_player_by_id.c visual/display_info.c \
 			visual/vinit_cursors.c visual/refresh_arena.c \
-			visual/visual_sti.c
+			visual/visual_sti.c visual/display_live_calls.c
 
 all: $(NAME)
 

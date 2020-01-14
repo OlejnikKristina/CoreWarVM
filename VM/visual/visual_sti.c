@@ -6,11 +6,18 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 14:24:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 14:45:52 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:38:09 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
+
+/*
+** Intresting ncrses function:
+** wclear(warena);
+** winsertln(warena);
+*/
+
 
 void	get_xy_coordinate(int *x, int *y, int address)
 {

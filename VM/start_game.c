@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 18:33:23 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 18:53:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		bury_dead_cursors(t_cursor **head)
 	if (!head || (*head)->last_live == 0)
 	{
 		ft_memdel((void **)head);
-		// ft_printf("%{RED}ALL PLAYERS DEAD\n%{RESET}");
 		return (100);
 	}
 	(*head)->last_live = 0;
