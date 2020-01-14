@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 18:58:51 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:25:21 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,20 @@
 
 typedef struct s_cursor	t_cursor;
 typedef struct s_visual t_visual;
+typedef struct s_player t_player;
 
 struct				s_cursor
 {
 	short			id;
 	bool			carry;
 	int				opcode;
-	short			last_live;
+	int				last_live;
 	short			wait_cycles;
 	int				pos;
 	int				pc;
 	int32_t			reg[REG_NUMBER];
 	/* For visualisation */
+	int				lives_reported;
 	int				prev_xy[2];
 	int				prev_val;
 	t_cursor		*next;
@@ -158,6 +160,5 @@ void				print_arena_pure(unsigned char arena[MEM_SIZE]);
 */
 
 bool				visual_corawar();
-// void				display_cursors(WINDOW *warena, t_cursor *cursor);
 
 #endif

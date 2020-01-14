@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   display_live_calls.c                               :+:    :+:            */
+/*   get_xy_coordinates.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/14 18:52:49 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 19:30:10 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/14 19:52:46 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/14 19:52:55 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar_visual.h"
+#include "corewar_visual.h"
 
-void	display_live_calls(WINDOW *winfo, t_cursor *cursor)
+void	get_xy_coordinates(int *x, int *y, int address)
 {
-	wattron(winfo, COLOR_PAIR(cursor->id));
-	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 2, 32, "%d", cursor->last_live);
-	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 1, 32, "%d", cursor->lives_reported);
-	wrefresh(winfo);
+	*y = address / 64 + OFFSETY + 1;
+	*x = (address % 64) * 3 + OFFSETX;
 }

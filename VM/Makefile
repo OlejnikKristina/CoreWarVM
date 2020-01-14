@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/14 18:53:45 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/14 19:55:41 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,11 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			operations/op_st.c operations/op_sti.c operations/op_xor.c \
 			operations/op_zjmp.c utilities/convert.c
 
-VISUAL		= visual/corewar_visual.c visual/set_colors_to_players.c \
+VISUAL		= visual/corewar_visual.c visual/init_color_pairs.c \
 			utilities/get_player_by_id.c visual/display_info.c \
 			visual/vinit_cursors.c visual/refresh_arena.c \
-			visual/visual_sti.c visual/display_live_calls.c
+			visual/visual_sti.c visual/display_live_calls.c \
+			visual/get_xy_coordinates.c
 
 all: $(NAME)
 

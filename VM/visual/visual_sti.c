@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 14:24:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 18:38:09 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:52:37 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 ** winsertln(warena);
 */
 
-
-void	get_xy_coordinate(int *x, int *y, int address)
-{
-	*y = address / 64 + OFFSETY + 1;
-	*x = (address % 64) * 3 + OFFSETX;
-}
-
-/* t_visual v swap to WINDOW warena  */
-
 void	visual_sti(WINDOW *warena, uint8_t arena[], short id, int address)
 {
 	int		x;
@@ -37,7 +28,7 @@ void	visual_sti(WINDOW *warena, uint8_t arena[], short id, int address)
 	wattron(warena, (COLOR_PAIR(id) | A_BOLD));
 	while (i < 4)
 	{
-		get_xy_coordinate(&x, &y, address);
+		get_xy_coordinates(&x, &y, address);
 		mvwprintw(warena, y, x, "%.2x ", arena[i]);
 		address++;
 		i++;

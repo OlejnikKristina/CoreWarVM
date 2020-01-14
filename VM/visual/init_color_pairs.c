@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   set_colors_to_players.c                            :+:    :+:            */
+/*   init_color_pairs.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:10:01 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/12 20:08:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:56:11 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,4 @@ void	init_pairs()
 	init_pair(30, LIGHT_PINK, COLOR_YELLOW);
 	init_pair(40, LIGHT_PINK, LIGHT_BLUE);
 	init_pair(50, LIGHT_PINK, NICE_PINCK);
-
-}
-
-bool	set_colors_to_players(t_player **players, short players_amnt)
-{
-	short	i;
-
-	i = 0;
-	while (i < players_amnt)
-	{
-		if (players[i])
-			;
-		i++;
-	}
-	return (true);
 }
