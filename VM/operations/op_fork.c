@@ -25,20 +25,8 @@ static void	cp_regs(t_cursor *new, int32_t reg[16])
 
 static void	insert_new(t_cursor *new, t_vm *vm)
 {
-	t_cursor	*curr;
-	t_cursor	*temp;
-
-	curr = vm->cursor;
-	while (curr)
-	{
-		if (curr->id == new->id)
-		{
-			temp = curr->next;
-			curr->next = new;
-			new->next = temp;
-		}
-		curr = curr->next;
-	}
+	new->next = vm->cursor;
+	vm->cursor = new;
 }
 
 bool		op_fork(t_cursor *cursor, t_vm *vm)
