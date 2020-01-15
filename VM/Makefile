@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/13 14:39:01 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/15 16:35:44 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			decode_encoding_byte.c calculate_program_counter.c \
 			init_battlefield.c init_cursors.c start_game.c \
 			execute_cursor.c operations/encode_match_opcode.c \
-			display_arena.c \
+			display_arena.c dump64.c \
 			operations/encode_match_opcode2.c execute_operation.c \
 			operations/op_add.c operations/op_aff.c operations/op_and.c \
 			operations/op_fork.c operations/op_lfork.c operations/op_ld.c \
@@ -31,10 +31,11 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			operations/op_st.c operations/op_sti.c operations/op_xor.c \
 			operations/op_zjmp.c utilities/convert.c
 
-VISUAL		= visual/corewar_visual.c visual/set_colors_to_players.c \
+VISUAL		= visual/corewar_visual.c visual/init_color_pairs.c \
 			utilities/get_player_by_id.c visual/display_info.c \
 			visual/vinit_cursors.c visual/refresh_arena.c \
-			visual/visual_sti.c
+			visual/visual_sti.c visual/display_live_calls.c \
+			visual/get_xy_coordinates.c
 
 all: $(NAME)
 

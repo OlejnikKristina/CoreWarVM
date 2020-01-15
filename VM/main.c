@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 14:45:35 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 19:56:06 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		main(int argc, char **argv)
 	else
 	{
 		init_vm(vm);
-		// displ_cursors(vm->cursor, vm->arena, vm->players_amnt);
 		start_game(vm);
 	}
 	vm_free(&vm);

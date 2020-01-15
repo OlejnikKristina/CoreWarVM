@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/06 19:30:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 16:06:20 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:36:49 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,6 @@ bool	show_arena(t_player **players, short pl_amnt, t_vm *vm)
 			ft_printf("\n     ");
 		i++;
 	}
-
-	// i = 0;
-	// ft_printf("ARENA MEM: \n");
-	// while (i < 23)
-	// {
-	// 	ft_printf("%.2x ", vm->arena[i]);
-	// 	i++;
-	// }i =0;ft_printf("\n");
-	// ft_printf("PLAYER MEM: \n");
-	// while (i < 23)
-	// {
-	// 	ft_printf("%.2x ", players[0]->code[i]);
-	// 	i++;
-	// }
 	ft_printf("%{RESET}\n");
-	return (true);
+	return (0);
 }
