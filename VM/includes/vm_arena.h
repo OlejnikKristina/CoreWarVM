@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/13 13:44:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 15:12:14 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ struct				s_cursor
 typedef struct		s_flags
 {
 	int				dump;
+	int				hexdump;
 	bool			v;
 	short			players_order[MAX_PLAYERS];
 }					t_flags;

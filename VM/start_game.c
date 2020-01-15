@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   start_game.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/05 15:51:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/11 18:33:23 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
+/*   Updated: 2020/01/15 15:53:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,53 @@ bool	execute_one_cycle(t_vm *vm)
 	return (true);
 }
 
+char	*get_hex(int n, int len)
+{
+	char	*ret;
+	char	padding[4];
+	int		offset;
+	int		i;
+
+	ret = itoa_base64u(n, 16, 0);
+	offset = (2 * len) - ft_strlen(ret);
+	i = 0;
+	while (i < offset)
+	{
+		padding[i] = '0';
+		i++;
+	}
+	padding[i] = 0;
+	ret = ft_strjoin(padding, ret);
+	return (ret);
+}
+
+bool	dump64(t_vm *vm)
+{
+	int i;
+	int j;
+	int idx;
+	int line;
+
+	i = 0;
+	line = 0;
+	idx = 0;
+	while (i < 64)
+	{
+		j = 0;
+		ft_printf("0x%s : ", get_hex(line, 2));
+		while (j < 64)
+		{
+			ft_printf("%s ", get_hex(vm->arena[idx], 1));
+			idx++;
+			j++;
+		}
+		ft_putendl("");
+		line += 64;
+		i++;
+	}
+	return (true);
+}
+
 bool	up_to_cycle_to_die(t_vm *vm)
 {
 	bool		someone_alive;
@@ -92,8 +139,10 @@ bool	up_to_cycle_to_die(t_vm *vm)
 			execute_one_cycle(vm);
 			cycle_counter++;
 			vm->current_cycle += 1;
-			if (vm->flag->dump == cycle_counter)
+			if (vm->flag->hexdump == cycle_counter)
 				return (show_arena(vm->players, vm->players_amnt, vm));
+			else if (vm->flag->dump == cycle_counter)
+				return (dump64(vm));
 		}
 		someone_alive = check(vm);
 	}
