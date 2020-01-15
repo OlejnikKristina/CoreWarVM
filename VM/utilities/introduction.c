@@ -6,11 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 17:36:54 by asulliva       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/01/15 16:05:40 by asulliva      ########   odam.nl         */
-=======
-/*   Updated: 2020/01/15 15:55:44 by krioliin      ########   odam.nl         */
->>>>>>> kristina
+/*   Updated: 2020/01/15 18:49:29 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +14,7 @@
 
 void	introduce_champion(t_player *player)
 {
-<<<<<<< HEAD
 	ft_printf("%{WHITE_B}* Player %d, ", player->id);
-=======
-	ft_printf("\n%{WHITE_B}* Player %d, ", player->id);
->>>>>>> kristina
 	ft_printf("weighing %{BLUE_B}%u%{WHITE_B}, ",
 	(unsigned int)player->code_size);
 	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
