@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/27 17:36:54 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/10 16:13:36 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:05:40 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	introduce_champion(t_player *player)
 {
-	ft_printf("\n%{WHITE_B}*Player %d, ", player->id);
+	ft_printf("%{WHITE_B}* Player %d, ", player->id);
 	ft_printf("weighing %{BLUE_B}%u%{WHITE_B}, ",
 	(unsigned int)player->code_size);
 	ft_printf("\"%{PINK_B}%s%{WHITE_B}\" ", player->name);
@@ -28,7 +28,7 @@ void	introduce_champions(t_player **players, short player_amnt)
 
 	i = 0;
 	player_id = 1;
-	ft_printf("Introducing contestants...");
+	ft_printf("Introducing contestants...\n");
 	while (player_id <= player_amnt)
 	{
 		if (players[i]->id == player_id)
