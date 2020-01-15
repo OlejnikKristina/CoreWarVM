@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/15 16:38:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:08:22 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@ int		bury_dead_cursors(t_cursor **head)
 		** What if only first cursor
 		** dead in all others alive?
 	*/
-	if (!head || (*head)->last_live == 0)
-	{
-		ft_memdel((void **)head);
-		return (100);
-	}
-	(*head)->last_live = 0;
-	corpse_counter = 0;
 	prev = *head;
-	cursor = (*head)->next;
+	corpse_counter = 0;
+	while (prev && prev->last_live == 0)
+	{
+		*head = prev->next;
+		ft_memdel((void **)&prev);
+		prev = *head;
+		corpse_counter++;
+	}
+	if (prev == NULL)
+		return (100);
+	prev->last_live = 0;
+	cursor = prev->next;
 	while (cursor)
 	{
 		if (cursor->last_live <= 0)
