@@ -6,10 +6,9 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 17:45:03 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/15 15:22:02 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "vm_arena.h"
 
@@ -76,7 +75,7 @@ bool	op_sti(t_cursor *cursor, t_vm *vm)
 	padding = 3;
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
-	address = (address  % IDX_MOD) + cursor->pos;
+	address = (address % IDX_MOD) + cursor->pos;
 	write_into_memory(val_to_write, vm->arena, address);
 	if (vm->flag->v)
 		visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);

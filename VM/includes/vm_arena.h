@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 15:52:12 by krioliin          #+#    #+#             */
-/*   Updated: 2020/01/15 19:03:42 by abumbier         ###   ########.fr       */
+/*   Updated: 2020/01/15 19:06:51 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@
 
 typedef struct s_cursor	t_cursor;
 typedef struct s_visual t_visual;
+typedef struct s_player t_player;
 
 struct				s_cursor
 {
 	short			id;
-	short			color;
 	bool			carry;
 	int				opcode;
-	short			last_live;
+	int				last_live;
 	short			wait_cycles;
 	int				pos;
 	int				pc;
 	int32_t			reg[REG_NUMBER];
 	/* For visualisation */
+	int				lives_reported;
 	int				prev_xy[2];
 	int				prev_val;
 	t_cursor		*next;
@@ -97,6 +98,7 @@ bool				args_validation(int argc, char **argv, t_flags *flags);
 short				check_flag(int argc, char **params, int *num,
 					t_flags *flags);
 void				add_n_falg(t_flags *flags, int from, int n);
+bool				dump64(t_vm *vm);
 bool				check_champ_file_name(char *file_name);
 bool				check_champion(char *file_name);
 short				get_players_amnt(short players_amnt_init);
@@ -160,6 +162,5 @@ void				print_arena_pure(unsigned char arena[MEM_SIZE]);
 */
 
 bool				visual_corawar();
-// void				display_cursors(WINDOW *warena, t_cursor *cursor);
 
 #endif

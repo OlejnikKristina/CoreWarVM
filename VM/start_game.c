@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   start_game.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/15 16:06:14 by asulliva      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   start_game.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/15 15:28:07 by asulliva          #+#    #+#             */
+/*   Updated: 2020/01/15 19:06:51 by abumbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@ int		bury_dead_cursors(t_cursor **head)
 	t_cursor	*cursor;
 	t_cursor	*prev;
 
-	if (!head || (*head)->last_live == 0)
-	{
-		ft_memdel((void **)head);
-		// ft_printf("%{RED}ALL PLAYERS DEAD\n%{RESET}");
-		return (100);
-	}
-	(*head)->last_live = 0;
-	corpse_counter = 0;
+	/*
+		** What if only first cursor
+		** dead in all others alive?
+	*/
 	prev = *head;
-	cursor = (*head)->next;
+	corpse_counter = 0;
+	while (prev && prev->last_live == 0)
+	{
+		*head = prev->next;
+		ft_memdel((void **)&prev);
+		prev = *head;
+		corpse_counter++;
+	}
+	if (prev == NULL)
+		return (100);
+	prev->last_live = 0;
+	cursor = prev->next;
 	while (cursor)
 	{
-		if (cursor->last_live == 0)
+		if (cursor->last_live <= 0)
 		{
 			prev->next = cursor->next;
 			ft_memdel((void **)&cursor);
@@ -41,6 +48,7 @@ int		bury_dead_cursors(t_cursor **head)
 		else
 		{
 			cursor->last_live = 0;
+			cursor->lives_reported = 0;
 			cursor = cursor->next;
 			prev = cursor;
 		}
@@ -78,54 +86,6 @@ bool	execute_one_cycle(t_vm *vm)
 	return (true);
 }
 
-char	*get_hex(int n, int len)
-{
-	char	*ret;
-	char	padding[4];
-	int		offset;
-	int		i;
-
-	ret = itoa_base64u(n, 16, 0);
-	offset = (2 * len) - ft_strlen(ret);
-	i = 0;
-	while (i < offset)
-	{
-		padding[i] = '0';
-		i++;
-	}
-	padding[i] = 0;
-	ret = ft_strjoin(padding, ret);
-	return (ret);
-}
-
-bool	dump64(t_vm *vm)
-{
-	int i;
-	int j;
-	int idx;
-	int line;
-
-	i = 0;
-	line = 0;
-	idx = 0;
-	while (i < 64)
-	{
-		j = 0;
-		ft_printf("0x%s : ", get_hex(line, 2));
-		while (j < 64)
-		{
-			ft_printf("%s ", get_hex(vm->arena[idx], 1));
-			idx++;
-			j++;
-		}
-		ft_putendl("");
-		line += 64;
-		i++;
-	}
-	exit(0);
-	return (true);
-}
-
 bool	up_to_cycle_to_die(t_vm *vm)
 {
 	bool		someone_alive;
@@ -154,9 +114,10 @@ bool	start_game(t_vm *vm)
 {
 	t_player *the_champion;
 
-	up_to_cycle_to_die(vm);
-	the_champion = get_player_by_id(vm->players, vm->last_alive, vm->players_amnt);
-	if (vm->flag->v == false)
+	if (up_to_cycle_to_die(vm) && vm->flag->v == false)
+	{
+		the_champion = get_player_by_id(vm->players, vm->last_alive, vm->players_amnt);
 		ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
+	}
 	return (true);
 }

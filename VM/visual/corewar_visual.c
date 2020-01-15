@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/12 18:42:21 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/14 21:07:21 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ bool	visual_corawar(t_vm *vm)
 	vm->v->winfo = init_winfo(HEIGHT + OFFSETY, (WIDTH) / 4 + 7, OFFSETY, WIDTH + OFFSETX + 3);
 	display_arena(vm, vm->v->warena);
 	display_info(vm, vm->v->winfo);
-	// display_cursors(vm->v->warena, vm->cursor);
-	set_colors_to_players(vm->players, vm->players_amnt);
 	return (true);
 }
 
