@@ -29,7 +29,7 @@ static void	write_value(t_vm *vm, t_cursor *cursor, int type, int value)
 		address = (index % IDX_MOD) + cursor->pos;
 		write_into_memory(value, vm->arena, address);
 		if (vm->flag->v)
-			visual_sti(vm->v->warena, vm->arena, cursor->id, address);
+			visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
 	}
 }
 
