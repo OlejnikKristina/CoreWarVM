@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/15 15:59:12 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 16:35:12 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ bool				args_validation(int argc, char **argv, t_flags *flags);
 short				check_flag(int argc, char **params, int *num,
 					t_flags *flags);
 void				add_n_falg(t_flags *flags, int from, int n);
+bool				dump64(t_vm *vm);
 bool				check_champ_file_name(char *file_name);
 bool				check_champion(char *file_name);
 short				get_players_amnt(short players_amnt_init);
