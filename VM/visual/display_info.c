@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 18:54:58 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:49:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ void		display_info(t_vm *vm, WINDOW *winfo)
 	display_game_params(winfo);
 	display_current_cycle(vm->v->winfo, 1);
 	display_processes(vm->v->winfo, 1);
+	display_live_calls_init(vm->v->winfo, vm->players_amnt);
 	wrefresh(winfo);
 }

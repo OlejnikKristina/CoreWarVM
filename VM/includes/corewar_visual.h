@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 20:45:02 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 14:50:34 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WIDTH 194
 # define OFFSETX 3
 # define OFFSETY 5
-# define DELAY 20000
+# define DELAY 27000
 # define INDEX ((HEIGHT - 8) / players_amnt))
 
 # include <ncurses.h>
@@ -50,6 +50,7 @@ void				display_processes(WINDOW *winfo, int processes_num);
 void				refresh_arena(t_vm *vm);
 void				visual_sti(WINDOW *warena, uint8_t arena[], short id, int address);
 void				display_live_calls(WINDOW *winfo, t_cursor *cursor);
+void				display_live_calls_init(WINDOW *winfo, short player_amnt);
 void				get_xy_coordinates(int *x, int *y, int address);
 
 #endif
