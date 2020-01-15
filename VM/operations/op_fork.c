@@ -6,8 +6,8 @@ static int	get_value(t_vm *vm, t_cursor *cursor)
 	int		value;
 
 	value = convert(&vm->arena[cursor->pos + 1], 2);
-	value = (value < 0 ? IDX_MOD + value : value % IDX_MOD);
-	value += cursor->pos % MEM_SIZE;
+	value = (value < 0 ? value : value % IDX_MOD);
+	value = (value + cursor->pos) % MEM_SIZE;
 	return (value);
 }
 
