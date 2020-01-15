@@ -1,5 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
+<<<<<<< HEAD
 /*                                                        :::      ::::::::   */
 /*   vm_arena.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -7,6 +8,15 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 15:52:12 by krioliin          #+#    #+#             */
 /*   Updated: 2020/01/14 17:55:57 by abumbier         ###   ########.fr       */
+=======
+/*                                                        ::::::::            */
+/*   vm_arena.h                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/15 15:12:14 by asulliva      ########   odam.nl         */
+>>>>>>> 6a0211e7f8326b0a89ff4c822637d67f5564577d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +55,7 @@ struct				s_cursor
 typedef struct		s_flags
 {
 	int				dump;
+	int				hexdump;
 	bool			v;
 	short			players_order[MAX_PLAYERS];
 }					t_flags;

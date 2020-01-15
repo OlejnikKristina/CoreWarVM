@@ -6,11 +6,36 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/21 17:39:09 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/06 19:55:35 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 15:13:15 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
+
+short	is_hexdump(int argc, char **params, int *param_num, t_flags *flags)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strcmp((const char *)params[*param_num], "-hexdump"))
+	{
+		if ((*param_num == argc - 1 || flags->hexdump))
+			return (-1);
+		else
+		{
+			*param_num = *param_num + 1;
+			while (params[*param_num][i])
+			{
+				if (!ft_isdigit(params[*param_num][i]))
+					return (-1);
+				i++;
+			}
+			flags->hexdump = ft_atoi(params[*param_num]);
+			return (1);
+		}
+	}
+	return (0);
+}
 
 short	is_dump(int argc, char **params, int *param_num, t_flags *flags)
 {
@@ -99,7 +124,9 @@ short	check_flag(int argc, char **params, int *num, t_flags *flags)
 {
 	short		return_val;
 
-	if ((return_val = is_dump(argc, params, num, flags)))
+	if ((return_val = is_hexdump(argc, params, num, flags)))
+		return (return_val);
+	else if ((return_val = is_dump(argc, params, num, flags)))
 		return (return_val);
 	else if (!ft_strcmp(params[*num], "-v"))
 	{
