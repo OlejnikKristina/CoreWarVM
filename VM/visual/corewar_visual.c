@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 21:07:21 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/15 17:18:14 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ bool	visual_corawar(t_vm *vm)
 {
 	initscr();
 	// nodelay(stdscr, true);
+	curs_set(0);
 	init_pairs();
 	vm->v = (t_visual *)ft_memalloc(sizeof(t_visual));
 	if (!vm)
