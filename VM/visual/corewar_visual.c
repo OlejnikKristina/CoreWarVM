@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 16:22:30 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 17:30:37 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ WINDOW	*init_winfo(int	height, int width, int startx, int starty)
 bool	visual_corawar(t_vm *vm)
 {
 	initscr();
+	// noecho();
 	nodelay(stdscr, true);
 	curs_set(0);
 	init_pairs();
