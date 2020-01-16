@@ -6,11 +6,16 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:45:10 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 17:50:38 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 19:25:06 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
+
+// void		refresh_cycle_to_die(WINDOW *winfo, int paddy)
+// {
+// 	mvwprintw(winfo, paddy + 30, 19, "[%d]", CYCLE_TO_DIE);
+// }
 
 static void	game_params_lables(WINDOW *winfo, int paddy)
 {
