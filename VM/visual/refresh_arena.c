@@ -6,11 +6,20 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 18:31:29 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 21:26:22 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 16:25:19 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
+
+void	step_by_step()
+{
+	while(getchar() == ' ')
+	{
+		;
+	}
+	flushinp();
+}
 
 bool	make_blink(WINDOW *warena , t_cursor *cursor)
 {
@@ -82,6 +91,8 @@ void	display_cursors(WINDOW *warena, t_cursor *cursors,
 
 void	refresh_arena(t_vm *vm)
 {
+	if (DEBUG_MOD)
+		step_by_step();
 	usleep(DELAY);
 	display_cursors(vm->v->warena, vm->cursor, vm->arena, vm);
 	display_current_cycle(vm->v->winfo, vm->current_cycle);

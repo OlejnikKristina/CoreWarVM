@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/15 14:50:34 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 15:26:45 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void				visual_sti(WINDOW *warena, uint8_t arena[], short id, int address);
 void				display_live_calls(WINDOW *winfo, t_cursor *cursor);
 void				display_live_calls_init(WINDOW *winfo, short player_amnt);
 void				get_xy_coordinates(int *x, int *y, int address);
+void				keyboard_madness(WINDOW *warena);
 
 #endif
