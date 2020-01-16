@@ -6,11 +6,12 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 18:31:29 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 18:03:33 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 18:20:14 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
+
 /*
 ** Program will execute step by step with pressed Enter
 */
@@ -94,7 +95,8 @@ void	refresh_arena(t_vm *vm)
 {
 	if (DEBUG_MOD)
 		step_by_step();
-	add_pause(vm->v->winfo);
+	else
+		add_pause(vm->v->winfo);
 	usleep(DELAY);
 	display_cursors(vm->v->warena, vm->cursor, vm->arena, vm);
 	display_current_cycle(vm->v->winfo, vm->current_cycle);

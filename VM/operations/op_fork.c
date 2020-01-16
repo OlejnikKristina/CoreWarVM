@@ -7,11 +7,12 @@ static int	get_value(t_vm *vm, t_cursor *cursor)
 
 	value = convert(&vm->arena[cursor->pos + 1], 2);
 	value = (value < 0 ? value : value % IDX_MOD);
-	value = (value + cursor->pos) % MEM_SIZE;
+	// value = (value + cursor->pos) % MEM_SIZE;
+	value = value % MEM_SIZE;
 	return (value);
 }
 
-static void	cp_regs(t_cursor *new, int32_t reg[16])
+static void	copy_regs(t_cursor *new, int32_t reg[16])
 {
 	int		i;
 
@@ -21,31 +22,44 @@ static void	cp_regs(t_cursor *new, int32_t reg[16])
 		new->reg[i] = reg[i];
 		i++;
 	}
-	new->pc = calculate_program_counter(new->opcode, reg[new->pos + 1]);
 }
 
-static void	insert_new(t_cursor *new, t_vm *vm)
+void	insert_new(t_cursor *new, t_vm *vm)
 {
 	new->next = vm->cursor;
 	vm->cursor = new;
 }
 
+void	insert_kid_after_father(t_cursor *cursor, t_cursor *new)
+{
+	new->next = cursor->next;
+	cursor->next = new;
+}
+
+void	insert_to_end(t_cursor *cursor, t_cursor *new)
+{
+	t_cursor *current;
+
+	current = cursor;
+	while (current->next)
+		current = current->next;
+	current->next = new;
+}
+
 bool		op_fork(t_cursor *cursor, t_vm *vm)
 {
-	int			new_pos;
+	int			new_pc;
 	t_cursor	*new;
 
-	if (cursor && vm)
-	{	
-		new_pos = get_value(vm, cursor);
-		new = init_cursor(cursor->id, new_pos, vm->arena[new_pos], vm->arena[new_pos + 1]);
-		ft_printf("POSITION: %d \n", new_pos, vm->arena[new_pos]);
-		cp_regs(new, cursor->reg);
-		new->last_live = cursor->last_live;
-		new->carry = 1;
-		insert_new(new, vm);
-		vm->process++;
-		return (true);
-	}
-	return (false);
+	new_pc = get_value(vm, cursor);
+	new = init_cursor(cursor->id, cursor->pos, cursor->opcode, vm->arena[cursor->pos + 1]);
+	copy_regs(new, cursor->reg);
+	new->last_live = cursor->last_live;
+	new->carry = cursor->carry;
+	new->pc = new_pc;
+	// insert_new(new, vm);
+	// insert_kid_after_father(cursor, new);
+	insert_to_end(cursor, new);
+	vm->process++;
+	return (true);
 }
