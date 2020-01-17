@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:18:36 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/04 15:38:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 20:19:37 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define YELLOW_PINK 118
 # define PINK_BLACK 119
 # define LBLUE_BLACK 120
+# define PINK_BLUE 121
 
 # define BRIGHT_YELLOW 3
 # define DARCK_GREEN 0b011100

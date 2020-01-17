@@ -6,52 +6,52 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/16 14:56:39 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:46:20 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vm_arena.h"
 
-int		bury_dead_cursors(t_cursor **head)
+int		bury_dead_cursors(t_cursor **head, t_vm *vm)
 {
 	int			corpse_counter;
 	t_cursor	*cursor;
 	t_cursor	*prev;
 
-	/*
-		** What if only first cursor
-		** dead in all others alive?
-	*/
 	prev = *head;
 	corpse_counter = 0;
 	while (prev && prev->last_live == 0)
 	{
 		*head = prev->next;
 		ft_memdel((void **)&prev);
+		if (*head == NULL)
+			return (100);
 		prev = *head;
 		corpse_counter++;
 	}
-	if (prev == NULL)
-		return (100);
 	prev->last_live = 0;
 	cursor = prev->next;
 	while (cursor)
 	{
 		if (cursor->last_live <= 0)
 		{
+			if (vm->flag->v)
+				show_corpse(cursor->id, vm->v->wop);
 			prev->next = cursor->next;
 			ft_memdel((void **)&cursor);
 			corpse_counter++;
-			if (prev->next == NULL)
+			if (prev == NULL)
 				break ;
 		}
 		else
 		{
 			cursor->last_live = 0;
 			cursor->lives_reported = 0;
-			cursor = cursor->next;
-			prev = cursor;
 		}
+		prev = prev->next;
+		if (prev == NULL)
+			break ;
+		cursor = prev->next;
 	}
 	return(corpse_counter);
 }
@@ -65,10 +65,12 @@ bool		check(t_vm *vm)
 	{
 		vm->cycle_to_die -= CYCLE_DELTA;
 		checks_in_row = 0;
+		if (vm->flag->v)
+			refresh_cycle_to_die(vm->v->winfo, 29, vm->cycle_to_die);
 	}
 	vm->nbr_lives = 0;
-	vm->process -= bury_dead_cursors(&vm->cursor);
-	return (0 < vm->process);
+	vm->process -= bury_dead_cursors(&vm->cursor, vm);
+	return (1 < vm->process);
 }
 
 bool	execute_one_cycle(t_vm *vm)
@@ -92,6 +94,7 @@ bool	up_to_cycle_to_die(t_vm *vm)
 	static int	cycle_counter;
 
 	someone_alive = true;
+	
 	while (someone_alive)
 	{
 		vm->current_cycle = 0;
@@ -114,10 +117,13 @@ bool	start_game(t_vm *vm)
 {
 	t_player *the_champion;
 
-	if (up_to_cycle_to_die(vm) && vm->flag->v == false)
+	if (up_to_cycle_to_die(vm))
 	{
 		the_champion = get_player_by_id(vm->players, vm->last_alive, vm->players_amnt);
-		ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
+		if (vm->flag->v == true)
+			congrats_champion(vm->v->wop, the_champion);
+		else
+			ft_printf("Contestant %d, \"%s\", has won !\n", vm->last_alive, the_champion->name);
 	}
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/22 11:27:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/10 17:30:00 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 20:09:21 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	vm_free(t_vm **vm)
 			getch();
 			delwin((*vm)->v->warena);
 			delwin((*vm)->v->winfo);
+			delwin((*vm)->v->wop);
 			endwin();
 		}
 		if ((*vm)->flag)

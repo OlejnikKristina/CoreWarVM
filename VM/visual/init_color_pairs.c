@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:10:01 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 19:56:11 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 20:21:05 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	init_pairs()
 	init_pair(PINK_YELLOW, NICE_PINCK2, COLOR_YELLOW);
 	init_pair(YELLOW_PINK, COLOR_YELLOW, NICE_PINCK2);
 	init_pair(PINK_BLACK, NICE_PINCK2, COLOR_BLACK);
+	init_pair(PINK_BLUE, LIGHT_BLUE, NICE_PINCK);
 	init_pair(LBLUE_BLACK, LIGHT_BLUE, COLOR_BLACK);
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, DARCK_GREEN, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, LIGHT_BLUE, COLOR_BLACK);
 	init_pair(5, NICE_PINCK, COLOR_BLACK);
-
 	init_pair(10, LIGHT_PINK, NICE_PINCK2);
 	init_pair(20, LIGHT_PINK, DARCK_GREEN);
 	init_pair(30, LIGHT_PINK, COLOR_YELLOW);

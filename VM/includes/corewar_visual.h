@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 18:03:42 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/17 13:56:15 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # define HEIGHT 68
 # define WIDTH 194
+# define WOPH (HEIGHT / 4 + 4)
+# define WOPW (WIDTH / 4)
 # define OFFSETX 3
 # define OFFSETY 5
-# define DELAY 27000
+# define DELAY 17000
 # define INDEX ((HEIGHT - 8) / players_amnt))
 
 # include <ncurses.h>
@@ -33,6 +35,7 @@ typedef struct		s_visual
 {
 	WINDOW			*winfo;
 	WINDOW			*warena;
+	WINDOW			*wop;
 }					t_visual;
 
 bool				visual_corawar(t_vm *vm);
@@ -54,6 +57,8 @@ void				display_live_calls(WINDOW *winfo, t_cursor *cursor);
 void				display_live_calls_init(WINDOW *winfo, short player_amnt);
 void				get_xy_coordinates(int *x, int *y, int address);
 void				add_pause(WINDOW *winfo);
+void				refresh_cycle_to_die(WINDOW *winfo, int paddy, int cycle_to_die);
+void				show_corpse(short dead_cursor_id, WINDOW *wop);
 
 void				keyboard_madness(WINDOW *warena);
 

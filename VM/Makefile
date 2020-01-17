@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/16 18:09:45 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/16 20:47:53 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ VISUAL		= visual/corewar_visual.c visual/init_color_pairs.c \
 			visual/vinit_cursors.c visual/refresh_arena.c \
 			visual/visual_sti.c visual/display_live_calls.c \
 			visual/get_xy_coordinates.c visual/keyboard_madness.c \
-			visual/display_game_params.c visual/add_pause.c
+			visual/display_game_params.c visual/add_pause.c \
+			visual/congrats_to_champion.c visual/show_corpse.c
 
 all: $(NAME)
 

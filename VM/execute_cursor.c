@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execute_cursor.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/05 17:28:27 by krioliin          #+#    #+#             */
-/*   Updated: 2020/01/14 18:25:06 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execute_cursor.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/16 22:30:43 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ bool	check_reg(uint8_t opcode, uint8_t encoding_byte, uint8_t *arena)
 
 short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 {
+	if (cursor == NULL)
+		return (0);
 	cursor->wait_cycles -= 1;
 	if (cursor->wait_cycles <= 0)
 	{
