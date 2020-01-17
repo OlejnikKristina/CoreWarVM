@@ -7,8 +7,6 @@ static int	get_value(t_vm *vm, t_cursor *cursor)
 
 	value = convert(&vm->arena[cursor->pos + 1], 2);
 	value = (value < 0 ? value : value % IDX_MOD);
-	// value = (value + cursor->pos) % MEM_SIZE;
-	// value = cursor->pc + (value % MEM_SIZE);
 	value = (value % MEM_SIZE);
 	return (value);
 }
@@ -45,6 +43,7 @@ void	insert_to_end(t_cursor *cursor, t_cursor *new)
 	while (current->next)
 		current = current->next;
 	current->next = new;
+	new->next = NULL;
 }
 
 bool		op_fork(t_cursor *cursor, t_vm *vm)
@@ -57,9 +56,8 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 	copy_regs(new, cursor->reg);
 	new->last_live = cursor->last_live;
 	new->carry = cursor->carry;
+	new->wait_cycles = 0;
 	new->pc = new_pc;
-	// insert_new(new, vm);
-	// insert_kid_after_father(cursor, new);
 	insert_to_end(cursor, new);
 	vm->process++;
 	return (true);

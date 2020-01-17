@@ -6,16 +6,18 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:45:10 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 19:25:06 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 19:59:51 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
 
-// void		refresh_cycle_to_die(WINDOW *winfo, int paddy)
-// {
-// 	mvwprintw(winfo, paddy + 30, 19, "[%d]", CYCLE_TO_DIE);
-// }
+void		refresh_cycle_to_die(WINDOW *winfo, int paddy, int cycle_to_die)
+{
+	wattron(winfo, COLOR_PAIR(YELLOW_PINK) | A_BOLD);
+	mvwprintw(winfo, paddy + 30, 19, "[%d]", cycle_to_die);
+	wattroff(winfo, COLOR_PAIR(YELLOW_PINK) | A_BOLD);
+}
 
 static void	game_params_lables(WINDOW *winfo, int paddy)
 {
@@ -55,6 +57,6 @@ static void	game_params_constans(WINDOW *winfo, int paddy)
 
 void		display_game_params(WINDOW *winfo)
 {
-	game_params_lables(winfo, 7);
-	game_params_constans(winfo, 7);
+	game_params_lables(winfo, 29);
+	game_params_constans(winfo, 29);
 }
