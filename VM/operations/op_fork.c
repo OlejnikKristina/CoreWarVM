@@ -56,7 +56,7 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 	copy_regs(new, cursor->reg);
 	new->last_live = cursor->last_live;
 	new->carry = cursor->carry;
-	new->wait_cycles = 800;
+	new->wait_cycles = 0;
 	new->pc = new_pc;
 	insert_to_end(cursor, new);
 	vm->process++;
