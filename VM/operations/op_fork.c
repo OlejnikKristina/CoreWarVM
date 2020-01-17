@@ -39,7 +39,6 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 	{	
 		new_pos = get_value(vm, cursor);
 		new = init_cursor(cursor->id, new_pos, vm->arena[new_pos], vm->arena[new_pos + 1]);
-		ft_printf("POSITION: %d \n", new_pos, vm->arena[new_pos]);
 		cp_regs(new, cursor->reg);
 		new->last_live = cursor->last_live;
 		new->carry = 1;
