@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/16 14:56:39 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:41:22 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ bool	up_to_cycle_to_die(t_vm *vm)
 			execute_one_cycle(vm);
 			cycle_counter++;
 			vm->current_cycle += 1;
-			if (vm->flag->hexdump == cycle_counter)
+			if (vm->flag->hexdump == cycle_counter
+			|| (vm->current_cycle == vm->cycle_to_die && vm->flag->hexdump))
 				return (show_arena(vm->players, vm->players_amnt, vm));
-			else if (vm->flag->dump == cycle_counter)
+			else if (vm->flag->dump == cycle_counter
+			|| (vm->current_cycle == vm->cycle_to_die && vm->flag->dump))
 				return (dump64(vm));
 		}
 		someone_alive = check(vm);
