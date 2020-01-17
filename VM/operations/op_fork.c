@@ -56,9 +56,13 @@ bool		op_fork(t_cursor *cursor, t_vm *vm)
 	copy_regs(new, cursor->reg);
 	new->last_live = cursor->last_live;
 	new->carry = cursor->carry;
-	new->wait_cycles = cursor->wait_cycles;
-	new->pc = new_pc;
 	insert_to_end(cursor, new);
+	new->pos += new_pc;
+	new->pos %= MEM_SIZE;
+	new->opcode = vm->arena[new->pos];
+	new->pc =
+	calculate_program_counter(new->opcode, vm->arena[new->pos + 1]);
+	new->wait_cycles = get_waite_cycle(new->opcode);
 	vm->process++;
 	return (true);
 }

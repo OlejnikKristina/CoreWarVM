@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/17 19:23:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/17 20:37:25 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool	up_to_cycle_to_die(t_vm *vm)
 	someone_alive = true;
 	while (someone_alive)
 	{
-		vm->current_cycle = 0;
+		vm->current_cycle = 1;
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
 			execute_one_cycle(vm);
