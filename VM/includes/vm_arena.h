@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vm_arena.h                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abumbier <abumbier@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/20 15:52:12 by krioliin          #+#    #+#             */
-/*   Updated: 2020/01/15 19:06:51 by abumbier         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   vm_arena.h                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/17 14:43:28 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int					get_waite_cycle(uint8_t opcode);
 t_player			*get_player_by_id(t_player **players, short player_id,
 					short player_amnt);
 bool				error_msg(unsigned short erro_num);
-void				introduce_champions(t_player **players, short player_amnt);
+void				introduce_champions(t_player **players, short player_amnt, int colour);
 void				init_op_encode_validation_arr(bool (*op_encode[17])(e_argctype *));
 bool				en_op_code_and_or_xor(e_argctype arg_type[3]);
 bool				en_op_code_ldi_lldi(e_argctype arg_type[3]);
