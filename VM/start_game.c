@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/17 17:24:57 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/17 19:23:15 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,35 @@ int		bury_dead_cursors(t_cursor **head, t_vm *vm)
 				break ;
 		}
 		else
-		{
 			cursor->last_live = 0;
-			cursor->lives_reported = 0;
-		}
 		prev = prev->next;
 		if (prev == NULL)
 			break ;
 		cursor = prev->next;
 	}
 	return(corpse_counter);
+}
+
+int			bury_dead_players(t_player **players, short players_amnt)
+{
+	int		corpse_counter;
+	int		i;
+
+	corpse_counter = 0;
+	i = 0;
+	while (i < players_amnt)
+	{
+		if (players[i]->lives == 0)
+		{
+			corpse_counter++;
+			players[i]->lives = DEAD;
+		}
+		else
+			players[i]->lives = 0;
+		players[i]->last_live = 0;
+		i++;
+	}
+	return (corpse_counter);
 }
 
 bool		check(t_vm *vm)
@@ -70,7 +89,8 @@ bool		check(t_vm *vm)
 	}
 	vm->nbr_lives = 0;
 	vm->process -= bury_dead_cursors(&vm->cursor, vm);
-	return (1 < vm->process);
+	vm->alive_players_amt -= bury_dead_players(vm->players, vm->players_amnt);
+	return (1 <= vm->alive_players_amt);
 }
 
 bool	execute_one_cycle(t_vm *vm)
@@ -99,8 +119,6 @@ bool	up_to_cycle_to_die(t_vm *vm)
 		vm->current_cycle = 0;
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
-			if (cycle_counter == 2001)
-				ft_printf("HELLOOO =D§n");
 			execute_one_cycle(vm);
 			cycle_counter++;
 			vm->current_cycle += 1;

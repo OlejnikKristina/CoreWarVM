@@ -6,11 +6,19 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 18:52:49 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/15 14:49:16 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/17 19:10:57 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
+
+// void	display_live_calls(WINDOW *winfo, t_cursor *cursor)
+// {
+// 	wattron(winfo, COLOR_PAIR(cursor->id));
+// 	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 2, 32, "%d", cursor->last_live);
+// 	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 1, 32, "%d", cursor->lives_reported);
+// 	wrefresh(winfo);
+// }
 
 void	display_live_calls_init(WINDOW *winfo, short player_amnt)
 {
@@ -26,10 +34,10 @@ void	display_live_calls_init(WINDOW *winfo, short player_amnt)
 	}
 }
 
-void	display_live_calls(WINDOW *winfo, t_cursor *cursor)
+void	display_live_calls(WINDOW *winfo, t_player *player)
 {
-	wattron(winfo, COLOR_PAIR(cursor->id));
-	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 2, 32, "%d", cursor->last_live);
-	mvwprintw(winfo, OFFSETY + cursor->id * 4 + 1, 32, "%d", cursor->lives_reported);
+	wattron(winfo, COLOR_PAIR(player->id));
+	mvwprintw(winfo, OFFSETY + player->id * 4 + 2, 32, "%d", player->last_live);
+	mvwprintw(winfo, OFFSETY + player->id * 4 + 1, 32, "%d", player->lives);
 	wrefresh(winfo);
 }

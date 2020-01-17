@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 16:02:19 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/17 19:08:17 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define OP_NBR 16
 # define DEBUG_MOD 0
+# define DEAD -1000
+
 
 typedef struct s_cursor	t_cursor;
 typedef struct s_visual t_visual;
@@ -38,7 +40,6 @@ struct				s_cursor
 	int				pc;
 	int32_t			reg[REG_NUMBER];
 	/* For visualisation */
-	int				lives_reported;
 	int				prev_xy[2];
 	int				prev_val;
 	t_cursor		*next;
@@ -60,6 +61,8 @@ typedef	struct		s_player
 	int				code_size;
 	uint8_t			*code;
 	int				start_pos;
+	int				lives;
+	int				last_live;
 }					t_player;
 
 /*
@@ -72,6 +75,7 @@ typedef struct		s_vm
 	int				cycle_to_die;
 	int				nbr_lives;
 	int				process;
+	int				alive_players_amt;
 	short			players_amnt;
 	int				last_alive;
 	t_player		**players;
@@ -116,6 +120,7 @@ bool				get_player_code_size(t_player *player, const int fd);
 bool				get_player_exec_code(t_player *player, const int fd);
 void				set_player_id(t_player *player,
 short players_order[MAX_PLAYERS], short num, short players_amnt);
+int			get_player_id(t_player **players, short player_id, short player_amnt);
 t_cursor			*init_cursor(int id, int pos, int opcode, int encoding_byte);
 
 /*

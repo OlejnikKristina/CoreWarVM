@@ -26,13 +26,7 @@ static void	write_value(t_vm *vm, t_cursor *cursor, int type, int value)
 	else if (type == IND)
 	{
 		index = convert(&vm->arena[cursor->pos + offset], 2);
-		ft_printf("index %d %x\n", index, index);
-		// 400 0190
-		// -400 FE 70
 		address = (index % IDX_MOD) + cursor->pos;
-		// ft_printf("ard %d\n", address);
-		//  address = (address < 0 ? MEM_SIZE + address : address % MEM_SIZE);
-		// ft_printf("ad %d\n", address);
 		write_into_memory(value, vm->arena, address);
 		if (vm->flag->v)
 			visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
