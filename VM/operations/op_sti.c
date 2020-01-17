@@ -6,11 +6,22 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 15:16:45 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:37:37 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
+
+// void		write_into_memory(int32_t val_to_write, uint8_t arena[])
+// {
+// 	uint8_t		*pointer;
+
+// 	pointer = (uint8_t *)&val_to_write;
+// 	arena[0] = pointer[3];
+// 	arena[1] = pointer[2];
+// 	arena[2] = pointer[1];
+// 	arena[3] = pointer[0];
+// }
 
 void	write_into_memory(int32_t val_to_write, uint8_t *arena, int address)
 {

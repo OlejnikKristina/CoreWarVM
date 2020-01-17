@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/15 14:49:56 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 19:16:44 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		display_current_cycle(WINDOW *winfo, int current_cycle)
 		lable_set = true;
 	}
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 25, 21, " %d", current_cycle);
+	mvwprintw(winfo, OFFSETY + 25, 21, " %.5d", current_cycle);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 
@@ -40,40 +40,6 @@ void		display_processes(WINDOW *winfo, int processes_num)
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 	mvwprintw(winfo, OFFSETY + 27, 22, "%d", processes_num);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-}
-
-void		display_game_params(WINDOW *winfo)
-{
-	char	spaces[26];
-	int		pady;
-
-	pady = 7;
-	ft_memset((void *)spaces, ' ', 26);
-	spaces[25] = '\0';
-	spaces[0] = '|';
-	spaces[24] = '|';
-	wattron(winfo, COLOR_PAIR(PINK_YELLOW) | A_BOLD);
-	mvwprintw(winfo, pady + 30, 3, "| Cycle to Die: ");
-	mvwprintw(winfo, pady + 32, 3, "| Cycle  Delta: "); 
-	mvwprintw(winfo, pady + 34, 3, "| Number Lives: ");
-	mvwprintw(winfo, pady + 36, 3, "| Max   Checks: ");
-
-	mvwprintw(winfo, pady + 30, 24, "   |");
-	mvwprintw(winfo, pady + 32, 23, "    |"); 
-	mvwprintw(winfo, pady + 34, 23, "    |");
-	mvwprintw(winfo, pady + 36, 22, "     |");
-
-	mvwprintw(winfo, pady + 29, 3, "-------------------------");
-	mvwprintw(winfo, pady + 31, 3, "%s", spaces);
-	mvwprintw(winfo, pady + 33, 3, "%s", spaces);
-	mvwprintw(winfo, pady + 35, 3, "%s", spaces);
-	mvwprintw(winfo, pady + 37, 3, "-------------------------");
-	wattron(winfo, COLOR_PAIR(YELLOW_PINK) | A_BOLD);
-	mvwprintw(winfo, pady + 30, 19, "[%d]", CYCLE_TO_DIE);
-	mvwprintw(winfo, pady + 32, 19, "[%d]", CYCLE_DELTA);
-	mvwprintw(winfo, pady + 34, 19, "[%d]", NBR_LIVE);
-	mvwprintw(winfo, pady + 36, 19, "[%d]", MAX_CHECKS);
-	wattroff(winfo, COLOR_PAIR(YELLOW_PINK) | A_BOLD);
 }
 
 void		display_players(t_player **players, WINDOW *winfo, short players_amnt)

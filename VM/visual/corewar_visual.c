@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/14 21:07:21 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/16 17:30:37 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,16 @@ WINDOW	*init_winfo(int	height, int width, int startx, int starty)
 bool	visual_corawar(t_vm *vm)
 {
 	initscr();
-	// nodelay(stdscr, true);
+	// noecho();
+	nodelay(stdscr, true);
+	curs_set(0);
 	init_pairs();
 	vm->v = (t_visual *)ft_memalloc(sizeof(t_visual));
 	if (!vm)
 		return (false);
 	vm->v->warena = init_arena(HEIGHT + OFFSETY, WIDTH + OFFSETX + 1, OFFSETY, OFFSETX);
 	vm->v->winfo = init_winfo(HEIGHT + OFFSETY, (WIDTH) / 4 + 7, OFFSETY, WIDTH + OFFSETX + 3);
+	// keyboard_madness(vm->v->warena);
 	display_arena(vm, vm->v->warena);
 	display_info(vm, vm->v->winfo);
 	return (true);
