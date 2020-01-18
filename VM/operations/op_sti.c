@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 18:05:45 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/18 20:59:08 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 		// val = arena[convert(&arena[cursor->pos + *padding], 4) % IDX_MOD];
 		val = convert(&arena[cursor->pos + *padding], 2) % IDX_MOD;
 		index = val + cursor->pos;
-		index = (index < 0 ? MEM_SIZE + index : index % MEM_SIZE);
+		index = (index < 0 ? (MEM_SIZE + index - 1) : index % MEM_SIZE);
 		val = convert(&arena[index], 4);
 		// val = convert(&arena[convert(&arena[cursor->pos + *padding], 2) % IDX_MOD], 4);
 		*padding += 2;

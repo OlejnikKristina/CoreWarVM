@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/13 14:24:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 15:26:00 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/18 21:05:41 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	visual_sti(WINDOW *warena, uint8_t arena[], short id, int address)
 	short	i;
 
 	i = 0;
-	wattron(warena, (COLOR_PAIR(id) | A_BOLD));
+	wattron(warena, (COLOR_PAIR(id * 10 + 1) | A_DIM));
 	while (i < 4)
 	{
 		get_xy_coordinates(&x, &y, address);
@@ -28,4 +28,5 @@ void	visual_sti(WINDOW *warena, uint8_t arena[], short id, int address)
 		i++;
 	}
 	wrefresh(warena);
+	wattroff(warena, (COLOR_PAIR(id * 10 + 1) | A_DIM));
 }
