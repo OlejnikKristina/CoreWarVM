@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:44:31 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 21:59:05 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/18 16:41:10 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 bool		op_live(t_cursor *cursor, t_vm *vm)
 {
 	int		val;
+	int		index;
 
 	val = convert(&vm->arena[cursor->pos + 1], 4);
-	if (val == cursor->id * -1)
+	val = (val < 0 ? val * -1 : val);
+	cursor->last_live = vm->current_cycle;
+	if (val > 0 && val <= vm->players_amnt)
 	{
-		cursor->last_live = vm->current_cycle;
-		cursor->lives_reported += 1;
-		if (2000 < cursor->lives_reported)
-			ft_printf("Wtf?\n");
+		index = get_player_index(vm->players, val, vm->players_amnt);
+		vm->players[index]->lives++;
+		vm->players[index]->last_live = vm->current_cycle;
 		vm->nbr_lives++;
-		vm->last_alive = cursor->id;
+		vm->last_alive = val;
 		if (vm->flag->v)
-			display_live_calls(vm->v->winfo, cursor);
+			display_live_calls(vm->v->winfo, vm->players[index]);
 	}
 	return (true);
 }

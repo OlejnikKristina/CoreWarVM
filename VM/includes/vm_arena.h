@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 15:55:14 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/18 16:38:55 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 
 # define OP_NBR 16
 # define DEBUG_MOD 0
+# define DEAD -1000
+
 
 typedef struct s_cursor	t_cursor;
 typedef struct s_visual t_visual;
@@ -38,7 +40,6 @@ struct				s_cursor
 	int				pc;
 	int32_t			reg[REG_NUMBER];
 	/* For visualisation */
-	int				lives_reported;
 	int				prev_xy[2];
 	int				prev_val;
 	t_cursor		*next;
@@ -60,6 +61,9 @@ typedef	struct		s_player
 	int				code_size;
 	uint8_t			*code;
 	int				start_pos;
+	/* For visualisation */
+	int				lives;
+	int				last_live;
 }					t_player;
 
 /*
@@ -115,7 +119,10 @@ bool				check_null_byte(const int fd);
 bool				get_player_code_size(t_player *player, const int fd);
 bool				get_player_exec_code(t_player *player, const int fd);
 void				set_player_id(t_player *player,
-short players_order[MAX_PLAYERS], short num, short players_amnt);
+					short players_order[MAX_PLAYERS], short num,
+					short players_amnt);
+int					get_player_index(t_player **players, short player_id,
+					short player_amnt);
 t_cursor			*init_cursor(int id, int pos, int opcode, int encoding_byte);
 
 /*
@@ -125,7 +132,8 @@ t_cursor			*init_cursor(int id, int pos, int opcode, int encoding_byte);
 bool				init_battlefield(t_vm *vm);
 bool				init_cursors(t_vm *vm);
 int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
-int					decode_encoding_byte(unsigned char encod_byte, e_argctype op_args[3]);
+int					decode_encoding_byte(unsigned char encod_byte,
+					e_argctype op_args[3]);
 short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
 bool				is_encoding_byte(uint8_t opcode);
 
@@ -138,6 +146,7 @@ short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm);
 short				execute_operation(t_cursor *cursor, t_vm *vm);
 bool				show_arena(t_player **players, short pl_amnt, t_vm *vm);
 int					get_waite_cycle(uint8_t opcode);
+void				discard_players_lives_calls(t_vm *vm);
 void				congrats_champion(WINDOW *wop, t_player *champiom);
 
 /*

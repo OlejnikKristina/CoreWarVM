@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/16 20:47:53 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/18 16:40:18 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			operations/op_ldi.c operations/op_lldi.c operations/op_lld.c \
 			operations/op_live.c operations/op_or.c operations/op_sub.c \
 			operations/op_st.c operations/op_sti.c operations/op_xor.c \
-			operations/op_zjmp.c utilities/convert.c
+			operations/op_zjmp.c utilities/convert.c \
+			discard_players_lives_calls.c
 
 VISUAL		= visual/corewar_visual.c visual/init_color_pairs.c \
 			utilities/get_player_by_id.c visual/display_info.c \
