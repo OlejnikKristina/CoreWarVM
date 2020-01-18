@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 19:16:44 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/17 15:57:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		display_processes(WINDOW *winfo, int processes_num)
 		lable_set = true;
 	}
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 27, 22, "%d", processes_num);
+	mvwprintw(winfo, OFFSETY + 27, 22, "%.5d", processes_num);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 
