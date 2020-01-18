@@ -1,4 +1,0 @@
-Usage: ./corewar -v [-dump nbr_cycles] [[-n number] champion1.cor] ...
-    -dump <num> : Dump memory (32 octets per line) after <num> cycles and exit
-    -v          : Run visualizer
-    -n    <num> : Set <num> of the next player
