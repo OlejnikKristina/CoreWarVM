@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 15:57:56 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/18 18:12:09 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void		display_players(t_player **players, WINDOW *winfo, short players_amnt)
 		mvwprintw(winfo, OFFSETY + i * 4, 15, player->name);
 		wattroff(winfo, COLOR_PAIR(i) | A_BOLD);
 		mvwprintw(winfo, OFFSETY + i * 4 + 1, 4,
-		"Reported   \"live\" (times):");
-		mvwprintw(winfo, OFFSETY + i * 4 + 2, 4,
 		"Last time reported \"live\":");
+		mvwprintw(winfo, OFFSETY + i * 4 + 2, 4,
+		"Reported   \"live\" (times):");
 		i++;
 	}
 	mvwprintw(winfo, OFFSETY + 20, 3,
