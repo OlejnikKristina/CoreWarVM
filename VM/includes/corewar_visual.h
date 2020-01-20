@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/18 18:19:17 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/18 22:29:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void				display_processes(WINDOW *winfo, int processes_num);
 void				display_game_params(WINDOW *winfo);
 void				refresh_arena(t_vm *vm);
 void				visual_sti(WINDOW *warena, uint8_t arena[], short id, int address);
+void				visual_st(WINDOW *warena, uint8_t arena[], short id, int address);
 void				display_live_calls(WINDOW *winfo, t_player *palyer, int cycles_passed);
 void				display_live_calls_init(WINDOW *winfo, short player_amnt);
 void				get_xy_coordinates(int *x, int *y, int address);

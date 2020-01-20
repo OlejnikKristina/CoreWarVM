@@ -54,7 +54,7 @@ wall:
 	st		r2, -249
 	st		r2, -258
 	st		r2, -267
-	st		r2, -276 #fucked up somewhere here; cycle num 1271
+	st		r2, -276
 	st		r2, -285
 	st		r2, -294
 	st		r2, -303

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/18 20:59:08 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/19 18:48:44 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 // 	uint8_t		*pointer;
 
 // 	pointer = (uint8_t *)&val_to_write;
-// 	arena[0] = pointer[3];
-// 	arena[1] = pointer[2];
-// 	arena[2] = pointer[1];
-// 	arena[3] = pointer[0];
+// 	arena[0] = pointer[3] % MEM_SIZE;
+// 	arena[1] = pointer[2] % MEM_SIZE;
+// 	arena[2] = pointer[1] % MEM_SIZE;
+// 	arena[3] = pointer[0] % MEM_SIZE;
 // }
 
 void	write_into_memory(int32_t val_to_write, uint8_t *arena, int address)
@@ -43,7 +43,6 @@ int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	int32_t	val;
 	int8_t	*pval;
 	int		reg_num;
-	int		index;
 
 	val = 0;
 	pval = (int8_t *)&val;
@@ -64,12 +63,9 @@ int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	}
 	else if (arg_type == IND)
 	{
-		// val = arena[convert(&arena[cursor->pos + *padding], 4) % IDX_MOD];
-		val = convert(&arena[cursor->pos + *padding], 2) % IDX_MOD;
-		index = val + cursor->pos;
-		index = (index < 0 ? (MEM_SIZE + index - 1) : index % MEM_SIZE);
-		val = convert(&arena[index], 4);
-		// val = convert(&arena[convert(&arena[cursor->pos + *padding], 2) % IDX_MOD], 4);
+		val = convert(&arena[cursor->pos + *padding], 2);
+		val = cursor->pos + (val % IDX_MOD);
+		val = convert(&arena[val], 4);
 		*padding += 2;
 	}
 	return (val);
@@ -93,6 +89,9 @@ bool	op_sti(t_cursor *cursor, t_vm *vm)
 	address = get_arg_val(args[1], vm->arena, cursor, &padding);
 	address += get_arg_val(args[2], vm->arena, cursor, &padding);
 	address = (address % IDX_MOD) + cursor->pos;
+	while (address < 0)					// new
+		address = MEM_SIZE + address;	// new
+	address = address % MEM_SIZE;
 	write_into_memory(val_to_write, vm->arena, address);
 	if (vm->flag->v)
 		visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
