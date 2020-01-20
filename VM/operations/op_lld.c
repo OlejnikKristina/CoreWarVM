@@ -48,6 +48,8 @@ bool		op_lld(t_cursor *cursor, t_vm *vm)
 		reg_num = get_reg_num(vm, cursor, args[0]);
 		value = get_value(vm, cursor, args[0]);
 		cursor->reg[reg_num] = value;
+		//ADD MODIFICATION OF CARRY FLAG ACCORDING TO SUBJECT
+		cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
 	}
 	return (true);
 }

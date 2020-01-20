@@ -28,7 +28,7 @@ static void	write_value(t_vm *vm, t_cursor *cursor, e_argctype type, int32_t val
 	else if (type == IND)
 	{
 		index = convert(&vm->arena[cursor->pos + offset], 2);
-		index = index % IDX_MOD;
+
 		address = cursor->pos + (index % IDX_MOD);
 		while (address < 0)						// new
 			address = MEM_SIZE + address;		// new
@@ -48,8 +48,8 @@ bool		op_st(t_cursor *cursor, t_vm *vm)
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	reg_num = get_reg_num(vm, cursor);
 	value = cursor->reg[reg_num - 1];
-	// if (57672192 <= value)
-	// 	ft_printf("");
+	if (0 < value)
+		ft_printf("");
 	write_value(vm, cursor, args[1], value);
 	return (true);
 }
