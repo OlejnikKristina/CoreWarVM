@@ -31,18 +31,19 @@ static void	write_value(t_vm *vm, t_cursor *cursor, e_argctype type, int32_t val
 		address = cursor->pos + (index % IDX_MOD);
 		while (address < 0)
 			address = MEM_SIZE + address;
-		address = address % MEM_SIZE;
+		if ((MEM_SIZE - 3) <= address)
+			ft_printf("");
 		write_into_memory(value, vm->arena, address);
 		if (vm->flag->v)
-			visual_st(vm->v->warena, &(vm->arena[address]), cursor->id, address);
+			visual_st(vm->v->warena, vm->arena, cursor->id, address);
 	}
 }
 
 bool		op_st(t_cursor *cursor, t_vm *vm)
 {
-	e_argctype	args[3];
-	int			reg_num;
-	int32_t		value;
+	e_argctype		args[3];
+	int				reg_num;
+	int				value;
 
 	decode_encoding_byte(vm->arena[cursor->pos + 1], args);
 	reg_num = get_reg_num(vm, cursor);

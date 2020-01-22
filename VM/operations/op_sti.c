@@ -6,33 +6,26 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/19 18:48:44 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/22 20:59:44 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
 
-// void		write_into_memory(int32_t val_to_write, uint8_t arena[])
-// {
-// 	uint8_t		*pointer;
-
-// 	pointer = (uint8_t *)&val_to_write;
-// 	arena[0] = pointer[3] % MEM_SIZE;
-// 	arena[1] = pointer[2] % MEM_SIZE;
-// 	arena[2] = pointer[1] % MEM_SIZE;
-// 	arena[3] = pointer[0] % MEM_SIZE;
-// }
-
-void	write_into_memory(int32_t val_to_write, uint8_t *arena, int address)
+void	write_into_memory(int val_to_write, uint8_t *arena, int address)
 {
 	uint8_t		*pointer;
+	int			position;
 	int			i;
 
 	i = 0;
 	pointer = (uint8_t *)&val_to_write;
 	while (i < 4)
 	{
-		arena[(address + i) % MEM_SIZE] = pointer[3 - i];
+		position = address + i;
+		while (MEM_SIZE <= position)
+			position -= MEM_SIZE;
+		arena[position] = pointer[3 - i];
 		i++;
 	}
 }
@@ -91,9 +84,8 @@ bool	op_sti(t_cursor *cursor, t_vm *vm)
 	address = (address % IDX_MOD) + cursor->pos;
 	while (address < 0)					// new
 		address = MEM_SIZE + address;	// new
-	address = address % MEM_SIZE;
 	write_into_memory(val_to_write, vm->arena, address);
 	if (vm->flag->v)
-		visual_sti(vm->v->warena, &(vm->arena[address]), cursor->id, address);
+		visual_sti(vm->v->warena, vm->arena, cursor->id, address);
 	return (true);
 }
