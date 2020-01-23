@@ -9,8 +9,8 @@ static int	get_reg_num(t_vm *vm, t_cursor *cursor, int type)
 	offset = 1;
 	offset += (type == IND ? 2 : 4);
 	offset++;
-	reg_num = vm->arena[cursor->pos + offset];
-	return (reg_num - 1);
+	reg_num = vm->arena[(cursor->pos + offset) % MEM_SIZE];
+	return (reg_num);
 }
 
 static int	get_value(t_vm *vm, t_cursor *cursor, int type)
@@ -26,7 +26,9 @@ static int	get_value(t_vm *vm, t_cursor *cursor, int type)
 	{
 		index = cursor->pos +
 		convert(&vm->arena[cursor->pos + offset], size);
-		value = convert(&vm->arena[index % MEM_SIZE], 4);
+		while (MEM_SIZE <= index)					//new
+			index -= MEM_SIZE;						//new
+		value = convert(&vm->arena[index], 4); //rm index % MS
 	}
 	else
 	{
@@ -44,12 +46,12 @@ bool		op_lld(t_cursor *cursor, t_vm *vm)
 
 	if (cursor && vm)
 	{
-		decode_encoding_byte(vm->arena[cursor->pos + 1], args);
+		decode_encoding_byte(vm->arena[(cursor->pos + 1) % MEM_SIZE], args);
 		reg_num = get_reg_num(vm, cursor, args[0]);
 		value = get_value(vm, cursor, args[0]);
-		cursor->reg[reg_num] = value;
+		cursor->reg[reg_num - 1] = value;
 		//ADD MODIFICATION OF CARRY FLAG ACCORDING TO SUBJECT
-		cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
+		cursor->carry = (cursor->reg[reg_num - 1] == 0 ? 1 : 0);
 	}
 	return (true);
 }

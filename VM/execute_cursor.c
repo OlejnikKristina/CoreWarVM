@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/22 21:01:00 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/23 17:13:11 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,11 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 			cursor->opcode = arena[cursor->pos];				//new
 			cursor->pc =
 			calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]); //new
-			cursor->wait_cycles = get_waite_cycle(cursor->opcode);				//new
 			return (0);
 		}
 		else if
-		(check_encodbyte(cursor->opcode, arena[cursor->pos + 1]) &&
-		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[cursor->pos + 2]))
+		(check_encodbyte(cursor->opcode, arena[(cursor->pos + 1) % MEM_SIZE]) &&
+		check_reg(cursor->opcode, arena[cursor->pos + 1], &arena[(cursor->pos + 2) % MEM_SIZE]))
 			execute_operation(cursor, vm);
 		cursor->pos += cursor->pc;
 		while (MEM_SIZE <= cursor->pos)

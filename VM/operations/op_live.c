@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/08 13:44:31 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/19 15:33:09 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/23 14:13:50 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool		op_live(t_cursor *cursor, t_vm *vm)
 	int		val;
 	int		index;
 
-	val = convert(&vm->arena[cursor->pos + 1], 4);
+	val = convert(&vm->arena[(cursor->pos + 1) % MEM_SIZE], 4);
 	cursor->last_live = vm->current_cycle;
 	if (cursor->reg[0] == val)
 	{

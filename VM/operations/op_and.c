@@ -18,19 +18,23 @@ static int	get_reg_num(t_vm *vm, t_cursor *cursor, e_argctype args[3])
 	offset = 2;
 	offset += get_offset(args[0]);
 	offset += get_offset(args[1]);
-	reg_num = vm->arena[cursor->pos + offset] - 1;
+	reg_num = vm->arena[(cursor->pos + offset) % MEM_SIZE] - 1;
 	return (reg_num);
 }
 
 static int	set_value(t_vm *vm, t_cursor *cursor, int type, int curr)
 {
 	int		value;
+	int		index;
 
 	if (type == REG)
 		return (cursor->reg[curr - 1]);
 	else if (type == DIR)
 		return (curr);
-	value = convert(&vm->arena[(cursor->pos + (curr % IDX_MOD)) % MEM_SIZE], 4);
+	index = cursor->pos + (curr % IDX_MOD);
+	while (MEM_SIZE <= index)
+		index -= MEM_SIZE;
+	value = convert(&vm->arena[index], 4);
 	return (value);
 }
 
@@ -43,10 +47,10 @@ static int	get_value(t_vm *vm, t_cursor *cursor, e_argctype args[3])
 
 	offset = 2;
 	size = get_offset(args[0]);
-	a = convert(&vm->arena[cursor->pos + offset], size);
+	a = convert(&vm->arena[(cursor->pos + offset) % MEM_SIZE], size);
 	offset += get_offset(args[0]);
 	size = get_offset(args[1]);
-	b = convert(&vm->arena[cursor->pos + offset], size);
+	b = convert(&vm->arena[(cursor->pos + offset) % MEM_SIZE], size);
 	a = set_value(vm, cursor, args[0], a);
 	b = set_value(vm, cursor, args[1], b);
 	return (a & b);
@@ -58,14 +62,10 @@ bool		op_and(t_cursor *cursor, t_vm *vm)
 	int			reg_num;
 	int			value;
 
-	if (cursor && vm)
-	{
-		decode_encoding_byte(vm->arena[cursor->pos + 1], args);
-		reg_num = get_reg_num(vm, cursor, args);
-		value = get_value(vm, cursor, args);
-		cursor->reg[reg_num] = value;
-		cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
-		return (true);
-	}
+	decode_encoding_byte(vm->arena[(cursor->pos + 1) % MEM_SIZE], args);
+	reg_num = get_reg_num(vm, cursor, args);
+	value = get_value(vm, cursor, args);
+	cursor->reg[reg_num] = value;
+	cursor->carry = (cursor->reg[reg_num] == 0 ? 1 : 0);
 	return (true);
 }

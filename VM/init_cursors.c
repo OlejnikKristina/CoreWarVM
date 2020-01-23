@@ -6,33 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/04 16:33:33 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 19:06:51 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/23 13:21:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vm_arena.h"
-
-void	whats_hide_inside_cursors(t_vm *vm)
-{
-	t_cursor *cursor;
-	t_player *player;
-
-	cursor = vm->cursor;
-	while (cursor)
-	{
-		player = get_player_by_id(vm->players, cursor->reg[0] * -1,
-				vm->players_amnt);
-		if (!player)
-			return ;
-		ft_printf("\nCursosr id: %d\n", cursor->id);
-		ft_printf("Player id: %d \n", cursor->reg[0]);
-		ft_printf("Player name: %s\n", player->name);
-		ft_printf("Cursor pos: %d\n", cursor->pos);
-		ft_printf("Cursor opcode: %d\n", cursor->opcode);
-		ft_printf("Next instruction (pc): %d\n", cursor->pc);
-		cursor = cursor->next;
-	}
-}
 
 t_cursor	*init_cursor(int id, int pos, int opcode, int encoding_byte)
 {
@@ -74,6 +52,5 @@ bool		init_cursors(t_vm *vm)
 		id--;
 	}
 	current->next = NULL;
-	// whats_hide_inside_cursors(vm);
 	return (true);
 }

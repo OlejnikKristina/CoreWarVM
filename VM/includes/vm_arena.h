@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/19 21:43:47 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/23 13:51:35 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "operations.h"
 # include "corewar_visual.h"
 
+# define POSITION(x) ((x) % MEM_SIZE)
 # define OP_NBR 16
 # define DEBUG_MOD 0
 
