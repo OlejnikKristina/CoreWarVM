@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   convert.c                                          :+:    :+:            */
+/*   put_value.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/30 16:35:54 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/21 16:35:35 by asulliva      ########   odam.nl         */
+/*   Created: 2020/01/22 19:54:55 by asulliva       #+#    #+#                */
+/*   Updated: 2020/01/22 20:10:26 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/dsm.h"
+#include "../includes/vm_arena.h"
 
 /*
-**	@desc	- function converts binary to decimal
-**	@param	- unsigned char *s, the read binary
-**			- int size, amount of bytes
-**	@return	- int, returns the converted number
+**	@desc	- function puts value into arena
+**	@param	- t_byte *arena, arena to write to
+**			- int index, starting index
+**			- void *val, void pointer of value to write
 */
 
-int	convert(unsigned char *s, int size)
+void	put_value(t_byte *arena, int index, void *val)
 {
-	int				i;
-	unsigned int	temp;
+	int	i;
 
 	i = 0;
-	temp = 0;
-	while (i < size)
+	while (i < 4)
 	{
-		temp = temp << 8;
-		temp |= s[i];
+		arena[get_index(index, i)] = ((t_byte*)val)[i];
 		i++;
 	}
-	if (size == 1)
-		return ((char)temp);
-	else if (size == 2)
-		return ((short)temp);
-	return ((int)temp);
 }
