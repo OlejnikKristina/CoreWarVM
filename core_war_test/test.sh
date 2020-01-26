@@ -1,14 +1,14 @@
     #!/bin/bash
 
-    PATH_YOUR_CW="./CoreWarOrigin/corewar"
-    PATH_ORGN_CW="../VM/corewar"
+    PATH_YOUR_CW="./CoreWarYours/corewar_kristinas"
+    PATH_ORGN_CW="./CoreWarOrigin/corewar"
     PATH_PLAYERS="./champions/"
 
     players=("zork" "bee_gees" "bigzork" "turtle" "fluttershy" "helltrain" "toto" "doge" "Gagnant")
 
     function    test_players()
     {
-		CYCLES=5000
+		CYCLES=10000
 
         for player in ${players[@]}
         do
