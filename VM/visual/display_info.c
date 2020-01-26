@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/03 15:07:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/18 18:12:09 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/25 20:18:38 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void		display_current_cycle(WINDOW *winfo, int current_cycle)
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 
+void		display_cycle_passed(WINDOW *winfo, int cycle_passed)
+{
+	static	bool lable_set;
+
+	if (lable_set == false)
+	{
+		wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
+		mvwprintw(winfo, OFFSETY + 27, 3, "Cycles passed:");
+		lable_set = true;
+	}
+	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
+	mvwprintw(winfo, OFFSETY + 27, 22, "%u", cycle_passed);
+	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
+}
+
 void		display_processes(WINDOW *winfo, int processes_num)
 {
 	static	bool lable_set;
@@ -34,11 +49,11 @@ void		display_processes(WINDOW *winfo, int processes_num)
 	if (lable_set == false)
 	{
 		wattron(winfo, COLOR_PAIR(PINK_BLACK) | A_BOLD);
-		mvwprintw(winfo, OFFSETY + 27, 3, "Processes:");
+		mvwprintw(winfo, OFFSETY + 29, 3, "Processes:");
 		lable_set = true;
 	}
 	wattron(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
-	mvwprintw(winfo, OFFSETY + 27, 22, "%.5d", processes_num);
+	mvwprintw(winfo, OFFSETY + 29, 22, "%.5d", processes_num);
 	wattroff(winfo, COLOR_PAIR(LBLUE_BLACK) | A_BOLD);
 }
 
@@ -80,6 +95,7 @@ void		display_info(t_vm *vm, WINDOW *winfo)
 	display_processes(winfo, 0);
 	display_game_params(winfo);
 	display_current_cycle(vm->v->winfo, 1);
+	display_cycle_passed(vm->v->winfo, 1);
 	display_processes(vm->v->winfo, 1);
 	display_live_calls_init(vm->v->winfo, vm->players_amnt);
 	wrefresh(winfo);

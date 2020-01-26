@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 18:31:29 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 18:20:14 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/25 20:16:47 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	refresh_arena(t_vm *vm)
 	usleep(DELAY);
 	display_cursors(vm->v->warena, vm->cursor, vm->arena, vm);
 	display_current_cycle(vm->v->winfo, vm->current_cycle);
+	display_cycle_passed(vm->v->winfo, vm->cycle_counter);
 	display_processes(vm->v->winfo, vm->process);
 	wrefresh(vm->v->winfo);
 	wrefresh(vm->v->warena);

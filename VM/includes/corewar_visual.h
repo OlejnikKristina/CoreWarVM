@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 14:19:39 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/18 22:29:57 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/25 20:14:39 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,13 @@ int					get_attribute(int i, t_player **players, short players_amnt);
 void				display_cursors(WINDOW *warena, t_cursor *cursor,
 					uint8_t arena[MEM_SIZE], t_vm *vm);
 void				display_current_cycle(WINDOW *winfo, int current_cycle);
+void				display_cycle_passed(WINDOW *winfo, int cycle_passed);
 void				display_processes(WINDOW *winfo, int processes_num);
 void				display_game_params(WINDOW *winfo);
 void				refresh_arena(t_vm *vm);
 void				visual_sti(WINDOW *warena, uint8_t arena[], short id, int address);
 void				visual_st(WINDOW *warena, uint8_t arena[], short id, int address);
-void				display_live_calls(WINDOW *winfo, t_player *palyer, int cycles_passed);
+void				display_live_calls(WINDOW *winfo, t_player *palyer, int cycle);
 void				display_live_calls_init(WINDOW *winfo, short player_amnt);
 void				get_xy_coordinates(int *x, int *y, int address);
 void				add_pause(WINDOW *winfo);

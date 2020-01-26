@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/23 13:51:35 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/26 15:43:20 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ struct				s_cursor
 
 typedef struct		s_flags
 {
-	int				dump;
-	int				hexdump;
+	unsigned long	dump;
+	unsigned long	hexdump;
 	bool			v;
 	short			players_order[MAX_PLAYERS];
 }					t_flags;
@@ -75,9 +75,9 @@ typedef struct		s_vm
 	int				cycle_to_die;
 	int				nbr_lives;
 	int				process;
-	short			players_amnt;
 	int				last_alive;
-	int				cycles_passed;
+	unsigned long	cycle_counter;
+	short			players_amnt;
 	t_player		**players;
 	uint8_t			arena[MEM_SIZE];
 	t_flags			*flag;

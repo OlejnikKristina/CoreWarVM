@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/22 21:05:33 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/25 19:29:08 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ bool	execute_one_cycle(t_vm *vm)
 bool	up_to_cycle_to_die(t_vm *vm)
 {
 	bool		someone_alive;
-	static int	cycle_counter;
 
 	someone_alive = true;
 	while (someone_alive && 0 < vm->cycle_to_die)
@@ -96,15 +95,14 @@ bool	up_to_cycle_to_die(t_vm *vm)
 		while (vm->current_cycle <= vm->cycle_to_die)
 		{
 			execute_one_cycle(vm);
-			cycle_counter++;
+			vm->cycle_counter += 1;
 			vm->current_cycle += 1;
-			if (vm->flag->hexdump == cycle_counter)
+			if (vm->flag->hexdump == vm->cycle_counter)
 				return (show_arena(vm->players, vm->players_amnt, vm));
-			else if (vm->flag->dump == cycle_counter)
+			else if (vm->flag->dump == vm->cycle_counter)
 				return (dump64(vm));
 		}
 		vm->current_cycle = 0;
-		vm->cycles_passed += 1;
 		someone_alive = check(vm);
 		discard_players_lives_calls(vm);
 	}

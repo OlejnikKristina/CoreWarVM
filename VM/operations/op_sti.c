@@ -6,13 +6,13 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/09 18:04:40 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/23 14:22:36 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/24 20:14:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm_arena.h"
 
-void	write_into_memory(int val_to_write, uint8_t *arena, int address)
+void	write_into_memory(long long val_to_write, uint8_t *arena, int address)
 {
 	uint8_t		*pointer;
 	int			position;
@@ -57,8 +57,8 @@ int		get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 	else if (arg_type == IND)
 	{
 		val = convert(&arena[(cursor->pos + *padding) % MEM_SIZE], 2);
-		val = cursor->pos + (val % IDX_MOD);
-		val = convert(&arena[val % MEM_SIZE], 4);
+		val = (cursor->pos + (val % IDX_MOD)) % MEM_SIZE;
+		val = convert(&arena[val], 4);
 		*padding += 2;
 	}
 	return (val);
