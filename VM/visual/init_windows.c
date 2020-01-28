@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 16:58:21 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 17:08:43 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,28 @@ static void		display_arena(t_vm *vm, WINDOW *warena)
 	wrefresh(warena);
 }
 
-static WINDOW	*init_arena(int	height, int width, int startx, int starty)
+static WINDOW	*init_arena(int height, int width, int startx, int starty)
 {
 	WINDOW	*warena;
 
 	wbkgd(stdscr, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	refresh();
-
 	warena = newwin(height, width, startx, starty);
 	wbkgd(warena, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
-	wborder(warena, '|', '|', '*','*','*', '*', '*', '*');
+	wborder(warena, '|', '|', '*', '*', '*', '*', '*', '*');
 	mvaddstr(OFFSETY + 3, OFFSETX + ((width / 2) - 12),
 	"C O R E  W A R");
 	wrefresh(warena);
 	return (warena);
 }
 
-static WINDOW	*init_winfo(int	height, int width, int startx, int starty)
+static WINDOW	*init_winfo(int height, int width, int startx, int starty)
 {
 	WINDOW *winfo;
 
 	winfo = newwin(height, width, startx, starty + 3);
 	wbkgd(winfo, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
-	wborder(winfo, '|', '|', '*','*', '*', '*', '*', '*');
+	wborder(winfo, '|', '|', '*', '*', '*', '*', '*', '*');
 	wrefresh(winfo);
 	return (winfo);
 }

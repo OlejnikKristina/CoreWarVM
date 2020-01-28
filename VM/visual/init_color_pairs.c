@@ -6,13 +6,13 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:10:01 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 17:05:19 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 18:45:47 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar_visual.h"
 
-static void init_players_colors(void)
+static void	init_players_colors(void)
 {
 	init_pair(STI_PL1, NICE_PINCK2, COLOR_BLACK);
 	init_pair(STI_PL2, COLOR_GREEN, COLOR_BLACK);
@@ -31,7 +31,7 @@ static void init_players_colors(void)
 	init_pair(50, LIGHT_PINK, NICE_PINCK);
 }
 
-void	init_pairs(void)
+void		init_pairs(void)
 {
 	if (!has_colors())
 	{

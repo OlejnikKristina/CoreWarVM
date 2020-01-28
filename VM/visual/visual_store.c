@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   visual_store.c                                       :+:    :+:            */
+/*   visual_store.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/13 14:24:42 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 16:36:13 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/28 18:44:43 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/28 18:44:57 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	get_xy_coordinates(int *x, int *y, int address)
 	*x = (address % 64) * 3 + OFFSETX;
 }
 
-void	visual_store(WINDOW *warena, uint8_t arena[MEM_SIZE], short id, int address)
+void	visual_store(WINDOW *warena, uint8_t arena[MEM_SIZE], short id,
+		int address)
 {
 	int		x;
 	int		y;
