@@ -6,11 +6,22 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 18:01:47 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 18:16:47 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:47:43 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
+
+/*
+** Program will execute step by step with pressed Enter
+*/
+
+void	step_by_step(void)
+{
+	while (getchar() == ' ')
+		;
+	flushinp();
+}
 
 void	add_pause(WINDOW *winfo)
 {

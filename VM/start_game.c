@@ -6,13 +6,13 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/15 15:28:07 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/25 19:29:08 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:27:01 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/vm_arena.h"
 
-int		bury_dead_cursors(t_cursor **head, t_vm *vm)
+int		bury_dead_cursors(t_cursor **head)
 {
 	int			corpse_counter;
 	t_cursor	*cursor;
@@ -35,8 +35,6 @@ int		bury_dead_cursors(t_cursor **head, t_vm *vm)
 	{
 		if (cursor->last_live <= 0)
 		{
-			if (vm->flag->v)
-				show_corpse(cursor->id, vm->v->wop);
 			prev->next = cursor->next;
 			ft_memdel((void **)&cursor);
 			corpse_counter++;
@@ -66,7 +64,7 @@ bool	check(t_vm *vm)
 			refresh_cycle_to_die(vm->v->winfo, 29, vm->cycle_to_die);
 	}
 	vm->nbr_lives = 0;
-	vm->process -= bury_dead_cursors(&vm->cursor, vm);
+	vm->process -= bury_dead_cursors(&vm->cursor);
 	return (0 < vm->process);
 }
 

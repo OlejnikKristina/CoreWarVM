@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   op_st.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2020/01/28 16:39:34 by krioliin       #+#    #+#                */
+/*   Updated: 2020/01/28 16:39:41 by krioliin      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vm_arena.h"
-/*Correct */
+
 static int	get_reg_num(t_vm *vm, t_cursor *cursor)
 {
 	int		offset;
@@ -26,16 +37,14 @@ static void	write_value(t_vm *vm, t_cursor *cursor, e_argctype type, long long v
 		cursor->reg[index] = value;
 	}
 	else if (type == IND)
-	{//OPpos(133)-->xy(5;3)]op->{03 70 02 ff c4} Original draw 4 zeros on this opereation
-		index = convert(&vm->arena[(cursor->pos + offset) % MEM_SIZE], 2);// from address 136 line[3] x=8 dec(880) hex(03 70)
+	{
+		index = convert(&vm->arena[(cursor->pos + offset) % MEM_SIZE], 2);
 		address = (cursor->pos + (index % IDX_MOD)) % MEM_SIZE;
-		while (address < 0)					// new
-			address = MEM_SIZE + address;	// new
-		if (499 <= address && address <= 505) // target 501
-			ft_printf("");
+		while (address < 0)
+			address = MEM_SIZE + address;
 		write_into_memory(value, vm->arena, address);
 		if (vm->flag->v)
-			visual_st(vm->v->warena, vm->arena, cursor->id, address);
+			visual_store(vm->v->warena, vm->arena, cursor->id, address);
 	}
 }
 

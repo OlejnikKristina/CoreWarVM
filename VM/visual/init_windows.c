@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   corewar_visual.c                                   :+:    :+:            */
+/*   init_windows.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/26 21:23:09 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:58:21 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar_visual.h"
+#include "corewar_visual.h"
 
-int			get_attribute(int i, t_player **players, short players_amnt)
+int				get_attribute(int i, t_player **players, short players_amnt)
 {
 	static int		prev_code_size;
 	static short	player_id;
@@ -39,7 +39,7 @@ int			get_attribute(int i, t_player **players, short players_amnt)
 	return (COLOR_PAIR(5) | A_BOLD);
 }
 
-static void	display_arena(t_vm *vm, WINDOW *warena)
+static void		display_arena(t_vm *vm, WINDOW *warena)
 {
 	int		yx[2];
 	int		i;
@@ -57,18 +57,17 @@ static void	display_arena(t_vm *vm, WINDOW *warena)
 		{
 			attribute = get_attribute(i, vm->players, vm->players_amnt);
 			wattron(warena, attribute);
-			mvwprintw(warena, OFFSETY + yx[0], yx[1] + 3, "%.2x ", vm->arena[i]);
-			i++;
 			yx[1] += 3;
+			mvwprintw(warena, OFFSETY + yx[0], yx[1], "%.2x ", vm->arena[i]);
+			i++;
 		}
 		yx[0] += 1;
 		wprintw(warena, " ");
-		
 	}
 	wrefresh(warena);
 }
 
-WINDOW	*init_arena(int	height, int width, int startx, int starty)
+static WINDOW	*init_arena(int	height, int width, int startx, int starty)
 {
 	WINDOW	*warena;
 
@@ -84,41 +83,30 @@ WINDOW	*init_arena(int	height, int width, int startx, int starty)
 	return (warena);
 }
 
-WINDOW	*init_winfo(int	height, int width, int startx, int starty)
+static WINDOW	*init_winfo(int	height, int width, int startx, int starty)
 {
 	WINDOW *winfo;
 
-	winfo = newwin(height, width, startx, starty);
+	winfo = newwin(height, width, startx, starty + 3);
 	wbkgd(winfo, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
 	wborder(winfo, '|', '|', '*','*', '*', '*', '*', '*');
 	wrefresh(winfo);
 	return (winfo);
 }
 
-WINDOW *init_woperations(int height, int width, int startx, int starty)
-{
-	WINDOW *wop;
-
-	wop = newwin(height, width, startx, starty);
-	wbkgd(wop, COLOR_PAIR(WHITE_BLACK) | A_BOLD);
-	wrefresh(wop);
-	return(wop);
-}
-
-bool	visual_corawar(t_vm *vm)
+bool			visual_corawar(t_vm *vm)
 {
 	initscr();
 	nodelay(stdscr, true);
 	curs_set(0);
 	init_pairs();
-	vm->v = (t_visual *)ft_memalloc(sizeof(t_visual));
-	if (!vm)
+	if (!(vm->v = (t_visual *)ft_memalloc(sizeof(t_visual))))
 		return (false);
-	vm->v->warena = init_arena(HEIGHT + OFFSETY, WIDTH + OFFSETX + 1, OFFSETY, OFFSETX);
-	vm->v->winfo = init_winfo(HEIGHT + OFFSETY, (WIDTH) / 4 + 7, OFFSETY, WIDTH + OFFSETX + 3);
-	vm->v->wop = init_woperations(WOPH, WOPW, HEIGHT / 2 + 6, WIDTH + 9);
+	vm->v->warena =
+	init_arena(HEIGHT + OFFSETY, WIDTH + OFFSETX + 1, OFFSETY, OFFSETX);
+	vm->v->winfo =
+	init_winfo(HEIGHT + OFFSETY, (WIDTH) / 4 + 7, OFFSETY, WIDTH + OFFSETX);
 	display_arena(vm, vm->v->warena);
-	display_info(vm, vm->v->winfo);
+	init_info_field(vm, vm->v->winfo);
 	return (true);
 }
-

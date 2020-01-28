@@ -6,13 +6,13 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 20:28:32 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/17 15:41:29 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 15:52:10 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
 
-void	congrats_champion(WINDOW *wop, t_player *champiom)
+void	congrats_champion(WINDOW *wop, t_player *champion)
 {
 	short i;
 	short y;
@@ -28,10 +28,10 @@ void	congrats_champion(WINDOW *wop, t_player *champiom)
 			wattron(wop, COLOR_PAIR(i));
 			mvwprintw(wop, 1, 2, "CONGRATULATIONS !!!");
 			mvwprintw(wop, 2, 2, "The winner is ...");
-			mvwprintw(wop, 2 + 1, 2, "Great \"%s\"", champiom->name);
-			mvwprintw(wop, 2 + 2, 2, "%s", champiom->comment);
+			mvwprintw(wop, 2 + 1, 2, "Great \"%s\"", champion->name);
+			mvwprintw(wop, 2 + 2, 2, "%s", champion->comment);
 			wrefresh(wop);
-			wattroff(wop, COLOR_PAIR(champiom->id));
+			wattroff(wop, COLOR_PAIR(champion->id));
 			i++;
 		}
 		y++;

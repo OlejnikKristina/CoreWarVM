@@ -6,22 +6,11 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/11 18:31:29 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/25 20:16:47 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:29:26 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
-
-/*
-** Program will execute step by step with pressed Enter
-*/
-
-void	step_by_step()
-{
-	while(getchar() == ' ')
-		;
-	flushinp();
-}
 
 bool	make_blink(WINDOW *warena , t_cursor *cursor)
 {
@@ -105,4 +94,3 @@ void	refresh_arena(t_vm *vm)
 	wrefresh(vm->v->winfo);
 	wrefresh(vm->v->warena);
 }
-

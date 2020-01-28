@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/16 17:45:10 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/25 19:31:22 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:48:21 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ static void	game_params_lables(WINDOW *winfo, int paddy)
 	spaces[24] = '|';
 	wattron(winfo, COLOR_PAIR(PINK_YELLOW) | A_BOLD);
 	mvwprintw(winfo, paddy + 30, 3, "| Cycle to Die: ");
-	mvwprintw(winfo, paddy + 32, 3, "| Cycle  Delta: "); 
+	mvwprintw(winfo, paddy + 32, 3, "| Cycle  Delta: ");
 	mvwprintw(winfo, paddy + 34, 3, "| Number Lives: ");
 	mvwprintw(winfo, paddy + 36, 3, "| Max   Checks: ");
-
 	mvwprintw(winfo, paddy + 30, 24, "   |");
-	mvwprintw(winfo, paddy + 32, 23, "    |"); 
+	mvwprintw(winfo, paddy + 32, 23, "    |");
 	mvwprintw(winfo, paddy + 34, 23, "    |");
 	mvwprintw(winfo, paddy + 36, 22, "     |");
-
 	mvwprintw(winfo, paddy + 29, 3, "-------------------------");
 	mvwprintw(winfo, paddy + 31, 3, "%s", spaces);
 	mvwprintw(winfo, paddy + 33, 3, "%s", spaces);
