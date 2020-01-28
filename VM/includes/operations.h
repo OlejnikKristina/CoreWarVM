@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 15:40:03 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/24 20:15:30 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/26 21:09:16 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ typedef struct	s_vm t_vm;
 typedef struct	s_cursor t_cursor;
 typedef enum	e_argctype e_argctype;
 
-/* Ops with size T_DIR 4 bytes */
+/* 
+** Ops with size T_DIR 4 bytes
+*/
 
 #define LIVE 0x01
 #define LD 0x02
@@ -32,7 +34,9 @@ typedef enum	e_argctype e_argctype;
 #define LLD 0x0d
 #define AFF 0x10
 
-/* Ops with size T_DIR 2 bytes */
+/*
+** Ops with size T_DIR 2 bytes
+*/
 
 #define ZJMP 0x09
 #define LDI 0x0a
@@ -60,7 +64,6 @@ bool		op_zjmp(t_cursor *cursor, t_vm *vm);
 
 int			get_arg_val(e_argctype arg_type, uint8_t arena[MEM_SIZE],
 			t_cursor *cursor, int *padding);
-// void		write_into_memory(int32_t val_to_write, uint8_t *arena, int address);
-void	write_into_memory(long long val_to_write, uint8_t *arena, int address);
+void		write_into_memory(long long val_to_write, uint8_t *arena, int address);
 
 #endif

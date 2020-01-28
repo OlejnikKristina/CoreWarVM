@@ -1,30 +1,36 @@
     #!/bin/bash
-
-    PATH_YOUR_CW="./CoreWarOrigin/corewar"
-    PATH_ORGN_CW="../VM/corewar"
+#corewar_aidans
+    PATH_YOUR_CW="./CoreWarYours/corewar_aidans"
+    PATH_ORGN_CW="./CoreWarOrigin/corewar"
     PATH_PLAYERS="./champions/"
 
-    players=("zork" "bee_gees" "bigzork" "turtle" "fluttershy" "helltrain" "toto" "doge" "Gagnant")
-
+    players=("helltrain" "zork" "bee_gees" "bigzork" "turtle" "fluttershy" "toto" "doge" "Gagnant")
+#( ( i <= $CYCLES ) && ( $error == 0 ) )
     function    test_players()
     {
-		CYCLES=5000
+		CYCLES=10000
+        error=0
 
         for player in ${players[@]}
         do
-            for (( i=1; i <= $CYCLES; i+=10))
+            ((error=0))
+            for (( i=1; ( ( i <= $CYCLES ) && ( $error == 0 ) ) ; i+=10))
             do
-                $PATH_ORGN_CW $PATH_PLAYERS+$player+".cor" -d $i | sed -n -e '/^0x/p' > diff/origin_output1
-                $PATH_YOUR_CW PATH_PLAYERS+$player+".cor" -dump $i | sed -n -e'/^0x/p' > diff/yours_output2
+                $PATH_ORGN_CW $PATH_PLAYERS$player".cor" -d $i | sed -n -e '/^0x/p' > diff/origin_output1
+                $PATH_YOUR_CW $PATH_PLAYERS$player".cor" -dump $i | sed -n -e'/^0x/p' > diff/yours_output2
                 if ! cmp -s "diff/origin_output1" "diff/yours_output2"; then
 				 	printf '\033[0m[%10s] ' "$player"
 					((i=i-1))
                     printf "\033[0;31mmemory is NOT the same at cycle [%d]\n\033[0m" "$i" ;
+                    ((error=1))
                 fi
             done
+            if [ $error == 0 ] ; then
                 printf '\033[0m[%10s] ' "$player"
 				((i=i-1))
                 printf '\033[0;32mPerfect! Memory is the same at all cycles until %s\n\033[0m' "$i"
+            fi
+            ((error=0))
         done
     }
 

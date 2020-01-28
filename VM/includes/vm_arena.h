@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/26 15:43:20 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/26 21:05:33 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ struct				s_cursor
 	int				pos;
 	int				pc;
 	int32_t			reg[REG_NUMBER];
+	t_cursor		*next;
 	/* For visualisation */
 	int				prev_xy[2];
 	int				prev_val;
-	t_cursor		*next;
 };
 
 typedef struct		s_flags
