@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/28 18:43:41 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/28 18:47:36 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC			= main.c parse_argc.c parse_flags.c \
 			get_champions_argc.c init_players.c utilities/vm_free.c \
 			utilities/error_msg.c parse_champion.c utilities/cursor.c \
 			utilities/introduction.c get_player_exec_code.c \
-			utilities/get_player_by_id.c \
+			utilities/get_player_by_id.c utilities/dump64.c\
 			decode_encoding_byte.c calculate_program_counter.c \
 			init_battlefield.c init_cursors.c start_game.c \
 			execute_cursor.c operations/encode_match_opcode.c \

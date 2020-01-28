@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:25:13 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 18:43:37 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 19:05:06 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "op.h"
 # include "../ft_printf/includes/ft_printf.h"
 # include "operations.h"
-// # include "corewar_visual.h"
+# include "corewar_visual.h"
 
 # define OP_NBR 16
 # define DEBUG_MOD 0
@@ -37,7 +37,7 @@ typedef struct s_args t_args;
 typedef struct s_champ t_champ;
 typedef struct s_cursor t_cursor;
 typedef struct s_game t_game;
-typedef struct s_files t_files;
+typedef struct s_files t_files; // ???????????????????
 
 
 /*
@@ -155,14 +155,15 @@ struct			s_game
 **			- t_champs *champ, champions
 */
 
-struct		s_vm
+struct			s_vm
 {
-	short	nb_players;
-	int		champ_id;
-	t_byte	arena[MEM_SIZE];
-	t_flags	*flag;
-	t_champ	*champs;
-	t_game	*game;
+	short		nb_players;
+	int			champ_id;
+	t_byte		arena[MEM_SIZE];
+	t_flags		*flag;
+	t_champ		*champs;
+	t_game		*game;
+	t_visual	*v;
 };
 
 /*

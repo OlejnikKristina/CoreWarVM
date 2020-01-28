@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/21 19:23:26 by asulliva       #+#    #+#                 #
-#    Updated: 2020/01/26 17:14:42 by asulliva      ########   odam.nl          #
+#    Updated: 2020/01/28 18:52:24 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,17 @@ SRC			= main.c\
 			ops/op.c ops/store.c ops/misc.c ops/fork.c ops/load.c ops/math.c\
 			ops/bitwise.c
 
+VISUAL		= visual/init_windows.c visual/init_color_pairs.c \
+			visual/init_info_field.c visual/refresh_arena.c \
+			visual/visual_store.c visual/display_live_calls.c \
+			visual/display_game_params.c visual/add_pause.c \
+			visual/congrats_to_champion.c visual/display_players.c \
+			visual/rm_prev_cursor_position.c
+
 all: $(NAME)
 
 $(NAME):
-	@gcc  $(FLAGS) -o $(NAME) $(SRC) $(HEADER) $(LIB)
+	@gcc  $(FLAGS) -o $(NAME) $(SRC) $(VISUAL) $(HEADER) $(LIB)
 	@echo "\033[0;32mVM successfully created\033[0m"
 
 clean:
