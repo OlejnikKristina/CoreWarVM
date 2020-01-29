@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   op.h                                               :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: zaz <marvin@42.fr>                           +#+                     */
+/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2013/10/04 11:33:27 by zaz            #+#    #+#                */
-/*   Updated: 2019/12/28 17:07:39 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/22 15:59:06 by asulliva       #+#    #+#                */
+/*   Updated: 2020/01/29 19:27:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-typedef char					t_arg_type;
+typedef unsigned char			t_byte;
 
 # define T_REG					1
 # define T_DIR					2
-# define T_IND					2
+# define T_IND					4
 # define T_LAB					8
 
 # define PROG_NAME_LENGTH		128
@@ -64,4 +64,17 @@ typedef struct					s_header
 	char						comment[COMMENT_LENGTH + 1];
 }								t_header;
 
+typedef struct					s_op
+{
+	char						*name;
+	t_byte						nb_arg;
+	t_byte						args[3];
+	t_byte						opcode;
+	unsigned int				cycle;
+	char						*description;
+	t_byte						octal;
+	t_byte						dir_size;
+}								t_op;
+
+extern t_op						g_op_tab[17];
 #endif

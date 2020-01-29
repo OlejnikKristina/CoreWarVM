@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   vm_arena.h                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: abumbier <abumbier@student.42.fr>            +#+                     */
+/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/20 15:52:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 15:56:26 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/21 19:25:13 by asulliva       #+#    #+#                */
+/*   Updated: 2020/01/29 18:57:29 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,162 +15,198 @@
 
 # include <ncurses.h>
 # include <fcntl.h>
+# include <stdlib.h>
 # include "op.h"
 # include "ft_printf.h"
 # include "operations.h"
 # include "corewar_visual.h"
 
-# define POSITION(x) ((x) % MEM_SIZE)
 # define OP_NBR 16
-# define DEBUG_MOD 0
+# define NB_OPS 0x10
+# define NB_PLAYERS vm->nb_players
+# define CHAMPS vm->champs
+# define ARENA vm->arena
+# define GAME vm->game
+# define CURSORS GAME->cursors
+# define FLAG vm->flag
 
+typedef struct s_vm		t_vm;
+typedef struct s_flags	t_flags;
+typedef struct s_args	t_args;
+typedef struct s_champ	t_champ;
 typedef struct s_cursor	t_cursor;
-typedef struct s_visual t_visual;
-typedef struct s_player t_player;
+typedef struct s_game	t_game;
+typedef struct s_visual	t_visual;
 
-struct				s_cursor
+/*
+**	@desc	- struct that holds cursors in a linked list
+**	@param	- long id,
+**			- int moved, 1 or 0, to know if it moved recently
+**			- int carry, 1 or 0, carry for ZJMP
+**			- int opcode, current operationcode
+**			- int last_live, last live call of cursor
+**			- int wait_cycles, total amont of waitcycles for this operation
+**			- int pos, current position of the cursor
+**			- int pc, amount of bytes needed to jump to next operation
+**			- int reg[REG_NUMBER], registries for this cursor
+**			- t_cursor *next, next cursor (if any)
+*/
+
+struct			s_cursor
 {
-	short			id;
-	bool			carry;
-	int				opcode;
-	int				last_live;
-	short			wait_cycles;
-	int				pos;
-	int				pc;
-	int32_t			reg[REG_NUMBER];
-	t_cursor		*next;
-	/* For visualisation */
-	int				prev_xy[2];
-	int				prev_val;
+	long		id;
+	int			moved;
+	int			carry;
+	int			opcode;
+	int			last_live;
+	int			wait_cycles;
+	int			pos;
+	int			pc;
+	int			reg[REG_NUMBER];
+	t_cursor	*next;
+	int			prev_xy[2];
+	int			prev_val;
 };
 
-typedef struct		s_flags
+/*
+**	@desc	- struct holds info for all champs
+**	@param	- int id, unique id of player
+**			- int size, size of the exec code
+**			- char *name, name of the champ
+**			- char *comment, comment of the champ
+**			- int lives, amount of live calls
+**			- int last_live, last live call (nb_cycle)
+**			- int start_pos, starting position of player
+**			- int code, exec code of the player
+*/
+
+struct			s_champ
 {
-	unsigned long	dump;
-	unsigned long	hexdump;
-	bool			v;
-	short			players_order[MAX_PLAYERS];
-}					t_flags;
+	int			id;
+	int			size;
+	char		*name;
+	char		*comment;
+	int			lives;
+	int			last_live;
+	int			start_pos;
+};
 
-typedef	struct		s_player
+/*
+**	@desc	- struct for the option flags
+**	@param	- int dump, sets the cycles for the dump flag
+**			- int v, 1 or 0 for visualizer
+**			- int n, the -n flag 1 for yes 0 for no
+*/
+
+struct			s_flags
 {
-	short			id;
-	char			*name;
-	char			*comment;
-	int				code_size;
-	uint8_t			*code;
-	int				start_pos;
-	/* For visualisation */
-	int				lives;
-	int				last_live;
-}					t_player;
+	int			dump;
+	int			v;
+	int			n;
+};
 
 /*
- ** v  --------------> visualsation
+**	@desc	- struct for the arguments of operations
+**	@param	- int value, stores value of the argument
+**			- int size, stores size of the argument
+**			- int type, flag for type of argument
 */
 
-typedef struct		s_vm
+struct			s_args
 {
-	int				current_cycle;
-	int				cycle_to_die;
-	int				nbr_lives;
-	int				process;
-	int				last_alive;
-	unsigned long	cycle_counter;
-	short			players_amnt;
-	t_player		**players;
-	uint8_t			arena[MEM_SIZE];
-	t_flags			*flag;
-	t_cursor		*cursor;
-	t_visual		*v;
-}					t_vm;
+	int			value;
+	int			size;
+	int			type;
+};
 
-typedef enum				e_argctype
+/*
+**	@desc	- struct that holds all data of the game
+**	@param	- int last_live, id of the last_live
+**			- int cycles, current nb of cycles
+**			- int lives, amount of live calls
+**			- int processes, amount of processes running
+**			- int cycles_to_die, cycles till next check
+**			- int checks, nb of checks performed
+**			- t_cursor *cursors, linked list of cursors in the game
+*/
+
+struct			s_game
 {
-	REG = 1,
-	DIR,
-	IND
-}							e_argctype;
-
-void				test_reg(void);
-
-/*
-	***************************** Parsing Arguments ******************************
-*/
-
-bool				args_validation(int argc, char **argv, t_flags *flags);
-short				check_flag(int argc, char **params, int *num,
-					t_flags *flags);
-void				add_n_falg(t_flags *flags, int from, int n);
-bool				dump64(t_vm *vm);
-bool				check_champ_file_name(char *file_name);
-bool				check_champion(char *file_name);
-short				get_players_amnt(short players_amnt_init);
-char				**safe_players_files(char *file);
-bool				parse_error();
+	int			last_live;
+	int			cycles;
+	int			lives;
+	int			processes;
+	int			cycles_to_die;
+	int			checks;
+	long		cursors_id;
+	t_cursor	*cursors;
+};
 
 /*
-	****************************** Init Players *********************************
+**	@desc	- main struct of the VM
+**	@param	- short nb_players, total number of players
+**			- t_byte arena[MEM_SIZE], arena the game takes place,
+**			MEM_SIZE is define
+**			- t_flags *flag, struct stores the flags
+**			- t_champs *champ, champions
 */
 
-bool				init_players(t_vm *vm);
-bool				check_null_byte(const int fd);
-bool				get_player_code_size(t_player *player, const int fd);
-bool				get_player_exec_code(t_player *player, const int fd);
-void				set_player_id(t_player *player,
-					short players_order[MAX_PLAYERS], short num,
-					short players_amnt);
-int					get_player_index(t_player **players, short player_id,
-					short player_amnt);
-t_cursor			*init_cursor(int id, int pos, int opcode, int encoding_byte);
+struct			s_vm
+{
+	short		nb_players;
+	int			champ_id;
+	t_byte		arena[MEM_SIZE];
+	t_flags		*flag;
+	t_champ		*champs;
+	t_game		*game;
+	t_visual	*v;
+};
 
 /*
-	****************************** Battlefield **********************************
+********************************* UTILS *********************************
 */
-
-bool				init_battlefield(t_vm *vm);
-bool				init_cursors(t_vm *vm);
-int					calculate_program_counter(uint8_t opcode, uint8_t encod_byte);
-int					decode_encoding_byte(unsigned char encod_byte,
-					e_argctype op_args[3]);
-short				add_bytes_to_pc(e_argctype arg_type, uint8_t opcode);
-bool				is_encoding_byte(uint8_t opcode);
+void			error(char *message, char *file);
+int				swap_32(int nb);
+int				arg_size(int type, int opcode);
+int				dump64(t_vm *vm);
+int				wait_cycle(int opcode);
+void			put_value(t_byte *arena, int index, void *val);
+int				get_player(t_vm *vm, t_champ *champs, int id);
+int				format_check(char *format, char *s);
+int				get_index(int current, int move);
+int				get_bytes(t_byte *arena, int idx, int amount);
+void			free_vm(t_vm *vm);
 
 /*
-	********************************* RUN GAME ************************************
+******************************** PARSING ********************************
 */
-
-bool				start_game(t_vm *vm);
-short				execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm);
-short				execute_operation(t_cursor *cursor, t_vm *vm);
-bool				show_arena(t_player **players, short pl_amnt, t_vm *vm);
-int					get_waite_cycle(uint8_t opcode);
-void				discard_players_lives_calls(t_vm *vm);
-void				congrats_champion(WINDOW *wop, t_player *champiom);
+void			parse(t_vm *vm, int ac, char **av);
+int				check_name(char *name);
+int				check_file(char *name);
+void			flags(t_vm *vm, int ac, char **av);
+void			get_champs(t_vm *vm, char **av, int ac);
+int				get_champ_comment(t_champ *champ, const int fd);
+int				get_champ_name(t_champ *champ, const int fd);
+int				check_code(t_vm *vm, t_champ *c, t_byte *code);
+void			switch_champs(t_vm *vm, int ac, char **av);
 
 /*
-	****************************** Utilites *************************************
+********************************* INIT **********************************
 */
-
-t_player			*get_player_by_id(t_player **players, short player_id,
-					short player_amnt);
-bool				error_msg(unsigned short erro_num);
-void				introduce_champions(t_player **players, short player_amnt, int colour);
-void				init_op_encode_validation_arr(bool (*op_encode[17])(e_argctype *));
-bool				en_op_code_and_or_xor(e_argctype arg_type[3]);
-bool				en_op_code_ldi_lldi(e_argctype arg_type[3]);
-bool				en_op_code_ldi(e_argctype arg_type[3]);
-bool				en_op_code_aff(e_argctype arg_type[3]);
-bool				en_op_code_sti(e_argctype arg_type[3]);
-void				vm_free(t_vm **vm);
-short				get_dir_size(uint8_t opcode);
-int					convert(unsigned char *s, int size);
-void				print_arena_pure(unsigned char arena[MEM_SIZE]);
+void			init_game(t_vm *vm);
+t_cursor		*cp_cursor(t_cursor *src, int pos, long id);
+void			mv_cursor(t_cursor *c, int move);
+void			add_cursor(t_cursor **head, t_cursor *new);
+t_cursor		*rm_cursor(t_cursor *head, long id);
+t_cursor		*new_cursor(int position, int r1, long id);
 
 /*
-	****************************** Visualisation *******************************
+********************************* GAME **********************************
 */
-
-bool				visual_corawar();
+void			start_game(t_vm *vm);
+void			execute(t_vm *vm);
+t_args			*get_args(t_cursor *c, t_byte octal, t_byte *arena);
+void			do_op(t_vm *vm, t_cursor *c, t_args *args, int size);
+void			opcode(t_byte opcode, t_cursor *c);
 
 #endif

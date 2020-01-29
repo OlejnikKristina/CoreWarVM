@@ -6,16 +6,30 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/28 16:24:12 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 16:25:06 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:09:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
 
-void	display_players(t_player **players, WINDOW *winfo, short players_amnt)
+int		vget_player_index(t_champ *champs, short id, int players_amnt)
 {
-	short		i;
-	t_player	*player;
+	int		i;
+
+	i = 0;
+	while (i < players_amnt)
+	{
+		if (champs[i].id == id)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+void	display_players(t_champ *players, WINDOW *winfo, short players_amnt)
+{
+	short	i;
+	int		index;
 
 	i = 1;
 	wprintw(winfo, " ** ******* C H A M P I O N S ******* ** ");
@@ -24,10 +38,10 @@ void	display_players(t_player **players, WINDOW *winfo, short players_amnt)
 	wmove(winfo, OFFSETY + 4, 4);
 	while (i <= players_amnt)
 	{
-		player = get_player_by_id(players, i, players_amnt);
+		index = vget_player_index(players, i, players_amnt);
 		wattron(winfo, COLOR_PAIR(i) | A_BOLD);
 		mvwprintw(winfo, OFFSETY + i * 4, 4, "PLAYER %d:  ", (int)i);
-		mvwprintw(winfo, OFFSETY + i * 4, 15, player->name);
+		mvwprintw(winfo, OFFSETY + i * 4, 15, players[index].name);
 		wattroff(winfo, COLOR_PAIR(i) | A_BOLD);
 		mvwprintw(winfo, OFFSETY + i * 4 + 1, 4,
 		"Last time reported \"live\":");

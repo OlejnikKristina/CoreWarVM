@@ -6,32 +6,34 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/29 15:09:04 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:37:23 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar_visual.h"
 
-int				get_attribute(int i, t_player **players, short players_amnt)
+int				get_attribute(int i, t_champ *players, short players_amnt)
 {
 	static int		prev_code_size;
 	static short	player_id;
 	int				index;
-	t_player		*player;
+	int				x;
 
 	if (i == 0)
-		player_id = 0;
-	index = (MEM_SIZE / players_amnt) * player_id;
-	if (!(player = get_player_by_id(players, player_id + 1, players_amnt)))
-		return (COLOR_PAIR(5) | A_BOLD);
-	if (i - index >= player->code_size)
 	{
-		prev_code_size = player->code_size + index;
+		player_id = 0;
+		i = 0;
+	}
+	index = (MEM_SIZE / players_amnt) * player_id;
+	x = vget_player_index(players, player_id + 1, players_amnt);
+	if (i - index >= players[x].size)
+	{
+		prev_code_size = players[x].size + index;
 		player_id++;
 	}
 	else if (prev_code_size < i && i < index)
 		return (COLOR_PAIR(5) | A_BOLD);
-	else if (i - index < player->code_size && prev_code_size <= i)
+	else if (i - index < players[x].size && prev_code_size <= i)
 		return (COLOR_PAIR(player_id + 1) | A_BOLD);
 	return (COLOR_PAIR(5) | A_BOLD);
 }
@@ -52,7 +54,7 @@ static void		display_arena(t_vm *vm, WINDOW *warena)
 		yx[1] = 0;
 		while (yx[1] < 64 * 3)
 		{
-			attribute = get_attribute(i, vm->players, vm->players_amnt);
+			attribute = get_attribute(i, vm->champs, vm->nb_players);
 			wattron(warena, attribute);
 			yx[1] += 3;
 			mvwprintw(warena, OFFSETY + yx[0], yx[1], "%.2x ", vm->arena[i]);

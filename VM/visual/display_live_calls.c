@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/14 18:52:49 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/25 20:05:11 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:49:19 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	display_live_calls_init(WINDOW *winfo, short player_amnt)
 	}
 }
 
-void	display_live_calls(WINDOW *winfo, t_player *player, int cycle)
+void	display_live_calls(WINDOW *winfo, t_champ player, int cycle)
 {
-	wattron(winfo, COLOR_PAIR(player->id));
-	mvwprintw(winfo, OFFSETY + player->id * 4 + 1, 32, "%d", cycle);
-	mvwprintw(winfo, OFFSETY + player->id * 4 + 2, 32, "%d", player->lives);
+	wattron(winfo, COLOR_PAIR(player.id));
+	mvwprintw(winfo, OFFSETY + player.id * 4 + 1, 32, "%d", cycle);
+	mvwprintw(winfo, OFFSETY + player.id * 4 + 2, 32, "%d", player.lives);
 	wrefresh(winfo);
 }

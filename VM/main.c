@@ -3,48 +3,40 @@
 /*                                                        ::::::::            */
 /*   main.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
+/*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/26 17:10:14 by krioliin      ########   odam.nl         */
+/*   Created: 2020/01/21 19:24:02 by asulliva       #+#    #+#                */
+/*   Updated: 2020/01/29 17:40:03 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm_arena.h"
+#include "includes/vm_arena.h"
 
-void	init_vm(t_vm *vm)
+/*
+**	@desc	- function initializes VM struct
+**	@return	- t_vm *new, freshly malloced struct
+*/
+
+static t_vm	*init(void)
 {
-	vm->process = vm->players_amnt;
-	vm->cycle_to_die = CYCLE_TO_DIE;
-	vm->last_alive = vm->players[0]->id;
-	vm->current_cycle = 0;
-	vm->cycle_counter = 0;
+	t_vm	*new;
+
+	new = ft_memalloc(sizeof(t_vm));
+	new->flag = ft_memalloc(sizeof(t_flags));
+	new->champ_id = 1;
+	if (!new || !new->flag)
+		error("Malloc error", NULL);
+	new->flag->dump = -1;
+	return (new);
 }
 
-int		main(int argc, char **argv)
+int			main(int ac, char **av)
 {
-	t_vm		*vm;
+	t_vm	*vm;
 
-	if (!(vm = (t_vm *)ft_memalloc(sizeof(t_vm))))
-		return (0);
-	if (!(vm->flag = (t_flags *)ft_memalloc(sizeof(t_flags))))
-		return (0);
-	if (!args_validation(argc, argv, vm->flag))
-		parse_error();
-	else if (!init_players(vm))
-		ft_printf("Can't init players\n");
-	else if (!init_battlefield(vm))
-	{
-		vm_free(&vm);
-		return (0);
-	}
-	else if (!init_cursors(vm))
-		ft_printf("Error in cursor init\n");
-	else
-	{
-		init_vm(vm);
-		start_game(vm);
-	}
-	vm_free(&vm);
-	return (0);
+	vm = init();
+	parse(vm, ac, av);
+	init_game(vm);
+	start_game(vm);
+	free_vm(vm);
 }
