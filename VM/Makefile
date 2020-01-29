@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/21 19:23:26 by asulliva       #+#    #+#                 #
-#    Updated: 2020/01/29 17:49:00 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/29 20:00:14 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(NAME):
 	@gcc $(FLAGS) -o $(NAME) $(SRC) $(VISUAL) $(HEADER) $(LIB)
-	@echo "\033[0;32mVM successfully created\033[0m"
+	@echo "\033[0;32m[ + ] VM successfully created\033[0m"
 
 clean:
 	@rm -f *.o
@@ -46,5 +46,6 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -rf *.dSYM
+	@echo "\033[0;31m[ - ] removed vm compiling files\033[0m"
 
 re: fclean $(NAME)
