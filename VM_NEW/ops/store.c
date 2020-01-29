@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:20:58 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 17:19:15 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:33:00 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	st(t_vm *vm, t_cursor *c, t_args *args)
 		index = get_index(c->pos, (a2.value % IDX_MOD));
 		put_value(ARENA, index, &val);
 		if (FLAG->v)
-			;
+			visual_store(vm->v->warena, vm->arena, c->reg[0] * -1, index);
 	}
 }
 
@@ -69,5 +69,5 @@ void	sti(t_vm *vm, t_cursor *c, t_args *args)
 	index = get_index(c->pos, (temp[1] + temp[2]) % IDX_MOD);
 	put_value(ARENA, index, &temp[0]);
 	if (FLAG->v)
-		;
+		visual_store(vm->v->warena, vm->arena, c->reg[0] * -1, index);
 }

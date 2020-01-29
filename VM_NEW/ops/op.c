@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 20:03:39 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 17:24:32 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:21:53 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void		do_op2(t_vm *vm, t_cursor *c, t_args *args)
 **			- int size, size to jump if no opcode
 */
 
-void	do_op(t_vm *vm, t_cursor *c, t_args *args, int size)
+void			do_op(t_vm *vm, t_cursor *c, t_args *args, int size)
 {
 	int	opcode;
 
@@ -74,6 +74,6 @@ void	do_op(t_vm *vm, t_cursor *c, t_args *args, int size)
 	else
 		do_op2(vm, c, args);
 	if (opcode != ZJMP || (opcode == ZJMP && !c->carry))
-		mv_cursor(vm, c, size);
+		mv_cursor( c, size);
 	free(args);
 }

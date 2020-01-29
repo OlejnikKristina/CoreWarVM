@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 17:27:58 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/28 19:13:18 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:42:27 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	check_live(t_vm *vm, int cycles)
 /*
 **	@desc	- funtion checks if there are still processes alive
 **	@param	- t_vm *vm, main struct
-**			- int cycles, 
+**			- int cycles, current cycle, used to call live funcion
 **	@return	- 1 if still processes, 0 if not
 */
 
@@ -55,6 +55,8 @@ static int	check(t_vm *vm, int cycles)
 		GAME->checks = 0;
 	}
 	GAME->lives = 0;
+	if (vm->flag->v)
+		refresh_cycle_to_die(vm->v->winfo, 29, GAME->cycles_to_die);
 	return (0);
 }
 
@@ -68,6 +70,8 @@ void		start_game(t_vm *vm)
 	int		cycles;
 
 	cycles = 0;
+	if (FLAG->v)
+		visual_corawar(vm);
 	while (CURSORS)
 	{
 		if (!FLAG->v && FLAG->dump == GAME->cycles)
@@ -78,6 +82,9 @@ void		start_game(t_vm *vm)
 		if (GAME->cycles_to_die < 1 || cycles == GAME->cycles_to_die)
 			cycles = check(vm, cycles);
 	}
-	ft_printf("Contestant %d, \"%s\", has won !\n",
-	GAME->winner, CHAMPS[GAME->winner - 1].name);
+	if (FLAG->v)
+		congrats_champion(vm->v->wop, CHAMPS[GAME->last_live - 1]);
+	else
+		ft_printf("Contestant %d, \"%s\", has won !\n",
+		GAME->last_live, CHAMPS[GAME->last_live - 1].name);
 }

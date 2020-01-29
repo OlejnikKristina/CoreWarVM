@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 16:18:36 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/16 20:19:37 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 17:02:13 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 # define COREWAR_VS_COLORS_H
 
 /*
- ************** Color palette 1 *****************
+ ************** Color palette *****************
 */
 
-# define COLOR_P1 421
-
-# define BGGREEN_FGRED 111
-# define BGCYAN_FBLACK 112
 # define BGYELLOW_FBLACK 113 
 # define WHITE_BLACK 114
 # define BGYELLOW_FBYELLOW 115
@@ -30,6 +26,12 @@
 # define PINK_BLACK 119
 # define LBLUE_BLACK 120
 # define PINK_BLUE 121
+
+#define STI_PL1 11
+#define STI_PL2 21
+#define STI_PL3 31
+#define STI_PL4 41
+#define STI_PL5 51
 
 # define BRIGHT_YELLOW 3
 # define DARCK_GREEN 0b011100

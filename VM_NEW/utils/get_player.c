@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:30:18 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/23 12:33:26 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:31:56 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int		get_player(t_vm *vm, t_champ *champs, int id)
 			return (i);
 		i++;
 	}
-	error("Player not found", NULL);
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:20:25 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/23 13:03:01 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:42:36 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ void	sub(t_cursor *c, t_args *args)
 	c->reg[a3.value - 1] = val;
 	c->carry = (val == 0 ? 1 : 0);
 }
-

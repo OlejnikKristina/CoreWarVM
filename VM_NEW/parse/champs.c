@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/24 16:58:48 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 18:34:22 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 15:41:30 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ static t_champ	read_file(t_vm *vm, char *file, int fd)
 	read(fd, code, new.size);
 	if (!check_code(vm, &new, code))
 		error("Invalid executable code for ", file);
+	free(code);
 	close(fd);
 	return (new);
 }

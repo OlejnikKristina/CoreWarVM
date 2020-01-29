@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 17:55:13 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 18:39:42 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:21:48 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	check_octal(t_vm *vm, t_cursor *c)
 	octal = ARENA[get_index(c->pos, 1)];
 	size = get_size(c->opcode, octal, g_op_tab[c->opcode].nb_arg) + 2;
 	if (!valid_octal(octal, g_op_tab[c->opcode].nb_arg))
-		return (mv_cursor(vm, c, size));
+		return (mv_cursor(c, size));
 	args = get_args(c, octal, ARENA);
 	i = 0;
 	while (i < g_op_tab[c->opcode].nb_arg)
@@ -89,7 +89,7 @@ static void	check_octal(t_vm *vm, t_cursor *c)
 			|| !(args[i].type & g_op_tab[c->opcode].args[i]))
 		{
 			free(args);
-			return (mv_cursor(vm, c, size));
+			return (mv_cursor(c, size));
 		}
 		i++;
 	}
@@ -139,7 +139,9 @@ void		execute(t_vm *vm)
 		if (!c->wait_cycles && (c->opcode >= 1 && c->opcode <= 16))
 			execute_op(vm, c);
 		else if (!c->wait_cycles)
-			mv_cursor(vm, c, 1);
+			mv_cursor( c, 1);
 		c = c->next;
 	}
+	if (FLAG->v)
+		refresh_arena(vm);
 }

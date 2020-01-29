@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 19:08:18 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 17:57:12 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:20:52 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_cursor	*cp_cursor(t_cursor *src, int pos, long id)
 	new->pos = pos;
 	new->id = id;
 	new->moved = 1;
+	new->prev_xy[0] = -1;
+	new->prev_xy[1] = -1;
 	return (new);
 }
 
@@ -39,15 +41,13 @@ t_cursor	*cp_cursor(t_cursor *src, int pos, long id)
 **			- int move, amount to move
 */
 
-void		mv_cursor(t_vm *vm, t_cursor *c, int move)
+void		mv_cursor(t_cursor *c, int move)
 {
 	int old_pos;
 
 	old_pos = c->pos;
 	c->pos = get_index(old_pos, move);
 	c->moved = 1;
-	if (FLAG->v)
-		;
 }
 
 /*
@@ -103,6 +103,8 @@ t_cursor	*new_cursor(int position, int r1, long id)
 	c->pos = position;
 	c->reg[0] = r1;
 	c->moved = 1;
+	c->prev_xy[0] = -1;
+	c->prev_xy[1] = -1;
 	return (c);
 }
 

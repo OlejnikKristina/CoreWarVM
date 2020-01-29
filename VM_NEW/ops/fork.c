@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/23 12:20:50 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 18:00:10 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:23:59 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 void	zjmp(t_vm *vm, t_cursor *c, t_args *args)
 {
-	if (c->carry)
-		mv_cursor(vm, c, (args->value % IDX_MOD));
+	if (c->carry && vm)
+		mv_cursor(c, (args->value % IDX_MOD));
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/28 18:42:17 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 18:42:32 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:42:18 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	make_blink(WINDOW *warena, t_cursor *cursor)
 {
-	wattron(warena, COLOR_PAIR(cursor->id));
+	wattron(warena, COLOR_PAIR(cursor->reg[0] * -1));
 	mvwprintw(warena, cursor->prev_xy[1],
 	cursor->prev_xy[0], "%.2x", cursor->prev_val);
 	return (true);
@@ -41,7 +41,7 @@ bool	cursor_moved(t_cursor *cursor, t_vm *vm, int current_x, int current_y)
 {
 	if (cursor->prev_xy[0] != current_x || cursor->prev_xy[1] != current_y)
 	{
-		wattron(vm->v->warena, COLOR_PAIR(cursor->id));
+		wattron(vm->v->warena, COLOR_PAIR(cursor->reg[0] * -1));
 		mvwprintw(vm->v->warena, cursor->prev_xy[1],
 		cursor->prev_xy[0], "%.2x", cursor->prev_val);
 		wrefresh(vm->v->warena);
@@ -99,7 +99,7 @@ void	display_cursors(WINDOW *warena, t_cursor *cursors,
 		blink = rm_prev_cursor_position(vm, cursor, x, y);
 		if (blink == false)
 		{
-			wattron(warena, COLOR_PAIR((cursor->id) * 10));
+			wattron(warena, COLOR_PAIR((cursor->reg[0] * -1) * 10));
 			mvwprintw(warena, y, x, "%.2x", arena[cursor->pos]);
 		}
 		wrefresh(warena);

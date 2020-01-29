@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 19:20:26 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 16:36:32 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:39:18 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void			opcode(t_byte opcode, t_cursor *c)
 		c->wait_cycles = g_op_tab[opcode].cycle;
 	else
 		c->wait_cycles = 0;
-
 }
 
 /*

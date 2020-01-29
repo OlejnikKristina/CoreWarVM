@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/22 15:38:16 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/28 19:09:55 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:13:00 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	intro_champs(t_champ *champs, int nb_champs)
 void		init_game(t_vm *vm)
 {
 	GAME = (t_game*)ft_memalloc(sizeof(t_game));
-	GAME->winner = NB_PLAYERS;
+	GAME->last_live = NB_PLAYERS;
 	GAME->cycles_to_die = CYCLE_TO_DIE;
 	GAME->cursors_id = 1;
 	GAME->processes = NB_PLAYERS;

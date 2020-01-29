@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/21 19:24:02 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/28 19:12:47 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/28 18:15:03 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,13 @@ static t_vm	*init(void)
 	return (new);
 }
 
-void	print_champs(t_champ *c, int max)
-{
-	int		i;
-
-	i = 0;
-	while (i < max)
-	{
-		ft_printf("%{YELLOW}.name [%s]\n.comment [%s]\nid [%d]\nsize [%d]\nlives [%d]\nlast_live [%d]\n%{WHITE}",
-			c[i].name, c[i].comment, c[i].id, c[i].size, c[i].lives, c[i].last_live);
-		i++;
-	}
-}
-
 int			main(int ac, char **av)
 {
 	t_vm	*vm;
 
 	vm = init();
 	parse(vm, ac, av);
-	// print_champs(CHAMPS, NB_PLAYERS);
 	init_game(vm);
 	start_game(vm);
+	// free_vm(vm);
 }

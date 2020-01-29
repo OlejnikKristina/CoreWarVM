@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/24 17:20:39 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/26 16:22:59 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:37:03 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			get_champ_comment(t_champ *champ, const int fd)
 **	@return	- 1 on success, 0 on error
 */
 
-int			check_code(t_vm *vm, t_champ *c, t_byte *code/*, int size*/)
+int			check_code(t_vm *vm, t_champ *c, t_byte *code)
 {
 	c->start_pos = (MEM_SIZE / NB_PLAYERS) * (vm->champ_id - 1);
 	ft_memcpy(&ARENA[c->start_pos], code, c->size);

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/24 15:30:19 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/24 18:08:48 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 18:50:06 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,6 @@ void		parse(t_vm *vm, int ac, char **av)
 	CHAMPS = (t_champ*)ft_memalloc(sizeof(t_champ) * NB_PLAYERS);
 	flags(vm, ac, av);
 	get_champs(vm, av, ac);
+	if (FLAG->n)
+		switch_champs(vm, ac, av);
 }

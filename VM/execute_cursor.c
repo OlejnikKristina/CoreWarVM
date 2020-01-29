@@ -6,7 +6,7 @@
 /*   By: abumbier <abumbier@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/05 17:28:27 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/24 17:28:10 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 14:43:29 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,14 @@ short	execute_cursor(t_cursor *cursor, uint8_t arena[MEM_SIZE], t_vm *vm)
 	cursor->wait_cycles--;
 	if (cursor->wait_cycles == 0)
 	{
-		if (vm->nbr_lives == 3122 && cursor->last_live == 1350)
-			ft_printf("");
 		if (!check_opcode(cursor->opcode))
 		{
 			cursor->pos += 1;
 			while (MEM_SIZE <= cursor->pos)
-				cursor->pos -= MEM_SIZE;							//new
-			cursor->opcode = arena[cursor->pos];				//new
+				cursor->pos -= MEM_SIZE;
+			cursor->opcode = arena[cursor->pos];
 			cursor->pc =
-			calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]); //new
+			calculate_program_counter(cursor->opcode, arena[cursor->pos + 1]);
 			return (0);
 		}
 		else if

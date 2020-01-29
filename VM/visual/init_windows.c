@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/20 15:26:21 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/28 17:08:43 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/29 15:09:04 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int				get_attribute(int i, t_player **players, short players_amnt)
 	t_player		*player;
 
 	if (i == 0)
-	{
 		player_id = 0;
-		i = 0;
-	}
 	index = (MEM_SIZE / players_amnt) * player_id;
 	if (!(player = get_player_by_id(players, player_id + 1, players_amnt)))
 		return (COLOR_PAIR(5) | A_BOLD);

@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/28 15:40:03 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/23 12:24:51 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/28 16:42:53 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 typedef struct s_vm		t_vm;
 typedef struct s_cursor	t_cursor;
 typedef struct s_args	t_args;
-
 
 /*
 ** Ops with size T_DIR 4 bytes
