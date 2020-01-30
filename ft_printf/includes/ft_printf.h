@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/05/28 14:54:45 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/29 19:33:18 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/07/19 21:18:22 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void			integer(t_format_spec *specifier,
 /*
 ** ******************************** Additional ********************************
 */
-
 bool			copy_until(char *src, t_output *out, char percent);
 void			move_ptr(char **input, char move_to, t_output *out);
 void			add_zeros(unsigned dig_amount, char **result, ssize_t width);
@@ -109,8 +108,4 @@ bool			set_color(t_format_spec *specifier, t_placeholder *result,
 void			fix_bug(t_format_spec *s, t_placeholder *result);
 bool			need_crutch(t_format_spec *spec, uint64_t data);
 short int		is_nan_inf(long double value, char **float_str);
-char			*ft_strjoinone(char *s, char c);
-char			**ft_strsplit(char const *s, char c);
-
-
 #endif

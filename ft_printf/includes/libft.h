@@ -6,7 +6,7 @@
 /*   By: krioliin <krioliin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/04/01 17:36:16 by krioliin       #+#    #+#                */
-/*   Updated: 2020/01/29 19:42:52 by krioliin      ########   odam.nl         */
+/*   Updated: 2019/12/27 17:46:45 by asulliva      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ int						ft_sqrt(int nb);
 void					ft_foreach(int *tab, int length, void (*f)(int));
 char					*ft_strrev(char str_rev[]);
 int						*ft_range(int min, int max);
-char					*ft_strjoinone(char *s, char c);
-char					**ft_strsplit(char const *s, char c);
-char					**ft_strsplit_ws(char const *s);
+
 /*
 ** *********************** Itoas ********************************** **
 */

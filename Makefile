@@ -3,53 +3,54 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: krioliin <krioliin@student.codam.nl>         +#+                      #
+#    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
-#    Created: 2020/01/29 17:45:05 by krioliin       #+#    #+#                 #
-#    Updated: 2020/01/30 15:19:18 by krioliin      ########   odam.nl          #
+#    Created: 2019/12/28 15:09:07 by krioliin       #+#    #+#                 #
+#    Updated: 2020/01/30 21:08:40 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-# @ ln -fs $(PATH_VM)corewar corewar
-# @ ln -fs $(PATH_DSM)dsm dsm
-ASM		:=	asm
-PATH_VM	:=	vm/
-PATH_ASM:=	asm_/
-PATH_DSM:=	dsm_/
-LIB		:=	ft_printf/
+FLAGS		= -Wall -Wextra -Werror -g -lncurses
+LIB			= ft_printf/libftprintf.a
+HEADER		= -I./ft_printf/includes -I includes/
+NAME		= corewar
 
-all:
-	@make -C $(LIB)
-	@make -C $(PATH_ASM)
-	@make -C $(PATH_VM)
-	@make -C $(PATH_DSM)
-	@ mv $(PATH_ASM)asm .
-	@ mv $(PATH_VM)corewar .
-	@ mv $(PATH_DSM)dsm .
-	@chmod 744 asm
-	@chmod 744 corewar
-	@chmod 744 dsm
+SRC			= main.c parse_argc.c parse_flags.c \
+			get_champions_argc.c init_players.c utilities/vm_free.c \
+			utilities/error_msg.c parse_champion.c utilities/cursor.c \
+			utilities/introduction.c get_player_exec_code.c \
+			utilities/get_player_by_id.c utilities/dump64.c\
+			decode_encoding_byte.c calculate_program_counter.c \
+			init_battlefield.c init_cursors.c start_game.c \
+			execute_cursor.c operations/encode_match_opcode.c \
+			display_arena.c bury_dead_cursors.c\
+			operations/encode_match_opcode2.c execute_operation.c \
+			operations/op_add.c operations/op_aff.c operations/op_and.c \
+			operations/op_fork.c operations/op_lfork.c operations/op_ld.c \
+			operations/op_ldi.c operations/op_lldi.c operations/op_lld.c \
+			operations/op_live.c operations/op_or.c operations/op_sub.c \
+			operations/op_st.c operations/op_sti.c operations/op_xor.c \
+			operations/op_zjmp.c utilities/convert.c \
+			discard_players_lives_calls.c
 
-mre:
-	@ make mre -C $(PATH_ASM)
-	@ make mre -C $(PATH_VM)
-	@ make mre -C $(PATH_DSM)
-	@ ln -fs $(PATH_ASM)dsm dsm
-	@ ln -fs $(PATH_ASM)asm asm
-	@ ln -fs $(PATH_VM)corewar corewar
-	@ chmod 744 asm corewar
+VISUAL		= visual/init_windows.c visual/init_color_pairs.c \
+			visual/init_info_field.c visual/refresh_arena.c \
+			visual/visual_store.c visual/display_live_calls.c \
+			visual/display_game_params.c visual/add_pause.c \
+			visual/congrats_to_champion.c visual/display_players.c \
+			visual/rm_prev_cursor_position.c
+
+all: $(NAME)
+
+$(NAME):
+	@clang  $(FLAGS) -o $(NAME) \
+	$(SRC) $(VISUAL) $(HEADER) $(LIB)
+	@echo "\033[0;32mVM successfully created\033[0m"
 
 clean:
-	@make -C $(LIB) clean
-	@make -C $(PATH_ASM) clean
-	@make -C $(PATH_VM) clean
-	@make -C $(PATH_DSM) clean
+	@rm -f *.o
 
 fclean: clean
-	@rm -f asm $(LIB)libftprintf.a
-	@rm -f asm $(PATH_ASM)asm
-	@rm -f corewar $(PATH_VM)corewar
-	@rm -f dsm $(PATH_DSM)dsm
+	@rm -f $(NAME)
 
-re: fclean all
-
+re: fclean $(NAME)

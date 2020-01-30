@@ -47,15 +47,12 @@ $(NAME):
 	@echo "\033[0;32mft_printf and libft successfully created\033[0m"
 	@ar rc $(NAME) *.o
 	@ranlib $(NAME)
-
 clean:
 	@rm -f $(ALL_OBJECT_FILES) *.o
-	@echo "\033[0;33m[ - ] Clean ft_printf and libft\033[0m"
+	@echo "\033[0;33mClean ft_printf and libft\033[0m"
 	@make -C libft/ clean
-
 fclean: clean
 	@rm -f $(NAME) *.o && make -C libft/ fclean
-
 home:
 	@$(COMPILER) -o ft_printf src/main.c $(SRC) $(UTILITY) \
 	-I$(INCLUDES) -g libft/libft.a

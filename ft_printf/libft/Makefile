@@ -5,12 +5,11 @@ GNL				:= favorite/get_next_line
 FAVORITE		:= atoi itoa ftoa itoa_base
 MEM				:= bzero memalloc memcpy memccpy memcmp memchr memdel memmove memset
 OTHER			:= count_digit foreach isalnum isprint isalpha isascii \
-				isdigit range recursive_factorial tolower toupper \
-				strjoinone
+				isdigit range recursive_factorial tolower toupper
 PUT				:= putchar putchar_fd putendl_fd putendl putnbr_fd putnbr putstr_fd putstr
 STR				:= sqrt strcat strcmp strcpy strdup strlen strncat strncmp \
 				strncpy strnstr strrchr strstr strchr strlcat strnew strdel strclr \
-				striter striteri strmap strmapi strequ strnequ strsub strsplit strsplit_ws strjoin \
+				striter striteri strmap strmapi strequ strnequ strsub strsplit strjoin \
 				superjoin strrev
 SPECIFIC_NAME	:= other/kr_count_words other/space favorite/findchr favorite/itoa64
 
@@ -37,13 +36,13 @@ $(OBJ):
 	@clang $(CFLAGS) -c $(addsuffix .c, $(SRC)) -I includes/
 clean:
 	@rm -f $(OBJ)
-
+#	@echo "\033[0;33mRemove objects files from libft\033[0m"
 fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
 
 so:
-	@gcc -shared -o $(NAME) $(OBJ)
+	gcc -shared -o $(NAME) $(OBJ)
 
 .PHONY: clean fclean all re
