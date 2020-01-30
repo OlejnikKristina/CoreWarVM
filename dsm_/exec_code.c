@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 19:39:31 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/04 18:58:11 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/30 15:09:14 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 **	@return	- t_op *curr, pointer to the end of the list
 */
 
-static t_op	*new_op(t_dsm *data)
+static t_oop	*new_op(t_dsm *data)
 {
-	t_op	*curr;
+	t_oop	*curr;
 
 	if (data->ops)
 	{
 		curr = data->ops;
 		while (curr && curr->next)
 			curr = curr->next;
-		curr->next = (t_op*)ft_memalloc(sizeof(t_op));
+		curr->next = (t_oop*)ft_memalloc(sizeof(t_oop));
 		return (curr->next);
 	}
 	else
 	{
-		data->ops = (t_op*)ft_memalloc(sizeof(t_op));
+		data->ops = (t_oop*)ft_memalloc(sizeof(t_oop));
 		curr = data->ops;
 		return (curr);
 	}
@@ -83,7 +83,7 @@ static char	*set_name(int op_code)
 
 void		get_line(t_dsm *data, int op, int *size)
 {
-	t_op	*new;
+	t_oop	*new;
 	int		ret;
 	int		s;
 

@@ -50,7 +50,7 @@ $(NAME):
 
 clean:
 	@rm -f $(ALL_OBJECT_FILES) *.o
-	@echo "\033[0;33mClean ft_printf and libft\033[0m"
+	@echo "\033[0;33m[ - ] Clean ft_printf and libft\033[0m"
 	@make -C libft/ clean
 
 fclean: clean

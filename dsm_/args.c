@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/01/02 21:34:48 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/08 15:26:28 by asulliva      ########   odam.nl         */
+/*   Updated: 2020/01/30 15:07:36 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static char	*prep_arg(int enc_byte, int nb_arg)
 **	@return	- int size, amount of bytes read
 */
 
-int			find_args(t_op *curr, int enc_byte, int arg_amnt, int op)
+int			find_args(t_oop *curr, int enc_byte, int arg_amnt, int op)
 {
 	int		i;
 	int		size;

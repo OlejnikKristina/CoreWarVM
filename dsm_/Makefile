@@ -6,7 +6,7 @@
 #    By: abumbier <abumbier@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/12/05 14:20:22 by asulliva       #+#    #+#                 #
-#    Updated: 2020/01/29 19:56:00 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/30 15:21:56 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "\033[0;31m[ - ] removed dsm files\033[0m"
+	@echo "\033[0;33m[ - ] removed dsm files\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: asulliva <asulliva@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/30 20:09:35 by asulliva       #+#    #+#                */
-/*   Updated: 2020/01/29 19:30:30 by krioliin      ########   odam.nl         */
+/*   Updated: 2020/01/30 15:07:27 by krioliin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define IND		-3
 
 typedef struct s_dsm	t_dsm;
-typedef struct s_op		t_op;
+typedef struct s_oop	t_oop;
 
 struct		s_dsm
 {
@@ -51,20 +51,20 @@ struct		s_dsm
 	char	*name;
 	char	*comment;
 	char	*file_name;
-	t_op	*ops;
+	t_oop	*ops;
 };
 
-struct		s_op
+struct		s_oop
 {
 	char	*op_name;
 	char	**args;
-	t_op	*next;
+	t_oop	*next;
 };
 
 /*
 **	args.c
 */
-int			find_args(t_op *curr, int enc_byte, int arg_amnt, int op);
+int			find_args(t_oop *curr, int enc_byte, int arg_amnt, int op);
 
 /*
 **	convert.c

@@ -44,6 +44,6 @@ fclean: clean
 re: fclean all
 
 so:
-	gcc -shared -o $(NAME) $(OBJ)
+	@gcc -shared -o $(NAME) $(OBJ)
 
 .PHONY: clean fclean all re

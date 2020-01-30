@@ -6,7 +6,7 @@
 #    By: asulliva <asulliva@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/01/21 19:23:26 by asulliva       #+#    #+#                 #
-#    Updated: 2020/01/29 20:00:14 by krioliin      ########   odam.nl          #
+#    Updated: 2020/01/30 15:23:07 by krioliin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ $(NAME):
 
 clean:
 	@rm -f *.o
+	@echo "\033[0;33m[ - ] removed vm's files\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
