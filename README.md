@@ -19,8 +19,8 @@ This is what is looks like in action:
 `    -dump <num> : Dump memory (32 octets per line) after <num> cycles and exit`<br>
 `    -v          : Run visualizer`<br>
  `   -n    <num> : Set <num> of the next player`<br>
-Example:
-`./corewar -v champions/bee_gees.cor champions/zork.cor champions/bigzork.cor champions/helltrain.cor`
+Example:<br>
+`./corewar -v champions/bee_gees.cor champions/zork.cor champions/bigzork.cor champions/helltrain.cor`<br>
 
 You can use champions with extantion `.cor` from `champions` folder.
 Or you free to write your own champions and run them on this Virtual Machine.
